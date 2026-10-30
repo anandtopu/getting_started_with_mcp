@@ -1,12 +1,14 @@
 """Phase 8 integration and adversarial regressions; all identities/data are synthetic."""
 
 import json
+import shutil
+import sys
 import time
 
 import httpx2 as httpx
 import pytest
 from jsonschema import ValidationError
-from mcp import Client
+from mcp import Client, StdioServerParameters
 from mcp_types import Request
 
 from common.audit_lab import audit_server
@@ -26,6 +28,34 @@ from common.skills_extension import (
     skills_server,
 )
 from scripts.auth_lab import rpc, running_app
+
+
+@pytest.mark.anyio
+async def test_explicit_audit_fixture_stdio():
+    async with Client(
+        StdioServerParameters(
+            command=sys.executable,
+            args=[str(ROOT / "capstones/02_security_audit/starter/vulnerable_server.py"), "--lab"],
+            cwd=str(ROOT),
+        ),
+        mode="2026-07-28",
+        read_timeout_seconds=10,
+    ) as client:
+        assert len((await client.list_tools()).tools) == 2
+
+
+@pytest.mark.anyio
+async def test_typescript_host_launcher_outside_checkout(tmp_path):
+    async with Client(
+        StdioServerParameters(
+            command=shutil.which("node"),
+            args=[str(ROOT / "scripts/launch_ts.cjs"), "notes"],
+            cwd=str(tmp_path),
+        ),
+        mode="2026-07-28",
+        read_timeout_seconds=10,
+    ) as client:
+        assert not (await client.call_tool("search_notes", {"query": "release"})).is_error
 
 
 @pytest.mark.anyio
