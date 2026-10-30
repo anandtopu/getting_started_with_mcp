@@ -4,6 +4,8 @@
 
 [Review findings, completed validation and explicit gaps](reviews/2026-10-30-review-summary.md) supersede unqualified completion language in historical phase records. The current spec index and full 2026-07-28 changelog were rechecked. Native additions use verified installed SDK APIs, four provider HTTP contracts, and pinned `@opentelemetry/api` 1.10.0 plus `@opentelemetry/sdk-trace` 3.0.0. The latter replaces the older split trace packages; the lesson uses explicit host spans. The exact lockfile is the reproducible record.
 
+[Post-review CI](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41135048577) passed all 28 required jobs on `723eb3b`, with no repair or rerun. CI logs confirm 250 Python tests and 233 standalone examples; TypeScript has 124 tests, Inspector covers 78 advertised catalogs, and browser acceptance has three scenarios. The local external-link sweep found zero failures.
+
 The review records B1 advanced-application parity as incomplete and the MCPB/Zod build-only advisory as mitigated, not silently waived. No live model call or public publication was performed.
 
 ## Phase 8 — complete course, October 30, 2026

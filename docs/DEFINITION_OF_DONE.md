@@ -6,7 +6,7 @@ Verification date: **2026-10-30**. Scope: the delivered local course and its CI.
 
 - [x] Default cached `uv sync --offline --frozen` and offline Python tests pass without API keys. TypeScript tests pass. Fresh dependency installation needs network.
 - [x] Ruff check/format, TypeScript compiler and ESLint pass.
-- [x] Final CI matrix: all 28 required jobs passed, covering Python 3.12–3.14 and Node 24/26 on Windows/Linux, plus macOS Python 3.12 and four native SDKs on Windows/Linux. See the linked run in the verification record.
+- [x] Post-review CI matrix: [all 28 required jobs passed](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41135048577) on `723eb3b`, covering Python 3.12–3.14 and Node 24/26 on Windows/Linux, plus macOS Python 3.12 and four native SDKs on Windows/Linux. The manual external-link CI job was skipped; the local external-link sweep passed.
 - [x] Every advertised primitive is listed by Inspector or an equivalent client check. Native SDK contracts cover tools/resources/prompts; the explicit audit fixture has a separate stdio regression.
 - [x] Repository-wide subprocess tests enforce protocol-only stdout; the TypeScript launcher also runs outside the checkout.
 - [x] The source audit rejects banned legacy imports; MCP deprecation warnings are test errors. Labeled older-protocol interoperability is retained deliberately.

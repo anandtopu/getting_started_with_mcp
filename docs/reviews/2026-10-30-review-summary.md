@@ -11,7 +11,7 @@ The scoped per-file pass and cross-file integration pass are complete. Security 
 |---|---|---|
 | Per-file pass | Complete for listed review scope | [Individual files](2026-10-30-per-file-analysis.md); this is not a line-by-line audit of every generated fixture or dependency |
 | Integration pass | Complete for listed flows | [Contracts and flows](2026-10-30-integration-checks.md) |
-| Fix validation | Local checks passed; CI pending | Completed local results below; CI recorded at the tested commit |
+| Fix validation | Local checks and all 28 required CI jobs passed | Implementation commit `723eb3b`; completed results below |
 | Exact prompt completeness | Incomplete | Native advanced application parity remains explicit in B1 and the definition of done |
 
 ## Findings
@@ -61,15 +61,16 @@ Completed local checks are listed below. Historical Phase 8 results are not used
 | Local release contract and protocol guide | Passed; 24 methods/notifications |
 | Installed wheel/npm and MCPB build | Passed; notes uvx/npx plus two knowledge wheel/bundle launches outside checkout |
 | Browser acceptance | Three Chromium scenarios passed |
-| Added native server Inspector inventory | Five actual CLI checks across four new servers passed |
+| Inspector inventory | Five new local CLI checks passed; CI verified all 78 advertised catalogs across 49 servers |
 | npm audit | Two high-severity dependency nodes, one advisory; R-010 |
-| CI for revised implementation | Pending |
+| CI for revised implementation | [All 28 required jobs passed](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41135048577) on `723eb3bc6a9c92c84087a1d0be234ef26748e7e3`; manual external-link job skipped |
+| Documentation links | Local and external sweeps: zero failures |
 
 ## Limits and follow-up
 
 R-009 needs implementation work, not a documentation waiver. Its coverage matrix identifies exactly where Python is still required. R-010 is build-only in this repository: the affected CLI consumes trusted checked-in manifests in a bounded Node process with a subprocess deadline. It is not used by the running MCP servers. This reduces exposure but does not make the advisory disappear.
 
-Manual tests of third-party desktop UIs, real model performance/cost, live vendor SSO, public publication and cloud operation are not claimed. The previous native compiler/Compose CI evidence applies to their unchanged source, and the new CI run will verify integration against this revision.
+Manual tests of third-party desktop UIs, real model performance/cost, live vendor SSO, public publication and cloud operation are not claimed. The new CI run verified the complete Python 3.12–3.14 Windows/Linux matrix and macOS 3.12, Node 24/26 on Windows/Linux, native Go/C#/Rust/Java builds on Windows/Linux, framework adapters, Inspector, isolated packages, browser acceptance, container isolation and OAuth/Compose deployments. Completed Linux, macOS and Windows logs report 250 Python tests and all 233 standalone examples passing. The implementation required no CI repair or rerun. This documentation-only record does not change the tested code.
 
 ## Primary references checked
 
