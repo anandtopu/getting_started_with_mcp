@@ -345,3 +345,26 @@ async def test_model_evaluation_scores_proposals_without_execution():
     assert result["correct"] == 3 and result["errors"] == 0
     with pytest.raises(ValueError, match="real provider"):
         await evaluate_model(Settings())
+
+
+@pytest.mark.anyio
+async def test_keycloak_fixture_cookie_policy_is_bound_to_one_loopback_origin():
+    from http.cookiejar import CookieJar
+
+    from scripts.keycloak_check import FixtureBrowserCookies
+
+    seen = []
+
+    async def transport(request):
+        seen.append(request.headers.get("cookie", ""))
+        headers = {"Set-Cookie": "KC_RESTART=synthetic; Path=/realms/lumen; Secure; HttpOnly"}
+        return httpx.Response(200, headers=headers)
+
+    async with httpx.AsyncClient(
+        transport=httpx.MockTransport(transport), cookies=CookieJar(FixtureBrowserCookies())
+    ) as browser:
+        await browser.get("http://127.0.0.1:8080/realms/lumen/auth")
+        await browser.post("http://127.0.0.1:8080/realms/lumen/login-actions/authenticate")
+        await browser.get("http://127.0.0.1:9999/realms/lumen/auth")
+        await browser.get("http://evil.example/realms/lumen/auth")
+    assert seen == ["", "KC_RESTART=synthetic", "", ""]

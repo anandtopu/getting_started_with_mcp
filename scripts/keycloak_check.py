@@ -10,6 +10,8 @@ import html
 import logging
 import re
 import time
+from http.cookiejar import CookieJar, DefaultCookiePolicy
+from urllib.parse import urlsplit
 
 import httpx2 as httpx
 from mcp import Client
@@ -26,10 +28,31 @@ ISSUER = "http://127.0.0.1:8080/realms/lumen"
 RESOURCE = "http://127.0.0.1:8001/mcp"
 
 
+class FixtureBrowserCookies(DefaultCookiePolicy):
+    """Emulate a browser's trusted loopback context for this one synthetic issuer.
+
+    Keycloak marks loopback login cookies Secure even on local HTTP. Python's
+    default cookie jar only sends those over HTTPS. Never use this fixture-only
+    policy for real identity providers or arbitrary destinations.
+    """
+
+    def return_ok(self, cookie, request):
+        target = urlsplit(request.get_full_url())
+        if (target.scheme, target.netloc) != ("http", "127.0.0.1:8080"):
+            return False
+        return super().return_ok(cookie, request)
+
+    def return_ok_secure(self, cookie, request):
+        target = urlsplit(request.get_full_url())
+        return (target.scheme, target.netloc) == ("http", "127.0.0.1:8080")
+
+
 async def main():
     logging.getLogger("httpx2").setLevel(logging.WARNING)
     logging.getLogger("httpx").setLevel(logging.WARNING)
-    async with httpx.AsyncClient(timeout=5, follow_redirects=False) as browser:
+    async with httpx.AsyncClient(
+        timeout=5, follow_redirects=False, cookies=CookieJar(FixtureBrowserCookies())
+    ) as browser:
         deadline = time.monotonic() + 120
         while True:
             try:

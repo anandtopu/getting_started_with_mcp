@@ -32,6 +32,12 @@ issuer and redeems the one-use code. Do not paste that address into chats or log
 The browser step is interactive; CI uses only this fixed synthetic account and an
 isolated cookie jar. The account is a development convenience, not a password grant.
 
+The HTTP test browser has a cookie policy restricted to `http://127.0.0.1:8080`.
+Keycloak treats loopback as a trusted browser context and sets Secure cookies;
+Python's default jar would omit them on HTTP and cause `cookie_not_found`.
+This test-only exception models the local browser flow, never a remote identity
+provider. The SDK's token transport and signature/issuer/audience checks are unchanged.
+
 For Inspector UI or another host, register its **exact** callback URL and use the
 pre-registered client ID in its OAuth settings. Host-specific browser flows are
 manual checks; the Inspector CI uses a short-lived fixture bearer to check the
