@@ -55,9 +55,9 @@ def register_input(server: MCPServer) -> None:
     async def bulk_close(
         issue_ids: list[int], ctx: Context
     ) -> dict[str, object] | InputRequiredResult:
-        """Ask the user before closing 1â€“20 distinct issues in a disposable database."""
+        """Ask the user before closing 1-20 distinct issues in a disposable database."""
         if not issue_ids or len(issue_ids) > 20 or len(set(issue_ids)) != len(issue_ids):
-            raise ToolError("Choose 1â€“20 distinct issue IDs.")
+            raise ToolError("Choose 1-20 distinct issue IDs.")
         store = store_from(ctx)
         for issue_id in issue_ids:
             store.read(issue_id)

@@ -128,8 +128,8 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run test:browser
       - run: docker build -f distribution/notes.Dockerfile -t lumen-notes-course:1.0.0 .
-      - run: uv run --frozen python checkpoints/05_shipping/acceptance.py --container
-      - run: docker compose -f deployment/compose.yaml up --build -d
+      - run: uv run --frozen python checkpoints/05_shipping/acceptance.py --container --docker-context default
+      - run: docker compose -f deployment/compose.yaml up --build -d --wait --wait-timeout 120
       - run: uv run --frozen python scripts/keycloak_check.py --deployed
       - if: failure()
         run: docker compose -f deployment/compose.yaml logs --no-color --tail 60

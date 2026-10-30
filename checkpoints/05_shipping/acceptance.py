@@ -15,7 +15,7 @@ from common.registry import validate_metadata
 from scripts.tier5 import run
 
 
-async def main(container=False):
+async def main(container=False, docker_context=None):
     inspect_artifacts(artifacts())
     validate_metadata()
     for module in range(18, 22):
@@ -25,6 +25,7 @@ async def main(container=False):
             StdioServerParameters(
                 command=shutil.which("docker"),
                 args=[
+                    *(["--context", docker_context] if docker_context else []),
                     "run",
                     "--rm",
                     "-i",
@@ -49,4 +50,6 @@ async def main(container=False):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--container", action="store_true")
-    asyncio.run(main(parser.parse_args().container))
+    parser.add_argument("--docker-context", help="Use an explicitly selected local Docker context")
+    args = parser.parse_args()
+    asyncio.run(main(args.container, args.docker_context))
