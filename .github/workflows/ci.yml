@@ -79,6 +79,8 @@ jobs:
       - run: uv sync --frozen --extra http --extra auth
       - run: docker compose -f deployment/auth/compose.yaml up -d
       - run: uv run --frozen python scripts/keycloak_check.py
+      - if: failure()
+        run: docker compose -f deployment/auth/compose.yaml logs --no-color --tail 60
       - if: always()
         run: docker compose -f deployment/auth/compose.yaml down
   isolation:

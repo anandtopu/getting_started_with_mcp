@@ -1,4 +1,5 @@
-FROM ghcr.io/astral-sh/uv:0.13.6-python3.12-bookworm-slim
+FROM python:3.12.13-slim-bookworm
+RUN pip install --no-cache-dir uv==0.13.6
 WORKDIR /course
 COPY pyproject.toml uv.lock README.md ./
 COPY common ./common

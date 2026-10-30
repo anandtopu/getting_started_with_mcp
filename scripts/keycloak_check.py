@@ -51,6 +51,7 @@ async def main():
             if not url.startswith(ISSUER + "/protocol/openid-connect/auth?"):
                 raise ValueError("Unexpected authorization endpoint")
             response = await browser.get(url)
+            phase = "authorization request"
             if response.status_code == 200:
                 match = re.search(r'<form[^>]+action="([^"]+)"', response.text)
                 if not match:
@@ -58,6 +59,7 @@ async def main():
                 action = html.unescape(match[1])
                 if not action.startswith(ISSUER + "/login-actions/"):
                     raise ValueError("Unexpected login form target")
+                phase = "login form submission"
                 response = await browser.post(
                     action,
                     data={
@@ -67,7 +69,15 @@ async def main():
                     },
                 )
             if response.status_code != 302:
-                raise RuntimeError(f"Keycloak authorization failed: HTTP {response.status_code}")
+                feedback = re.findall(
+                    r"<(?:h1|span|p)[^>]*(?:kc-page-title|kc-feedback-text|instruction)[^>]*>(.*?)</",
+                    response.text,
+                    re.S,
+                )
+                summary = " ".join(
+                    html.unescape(re.sub(r"<[^>]+>", "", x)).strip() for x in feedback
+                )[:300]
+                raise RuntimeError(f"Keycloak {phase}: HTTP {response.status_code}; {summary}")
             callback_value = callback_result(response.headers["location"])
 
         async def callback():
