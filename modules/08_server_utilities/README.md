@@ -1,6 +1,6 @@
 # Module 08: Server utilities: context, lifetime, progress
 
-**Time:** 90 minutes · **Level:** intermediate · **Languages:** Python · **LLM needed:** no; optional direct generation only
+**Time:** 105 minutes · **Level:** intermediate · **Languages:** Python · **LLM needed:** no; optional direct generation only
 
 **Target:** MCP 2026-07-28, Python SDK 2.3, TypeScript SDK 2.4. Commands run from the repository root on Windows, macOS, or Linux.
 

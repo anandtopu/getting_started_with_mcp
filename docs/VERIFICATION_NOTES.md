@@ -57,12 +57,28 @@ sources in [host setup](HOST_SETUP.md).
   examples**: 22 servers and 49 scripts, exercised by the repository smoke test.
 - Inspector 2.13 lists the stdio services locally. Its HTTP CLI crashes on this
   Windows/Node 24 installation with a libuv closing-handle assertion. Both HTTP
-  servers pass the independent SDK harness; the Linux Inspector CI job is the
-  remaining platform verification before Phase 4 is finalized.
+  servers pass the independent SDK harness, and Linux Inspector CI passes for
+  both implementations. The local Windows Inspector crash remains documented.
 - No live provider calls, external weather request, third-party host GUI session,
   or public HTTP deployment was performed. These are not implied by offline tests.
 
-CI results will be recorded after the Phase 4 implementation push.
+### CI result
+
+[Phase 4 CI run](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41017169749)
+passed all **12 required jobs** for implementation commit
+`333d03a2a6e09d553ac6e37ba035c8bd6972dda7`:
+
+- Seven Python jobs: Windows/Linux 3.12–3.14, plus macOS 3.12.
+- Four TypeScript jobs: Windows/Linux Node 24 and 26.
+- Linux Inspector: every manifest server, including both HTTP implementations,
+  plus the isolated security fixture and filesystem reference server.
+
+CI logs confirm **110 Python tests**, **35 TypeScript tests**, **71 runnable
+examples**, and both Tier 1 and Tier 2 scenarios passing. CI's Windows account can
+create symlinks, so its suite has no local-account skip. External link checks are
+manual-only and were skipped on this push; local links passed. A subsequent
+documentation-only commit records this evidence and aligns lesson time estimates.
+Phase 4 is complete; modules 11–21 and later-phase material remain planned.
 
 ## Phase 3 — Tier 1, October 30, 2026
 

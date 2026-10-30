@@ -1,6 +1,6 @@
 # Module 10: Streamable HTTP [TS]
 
-**Time:** 120 minutes · **Level:** intermediate · **Languages:** Python and TypeScript · **LLM needed:** no; optional direct generation only
+**Time:** 150 minutes · **Level:** intermediate · **Languages:** Python and TypeScript · **LLM needed:** no; optional direct generation only
 
 **Target:** MCP 2026-07-28, Python SDK 2.3, TypeScript SDK 2.4. Commands run from the repository root on Windows, macOS, or Linux.
 
