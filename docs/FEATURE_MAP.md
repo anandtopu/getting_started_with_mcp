@@ -1,12 +1,12 @@
 # Feature map
 
-Coverage contract updated October 30, 2026. **Modules 00â€“06 are delivered; modules 07â€“21, bonuses and capstones remain planned.** A row closes only when its runnable example, use case, captured exchange, exercises/solutions and tests are delivered. Future paths are code text, not dead links. Replace them with relative links as files land.
+Coverage contract updated October 30, 2026. **Modules 00–13 are delivered; modules 14–21, bonuses and capstones remain planned.** A row closes only when its runnable example, use case, captured exchange, exercises/solutions and tests are delivered. Future paths are code text, not dead links. Replace them with relative links as files land.
 
 The map covers the core protocol, official extension inventory, selected SDK facilities, and the requested application curriculum. It does not imply that every SDK implementation detail is a protocol feature. Framework rows name planned integrations; provider-specific primary API references must be verified and added before implementation.
 
 ## Path rules
 
-All paths are relative to the repository root. Delivered table links below point directly to implementations. Tier 1 and Tier 2 captures group related operations into scenario files listed in each moduleâ€™s `wire/manifest.json`; example basenames need not equal capture filenames. The example column names a basename:
+All paths are relative to the repository root. Delivered table links below point directly to implementations. Tier 1–3 captures group related operations into scenario files listed in each module's `wire/manifest.json`; example basenames need not equal capture filenames. The example column names a basename:
 - Python example: `modules/<module>/python/examples/<basename>.py`.
 - For modules 02â€“05 and 10, TypeScript counterpart: `modules/<module>/typescript/examples/<basename>.ts`.
 - Other TypeScript counterparts: `modules/bonus/B1_typescript/<module>/examples/<basename>.ts`.

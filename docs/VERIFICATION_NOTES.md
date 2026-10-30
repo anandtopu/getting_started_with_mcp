@@ -31,8 +31,8 @@ locked PyJWT/cryptography and OpenTelemetry extras supply auth and tracing.
   proposals without executing them; it has not been run against a live provider.
 - Local Windows/Python 3.12 focused checks: **32 passed**. TypeScript compiler,
   ESLint and **35 tests** passed. Ruff, formatting, local links, lesson structure
-  and the Tier 3 checkpoint passed. The full suite's supported-OS evidence will
-  be recorded below after CI completes.
+  and the Tier 3 checkpoint passed. The separate loopback-cookie boundary
+  regression also passed. Full-suite supported-OS evidence appears below.
 - Docker CLI is installed locally, but its configured daemon is unavailable.
   Keycloak/container runtime validation therefore runs in dedicated Linux CI.
   No host GUI, browser-login UI, external collector or paid model call is claimed.
@@ -41,7 +41,27 @@ locked PyJWT/cryptography and OpenTelemetry extras supply auth and tracing.
 
 ### Phase 5 publication
 
-CI verification pending for the Phase 5 implementation commit.
+Implementation commit `60fe1526f8b96b79b20dab15c93160113087d417` passed
+[all 14 required CI jobs](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41072129372):
+seven Python jobs (Windows/Linux 3.12–3.14 and macOS 3.12), four TypeScript jobs
+(Windows/Linux Node 24 and 26), Inspector, Keycloak, and container isolation.
+The optional external-link job was skipped.
+
+- Linux Python 3.12 reports **143 tests passed**, **86 delivered examples**
+  checked (25 servers and 61 scripts), and the Tier 3 acceptance checkpoint
+  passed. TypeScript reports **35 tests passed**.
+- The real Keycloak run passed discovery, PKCE, resource audience validation,
+  SDK scope step-up and a confirmed write. The realm explicitly includes the
+  subject mapper required by strict token validation. Its headless browser
+  cookie policy permits Secure cookies only at the exact local fixture origin,
+  `http://127.0.0.1:8080`; a regression test rejects other hosts and ports.
+- The repaired server passed inside an unprivileged, read-only container with
+  networking disabled. The image uses `python:3.12.13-slim-bookworm` and installs
+  pinned `uv==0.13.6`. Linux Inspector passed the delivered server inventory,
+  including the authenticated Module 11 server.
+- GUI host login, an external telemetry collector, and the optional live-model
+  evaluation remain manual checks. Subsequent documentation-only publication
+  records this CI result without changing the tested implementation.
 
 ## Phase 4 — Tier 2, October 30, 2026
 
