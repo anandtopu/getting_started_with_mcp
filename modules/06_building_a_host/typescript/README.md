@@ -50,6 +50,19 @@ sequenceDiagram
 
 The executable contracts live in [advanced_lessons.ts](../../../common/typescript/advanced_lessons.ts); follow the module-number branch to the focused implementation it invokes. This avoids copying the same host/security logic into every example.
 
+Run the complete three-server terminal host:
+
+```text
+node --import tsx common/typescript/chat.ts
+node --import tsx common/typescript/chat.ts --live
+```
+
+The first command uses a fixture model and exits after an approved notes read. The second loads the shared `.env`, asks for your question and requests terminal approval for each exact call. Set `LLM_PROVIDER` to `openai`, `anthropic`, `gemini` or `ollama`, and choose `LLM_MODEL`; hosted providers also need their named API key. There is no hardcoded model or implicit network call.
+
+[llm.ts](../../../common/typescript/llm.ts) implements the native HTTP tool loop for all four providers. It preserves call IDs and native assistant blocks, including reasoning/thought signatures. [schemas.ts](../../../common/typescript/schemas.ts) expands bounded local schema references and removes host-only `confirmed` before exposing tools to the model. Host validation rejects unknown properties and model-supplied confirmation before asking the user. Six turns, eight calls, 16,000 result characters, 60-second provider requests and a 256 KB response cap bound the loop. Provider errors do not echo credentials or prompts.
+
+Tests inject provider HTTP responses and perform actual MCP calls. They verify protocol shape and correlation; they do not establish live model quality. API references: [OpenAI Responses](https://developers.openai.com/api/docs/guides/function-calling), [Anthropic](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools), [Gemini](https://ai.google.dev/gemini-api/docs/function-calling), [Ollama](https://docs.ollama.com/capabilities/tool-calling).
+
 ## Try it in a host
 
 Use the [B1 host configs](../../bonus/B1_typescript_track/host_configs/vscode.json), replacing the absolute repository path. Ask "Find release notes." The fixed `notes` profile starts with protocol-only stdout. The `forms` profile asks for a bulletin decision; the `workflow` profile reads and drafts without publishing.

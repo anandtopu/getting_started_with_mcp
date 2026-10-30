@@ -1,6 +1,6 @@
 # TypeScript 13: Quality and evaluation
 
-Check actual results, negative cases and the discovered tool inventory within a time budget. These are the TypeScript counterparts to [Module 13](../README.md). Read that lesson's explanation, diagram and quiz first; this page records language-specific behavior.
+Check contracts and stdout, export OTel spans, measure HTTP load and score fixture selections. These are the TypeScript counterparts to [Module 13](../README.md). Read that lesson's explanation, diagram and quiz first; this page records language-specific behavior.
 
 ## Prerequisites
 
@@ -14,7 +14,7 @@ From the root: `npm ci`. Node 24 or 26 is required. The pinned official MCP SDK 
 
 ## The big idea
 
-Check actual results, negative cases and the discovered tool inventory within a time budget. The language changes syntax and library choices; the peer still sees the same JSON-RPC contract. A deterministic fixture is an integration check, not a measured model-quality claim.
+Check contracts and stdout, export OTel spans, measure HTTP load and score fixture selections. The language changes syntax and library choices; the peer still sees the same JSON-RPC contract. A deterministic fixture is an integration check, not a measured model-quality claim.
 
 ## How it works
 
@@ -46,9 +46,13 @@ sequenceDiagram
 
 - `01_contract.ts`: run `node --import tsx modules/13_testing_observability/typescript/examples/01_contract.ts`; expect `status: PASS`.
 - `02_negative.ts`: run `node --import tsx modules/13_testing_observability/typescript/examples/02_negative.ts`; expect `status: PASS`.
-- `03_inventory.ts`: run `node --import tsx modules/13_testing_observability/typescript/examples/03_inventory.ts`; expect `status: PASS`.
+- `03_traces_load_eval.ts`: run `node --import tsx modules/13_testing_observability/typescript/examples/03_traces_load_eval.ts`; expect `status: PASS`.
 
 The executable contracts live in [advanced_lessons.ts](../../../common/typescript/advanced_lessons.ts); follow the module-number branch to the focused implementation it invokes. This avoids copying the same host/security logic into every example.
+
+The third example now exports real [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/sdk-trace) spans around two actual MCP calls, including an error. It verifies their common parent trace, then flushes and shuts down its exporter. These are explicit host spans; the TypeScript SDK is not claimed to auto-instrument them. Attributes contain only the method name, never arguments, results or credentials.
+
+It also runs ten actual loopback HTTP requests with concurrency two and measures elapsed time and p95 latency. Each call has a three-second deadline. The fixed tool-selection dataset is scored separately and labeled a deterministic baseline, not LLM accuracy. [quality.ts](../../../common/typescript/quality.ts) contains the implementation. `02_negative.ts` demonstrates the exact stdout corruption diagnostic and requires protocol-only output. The pinned OTel packages are `@opentelemetry/api` 1.10.0 and `@opentelemetry/sdk-trace` 3.0.0 (verified 2026-10-30).
 
 ## Try it in a host
 

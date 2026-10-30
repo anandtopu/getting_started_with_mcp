@@ -1,6 +1,6 @@
 # Definition of done
 
-Verification date: **2026-10-30**. Scope: the delivered local course and its CI. [Measured evidence and limits](PHASE_8_VERIFICATION.md) identify the tested versions and optional integrations.
+Verification date: **2026-10-30**. Scope: the delivered local course and its CI. The [post-build review](reviews/2026-10-30-review-summary.md) supersedes blanket completeness claims below. [Measured evidence and limits](PHASE_8_VERIFICATION.md) identify the tested versions and optional integrations.
 
 ## Requested release gates
 
@@ -19,10 +19,14 @@ Verification date: **2026-10-30**. Scope: the delivered local course and its CI.
 
 ## Phase 8 deliverables
 
-- [x] Four bonus modules: full TypeScript route, Go/C#/Rust/Java SDKs, specification workflow, current extensions.
+- [x] Four bonus modules: TypeScript companions for every module, Go/C#/Rust/Java SDKs, specification workflow, current extensions.
 - [x] Five capstones: stories, acceptance, distinct Mermaid architecture, runnable policy starter, reference runtime, tests, evaluated cases, security checklist, rubric and extension ideas.
 - [x] Reference docs: mental model, all 24 taught current methods/notifications, four design flowcharts, four-host setup matrix, security, 100-term glossary, troubleshooting and migration.
 - [x] Six one-page PDF cheatsheets, editable content and reproducible generator; rendered and visually checked.
+
+## Remaining original-prompt parity
+
+- [ ] B1's complete native application parity: the combined OAuth gateway/deployment and full Chat Pro web backend use shared Python infrastructure. Native TS protocols, providers, data, input, OAuth clients, quality, packaging, Registry, Tasks and App bridge have runnable cases. See the [explicit coverage matrix](../modules/bonus/B1_typescript_track/README.md#coverage-and-runtime-boundaries). A small native tool-review UI is not equivalent to the full production-host lesson.
 
 ## Optional integrations outside the tested release
 

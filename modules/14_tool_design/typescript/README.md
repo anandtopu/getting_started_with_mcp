@@ -1,6 +1,6 @@
 # TypeScript 14: Tool design
 
-Measure catalog size and detect changed semantics before execution. These are the TypeScript counterparts to [Module 14](../README.md). Read that lesson's explanation, diagram and quiz first; this page records language-specific behavior.
+Compare actual 25-tool and six-tool catalogs, concise/detail results and measured retrieval. These are the TypeScript counterparts to [Module 14](../README.md). Read that lesson's explanation, diagram and quiz first; this page records language-specific behavior.
 
 ## Prerequisites
 
@@ -14,7 +14,7 @@ From the root: `npm ci`. Node 24 or 26 is required. The pinned official MCP SDK 
 
 ## The big idea
 
-Measure catalog size and detect changed semantics before execution. The language changes syntax and library choices; the peer still sees the same JSON-RPC contract. A deterministic fixture is an integration check, not a measured model-quality claim.
+Compare actual 25-tool and six-tool catalogs, concise/detail results and measured retrieval. The language changes syntax and library choices; the peer still sees the same JSON-RPC contract. A deterministic fixture is an integration check, not a measured model-quality claim.
 
 ## How it works
 
@@ -44,11 +44,15 @@ sequenceDiagram
 
 ## Walkthrough
 
-- `01_descriptions.ts`: run `node --import tsx modules/14_tool_design/typescript/examples/01_descriptions.ts`; expect `status: PASS`.
-- `02_catalog_change.ts`: run `node --import tsx modules/14_tool_design/typescript/examples/02_catalog_change.ts`; expect `status: PASS`.
-- `03_context_size.ts`: run `node --import tsx modules/14_tool_design/typescript/examples/03_context_size.ts`; expect `status: PASS`.
+- `01_endpoint_mirror.ts`: run `node --import tsx modules/14_tool_design/typescript/examples/01_endpoint_mirror.ts`; expect `status: PASS`.
+- `02_task_tools.ts`: run `node --import tsx modules/14_tool_design/typescript/examples/02_task_tools.ts`; expect `status: PASS`.
+- `03_evaluation.ts`: run `node --import tsx modules/14_tool_design/typescript/examples/03_evaluation.ts`; expect `status: PASS`.
 
 The executable contracts live in [advanced_lessons.ts](../../../common/typescript/advanced_lessons.ts); follow the module-number branch to the focused implementation it invokes. This avoids copying the same host/security logic into every example.
+
+Compare actual native catalogs over identical `issues.db` data: [mirror_server.ts](mirror_server.ts) registers 25 endpoint tools; [task_tools_server.ts](task_tools_server.ts) registers six workflow tools. Inspect the first with `npm run inspector -- --cli node --import tsx modules/14_tool_design/typescript/mirror_server.ts --protocol-era modern --method tools/list`. Replace `mirror_server.ts` with `task_tools_server.ts` for the workflow catalog.
+
+The first example asserts the 25-tool inventory. The second calls the six-tool server, compares concise and detailed issue evidence and checks an actionable invalid-ID failure. The third evaluates six known issue retrievals against both servers, checking ID and status and measuring catalog characters. These measurements compare deterministic retrieval and catalog size; a model-quality conclusion requires a separate live evaluation. [tool_design.ts](../../../common/typescript/tool_design.ts) is the full implementation. [Mirror capture](../../bonus/B1_typescript_track/wire/mirror.jsonl), [workflow capture](../../bonus/B1_typescript_track/wire/task_tools.jsonl).
 
 ## Try it in a host
 

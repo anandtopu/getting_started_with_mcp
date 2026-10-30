@@ -3,7 +3,10 @@
 
 **Time:** ~150 min · **Level:** Advanced · **LLM needed:** No · **Languages:** Python
 **Spec sections:** [Tools](https://modelcontextprotocol.io/specification/2026-07-28/server/tools), [transports](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports).
-**Workspace and Chat version 3:** Workspace 6 gains deploying remote servers.
+
+**Workspace and Chat version 6 / 3:** Run secured issues behind a local reverse proxy and tear it down.
+
+[TypeScript companion](typescript/README.md) covers the native cases and API differences.
 
 ## Prerequisites
 
@@ -314,11 +317,11 @@ No. Tear down infrastructure and verify remaining charges.
 
 ## Key takeaways
 
-- Verify the artifact or endpoint users will actually run.
-- Keep identity, capability and permission separate.
-- Make configuration explicit and keep credentials out of artifacts/logs.
-- Bound failures and retain evidence before retrying or approving again.
-- Rehearse with synthetic data before publishing or deploying real access.
+- A reverse proxy terminates the public boundary; the MCP server remains a separate protected resource.
+- Validate issuer, audience, expiry and scopes before dispatching authorized operations.
+- Keep credentials in server configuration and omit them from logs and images.
+- Bound request sizes, rates and execution time, and expose readiness without secrets.
+- Rehearse teardown and retain only the data whose lifetime you explicitly intend.
 
 ## Go deeper
 

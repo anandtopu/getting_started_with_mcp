@@ -26,7 +26,7 @@ export class Connection {
   async call(name:string,args:Record<string,unknown>) {
     for(let attempt=0;attempt<2;attempt++) {
       const client=await this.connect();
-      const tool=(await client.listTools()).tools.find(t=>t.name===name);
+      const tool=(await client.listTools(undefined,{cacheMode:'refresh'})).tools.find(t=>t.name===name);
       if(!tool || this.reviewed.get(name)!==fingerprint(tool)) throw new Error('Review the current catalog first');
       try {return await client.callTool({name,arguments:args},{timeout:3000});}
       catch(error) {
@@ -37,5 +37,5 @@ export class Connection {
     }
     throw new Error('Reconnect budget exceeded');
   }
-  async close(){const client=this.client;this.client=undefined;await client?.close();}
+  async close(){await this.connectPromise?.catch(()=>undefined);const client=this.client;this.client=undefined;await client?.close();}
 }

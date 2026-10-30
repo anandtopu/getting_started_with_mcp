@@ -1,11 +1,14 @@
 # Module 17: Official extensions: Tasks and MCP Apps
 > After this module you can negotiate optional extensions on every request and provide a text fallback.
 
-**Time:** 180 minutes · **Level:** Advanced · **LLM needed:** Optional · **Languages:** Python (plus browser JavaScript for the App)
+**Time:** ~165 min · **Level:** Advanced · **LLM needed:** Optional · **Languages:** Python (plus browser JavaScript for the App)
 
-**Workspace and Chat version 6 / 3:** durable reports and an interactive analytics App.
 **Target:** MCP 2026-07-28 and official Python SDK 2.3.0. Commands run from the repository root on Windows, macOS and Linux.
 **Spec sections:** [Extension framework](https://modelcontextprotocol.io/extensions/overview) · [Released Tasks specification](https://github.com/modelcontextprotocol/ext-tasks/blob/main/specification/2026-07-28/tasks.md) · [Apps specification and SDK](https://apps.extensions.modelcontextprotocol.io/api/) · [Python SDK](https://py.sdk.modelcontextprotocol.io/)
+
+**Workspace and Chat version 6 / 3:** Negotiate optional extensions on every request and provide a text fallback.
+
+[TypeScript companion](typescript/README.md) covers the native cases and API differences.
 
 ## Prerequisites
 
@@ -106,10 +109,10 @@ Source: [captured python_main](wire/python_main.jsonl). Each JSON block below is
   "id": 3,
   "result": {
     "resultType": "task",
-    "taskId": "fptzWPKNuh_NQaeMVdACVFLwTTqNOVdK",
+    "taskId": "ThTaUl9XGBkt81PBWk6ha6I22gqAqqnx",
     "status": "working",
-    "createdAt": "2026-10-30T16:10:32.443455+00:00",
-    "lastUpdatedAt": "2026-10-30T16:10:32.443455+00:00",
+    "createdAt": "2026-10-30T21:15:28.214090+00:00",
+    "lastUpdatedAt": "2026-10-30T21:15:28.214090+00:00",
     "ttlMs": 300000,
     "pollIntervalMs": 25,
     "_meta": {
@@ -128,7 +131,7 @@ Source: [captured python_main](wire/python_main.jsonl). Each JSON block below is
   "id": 4,
   "method": "tasks/get",
   "params": {
-    "taskId": "fptzWPKNuh_NQaeMVdACVFLwTTqNOVdK",
+    "taskId": "ThTaUl9XGBkt81PBWk6ha6I22gqAqqnx",
     "_meta": {
       "io.modelcontextprotocol/protocolVersion": "2026-07-28",
       "io.modelcontextprotocol/clientInfo": {
@@ -155,10 +158,10 @@ Source: [captured python_main](wire/python_main.jsonl). Each JSON block below is
   "id": 4,
   "result": {
     "resultType": "complete",
-    "taskId": "fptzWPKNuh_NQaeMVdACVFLwTTqNOVdK",
+    "taskId": "ThTaUl9XGBkt81PBWk6ha6I22gqAqqnx",
     "status": "working",
-    "createdAt": "2026-10-30T16:10:32.443455+00:00",
-    "lastUpdatedAt": "2026-10-30T16:10:32.443455+00:00",
+    "createdAt": "2026-10-30T21:15:28.214090+00:00",
+    "lastUpdatedAt": "2026-10-30T21:15:28.214090+00:00",
     "ttlMs": 300000,
     "pollIntervalMs": 25,
     "_meta": {
@@ -177,7 +180,7 @@ Source: [captured python_main](wire/python_main.jsonl). Each JSON block below is
   "id": 6,
   "method": "tasks/update",
   "params": {
-    "taskId": "fptzWPKNuh_NQaeMVdACVFLwTTqNOVdK",
+    "taskId": "ThTaUl9XGBkt81PBWk6ha6I22gqAqqnx",
     "inputResponses": {
       "details-1": {
         "action": "accept",
@@ -228,7 +231,7 @@ Source: [captured python_main](wire/python_main.jsonl). Each JSON block below is
   "id": 9,
   "method": "tasks/cancel",
   "params": {
-    "taskId": "X-OdkyW8A7tJ7Mtn-mEoF6D_SfvvySJS",
+    "taskId": "dgGOj4JS8fGI5QvkK1asJxD-cZfDqYmh",
     "_meta": {
       "io.modelcontextprotocol/protocolVersion": "2026-07-28",
       "io.modelcontextprotocol/clientInfo": {
@@ -271,7 +274,7 @@ Source: [captured python_main](wire/python_main.jsonl). Each JSON block below is
   "id": 5,
   "method": "tasks/get",
   "params": {
-    "taskId": "fptzWPKNuh_NQaeMVdACVFLwTTqNOVdK",
+    "taskId": "ThTaUl9XGBkt81PBWk6ha6I22gqAqqnx",
     "_meta": {
       "io.modelcontextprotocol/protocolVersion": "2026-07-28",
       "io.modelcontextprotocol/clientInfo": {
@@ -298,10 +301,10 @@ Source: [captured python_main](wire/python_main.jsonl). Each JSON block below is
   "id": 5,
   "result": {
     "resultType": "complete",
-    "taskId": "fptzWPKNuh_NQaeMVdACVFLwTTqNOVdK",
+    "taskId": "ThTaUl9XGBkt81PBWk6ha6I22gqAqqnx",
     "status": "input_required",
-    "createdAt": "2026-10-30T16:10:32.443455+00:00",
-    "lastUpdatedAt": "2026-10-30T16:10:32.606148+00:00",
+    "createdAt": "2026-10-30T21:15:28.214090+00:00",
+    "lastUpdatedAt": "2026-10-30T21:15:28.380871+00:00",
     "ttlMs": 300000,
     "pollIntervalMs": 25,
     "inputRequests": {
@@ -341,7 +344,7 @@ Source: [captured python_main](wire/python_main.jsonl). Each JSON block below is
   "id": 7,
   "method": "tasks/get",
   "params": {
-    "taskId": "fptzWPKNuh_NQaeMVdACVFLwTTqNOVdK",
+    "taskId": "ThTaUl9XGBkt81PBWk6ha6I22gqAqqnx",
     "_meta": {
       "io.modelcontextprotocol/protocolVersion": "2026-07-28",
       "io.modelcontextprotocol/clientInfo": {
@@ -368,10 +371,10 @@ Source: [captured python_main](wire/python_main.jsonl). Each JSON block below is
   "id": 7,
   "result": {
     "resultType": "complete",
-    "taskId": "fptzWPKNuh_NQaeMVdACVFLwTTqNOVdK",
+    "taskId": "ThTaUl9XGBkt81PBWk6ha6I22gqAqqnx",
     "status": "completed",
-    "createdAt": "2026-10-30T16:10:32.443455+00:00",
-    "lastUpdatedAt": "2026-10-30T16:10:32.894036+00:00",
+    "createdAt": "2026-10-30T21:15:28.214090+00:00",
+    "lastUpdatedAt": "2026-10-30T21:15:28.724888+00:00",
     "ttlMs": 300000,
     "pollIntervalMs": 25,
     "result": {

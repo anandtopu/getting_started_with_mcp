@@ -1,5 +1,11 @@
 # Verification notes
 
+## Post-build prompt review — October 30, 2026
+
+[Review findings, completed validation and explicit gaps](reviews/2026-10-30-review-summary.md) supersede unqualified completion language in historical phase records. The current spec index and full 2026-07-28 changelog were rechecked. Native additions use verified installed SDK APIs, four provider HTTP contracts, and pinned `@opentelemetry/api` 1.10.0 plus `@opentelemetry/sdk-trace` 3.0.0. The latter replaces the older split trace packages; the lesson uses explicit host spans. The exact lockfile is the reproducible record.
+
+The review records B1 advanced-application parity as incomplete and the MCPB/Zod build-only advisory as mitigated, not silently waived. No live model call or public publication was performed.
+
 ## Phase 8 — complete course, October 30, 2026
 
 Course 1.0.0 adds the full TypeScript route, four native SDKs, five capstones and final references. [Phase 8 evidence and explicit limits](PHASE_8_VERIFICATION.md) supersede delivery-status statements in historical sections below. [Native pins](../modules/bonus/B2_other_sdks/VERSIONS.md) distinguish Java compatibility from current-revision support. TypeScript uses Agents SDK 0.21.0, LangGraph 1.5.3 and LangChain core 1.3.2 with deterministic model fixtures. PDF regeneration pins ReportLab 5.1.0 in the optional docs group.

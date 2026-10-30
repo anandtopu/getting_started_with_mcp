@@ -13,7 +13,7 @@ from mcp_types import (
 )
 
 from common.data import data_root, safe_path
-from common.notes import READ, WRITE
+from common.notes import READ, REPLACE
 
 SPACES = ["engineering", "product", "hr", "onboarding", "incident_postmortems"]
 
@@ -79,7 +79,7 @@ def wiki_server() -> MCPServer:
         wiki_text(space, page)
         return [ResourceLink(uri=f"wiki://{space}/{page}", name=page, mime_type="text/markdown")]
 
-    @server.tool(annotations=WRITE)
+    @server.tool(annotations=REPLACE)
     async def update_bulletin(text: str, ctx: Context, confirmed: bool = False) -> str:
         """Update only the in-memory training bulletin after confirmation; notify subscribers."""
         nonlocal status_enabled

@@ -3,7 +3,10 @@
 
 **Time:** ~75 min · **Level:** Advanced · **LLM needed:** No · **Languages:** Python
 **Spec sections:** [Tools](https://modelcontextprotocol.io/specification/2026-07-28/server/tools), [transports](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports).
-**Workspace and Chat version 3:** Workspace 6 gains the mcp registry and choosing servers safely.
+
+**Workspace and Chat version 6 / 3:** Validate metadata and review a server before installation.
+
+[TypeScript companion](typescript/README.md) covers the native cases and API differences.
 
 ## Prerequisites
 
@@ -298,11 +301,11 @@ No. It returns metadata only.
 
 ## Key takeaways
 
-- Verify the artifact or endpoint users will actually run.
-- Keep identity, capability and permission separate.
-- Make configuration explicit and keep credentials out of artifacts/logs.
-- Bound failures and retain evidence before retrying or approving again.
-- Rehearse with synthetic data before publishing or deploying real access.
+- Registry metadata describes a server; a listing does not establish that it is trustworthy.
+- The namespace, package identity and version must agree.
+- Validate server.json against the pinned registry schema before publication.
+- Review permissions, provenance and executable arguments before installation.
+- Follow pagination within a fixed budget and stop when a cursor repeats.
 
 ## Go deeper
 

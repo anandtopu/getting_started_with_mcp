@@ -15,7 +15,7 @@ from mcp_types import (
 from pydantic import BaseModel, ConfigDict, StrictBool
 
 from common.issues import issue_lifespan, register_issues, store_from
-from common.notes import WRITE
+from common.notes import REPLACE, WRITE
 from common.portal import approval_portal
 from common.retry import RetryLedger
 
@@ -52,7 +52,7 @@ def require_mode(ctx: Context, mode: str) -> None:
 
 
 def register_input(server: MCPServer) -> None:
-    @server.tool(annotations=WRITE)
+    @server.tool(annotations=REPLACE)
     async def bulk_close(
         issue_ids: list[int], ctx: Context
     ) -> dict[str, object] | InputRequiredResult:

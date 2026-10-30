@@ -123,7 +123,8 @@ class Gateway:
                 try:
                     async with asyncio.timeout(5):
                         page = await asyncio.create_task(
-                            client.list_tools(cursor=cursor), context=Context()
+                            client.list_tools(cursor=cursor, cache_mode="refresh"),
+                            context=Context(),
                         )
                 except Exception:
                     LOG.warning(json.dumps({"event": "upstream_unavailable", "route": alias}))

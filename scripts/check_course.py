@@ -6,6 +6,7 @@ Run: uv run python scripts/check_course.py [--release]
 
 import argparse
 import json
+import re
 
 from common.config import ROOT
 from scripts.check_links import check
@@ -29,10 +30,39 @@ SECTIONS = [
 ]
 
 
+def teaching_contract(path) -> list[str]:
+    """Check promises that headings alone cannot establish."""
+    text = path.read_text(encoding="utf-8")
+    errors = []
+    for marker in [
+        "> After this module you can",
+        "**Time:**",
+        "**Level:**",
+        "**LLM needed:**",
+        "**Languages:**",
+        "**Spec sections:**",
+        "**Workspace and Chat version",
+    ]:
+        if marker not in text:
+            errors.append(f"{path.parent.name}: missing teaching metadata {marker}")
+    for section, lower, upper in [("Learning objectives", 3, 6), ("Key takeaways", 5, 5)]:
+        body = text.partition(f"## {section}")[2].partition("\n## ")[0]
+        count = len(re.findall(r"^[-*] ", body, re.M))
+        if not lower <= count <= upper:
+            errors.append(
+                f"{path.parent.name}: {section} needs {lower}-{upper} bullets; got {count}"
+            )
+    return errors
+
+
 def validate(release: bool = False) -> list[str]:
     errors = check()
     manifest = json.loads((ROOT / "scripts/examples.json").read_text())
-    for entry in manifest["servers"] + manifest["scripts"]:
+    entries = manifest["servers"] + manifest["scripts"]
+    paths = {entry["path"] for entry in entries}
+    if len(paths) != len(entries):
+        errors.append("Example inventory has duplicate paths")
+    for entry in entries:
         if not (ROOT / entry["path"]).is_file():
             errors.append(f"Missing delivered example: {entry['path']}")
     modules = sorted((ROOT / "modules").glob("[0-9][0-9]_*/README.md"))
@@ -49,14 +79,15 @@ def validate(release: bool = False) -> list[str]:
                 errors.append(f"Release needs Phase 8 bonus B{index}.")
         for readme in (ROOT / "modules/bonus").glob("B*/README.md"):
             content = readme.read_text(encoding="utf-8")
+            errors.extend(teaching_contract(readme))
             for section in SECTIONS:
                 if f"## {section}" not in content:
                     errors.append(f"{readme.parent.name}: missing {section}")
             for required in ["quiz.md", "wire/manifest.json", "host_configs/vscode.json"]:
                 if not (readme.parent / required).is_file():
                     errors.append(f"{readme.parent.name}: missing {required}")
-            quiz = (readme.parent / "quiz.md").read_text(encoding="utf-8")
-            if not 5 <= quiz.count("<details>") <= 8:
+            quiz = readme.parent / "quiz.md"
+            if quiz.exists() and not 5 <= quiz.read_text(encoding="utf-8").count("<details>") <= 8:
                 errors.append(f"{readme.parent.name}: needs 5-8 quiz answers")
         for folder in (ROOT / "capstones").glob("[0-9][0-9]_*"):
             for required in [
@@ -95,6 +126,13 @@ def validate(release: bool = False) -> list[str]:
             errors.append("Release needs six one-page PDF sheets")
     for readme in modules:
         text = readme.read_text(encoding="utf-8")
+        errors.extend(teaching_contract(readme))
+        for language, suffix in [("python", "py"), ("typescript", "ts")]:
+            for example in (readme.parent / language / "examples").glob(f"[0-9][0-9]_*.{suffix}"):
+                if example.relative_to(ROOT).as_posix() not in paths:
+                    errors.append(
+                        f"Example missing from runnable inventory: {example.relative_to(ROOT)}"
+                    )
         for section in SECTIONS:
             if f"## {section}" not in text:
                 errors.append(f"{readme.parent.name}: missing section {section}")

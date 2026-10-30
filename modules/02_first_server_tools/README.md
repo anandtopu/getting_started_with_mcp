@@ -1,10 +1,13 @@
 # Module 02: Your first server — typed tools and approved notes
+> After this module you can build typed notes tools that reject unconfirmed writes.
 
-Workspace and Chat version 1: create, search and tag ephemeral Lumen notes; Chat is still optional.
-
-**Time:** 90 minutes · **Level:** beginner · **LLM needed:** no · **Languages:** Python and TypeScript
+**Time:** ~90 min · **Level:** beginner · **LLM needed:** no · **Languages:** Python and TypeScript
 
 **Target:** [MCP 2026-07-28](https://modelcontextprotocol.io/specification/2026-07-28/server/tools); official Python SDK 2.3 and TypeScript SDK 2.4 where shown.
+
+**Workspace and Chat version 1 / 0:** Build typed notes tools that reject unconfirmed writes.
+
+**Spec sections:** [Current specification](https://modelcontextprotocol.io/specification/2026-07-28/server/tools).
 
 ## Prerequisites
 
@@ -190,7 +193,7 @@ Generate configurations for this machine:
 uv run python scripts/host_configs.py --module 2
 ```
 
-Use [the four host configurations](host_configs/README.md) and [host setup instructions](../../docs/HOST_SETUP.md). The JSON has the host’s exact outer envelope and absolute executable/project paths. Restart or reload the host after adding entries, inspect the listed capabilities, then type: **“Show the available Lumen capabilities and use the relevant read operation to find release context. Ask before any change.”** For prompts, choose `summarize_incident` in the host’s prompt picker and supply `incident_postmortems` and `page-01`; slash-command spelling varies by host.
+Use [the four host configurations](host_configs/README.md) and [host setup instructions](../../docs/HOST_SETUP.md). The JSON has the host’s exact outer envelope and absolute executable/project paths. Restart or reload the host after adding entries and inspect the listed capabilities. Ask **“Search the notes for release, then propose a new handover note and wait for my approval.”** The notes server offers `search_notes`, `create_note` and `tag_note`.
 
 Use Inspector or the supplied client as the reproducible baseline; third-party host UI behavior is a separate learner verification step. Host configuration formats were checked against official documentation; interactive host UI behavior is not an automated test claim.
 
@@ -292,11 +295,11 @@ Answer the [five-question quiz](quiz.md) before opening its expandable answers.
 
 ## Key takeaways
 
-- Normally it sees the name, description and schema, not the implementation.
-- The protocol call completed, but tool execution failed; the model can inspect the error.
-- Repeating the same confirmed tag has the same effect as doing it once.
-- No. It is untrusted descriptive metadata.
-- Programs can consume structured fields; people and simpler hosts can read the text fallback.
+- A model sees a tool name, description and schema, so clear descriptions matter.
+- A tool execution failure uses isError; a protocol failure uses a JSON-RPC error envelope.
+- Adding an existing tag again leaves the note unchanged: this operation is idempotent.
+- Annotations describe behavior and cannot replace authorization or human approval.
+- Structured content supports programs while text provides a readable fallback.
 
 ## Go deeper
 

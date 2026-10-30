@@ -1,10 +1,15 @@
 # Module 01: Architecture and the wire — read and write JSON-RPC
+> After this module you can read a JSON-RPC exchange and run an SDK-free MCP server.
 
-Workspace and Chat version 0: add an SDK-free directory-count server and a byte-preserving wiretap.
-
-**Time:** 75 minutes · **Level:** beginner · **LLM needed:** no · **Languages:** Python
+**Time:** ~75 min · **Level:** beginner · **LLM needed:** no · **Languages:** Python
 
 **Target:** [MCP 2026-07-28](https://modelcontextprotocol.io/specification/2026-07-28/server/discover); official Python SDK 2.3 and TypeScript SDK 2.4 where shown.
+
+**Workspace and Chat version 0 / 0:** Read a json-rpc exchange and run an sdk-free mcp server.
+
+**Spec sections:** [Current specification](https://modelcontextprotocol.io/specification/2026-07-28/server/discover).
+
+[TypeScript companion](typescript/README.md) covers the native cases and API differences.
 
 ## Prerequisites
 
@@ -195,7 +200,7 @@ Generate configurations for this machine:
 uv run python scripts/host_configs.py --module 1
 ```
 
-Use [the four host configurations](host_configs/README.md) and [host setup instructions](../../docs/HOST_SETUP.md). The JSON has the host’s exact outer envelope and absolute executable/project paths. Restart or reload the host after adding entries, inspect the listed capabilities, then type: **“Show the available Lumen capabilities and use the relevant read operation to find release context. Ask before any change.”** For prompts, choose `summarize_incident` in the host’s prompt picker and supply `incident_postmortems` and `page-01`; slash-command spelling varies by host.
+Use [the four host configurations](host_configs/README.md) and [host setup instructions](../../docs/HOST_SETUP.md). The JSON has the host’s exact outer envelope and absolute executable/project paths. Restart or reload the host after adding entries and inspect the listed capabilities. Ask **“Count the synthetic employee sample.”** Expect `directory_count` to return `80 synthetic employees`. This small server advertises tools only.
 
 Use Inspector or the supplied client as the reproducible baseline; third-party host UI behavior is a separate learner verification step. Host configuration formats were checked against official documentation; interactive host UI behavior is not an automated test claim.
 
@@ -273,11 +278,11 @@ Answer the [five-question quiz](quiz.md) before opening its expandable answers.
 
 ## Key takeaways
 
-- To correlate it with the request, even if replies arrive out of order.
-- No. It has no request ID and no response.
-- The input was not valid JSON.
-- No. It removes implicit protocol-session assumptions; application state remains explicit.
-- That would change the transport. Only the separate captured copy is decoded and formatted.
+- A response repeats the request ID so the client can pair messages that arrive out of order.
+- A notification has no request ID and receives no response.
+- Parse error -32700 means the incoming bytes were not valid JSON.
+- Stateless protocol requests can still address explicit application state through handles.
+- The wiretap forwards original bytes unchanged and formats a separate diagnostic copy.
 
 ## Go deeper
 

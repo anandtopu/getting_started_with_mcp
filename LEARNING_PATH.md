@@ -131,7 +131,7 @@ Keep each checkpoint as a gate even if you spread a week across more calendar da
 | [Personal Knowledge Server](capstones/01_personal_knowledge/README.md) | Markdown full-text/semantic search, resources, prompts, completion and packaging | Tier 2 |
 | [Security Audit Lab](capstones/02_security_audit/README.md) | Findings, fixes and regression tests for a second vulnerable server | Tier 3 |
 | [Lumen Gateway](capstones/03_lumen_gateway/README.md) | OAuth, per-user filtering, audit and rate limits | Tier 4 |
-| Lumen Ops | Secured issues/analytics, elicitation, Tasks, App, evaluation and deployment | Tier 5 |
+| [Lumen Ops](capstones/04_lumen_ops/README.md) | Secured issues/analytics, elicitation, Tasks, App, evaluation and deployment | Tier 5 |
 | [Lumen Chat Pro](capstones/05_lumen_chat_pro/README.md) | Multi-server web host, selectable provider, approvals and extension UI | Tier 5 |
 
 Each capstone includes user stories, acceptance criteria, Mermaid architecture, runnable starter, full reference solution, tests, completed security checklist, extension challenges and rubric. Semantic search uses an explicit five-concept local encoder with normalized vectors. It needs no model download; its limited vocabulary is part of the lesson, not a claim of general semantic understanding.

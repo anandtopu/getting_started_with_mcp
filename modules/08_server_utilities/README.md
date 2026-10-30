@@ -1,8 +1,15 @@
 # Module 08: Server utilities: context, lifetime, progress
+> After this module you can report progress, cancel work and close server-owned resources.
 
-**Time:** 105 minutes · **Level:** intermediate · **Languages:** Python · **LLM needed:** no; optional direct generation only
+**Time:** ~105 min · **Level:** intermediate · **Languages:** Python · **LLM needed:** no; optional direct generation only
 
 **Target:** MCP 2026-07-28, Python SDK 2.3, TypeScript SDK 2.4. Commands run from the repository root on Windows, macOS, or Linux.
+
+**Workspace and Chat version 3 / 1:** Report progress, cancel work and close server-owned resources.
+
+**Spec sections:** [Current specification](https://modelcontextprotocol.io/specification/2026-07-28).
+
+[TypeScript companion](typescript/README.md) covers the native cases and API differences.
 
 ## Prerequisites
 

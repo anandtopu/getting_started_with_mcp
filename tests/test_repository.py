@@ -2,6 +2,7 @@
 
 import ast
 import json
+import re
 import runpy
 
 import pytest
@@ -46,7 +47,7 @@ def test_links_and_course():
 
 
 def test_no_legacy_imports_or_stdout_in_servers():
-    banned = ["mcp.server." + "fastmcp", "mcp." + "types"]
+    banned = ["mcp.server." + "fastmcp", "mcp." + "types", "mcp.client.sse", "mcp.server.sse"]
     manifest = json.loads((ROOT / "scripts/examples.json").read_text())
     servers = {ROOT / entry["path"] for entry in manifest["servers"]}
     servers.add(ROOT / "data/security/vulnerable_server.py")
@@ -54,6 +55,8 @@ def test_no_legacy_imports_or_stdout_in_servers():
         *ROOT.joinpath("common").rglob("*.py"),
         *ROOT.joinpath("scripts").glob("*.py"),
         *ROOT.joinpath("modules").rglob("*.py"),
+        *ROOT.joinpath("capstones").rglob("*.py"),
+        *ROOT.joinpath("distribution/python/src").rglob("*.py"),
         ROOT / "data/security/vulnerable_server.py",
     ]
     for path in paths:
@@ -65,6 +68,13 @@ def test_no_legacy_imports_or_stdout_in_servers():
                 assert not any(alias.name in banned for alias in node.names), path
             if path in servers and isinstance(node, ast.Call):
                 assert not (isinstance(node.func, ast.Name) and node.func.id == "print"), path
+    for folder in ["common/typescript", "modules", "distribution/npm/src"]:
+        for path in ROOT.joinpath(folder).rglob("*.ts"):
+            source = path.read_text(encoding="utf-8")
+            assert not re.search(r"from\s+['\"]@modelcontextprotocol/sdk(?:/|['\"])", source), path
+            assert not re.search(r"new\s+(?:SSEClientTransport|SseServerTransport)\s*\(", source), (
+                path
+            )
 
 
 def test_capture_is_real_jsonrpc():

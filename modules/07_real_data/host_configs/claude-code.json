@@ -10,7 +10,7 @@
         "--extra",
         "http",
         "python",
-        "D:\\Learning_Projects\\getting_started_with_mcp_prompt\\modules\\09_elicitation_sampling_roots\\python\\use_case\\server.py"
+        "D:\\Learning_Projects\\getting_started_with_mcp_prompt\\modules\\07_real_data\\python\\examples\\01_issue_crud.py"
       ]
     },
     "analytics": {

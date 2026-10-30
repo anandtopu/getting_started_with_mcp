@@ -6,7 +6,7 @@ import { McpServer, ResourceTemplate, completable, InMemoryServerEventBus } from
 import { z } from 'zod';
 import { root } from './data.ts';
 import { wikiText } from './wiki.ts';
-import { structured, failure, read as readAnnotation, write } from './notes.ts';
+import { structured, failure, read as readAnnotation, write, replace } from './notes.ts';
 import { serveHttp } from './http.ts';
 
 export function remoteWorkspace() {
@@ -46,12 +46,12 @@ export function remoteWorkspace() {
         db.exec('COMMIT'); return structured(read(Number(result.lastInsertRowid))!);
       } catch (error) { db.exec('ROLLBACK'); throw error; }
     });
-    server.registerTool('update_issue', { annotations:write, inputSchema: z.object({ issue_id: z.number().int(), status: z.enum(['open', 'in_progress', 'closed']), confirmed: z.boolean().default(false) }) }, args => {
+    server.registerTool('update_issue', { annotations:replace, inputSchema: z.object({ issue_id: z.number().int(), status: z.enum(['open', 'in_progress', 'closed']), confirmed: z.boolean().default(false) }) }, args => {
       if (!args.confirmed || !read(args.issue_id)) return failure('Confirm an existing issue');
       db.prepare('UPDATE issues SET status=? WHERE id=?').run(args.status, args.issue_id);
       return structured(read(args.issue_id)!);
     });
-    server.registerTool('delete_issue', { annotations:write, inputSchema: z.object({ issue_id: z.number().int(), confirmed: z.boolean().default(false) }) }, args => {
+    server.registerTool('delete_issue', { annotations:replace, inputSchema: z.object({ issue_id: z.number().int(), confirmed: z.boolean().default(false) }) }, args => {
       if (!args.confirmed || !read(args.issue_id)) return failure('Confirm an existing issue');
       db.exec('BEGIN');
       try {
@@ -80,7 +80,7 @@ export function remoteWorkspace() {
       return { content: [{ type: 'resource_link', name: page, uri: `wiki://${space}/${page}`, mimeType: 'text/markdown' }] };
     });
     server.registerResource('review', 'workspace://review', {}, uri => ({ contents: [{ uri: uri.href, text: review }] }));
-    server.registerTool('publish_review', { annotations:write, inputSchema: z.object({ text: z.string().max(500), confirmed:z.boolean().default(false) }) }, async ({ text, confirmed }) => {
+    server.registerTool('publish_review', { annotations:replace, inputSchema: z.object({ text: z.string().max(500), confirmed:z.boolean().default(false) }) }, async ({ text, confirmed }) => {
       if (!confirmed) return failure('Confirm this exact write in the host first.');
       review = text; bus.publish({ kind: 'resource_updated', uri: 'workspace://review' }); return structured({ updated: true });
     });

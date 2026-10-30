@@ -14,6 +14,8 @@ READ = ToolAnnotations(
 WRITE = ToolAnnotations(
     read_only_hint=False, destructive_hint=False, idempotent_hint=False, open_world_hint=False
 )
+# Replacing or deleting existing data has destructive potential, even in a fixture.
+REPLACE = WRITE.model_copy(update={"destructive_hint": True})
 
 
 def notes_server() -> MCPServer:

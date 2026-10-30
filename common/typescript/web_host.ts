@@ -3,12 +3,21 @@ import { createServer } from 'node:http';
 import { randomBytes } from 'node:crypto';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { once } from 'node:events';
 import { CourseHost, fingerprint, type Proposal } from './advanced_host.ts';
 import { Connection } from './production_host.ts';
+import { validateProposal } from './schemas.ts';
 
-export async function webHost(port=8767) {
-  const connections=[new Connection('notes'),new Connection('workflow')];
-  const clients=await Promise.all(connections.map(c=>c.connect()));
+export async function webHost(port=8767, connect=(profile:'notes'|'workflow'):Pick<Connection,'connect'|'close'>=>new Connection(profile)) {
+  const connections=[connect('notes'),connect('workflow')];
+  // Settle both starts before closing: the other child may still be opening.
+  const started=await Promise.allSettled(connections.map(c=>c.connect()));
+  const failed=started.find(result=>result.status==='rejected');
+  if(failed?.status==='rejected') {
+    await Promise.allSettled(connections.map(c=>c.close()));
+    throw failed.reason;
+  }
+  const clients=started.map(result=>{if(result.status==='rejected')throw result.reason;return result.value;});
   const csrf=randomBytes(24).toString('base64url');
   const pending=new Map<string,{proposal:Proposal;signature:string;expires:number}>();
   const host=new CourseHost(new Map([['notes',clients[0]],['workflow',clients[1]]]),async()=>true);
@@ -30,6 +39,7 @@ export async function webHost(port=8767) {
         if(pending.size>=20)throw new Error('Review capacity reached');
         if(typeof value.name!=='string'||!value.arguments||typeof value.arguments!=='object'||Array.isArray(value.arguments))throw new Error('Invalid proposal');
         const tool=(await host.catalog()).find(t=>t.name===value.name);if(!tool)throw new Error('Unknown tool');
+        validateProposal(tool,value.arguments);
         const ticket=randomBytes(24).toString('base64url');pending.set(ticket,{proposal:structuredClone(value),signature:fingerprint(tool),expires:Date.now()+60000});respond(200,{ticket});return;
       }
       if(!['/api/approve','/api/decline'].includes(req.url??'')){respond(404,{error:'Unknown route'});return;}
@@ -37,10 +47,15 @@ export async function webHost(port=8767) {
       if(!proposal)throw new Error('Unknown or expired review');
       const current=(await host.catalog()).find(t=>t.name===proposal.proposal.name);
       if(!current || fingerprint(current)!==proposal.signature)throw new Error('Tool changed; review again');
-      respond(200,req.url==='/api/approve'?await host.execute(proposal.proposal):{declined:true});
+      const reviewedHost=new CourseHost(host.clients,async(_call,tool)=>{
+        if(fingerprint(tool)!==proposal.signature)throw new Error('Tool changed; review again');
+        return true;
+      });
+      respond(200,req.url==='/api/approve'?await reviewedHost.execute(proposal.proposal):{declined:true});
     }catch(error){respond(400,{error:error instanceof Error?error.message:'Request failed'});}
   });
-  server.listen(port,'127.0.0.1');
+  try {server.listen(port,'127.0.0.1');await once(server,'listening');}
+  catch(error){await Promise.allSettled(connections.map(c=>c.close()));throw error;}
   return {server,close:async()=>{await new Promise<void>(resolve=>server.close(()=>resolve()));await Promise.all(connections.map(c=>c.close()));}};
 }
 if(process.argv[1] && resolve(process.argv[1])===fileURLToPath(import.meta.url)) {

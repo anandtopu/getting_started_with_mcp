@@ -575,7 +575,7 @@ Poll one owned task; completed state includes its original operation result. [Sp
   "id": 7,
   "method": "tasks/get",
   "params": {
-    "taskId": "TP5TMKee-nuXk22c1ltVlDOgedElt8N0",
+    "taskId": "2t3L9YQL1ZFiRrO2N7fD6I4dRxUiHqEw",
     "_meta": {
       "io.modelcontextprotocol/protocolVersion": "2026-07-28",
       "io.modelcontextprotocol/clientInfo": {
@@ -604,10 +604,10 @@ The same ID identifies this response:
   "id": 7,
   "result": {
     "resultType": "complete",
-    "taskId": "TP5TMKee-nuXk22c1ltVlDOgedElt8N0",
+    "taskId": "2t3L9YQL1ZFiRrO2N7fD6I4dRxUiHqEw",
     "status": "cancelled",
-    "createdAt": "2026-10-30T19:59:20.737Z",
-    "lastUpdatedAt": "2026-10-30T19:59:20.738Z",
+    "createdAt": "2026-10-30T21:16:17.122Z",
+    "lastUpdatedAt": "2026-10-30T21:16:17.123Z",
     "ttlMs": 300000,
     "pollIntervalMs": 25,
     "_meta": {
@@ -631,7 +631,7 @@ Supply an answer to a task input request; do not send an unrelated confirmation.
   "id": 8,
   "method": "tasks/update",
   "params": {
-    "taskId": "csiVQNP4_KLBIkCP2VnhiZ_iBtVW50XK",
+    "taskId": "pUp7h_KCX1VYjGOOZLo9GMzUDDp71EU5",
     "inputResponses": {
       "details-1": {
         "action": "accept",
@@ -689,7 +689,7 @@ Cancel pending work; terminal-state semantics stay with the extension. [Specific
   "id": 11,
   "method": "tasks/cancel",
   "params": {
-    "taskId": "FwpIZv1pRjGTRM63ItLvBbDrqivVCc2F",
+    "taskId": "Th3V9VIfKXKt5ZOP2Zj0Kx9PbZL9Hmns",
     "_meta": {
       "io.modelcontextprotocol/protocolVersion": "2026-07-28",
       "io.modelcontextprotocol/clientInfo": {

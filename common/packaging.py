@@ -31,6 +31,8 @@ def run(command, cwd=ROOT, **kwargs):
 
 
 def artifacts():
+    if (ROOT / "distribution/mcpb/manifest.json").stat().st_size > 64000:
+        raise ValueError("Notes bundle manifest exceeds 64 KB.")
     sources = [
         ROOT / p
         for p in [

@@ -1,11 +1,14 @@
 # Module 14: Designing tools that models use well
 > After this module you can compare a 25-tool endpoint mirror with six task-oriented tools.
 
-**Time:** 150 minutes · **Level:** Advanced · **LLM needed:** Optional · **Languages:** Python (plus browser JavaScript for the App)
+**Time:** ~135 min · **Level:** Advanced · **LLM needed:** Optional · **Languages:** Python (plus browser JavaScript for the App)
 
-**Workspace and Chat version 6 / 3:** task-oriented tool catalog and measured outcomes.
 **Target:** MCP 2026-07-28 and official Python SDK 2.3.0. Commands run from the repository root on Windows, macOS and Linux.
 **Spec sections:** [Tools specification](https://modelcontextprotocol.io/specification/2026-07-28/server/tools) · [Caching](https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/caching) · [Python SDK](https://py.sdk.modelcontextprotocol.io/)
+
+**Workspace and Chat version 5 / 2:** Compare a 25-tool endpoint mirror with six task-oriented tools.
+
+[TypeScript companion](typescript/README.md) covers the native cases and API differences.
 
 ## Prerequisites
 

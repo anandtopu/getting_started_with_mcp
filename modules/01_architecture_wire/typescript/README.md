@@ -1,6 +1,6 @@
 # TypeScript 01: Protocol architecture
 
-Send correlated requests over the official transport, then compare raw and SDK paths. These are the TypeScript counterparts to [Module 01](../README.md). Read that lesson's explanation, diagram and quiz first; this page records language-specific behavior.
+Write SDK-free stdio requests and a server, then compare raw and typed SDK paths. These are the TypeScript counterparts to [Module 01](../README.md). Read that lesson's explanation, diagram and quiz first; this page records language-specific behavior.
 
 ## Prerequisites
 
@@ -14,7 +14,7 @@ From the root: `npm ci`. Node 24 or 26 is required. The pinned official MCP SDK 
 
 ## The big idea
 
-Send correlated requests over the official transport, then compare raw and SDK paths. The language changes syntax and library choices; the peer still sees the same JSON-RPC contract. A deterministic fixture is an integration check, not a measured model-quality claim.
+Write SDK-free stdio requests and a server, then compare raw and typed SDK paths. The language changes syntax and library choices; the peer still sees the same JSON-RPC contract. A deterministic fixture is an integration check, not a measured model-quality claim.
 
 ## How it works
 
@@ -49,6 +49,8 @@ sequenceDiagram
 - `03_call.ts`: run `node --import tsx modules/01_architecture_wire/typescript/examples/03_call.ts`; expect `status: PASS`.
 
 The executable contracts live in [advanced_lessons.ts](../../../common/typescript/advanced_lessons.ts); follow the module-number branch to the focused implementation it invokes. This avoids copying the same host/security logic into every example.
+
+The [raw server](raw_server.ts) and [raw client](../../../common/typescript/raw_client.ts) use Node streams and newline-delimited JSON without importing the MCP SDK. The first example checks ID correlation, a real `directory_count` call returning 80, unknown methods and unsupported revisions. Compare that code with the typed SDK in examples 2 and 3. [Captured raw traffic](../../bonus/B1_typescript_track/wire/raw.jsonl) is generated from this server.
 
 ## Try it in a host
 

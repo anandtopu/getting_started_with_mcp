@@ -50,6 +50,10 @@ sequenceDiagram
 
 The executable contracts live in [advanced_lessons.ts](../../../common/typescript/advanced_lessons.ts); follow the module-number branch to the focused implementation it invokes. This avoids copying the same host/security logic into every example.
 
+The terminal host with four native model adapters is `node --import tsx common/typescript/chat.ts --live` (module 06). The local web shell is `node --import tsx common/typescript/web_host.ts`. It provides a two-server catalog, frozen one-use approvals and exact argument review. Its final dispatch checks the original reviewed definition again using a fresh SDK catalog response, even if a server advertises a cache TTL. Failed or interrupted startup closes every child before returning.
+
+The complete dashboard, Tasks display and settings UI described by the main lesson use the shared [Python production host](../../../common/production_host.py) and [browser application](../../../common/web_ui/app.source.js). Native TypeScript Tasks and App bridge implementations are taught and tested in module 17; the smaller TypeScript web shell is not a duplicate of that complete UI. This runtime boundary is recorded in the B1 coverage table.
+
 ## Try it in a host
 
 Use the [B1 host configs](../../bonus/B1_typescript_track/host_configs/vscode.json), replacing the absolute repository path. Ask "Find release notes." The fixed `notes` profile starts with protocol-only stdout. The `forms` profile asks for a bulletin decision; the `workflow` profile reads and drafts without publishing.

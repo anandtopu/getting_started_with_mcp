@@ -87,3 +87,14 @@ the offline fixture cannot establish interoperability or OS isolation by itself.
 - [x] Local machine/enterprise fixtures reject wrong resource, bad assertion and replay; published captures redact credentials.
 
 Evidence: [Python regressions](../tests/test_phase8.py), [TypeScript regressions](../common/typescript/phase8.test.ts), [five project checklists](../capstones/README.md). Multi-worker recovery, live identity-provider federation and real production incident response remain deployment-specific work.
+
+## Post-build review corrections
+
+- Security catalog checks explicitly bypass SDK TTL caching immediately before dispatch. Ordinary discovery caching must never weaken a reviewed-definition check.
+- The native browser ticket retains its original fingerprint through the execution-time approval callback; a second discovery cannot silently change what was approved.
+- Replacement and deletion use `destructiveHint=true`, including bulletin updates. Additive creation/tagging remains separately annotated. All mutations still require explicit approval.
+- Native model schemas exclude host-only confirmation; invalid or self-approved proposals fail before human review.
+- Failed/cancelled connection startup cleans up before ownership transfers to the host.
+- MCPB 2.1.2 brings Zod 3.25.76 into the build tool only. Both packaging paths accept bounded repository-owned manifests, cap Node heap at 256 MB and use a 120-second subprocess deadline. [The advisory](https://github.com/advisories/GHSA-mrhx-c7xc-m3w5) remains unresolved upstream; do not use the course build CLI to validate arbitrary downloaded bundles.
+
+[Regressions and remaining limits](reviews/2026-10-30-review-summary.md).

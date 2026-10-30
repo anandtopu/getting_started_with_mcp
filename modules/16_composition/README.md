@@ -1,11 +1,14 @@
 # Module 16: Composition: the Lumen Gateway
 > After this module you can expose seven fixed upstream servers through one namespaced catalog.
 
-**Time:** 180 minutes · **Level:** Advanced · **LLM needed:** Optional · **Languages:** Python (plus browser JavaScript for the App)
+**Time:** ~150 min · **Level:** Advanced · **LLM needed:** Optional · **Languages:** Python (plus browser JavaScript for the App)
 
-**Workspace and Chat version 6 / 3:** seven upstreams behind reviewed gateway policy.
 **Target:** MCP 2026-07-28 and official Python SDK 2.3.0. Commands run from the repository root on Windows, macOS and Linux.
 **Spec sections:** [Architecture](https://modelcontextprotocol.io/specification/2026-07-28/architecture/index) · [Authorization](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/index) · [Python SDK](https://py.sdk.modelcontextprotocol.io/)
+
+**Workspace and Chat version 6 / 2:** Expose seven fixed upstream servers through one namespaced catalog.
+
+[TypeScript companion](typescript/README.md) covers the native cases and API differences.
 
 ## Prerequisites
 

@@ -11,6 +11,10 @@ import shutil
 import subprocess
 import sys
 
+from dotenv import dotenv_values
+
+from common.config import ROOT
+
 
 def check() -> bool:
     ok = (3, 12) <= sys.version_info[:2] < (3, 15)
@@ -44,8 +48,9 @@ def check() -> bool:
         except importlib.metadata.PackageNotFoundError:
             print(f"MISSING {package}: run uv sync")
             ok = False
+    values = {**dotenv_values(ROOT / ".env"), **os.environ}
     for key in ("ANTHROPIC_API_KEY", "OPENAI_API_KEY", "GEMINI_API_KEY"):
-        print(f"OPTIONAL {key}: {'set' if os.environ.get(key) else 'not set'}")
+        print(f"OPTIONAL {key}: {'set' if values.get(key) else 'not set'}")
     print("Keys and model services are unnecessary for the default offline tests.")
     return ok
 

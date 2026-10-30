@@ -5,6 +5,7 @@ export const read: ToolAnnotations = {
   readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false,
 };
 export const write: ToolAnnotations = { ...read, readOnlyHint: false, idempotentHint: false };
+export const replace: ToolAnnotations = { ...write, destructiveHint: true };
 export const text = (value: string) => ({ content: [{ type: 'text' as const, text: value }] });
 export const failure = (message: string) => ({ ...text(message), isError: true });
 export const structured = (value: Record<string, unknown>) => ({

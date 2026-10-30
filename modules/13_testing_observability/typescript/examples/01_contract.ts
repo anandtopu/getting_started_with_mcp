@@ -1,4 +1,4 @@
-/** Quality and evaluation: contract.
+/** contracts.
  * Concepts/spec: ../README.md; https://modelcontextprotocol.io/specification/2026-07-28
  * Run: node --import tsx modules/13_testing_observability/typescript/examples/01_contract.ts
  * Capture: uv run python scripts/phase8.py --capture

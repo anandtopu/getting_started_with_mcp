@@ -1,4 +1,4 @@
-/** Long operations: cancellation.
+/** running cancellation.
  * Concepts/spec: ../README.md; https://modelcontextprotocol.io/specification/2026-07-28
  * Run: node --import tsx modules/08_server_utilities/typescript/examples/02_cancellation.ts
  * Capture: uv run python scripts/phase8.py --capture

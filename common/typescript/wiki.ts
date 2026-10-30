@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { McpServer, ResourceTemplate } from '@modelcontextprotocol/server';
 import { z } from 'zod';
 import { root, safePath } from './data.ts';
-import { read, write, text, failure } from './notes.ts';
+import { read, replace, text, failure } from './notes.ts';
 
 export const spaces = ['engineering', 'product', 'hr', 'onboarding', 'incident_postmortems'];
 export const pages = Array.from({ length: 8 }, (_, i) => `page-0${i + 1}`);
@@ -46,7 +46,7 @@ export function wikiServer(): McpServer {
   });
   server.registerTool('update_bulletin', {
     description: 'Update only the in-memory training bulletin after confirmation; notify subscribers.',
-    inputSchema: z.object({ text: z.string().min(1).max(500), confirmed: z.boolean().default(false) }), annotations: write,
+    inputSchema: z.object({ text: z.string().min(1).max(500), confirmed: z.boolean().default(false) }), annotations: replace,
   }, async ({ text: value, confirmed }) => {
     if (!confirmed) return failure('Confirmation required: review the bulletin text.');
     bulletin = value;

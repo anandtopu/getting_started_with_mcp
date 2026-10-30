@@ -1,6 +1,6 @@
 # TypeScript 09: Interactive input
 
-Use input_required form retries and bind opaque one-use state to exact arguments. These are the TypeScript counterparts to [Module 09](../README.md). Read that lesson's explanation, diagram and quiz first; this page records language-specific behavior.
+Use form and URL input retries with one-use state bound to the exact operation. These are the TypeScript counterparts to [Module 09](../README.md). Read that lesson's explanation, diagram and quiz first; this page records language-specific behavior.
 
 ## Prerequisites
 
@@ -14,7 +14,7 @@ From the root: `npm ci`. Node 24 or 26 is required. The pinned official MCP SDK 
 
 ## The big idea
 
-Use input_required form retries and bind opaque one-use state to exact arguments. The language changes syntax and library choices; the peer still sees the same JSON-RPC contract. A deterministic fixture is an integration check, not a measured model-quality claim.
+Use form and URL input retries with one-use state bound to the exact operation. The language changes syntax and library choices; the peer still sees the same JSON-RPC contract. A deterministic fixture is an integration check, not a measured model-quality claim.
 
 ## How it works
 
@@ -49,6 +49,10 @@ sequenceDiagram
 - `03_state_binding.ts`: run `node --import tsx modules/09_elicitation_sampling_roots/typescript/examples/03_state_binding.ts`; expect `status: PASS`.
 
 The executable contracts live in [advanced_lessons.ts](../../../common/typescript/advanced_lessons.ts); follow the module-number branch to the focused implementation it invokes. This avoids copying the same host/security logic into every example.
+
+The third example also exercises [native URL input](../../../common/typescript/url_input.ts) with a real loopback approval page. It first accepts the MCP input without visiting the browser page and proves that no export occurs. It then completes the separate browser POST with its anti-forgery token and retries successfully. The portal rejects a forged Origin, expires grants after 60 seconds and consumes each continuation once. Automatic consent exists only inside this synthetic test helper; a real host opens the page for the user.
+
+Sampling and roots are deprecated in the targeted revision. Use the native [provider helper](../../../common/typescript/llm.ts) and canonical [allowed-path helper](../../../common/typescript/data.ts) for their current replacements. The model never controls the configured filesystem root.
 
 ## Try it in a host
 

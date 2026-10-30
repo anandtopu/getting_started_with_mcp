@@ -1,10 +1,15 @@
 # Module 06: Building a host — Lumen Chat v1
+> After this module you can run a provider-neutral host loop with explicit tool approval.
 
-Workspace and Chat version 2 / 1: route model calls across notes, wiki and a restricted reference server.
-
-**Time:** 120 minutes · **Level:** beginner · **LLM needed:** only for optional live Chat; fake mode is free · **Languages:** Python
+**Time:** ~120 min · **Level:** beginner · **LLM needed:** only for optional live Chat; fake mode is free · **Languages:** Python
 
 **Target:** [MCP 2026-07-28](https://modelcontextprotocol.io/specification/2026-07-28/architecture/index); official Python SDK 2.3 and TypeScript SDK 2.4 where shown.
+
+**Workspace and Chat version 2 / 1:** Run a provider-neutral host loop with explicit tool approval.
+
+**Spec sections:** [Current specification](https://modelcontextprotocol.io/specification/2026-07-28/architecture/index).
+
+[TypeScript companion](typescript/README.md) covers the native cases and API differences.
 
 ## Prerequisites
 
@@ -174,7 +179,7 @@ Generate configurations for this machine:
 uv run python scripts/host_configs.py --module 6
 ```
 
-Use [the four host configurations](host_configs/README.md) and [host setup instructions](../../docs/HOST_SETUP.md). The JSON has the host’s exact outer envelope and absolute executable/project paths. Restart or reload the host after adding entries, inspect the listed capabilities, then type: **“Show the available Lumen capabilities and use the relevant read operation to find release context. Ask before any change.”** For prompts, choose `summarize_incident` in the host’s prompt picker and supply `incident_postmortems` and `page-01`; slash-command spelling varies by host.
+Use [the four host configurations](host_configs/README.md) and [host setup instructions](../../docs/HOST_SETUP.md). The JSON has the host’s exact outer envelope and absolute executable/project paths. Restart or reload the host after adding entries and inspect the listed capabilities. Ask **“Find the release handover note and read the engineering wiki page. Ask before any change.”** These configs connect notes, wiki and restricted files. Run Lumen Chat from the walkthrough to inspect your own host loop.
 
 Use Inspector or the supplied client as the reproducible baseline; third-party host UI behavior is a separate learner verification step. Host configuration formats were checked against official documentation; interactive host UI behavior is not an automated test claim.
 
@@ -252,11 +257,11 @@ Answer the [five-question quiz](quiz.md) before opening its expandable answers.
 
 ## Key takeaways
 
-- The host, after routing, validation and approval.
-- Different servers can expose identical names; the host needs an unambiguous route.
-- No. The host excludes it from the advertised schema and rejects such arguments.
-- The provider must pair each returned result with the original tool request.
-- No. It proves the host loop deterministically; live model behavior requires an opt-in test.
+- The host validates, approves and routes a model-proposed call before execution.
+- Namespacing prevents identical tool names on different servers from colliding.
+- The model cannot supply confirmed; the host adds it after a separate human decision.
+- Provider adapters preserve tool-call IDs when returning results to the model.
+- Fake-model tests demonstrate the host mechanism; opt-in live tests measure model behavior.
 
 ## Go deeper
 

@@ -129,11 +129,16 @@ class Connection:
             ) as client:
                 yield client
 
-    async def start(self):
+    async def start(self, timeout=20):
         self.ready = asyncio.get_running_loop().create_future()
         self.worker = asyncio.create_task(self._own_connection())
-        async with asyncio.timeout(20):
-            await self.ready
+        try:
+            async with asyncio.timeout(timeout):
+                await self.ready
+        except BaseException:
+            # The caller has not acquired ownership yet, so it cannot close us.
+            await self.close()
+            raise
         return self
 
     async def _own_connection(self):

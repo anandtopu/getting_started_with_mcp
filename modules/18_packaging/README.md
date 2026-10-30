@@ -3,7 +3,10 @@
 
 **Time:** ~105 min · **Level:** Advanced · **LLM needed:** No · **Languages:** Python + TypeScript packaging
 **Spec sections:** [Tools](https://modelcontextprotocol.io/specification/2026-07-28/server/tools), [transports](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports).
-**Workspace and Chat version 3:** Workspace 6 gains packaging and distributing servers.
+
+**Workspace and Chat version 6 / 3:** Build and inspect installable notes packages.
+
+[TypeScript companion](typescript/README.md) covers the native cases and API differences.
 
 ## Prerequisites
 
@@ -304,11 +307,11 @@ Only when the learner deliberately publishes with their own account.
 
 ## Key takeaways
 
-- Verify the artifact or endpoint users will actually run.
-- Keep identity, capability and permission separate.
-- Make configuration explicit and keep credentials out of artifacts/logs.
-- Bound failures and retain evidence before retrying or approving again.
-- Rehearse with synthetic data before publishing or deploying real access.
+- A package must launch outside the checkout to prove its dependencies and included files are sufficient.
+- Python wheels, npm packages and desktop bundles have different entry points and install contracts.
+- Inspect archives for secrets and unexpected files before publication.
+- Version schemas deliberately; removing a field or tool can break existing clients.
+- Build and verify locally before choosing an index and explicitly publishing.
 
 ## Go deeper
 

@@ -2,24 +2,28 @@
 import { strict as assert } from 'node:assert';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { performance } from 'node:perf_hooks';
 import { Client, InMemoryTransport } from '@modelcontextprotocol/client';
 import { serveStdio } from '@modelcontextprotocol/server/stdio';
-import { z } from 'zod';
 import { inMemory } from './clients.ts';
 import { root, employees, safePath } from './data.ts';
 import { notesServer, configuredNotesServer } from './notes.ts';
 import { remoteWorkspace } from './remote.ts';
 import { withRemote, headerLab } from './remote_client.ts';
-import { CourseHost, fakeModel, providerTools, fingerprint } from './advanced_host.ts';
+import { CourseHost, fakeModel, providerTools } from './advanced_host.ts';
 import { fixtureKeys, mintToken, verifyToken, ReviewLedger, RateLimit, redact, publicEndpoint } from './advanced_policy.ts';
 import { advancedServer } from './advanced_server.ts';
+import { realDataServer, withInternalAPI } from './real_data.ts';
+import { utilityLesson } from './utilities.ts';
+import { mirrorServer, taskToolsServer, designEvaluation } from './tool_design.ts';
+import { validateMetadata, registryPages } from './registry.ts';
+import { traces, load, evaluate, validateStdout } from './quality.ts';
 
 import { Gateway } from './gateway.ts';
 import { taskDemo } from './task_receiver.ts';
 import { appDemo } from './app_bridge.ts';
 import { Connection } from './production_host.ts';
-import { RpcPeer, serveRaw } from './protocol_peer.ts';
+import { rawLesson } from './raw_client.ts';
+import { urlInputDemo } from './url_input.ts';
 
 export const modules=[0,1,6,7,8,9,11,12,13,14,15,16,17,18,19,20,21];
 
@@ -30,7 +34,7 @@ export async function lesson(module:number, part:number) {
     if(part===2) assert.equal(JSON.parse(readFileSync(resolve(root,'node_modules/@modelcontextprotocol/server/package.json'),'utf8')).version,'2.4.0');
     if(part===3) await inMemory(notesServer,async c=>assert.ok((await c.listTools()).tools.some(t=>t.name==='search_notes')));
   } else if(module===1) {
-    if(part===1) {const [a,b]=InMemoryTransport.createLinkedPair();await serveRaw(a,method=>{if(method!=='tools/list')throw new Error('Unknown method');return {tools:[],ttlMs:0,cacheScope:'private'};});const peer=new RpcPeer(b);try{await peer.start();assert.deepEqual((await peer.request('tools/list')).tools,[]);await assert.rejects(peer.request('unknown'),/Unknown method/);}finally{await peer.close();await a.close();}}
+    if(part===1) await rawLesson();
     if(part===2) await inMemory(notesServer,async c=>assert.ok((await c.discover()).capabilities.tools));
     if(part===3) await inMemory(notesServer,async c=>assert.equal((await c.callTool({name:'search_notes',arguments:{query:'release'}})).isError===true,false));
   } else if(module===6) {
@@ -42,22 +46,40 @@ export async function lesson(module:number, part:number) {
       if(part===3) for(const provider of ['openai','anthropic','gemini','ollama'] as const) assert.ok(providerTools(await host.catalog(),provider).length);
     });
   } else if(module===7) {
-    const workspace=remoteWorkspace();
-    try { await inMemory(workspace.factory,async c=>{
-      if(part===1) assert.equal((await c.callTool({name:'read_issue',arguments:{issue_id:1}})).isError===true,false);
-      if(part===2) assert.equal((await c.callTool({name:'create_issue',arguments:{issue:{title:'Reviewed'},operation_key:'demo',confirmed:false}})).isError,true);
-      if(part===3) { const args={issue:{title:'Reviewed'},operation_key:'once',confirmed:true};const one=await c.callTool({name:'create_issue',arguments:args});const two=await c.callTool({name:'create_issue',arguments:args});assert.deepEqual(one.structuredContent,two.structuredContent); }
-    }); } finally {workspace.close();}
-  } else if(module===8) {
-    await inMemory(advancedServer,async c=>{
-      if(part===1) assert.equal((await c.callTool({name:'quarterly_report',arguments:{quarter:'Q1'}})).isError===true,false);
-      if(part===2) { const abort=new AbortController();abort.abort();await assert.rejects(c.callTool({name:'quarterly_report',arguments:{}},{signal:abort.signal})); }
-      if(part===3) assert.equal((await c.callTool({name:'checked_note',arguments:{text:'x'.repeat(201)}})).isError,true);
+    if(part===1) {
+      const workspace=remoteWorkspace();
+      try {await inMemory(workspace.factory,async c=>{
+        const args={issue:{title:'Reviewed'},operation_key:'once'};
+        assert.equal((await c.callTool({name:'create_issue',arguments:args})).isError,true);
+        const created=await c.callTool({name:'create_issue',arguments:{...args,confirmed:true}});
+        const repeated=await c.callTool({name:'create_issue',arguments:{...args,confirmed:true}});
+        assert.deepEqual(created.structuredContent,repeated.structuredContent);
+        const id=(created.structuredContent as {id:number}).id;
+        assert.equal((await c.callTool({name:'update_issue',arguments:{issue_id:id,status:'closed',confirmed:true}})).isError===true,false);
+        await c.callTool({name:'delete_issue',arguments:{issue_id:id,confirmed:true}});
+        assert.equal((await c.callTool({name:'read_issue',arguments:{issue_id:id}})).isError,true);
+        assert.equal((await c.callTool({name:'create_issue',arguments:{...args,confirmed:true}})).isError,true);
+      });}finally{workspace.close();}
+    }
+    if(part===2) await inMemory(realDataServer,async c=>{
+      const result=await c.callTool({name:'analytics_page',arguments:{limit:2}});
+      assert.equal((result.structuredContent as {rows:unknown[]}).rows.length,2);
+      const link=result.content.find(v=>v.type==='resource_link');assert.ok(link && link.type==='resource_link');
+      const next=await c.readResource({uri:link.uri});assert.ok('text' in next.contents[0] && next.contents[0].text.includes('rows'));
+      assert.equal((await c.callTool({name:'analytics_page',arguments:{limit:999}})).isError,true);
     });
+    if(part===3) await withInternalAPI(origin=>inMemory(()=>realDataServer(origin),async c=>{
+      const result=await c.callTool({name:'project_details',arguments:{project_id:1}});
+      assert.equal((result.structuredContent as {name:string}).name,'Lumen project 1');
+      assert.equal((await c.callTool({name:'project_details',arguments:{project_id:999}})).isError,true);
+      assert.equal((await c.callTool({name:'weather',arguments:{latitude:40,longitude:-90}})).isError,true);
+    }));
+  } else if(module===8) {
+    await utilityLesson(part);
   } else if(module===9) {
     if(part===1) await formDemo(true);
     if(part===2) await formDemo(false);
-    if(part===3) {const l=new ReviewLedger();const key=l.issue('reviewed');assert.throws(()=>l.take(key,'changed'));assert.throws(()=>l.take(key,'reviewed'));}
+    if(part===3) {const l=new ReviewLedger();const key=l.issue('reviewed');assert.throws(()=>l.take(key,'changed'));assert.throws(()=>l.take(key,'reviewed'));await urlInputDemo(false);await urlInputDemo(true);}
   } else if(module===11) {
     const keys=fixtureKeys();const now=Date.now()/1000;
     const token=mintToken({iss:'https://auth.lumen.example',aud:'https://ops.lumen.example/mcp',sub:'synthetic-reader',iat:now,exp:now+60,scope:'issues:read'},keys.privateKey);
@@ -69,18 +91,25 @@ export async function lesson(module:number, part:number) {
     if(part===2) assert.deepEqual(redact({authorization:'secret',nested:{access_token:'secret'}}),{authorization:'[REDACTED]',nested:{access_token:'[REDACTED]'}});
     if(part===3) assert.throws(()=>publicEndpoint('http://169.254.169.254/mcp'));
   } else if(module===13) {
-    const start=performance.now();await inMemory(advancedServer,async c=>{
+    await inMemory(advancedServer,async c=>{
       if(part===1) assert.equal((await c.callTool({name:'checked_note',arguments:{text:'release'}})).isError===true,false);
       if(part===2) assert.equal((await c.callTool({name:'checked_note',arguments:{text:'x'.repeat(201)}})).isError,true);
-      if(part===3) assert.equal((await c.listTools()).tools.length,4);
-    });assert.ok(performance.now()-start<10000);
-  } else if(module===14) {
-    await inMemory(notesServer,async c=>{
-      const tools=(await c.listTools()).tools;
-      if(part===1) assert.ok(tools.every(t=>t.description && t.inputSchema));
-      if(part===2) assert.notEqual(fingerprint(tools[0]),fingerprint({...tools[0],description:'Changed meaning'}));
-      if(part===3) assert.ok(JSON.stringify(tools).length>JSON.stringify(tools.filter(t=>t.name==='search_notes')).length);
+      if(part===2) {assert.throws(()=>validateStdout('debug startup'),/stderr/);assert.equal(validateStdout('{"jsonrpc":"2.0","id":1,"result":{}}'),1);}
     });
+    if(part===3) {assert.equal((await traces()).length,3);assert.equal((await load()).requests,10);assert.equal(evaluate().correct,evaluate().total);}
+  } else if(module===14) {
+    if(part===1) await inMemory(mirrorServer,async c=>assert.equal((await c.listTools()).tools.length,25));
+    if(part===2) await inMemory(taskToolsServer,async c=>{
+      assert.equal((await c.listTools()).tools.length,6);
+      const concise=await c.callTool({name:'issue_brief',arguments:{issue_id:1}});
+      const detailed=await c.callTool({name:'issue_brief',arguments:{issue_id:1,mode:'detailed'}});
+      assert.ok(JSON.stringify(detailed).length>JSON.stringify(concise).length);
+      assert.equal((await c.callTool({name:'issue_brief',arguments:{issue_id:-1}})).isError,true);
+    });
+    if(part===3) {
+      const scores=await designEvaluation();
+      for(const name of ['mirror','task_tools'])assert.equal((scores[name] as {completed:number}).completed,6);
+    }
   } else if(module===15) {
     const {frameworkDemo}=await import('./frameworks.ts');
     await frameworkDemo((['agents','langchain','langgraph'] as const)[part-1]);
@@ -101,10 +130,14 @@ export async function lesson(module:number, part:number) {
     if(part===2) assert.equal(JSON.parse(readFileSync(resolve(root,'distribution/npm/package.json'),'utf8')).version,'1.0.0');
     if(part===3) {const manifest=JSON.parse(readFileSync(resolve(root,'distribution/mcpb/manifest.json'),'utf8'));assert.equal(manifest.manifest_version,'0.3');assert.equal(manifest.server.type,'node');}
   } else if(module===19) {
-    const metadata=JSON.parse(readFileSync(resolve(root,'distribution/registry/server.json'),'utf8'));
+    const metadata=validateMetadata();
     if(part===1) assert.ok(metadata.name.startsWith('io.github.anandtopu/'));
-    if(part===2) assert.equal(z.object({name:z.string(),version:z.string()}).safeParse({name:metadata.name}).success,false);
-    if(part===3) assert.throws(()=>publicEndpoint('https://user:secret@example.com/mcp'));
+    if(part===2) {assert.throws(()=>validateMetadata({name:metadata.name}));assert.throws(()=>validateMetadata({...metadata,version:'99.0.0'}),/identity/);}
+    if(part===3) {
+      assert.equal((await registryPages(async cursor=>cursor?{servers:[]}:{servers:[metadata],metadata:{nextCursor:'next'}})).length,1);
+      await assert.rejects(registryPages(async()=>({servers:[],metadata:{nextCursor:'repeat'}})),/repeated/);
+      assert.throws(()=>publicEndpoint('https://user:secret@example.com/mcp'));
+    }
   } else if(module===20) {
     if(part===1) await withRemote(headerLab);
     if(part===2) assert.throws(()=>publicEndpoint('http://public.example/mcp'));

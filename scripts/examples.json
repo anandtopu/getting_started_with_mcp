@@ -379,6 +379,35 @@
         "resources/list",
         "prompts/list"
       ]
+    },
+    {
+      "path": "modules/01_architecture_wire/typescript/raw_server.ts",
+      "kind": "phase8",
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/07_real_data/typescript/analytics_server.ts",
+      "kind": "phase8",
+      "lists": [
+        "tools/list",
+        "resources/list"
+      ]
+    },
+    {
+      "path": "modules/14_tool_design/typescript/mirror_server.ts",
+      "kind": "phase8",
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/14_tool_design/typescript/task_tools_server.ts",
+      "kind": "phase8",
+      "lists": [
+        "tools/list"
+      ]
     }
   ],
   "scripts": [
@@ -862,17 +891,17 @@
       "timeout": 90
     },
     {
-      "path": "modules/07_real_data/typescript/examples/01_read.ts",
+      "path": "modules/07_real_data/typescript/examples/01_issue_crud.ts",
       "arguments": [],
       "timeout": 90
     },
     {
-      "path": "modules/07_real_data/typescript/examples/02_confirmation.ts",
+      "path": "modules/07_real_data/typescript/examples/02_readonly_analytics.ts",
       "arguments": [],
       "timeout": 90
     },
     {
-      "path": "modules/07_real_data/typescript/examples/03_idempotency.ts",
+      "path": "modules/07_real_data/typescript/examples/03_rest_wrapper.ts",
       "arguments": [],
       "timeout": 90
     },
@@ -892,7 +921,7 @@
       "timeout": 90
     },
     {
-      "path": "modules/08_server_utilities/typescript/examples/03_limits.ts",
+      "path": "modules/08_server_utilities/typescript/examples/03_pages_completion.ts",
       "arguments": [],
       "timeout": 90
     },
@@ -972,7 +1001,7 @@
       "timeout": 90
     },
     {
-      "path": "modules/13_testing_observability/typescript/examples/03_inventory.ts",
+      "path": "modules/13_testing_observability/typescript/examples/03_traces_load_eval.ts",
       "arguments": [],
       "timeout": 90
     },
@@ -982,17 +1011,17 @@
       "timeout": 90
     },
     {
-      "path": "modules/14_tool_design/typescript/examples/01_descriptions.ts",
+      "path": "modules/14_tool_design/typescript/examples/01_endpoint_mirror.ts",
       "arguments": [],
       "timeout": 90
     },
     {
-      "path": "modules/14_tool_design/typescript/examples/02_catalog_change.ts",
+      "path": "modules/14_tool_design/typescript/examples/02_task_tools.ts",
       "arguments": [],
       "timeout": 90
     },
     {
-      "path": "modules/14_tool_design/typescript/examples/03_context_size.ts",
+      "path": "modules/14_tool_design/typescript/examples/03_evaluation.ts",
       "arguments": [],
       "timeout": 90
     },
@@ -1240,6 +1269,16 @@
       "path": "scripts/phase8.py",
       "arguments": [],
       "timeout": 180
+    },
+    {
+      "path": "common/typescript/chat.ts",
+      "arguments": [],
+      "timeout": 45
+    },
+    {
+      "path": "scripts/ts_oauth.py",
+      "arguments": [],
+      "timeout": 45
     }
   ]
 }

@@ -28,7 +28,8 @@ def catalog_fingerprint(tools: list) -> str:
 async def catalog(client):
     tools, cursor, seen = [], None, set()
     for _ in range(20):
-        page = await client.list_tools(cursor=cursor)
+        # A freshness hint from an untrusted server cannot authorize execution.
+        page = await client.list_tools(cursor=cursor, cache_mode="refresh")
         tools.extend(page.tools)
         cursor = page.next_cursor
         if cursor is None:

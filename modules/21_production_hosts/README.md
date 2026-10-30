@@ -3,7 +3,10 @@
 
 **Time:** ~180 min · **Level:** Advanced · **LLM needed:** Optional · **Languages:** Python
 **Spec sections:** [Tools](https://modelcontextprotocol.io/specification/2026-07-28/server/tools), [transports](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports).
-**Workspace and Chat version 4:** Workspace 6 gains building production hosts and clients.
+
+**Workspace and Chat version 6 / 4:** Operate lumen chat v4 with approvals, task input and an isolated app.
+
+[TypeScript companion](typescript/README.md) covers the native cases and API differences.
 
 ## Prerequisites
 
@@ -313,11 +316,11 @@ Only the displayed analytics_dashboard with empty arguments through the pinned b
 
 ## Key takeaways
 
-- Verify the artifact or endpoint users will actually run.
-- Keep identity, capability and permission separate.
-- Make configuration explicit and keep credentials out of artifacts/logs.
-- Bound failures and retain evidence before retrying or approving again.
-- Rehearse with synthetic data before publishing or deploying real access.
+- Own each connection in one task and close failed starts as well as successful sessions.
+- Refresh definitions before executing a reviewed call; a cache hint cannot grant permission.
+- Retry only locally approved read operations; a lost write response has an uncertain outcome.
+- Keep approval, elicitation and Task cancellation visible to the user.
+- Render Apps inside a constrained frame and allow only reviewed bridge operations.
 
 ## Go deeper
 

@@ -48,6 +48,29 @@ def client(path, capture, *, tasks=False, log_level=None):
 
 async def typescript(capture=False):
     folder = B1 / "wire"
+    for name, path, tool, arguments in [
+        ("raw", "01_architecture_wire/typescript/raw_server.ts", "directory_count", {}),
+        (
+            "analytics",
+            "07_real_data/typescript/analytics_server.ts",
+            "analytics_page",
+            {"limit": 2},
+        ),
+        ("mirror", "14_tool_design/typescript/mirror_server.ts", "get_issues", {"row_id": 1}),
+        (
+            "task_tools",
+            "14_tool_design/typescript/task_tools_server.ts",
+            "issue_brief",
+            {"issue_id": 1},
+        ),
+    ]:
+        async with client("modules/" + path, folder / f"{name}.jsonl" if capture else None) as peer:
+            assert (await peer.list_tools()).tools
+            result = await peer.call_tool(tool, arguments)
+            assert not result.is_error
+            if name == "analytics":
+                link = next(item for item in result.content if item.type == "resource_link")
+                assert (await peer.read_resource(link.uri)).contents
     for profile, filename in [
         ("notes", "server.ts"),
         ("forms", "forms_server.ts"),
@@ -107,6 +130,10 @@ async def typescript(capture=False):
     ) as peer:
         assert not (await peer.call_tool("inspect_logging", {})).is_error
     print("PASS TypeScript/Python interop: notes, form retries, Tasks, Skills, notifications")
+    if capture:
+        manifest = json.loads((folder / "manifest.json").read_text())
+        manifest["captures"] = sorted(path.name for path in folder.glob("*.jsonl"))
+        (folder / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
 
 
 def excerpts():

@@ -1,10 +1,15 @@
 # Module 00: Setup and orientation — connect a restricted reference server
+> After this module you can connect a restricted filesystem server and explain the host/client/server roles.
 
-Workspace and Chat version 0: inspect a reference workspace; Chat arrives in module 06.
-
-**Time:** 45 minutes · **Level:** beginner · **LLM needed:** no · **Languages:** Python
+**Time:** ~45 min · **Level:** beginner · **LLM needed:** no · **Languages:** Python
 
 **Target:** [MCP 2026-07-28](https://modelcontextprotocol.io/specification/2026-07-28/architecture/index); official Python SDK 2.3 and TypeScript SDK 2.4 where shown.
+
+**Workspace and Chat version 0 / 0:** Connect a restricted filesystem server and explain the host/client/server roles.
+
+**Spec sections:** [Current specification](https://modelcontextprotocol.io/specification/2026-07-28/architecture/index).
+
+[TypeScript companion](typescript/README.md) covers the native cases and API differences.
 
 ## Prerequisites
 
@@ -169,7 +174,7 @@ Generate configurations for this machine:
 uv run python scripts/host_configs.py --module 0
 ```
 
-Use [the four host configurations](host_configs/README.md) and [host setup instructions](../../docs/HOST_SETUP.md). The JSON has the host’s exact outer envelope and absolute executable/project paths. Restart or reload the host after adding entries, inspect the listed capabilities, then type: **“Show the available Lumen capabilities and use the relevant read operation to find release context. Ask before any change.”** For prompts, choose `summarize_incident` in the host’s prompt picker and supply `incident_postmortems` and `page-01`; slash-command spelling varies by host.
+Use [the four host configurations](host_configs/README.md) and [host setup instructions](../../docs/HOST_SETUP.md). The JSON has the host’s exact outer envelope and absolute executable/project paths. Restart or reload the host after adding entries and inspect the listed capabilities. Ask **“List files in the allowed Lumen folder. Do not modify files.”** The filesystem server offers file tools; it does not offer the incident prompt.
 
 Complete this in **two hosts**, such as VS Code and Cursor, and ask **“List files in the allowed Lumen folder. Do not modify files.”** Host configuration formats were checked against official documentation; interactive host UI behavior is not an automated test claim.
 
@@ -247,11 +252,11 @@ Answer the [five-question quiz](quiz.md) before opening its expandable answers.
 
 ## Key takeaways
 
-- The host. A client is its protocol connection.
-- No. Discovery and authorization are different decisions.
-- 12; standardizing both sides reduces the adapter count to 7.
-- Standard error, because standard output carries protocol messages.
-- No. It limits paths; the host must still review writes and retrieved content.
+- A host is the application; each client connects it to one server.
+- Discovery tells you what a server offers; it does not grant permission to use it.
+- For three hosts and four systems, a shared standard replaces 12 custom adapters with seven standard integrations.
+- A stdio server sends protocol messages to stdout and diagnostics to stderr.
+- An allowed folder limits file access; the host must still review writes and treat retrieved content as untrusted.
 
 ## Go deeper
 

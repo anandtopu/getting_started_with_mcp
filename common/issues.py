@@ -11,7 +11,7 @@ from mcp.server.mcpserver.exceptions import ToolError
 from pydantic import BaseModel, ConfigDict, Field
 
 from common.data import data_root
-from common.notes import READ, WRITE
+from common.notes import READ, REPLACE, WRITE
 
 
 class IssueInput(BaseModel):
@@ -109,7 +109,7 @@ def register_issues(server: MCPServer) -> None:
             raise ToolError("Confirm this exact write in the host first.")
         return store_from(ctx).create(issue, operation_key)
 
-    @server.tool(annotations=WRITE)
+    @server.tool(annotations=REPLACE)
     async def update_issue(
         issue_id: int,
         status: Literal["open", "in_progress", "closed"],
@@ -125,7 +125,7 @@ def register_issues(server: MCPServer) -> None:
             store.db.execute("UPDATE issues SET status=? WHERE id=?", (status, issue_id))
         return store.read(issue_id)
 
-    @server.tool(annotations=WRITE)
+    @server.tool(annotations=REPLACE)
     async def delete_issue(
         issue_id: int, ctx: Context, confirmed: bool = False
     ) -> dict[str, object]:

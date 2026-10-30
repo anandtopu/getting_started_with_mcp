@@ -1,8 +1,8 @@
-/** Tool design: descriptions.
+/** read-only analytics.
  * Concepts/spec: ../README.md; https://modelcontextprotocol.io/specification/2026-07-28
- * Run: node --import tsx modules/14_tool_design/typescript/examples/01_descriptions.ts
+ * Run: node --import tsx modules/07_real_data/typescript/examples/02_readonly_analytics.ts
  * Capture: uv run python scripts/phase8.py --capture
- * Expected: { module: 14, example: 1, status: 'PASS' }.
+ * Expected: { module: 7, example: 2, status: 'PASS' }.
  */
 import { lesson } from '../../../../common/typescript/advanced_lessons.ts';
-console.log(await lesson(14,1));
+console.log(await lesson(7,2));

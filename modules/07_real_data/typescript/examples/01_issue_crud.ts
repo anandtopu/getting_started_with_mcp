@@ -1,6 +1,6 @@
-/** Structured tools: read.
+/** issue CRUD.
  * Concepts/spec: ../README.md; https://modelcontextprotocol.io/specification/2026-07-28
- * Run: node --import tsx modules/07_real_data/typescript/examples/01_read.ts
+ * Run: node --import tsx modules/07_real_data/typescript/examples/01_issue_crud.ts
  * Capture: uv run python scripts/phase8.py --capture
  * Expected: { module: 7, example: 1, status: 'PASS' }.
  */

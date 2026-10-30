@@ -1,10 +1,15 @@
 # Module 13: Testing, debugging and observability
+> After this module you can combine protocol contracts, traces, load checks and tool-selection evaluations.
 
-**Time:** 210 minutes · **Level:** intermediate to advanced · **Language:** Python · **LLM needed:** no
+**Time:** ~210 min · **Level:** intermediate to advanced · **Languages:** Python · **LLM needed:** no
 
-**Target:** MCP 2026-07-28; official Python SDK 2.3. Workspace version **5**, Chat version **2** with an authenticated connection. Commands run from the repository root on Windows, macOS or Linux.
+**Target:** MCP 2026-07-28; official Python SDK 2.3. Commands run from the repository root on Windows, macOS or Linux.
 
-> **Outcome:** Test SDK handlers in memory and verify tool contracts.
+**Workspace and Chat version 5 / 2:** Combine protocol contracts, traces, load checks and tool-selection evaluations.
+
+**Spec sections:** [Current specification](https://modelcontextprotocol.io/specification/2026-07-28).
+
+[TypeScript companion](typescript/README.md) covers the native cases and API differences.
 
 ## Prerequisites
 
@@ -81,7 +86,7 @@ Source: [captured python_main](wire/python_main.jsonl). Each JSON block below is
         "version": "0.1.0"
       },
       "io.modelcontextprotocol/clientCapabilities": {},
-      "traceparent": "00-ba798b5c2d2cede52476f2d3ccb29c2b-aa4b69c16ca0c66a-03"
+      "traceparent": "00-0741409622cd285751033d28127eed23-a262cc6aaf442dcf-03"
     }
   }
 }

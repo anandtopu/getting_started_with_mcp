@@ -2,7 +2,7 @@
 import { McpServer, inputRequired, acceptedContent } from '@modelcontextprotocol/server';
 import { z } from 'zod';
 import { setTimeout as pause } from 'node:timers/promises';
-import { read, write, structured, failure } from './notes.ts';
+import { read, replace, structured, failure } from './notes.ts';
 import { ReviewLedger } from './advanced_policy.ts';
 
 export function advancedServer() {
@@ -13,7 +13,7 @@ export function advancedServer() {
   server.registerTool('read_bulletin', { description:'Read the synthetic review bulletin.', inputSchema:z.object({}), annotations:read }, () => structured({text:bulletin}));
   server.registerTool('review_bulletin', {
     description:'Ask the user to approve exact bulletin text before replacing the ephemeral bulletin.',
-    inputSchema:z.object({text:z.string().min(1).max(200)}), annotations:write,
+    inputSchema:z.object({text:z.string().min(1).max(200)}), annotations:replace,
   }, ({text},ctx) => {
     const state=ctx.mcpReq.requestState<string>();
     if(!state) return inputRequired({requestState:ledger.issue(text),inputRequests:{decision:inputRequired.elicit({message:`Publish this exact bulletin: ${text}?`,requestedSchema:confirmation})}});

@@ -1,6 +1,6 @@
 # TypeScript 08: Long operations
 
-Run a cancellable report and reject data beyond the documented size limit. These are the TypeScript counterparts to [Module 08](../README.md). Read that lesson's explanation, diagram and quiz first; this page records language-specific behavior.
+Observe progress, cancel running work, verify cleanup, paginate lists and complete arguments. These are the TypeScript counterparts to [Module 08](../README.md). Read that lesson's explanation, diagram and quiz first; this page records language-specific behavior.
 
 ## Prerequisites
 
@@ -14,7 +14,7 @@ From the root: `npm ci`. Node 24 or 26 is required. The pinned official MCP SDK 
 
 ## The big idea
 
-Run a cancellable report and reject data beyond the documented size limit. The language changes syntax and library choices; the peer still sees the same JSON-RPC contract. A deterministic fixture is an integration check, not a measured model-quality claim.
+Observe progress, cancel running work, verify cleanup, paginate lists and complete arguments. The language changes syntax and library choices; the peer still sees the same JSON-RPC contract. A deterministic fixture is an integration check, not a measured model-quality claim.
 
 ## How it works
 
@@ -46,9 +46,11 @@ sequenceDiagram
 
 - `01_report.ts`: run `node --import tsx modules/08_server_utilities/typescript/examples/01_report.ts`; expect `status: PASS`.
 - `02_cancellation.ts`: run `node --import tsx modules/08_server_utilities/typescript/examples/02_cancellation.ts`; expect `status: PASS`.
-- `03_limits.ts`: run `node --import tsx modules/08_server_utilities/typescript/examples/03_limits.ts`; expect `status: PASS`.
+- `03_pages_completion.ts`: run `node --import tsx modules/08_server_utilities/typescript/examples/03_pages_completion.ts`; expect `status: PASS`.
 
 The executable contracts live in [advanced_lessons.ts](../../../common/typescript/advanced_lessons.ts); follow the module-number branch to the focused implementation it invokes. This avoids copying the same host/security logic into every example.
+
+The report example observes four progress notifications and verifies that active work returns to zero. Cancellation begins only after the first notification, then waits for server cleanup; this detects a leaked running operation that a pre-aborted request would miss. The third example completes quarter names and follows an empty first resource page with a continuation cursor. [utilities.ts](../../../common/typescript/utilities.ts) shows the assertions and finite polling budgets.
 
 ## Try it in a host
 

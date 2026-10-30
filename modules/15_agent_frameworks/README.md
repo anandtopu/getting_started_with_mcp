@@ -1,11 +1,14 @@
 # Module 15: MCP with agent frameworks and model APIs
 > After this module you can run the same MCP triage task in three actual framework runtimes.
 
-**Time:** 210 minutes · **Level:** Advanced · **LLM needed:** Optional · **Languages:** Python (plus browser JavaScript for the App)
+**Time:** ~180 min · **Level:** Advanced · **LLM needed:** Optional · **Languages:** Python (plus browser JavaScript for the App)
 
-**Workspace and Chat version 6 / 3:** the same workspace through six framework adapters.
 **Target:** MCP 2026-07-28 and official Python SDK 2.3.0. Commands run from the repository root on Windows, macOS and Linux.
 **Spec sections:** [OpenAI integration](https://developers.openai.com/api/docs/guides/agents/integrations-observability) · [LangChain MCP](https://docs.langchain.com/oss/python/langchain/mcp) · [Pydantic MCP](https://pydantic.dev/docs/ai/mcp/client/) · [Strands MCP](https://strandsagents.com/latest/documentation/docs/user-guide/concepts/tools/mcp-tools/) · [ADK MCP](https://adk.dev/tools-custom/mcp-tools/) · [Claude SDK](https://code.claude.com/docs/en/agent-sdk/mcp)
+
+**Workspace and Chat version 5 / 2:** Run the same mcp triage task in three actual framework runtimes.
+
+[TypeScript companion](typescript/README.md) covers the native cases and API differences.
 
 ## Prerequisites
 

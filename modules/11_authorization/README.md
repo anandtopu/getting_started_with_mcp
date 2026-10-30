@@ -1,10 +1,15 @@
 # Module 11: Authorization with OAuth 2.1
+> After this module you can authenticate a client with OAuth and reject incorrect audiences and scopes.
 
-**Time:** 210 minutes · **Level:** intermediate to advanced · **Language:** Python · **LLM needed:** no
+**Time:** ~210 min · **Level:** intermediate to advanced · **Languages:** Python · **LLM needed:** no
 
-**Target:** MCP 2026-07-28; official Python SDK 2.3. Workspace version **5**, Chat version **2** with an authenticated connection. Commands run from the repository root on Windows, macOS or Linux.
+**Target:** MCP 2026-07-28; official Python SDK 2.3. Commands run from the repository root on Windows, macOS or Linux.
 
-> **Outcome:** Trace resource discovery to an identity provider.
+**Workspace and Chat version 5 / 2:** Authenticate a client with oauth and reject incorrect audiences and scopes.
+
+**Spec sections:** [Current specification](https://modelcontextprotocol.io/specification/2026-07-28).
+
+[TypeScript companion](typescript/README.md) covers the native cases and API differences.
 
 ## Prerequisites
 

@@ -1,10 +1,13 @@
 # Module 03: Resources — browse a wiki and observe changes
+> After this module you can expose wiki resources and invalidate cached content after a notification.
 
-Workspace and Chat version 2: expose wiki pages, a PDF contract, and an observable bulletin.
-
-**Time:** 75 minutes · **Level:** beginner · **LLM needed:** no · **Languages:** Python and TypeScript
+**Time:** ~75 min · **Level:** beginner · **LLM needed:** no · **Languages:** Python and TypeScript
 
 **Target:** [MCP 2026-07-28](https://modelcontextprotocol.io/specification/2026-07-28/server/resources); official Python SDK 2.3 and TypeScript SDK 2.4 where shown.
+
+**Workspace and Chat version 2 / 0:** Expose wiki resources and invalidate cached content after a notification.
+
+**Spec sections:** [Current specification](https://modelcontextprotocol.io/specification/2026-07-28/server/resources).
 
 ## Prerequisites
 
@@ -257,7 +260,7 @@ Generate configurations for this machine:
 uv run python scripts/host_configs.py --module 3
 ```
 
-Use [the four host configurations](host_configs/README.md) and [host setup instructions](../../docs/HOST_SETUP.md). The JSON has the host’s exact outer envelope and absolute executable/project paths. Restart or reload the host after adding entries, inspect the listed capabilities, then type: **“Show the available Lumen capabilities and use the relevant read operation to find release context. Ask before any change.”** For prompts, choose `summarize_incident` in the host’s prompt picker and supply `incident_postmortems` and `page-01`; slash-command spelling varies by host.
+Use [the four host configurations](host_configs/README.md) and [host setup instructions](../../docs/HOST_SETUP.md). The JSON has the host’s exact outer envelope and absolute executable/project paths. Restart or reload the host after adding entries and inspect the listed capabilities. Ask **“Read wiki://engineering/page-01 and show its source.”** Use the resource picker where available; `find_page` supplies a resource link. Review before calling `update_bulletin`.
 
 Use Inspector or the supplied client as the reproducible baseline; third-party host UI behavior is a separate learner verification step. Host configuration formats were checked against official documentation; interactive host UI behavior is not an automated test claim.
 
@@ -359,11 +362,11 @@ Answer the [five-question quiz](quiz.md) before opening its expandable answers.
 
 ## Key takeaways
 
-- No. Templates describe potentially many valid addresses.
-- A link identifies content to read later; an embedded resource includes it now.
-- No. Invalidate your cached copy and read the resource again.
-- The acknowledgement establishes the listener before a change can occur.
-- No. Private results must remain partitioned by authorization context.
+- Resource templates describe addresses that may not appear in a static resource list.
+- A resource link points to content; an embedded resource contains the content.
+- A change notification invalidates cached content; the client reads the updated resource.
+- Wait for subscription acknowledgement before expecting change notifications.
+- Private cache entries remain partitioned by authorization context.
 
 ## Go deeper
 

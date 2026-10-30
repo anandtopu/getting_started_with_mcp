@@ -231,7 +231,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md), the [code of conduct](CODE_OF_CONDUCT.md
 
 ## Bonus modules and capstones
 
-- [B1: full TypeScript track](modules/bonus/B1_typescript_track/README.md), including native hosts, frameworks, input, Tasks and Apps.
+- [B1: TypeScript companion track and coverage limits](modules/bonus/B1_typescript_track/README.md), including native hosts, frameworks, input, Tasks and Apps.
 - [B2: Go, C#, Rust and Java](modules/bonus/B2_other_sdks/README.md), with pinned builds and a shared client contract. Java uses the stable SDK's older protocol compatibility.
 - [B3: read the specification and contribute](modules/bonus/B3_spec_contributing/README.md).
 - [B4: Skills, Server Cards and authorization extensions](modules/bonus/B4_whats_new/README.md), with status and interoperability limits.
@@ -252,3 +252,7 @@ uv run python scripts/phase8.py
 ```
 
 Dependency installation needs network once. Default checks then use local fixtures and no model credentials. Native compiler builds, package installation, Docker and browser checks have explicit commands in [Phase 8 verification](docs/PHASE_8_VERIFICATION.md). See the [definition of done](docs/DEFINITION_OF_DONE.md) for completed gates and optional integrations.
+
+## Post-build review
+
+The [original-prompt review](docs/reviews/2026-10-30-review-summary.md) records security fixes, added native examples, verification and remaining gaps. B1 has native cases for every module; the full advanced gateway/deployment and Chat Pro web backend still use shared Python infrastructure. The MCPB build-tool dependency advisory is recorded with its bounded build-only mitigation.

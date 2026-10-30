@@ -117,6 +117,13 @@ def configurations(index: int) -> dict:
         }
         for host in ["claude-desktop", "claude-code", "vscode", "cursor"]
     }
+    if index == 7:
+        # Do not make the real-data lesson depend on module 09's input protocol.
+        for config in configs.values():
+            entries = config.get("servers", config.get("mcpServers"))
+            entries["issues"]["args"][-1] = str(
+                ROOT / "modules/07_real_data/python/examples/01_issue_crud.py"
+            )
     if index in {12, 13}:
         for config in configs.values():
             entries = config.get("servers", config.get("mcpServers"))

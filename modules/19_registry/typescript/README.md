@@ -50,6 +50,8 @@ sequenceDiagram
 
 The executable contracts live in [advanced_lessons.ts](../../../common/typescript/advanced_lessons.ts); follow the module-number branch to the focused implementation it invokes. This avoids copying the same host/security logic into every example.
 
+[registry.ts](../../../common/typescript/registry.ts) validates the actual pinned `server.schema.json` with Ajv, then compares Registry identity, version and package name with the npm artifact. Merely checking that fields exist would accept malformed records. The third example consumes a two-page fixture and rejects a repeated cursor; traversal is capped at three pages. Metadata validation never grants installation or connection permission.
+
 ## Try it in a host
 
 Use the [B1 host configs](../../bonus/B1_typescript_track/host_configs/vscode.json), replacing the absolute repository path. Ask "Find release notes." The fixed `notes` profile starts with protocol-only stdout. The `forms` profile asks for a bulletin decision; the `workflow` profile reads and drafts without publishing.

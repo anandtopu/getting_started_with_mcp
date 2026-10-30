@@ -7,7 +7,7 @@ It cannot reach real accounts or files, even when given attacker-controlled inpu
 from mcp.server import MCPServer
 from mcp.server.mcpserver.exceptions import ToolError
 
-from common.notes import READ, WRITE
+from common.notes import READ, REPLACE
 
 FIXTURE = {"public": "Synthetic release checklist", "private": "FAKE salary: 12345"}
 
@@ -23,7 +23,7 @@ def audit_server(*, repaired=True):
             raise ToolError("Record is not available to this principal.")
         return FIXTURE.get(name, "Unknown synthetic record")
 
-    @server.tool(annotations=WRITE)
+    @server.tool(annotations=REPLACE)
     def publish_bulletin(text: str, confirmed: bool = False) -> str:
         """Replace an in-memory synthetic bulletin after the user confirms exact text."""
         nonlocal bulletin

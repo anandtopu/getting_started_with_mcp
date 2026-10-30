@@ -1,10 +1,13 @@
 # Module 05: Your first client — own connections and query the workspace
+> After this module you can query multiple servers with a bounded command-line client.
 
-Workspace and Chat version 2: add a deterministic workspace CLI and bounded pagination.
-
-**Time:** 75 minutes · **Level:** beginner · **LLM needed:** no · **Languages:** Python and TypeScript
+**Time:** ~75 min · **Level:** beginner · **LLM needed:** no · **Languages:** Python and TypeScript
 
 **Target:** [MCP 2026-07-28](https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/pagination); official Python SDK 2.3 and TypeScript SDK 2.4 where shown.
+
+**Workspace and Chat version 2 / 0:** Query multiple servers with a bounded command-line client.
+
+**Spec sections:** [Current specification](https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/pagination).
 
 ## Prerequisites
 
@@ -190,7 +193,7 @@ Generate configurations for this machine:
 uv run python scripts/host_configs.py --module 5
 ```
 
-Use [the four host configurations](host_configs/README.md) and [host setup instructions](../../docs/HOST_SETUP.md). The JSON has the host’s exact outer envelope and absolute executable/project paths. Restart or reload the host after adding entries, inspect the listed capabilities, then type: **“Show the available Lumen capabilities and use the relevant read operation to find release context. Ask before any change.”** For prompts, choose `summarize_incident` in the host’s prompt picker and supply `incident_postmortems` and `page-01`; slash-command spelling varies by host.
+Use [the four host configurations](host_configs/README.md) and [host setup instructions](../../docs/HOST_SETUP.md). The JSON has the host’s exact outer envelope and absolute executable/project paths. Restart or reload the host after adding entries and inspect the listed capabilities. Ask **“Find the release note and read wiki://engineering/page-01.”** The configured notes, wiki and prompts servers also let you choose `summarize_incident` from the prompt picker.
 
 Use Inspector or the supplied client as the reproducible baseline; third-party host UI behavior is a separate learner verification step. Host configuration formats were checked against official documentation; interactive host UI behavior is not an automated test claim.
 
@@ -292,11 +295,11 @@ Answer the [five-question quiz](quiz.md) before opening its expandable answers.
 
 ## Key takeaways
 
-- No. The CLI is a deterministic client.
-- When nextCursor is absent, even if earlier pages were empty.
-- A seen-cursor set plus an absolute page budget.
-- To close pipes and child processes even when an operation fails.
-- No. A tool may return isError content; a protocol failure uses an error envelope.
+- A deterministic MCP client needs no language model.
+- Pagination ends when nextCursor is absent, even if an earlier page is empty.
+- A seen-cursor set and a page budget prevent unbounded discovery.
+- Async context managers close pipes and child processes on success and failure.
+- Check both protocol errors and isError tool results.
 
 ## Go deeper
 

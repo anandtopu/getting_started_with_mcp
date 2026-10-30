@@ -1,8 +1,15 @@
 # Module 09: Asking the user: request and retry
+> After this module you can complete form and URL input retries without changing the approved operation.
 
-**Time:** 135 minutes · **Level:** intermediate · **Languages:** Python · **LLM needed:** no; optional direct generation only
+**Time:** ~135 min · **Level:** intermediate · **Languages:** Python · **LLM needed:** no; optional direct generation only
 
 **Target:** MCP 2026-07-28, Python SDK 2.3, TypeScript SDK 2.4. Commands run from the repository root on Windows, macOS, or Linux.
+
+**Workspace and Chat version 3 / 2:** Complete form and url input retries without changing the approved operation.
+
+**Spec sections:** [Current specification](https://modelcontextprotocol.io/specification/2026-07-28).
+
+[TypeScript companion](typescript/README.md) covers the native cases and API differences.
 
 ## Prerequisites
 
@@ -109,7 +116,7 @@ Source: [captured python_main](wire/python_main.jsonl). Each JSON block below is
         }
       }
     },
-    "requestState": "v1.qOnaw7LWs7D5aAHsFlq96m2bAtxcKk6Nw4wisPGG-3jCHZyPyb7jcbfh0Y5Z_hY_LsUwEOjfDEkkfv9IaKxazfoBNP4XcGWr-hZ6ANZsOLPC_Y25gkveaxOyhqyeVucxyhmAEt2Y_TymLS7S-j9ezeWoTA74IH_Ml-ZDVYdKgQtJSwWdW4F24HnfMILw4IzoO_sB2cOKTgpLBuvcgls1Jq0j2PvB1WAZndADvgKORRUCCQKOhSnFTbUSPnggvgARab0SE0dCLYbcseX0D9Or-uCBcw",
+    "requestState": "v1.9VFCDyBdSKs98hXo8YrjwdSJoDt24Qc6josxbQpxCjOGbd9e7poG5aXVSN6e9bG6HzORkdi3FSEOCiayNGAhwW-xJo96lY1bnFgnyVAJvX0QL2kixU3TIqUejpAK3Y8RLn0bZeOV1x3FMnmcpPYGQCqhgpR0r_bZaObwflSwbF6iOyi8Xi7EzEQRZNfY2G-TnfVGlfIEKJL2dVuwY5b2fFwzGWxIHLkTAcyWMRPArEOEVWxhMRXenN27r-Z3EVIvMur0YSKGM9Qan5t8KP7k1xdUNQ",
     "resultType": "input_required",
     "_meta": {
       "io.modelcontextprotocol/serverInfo": {
@@ -132,7 +139,7 @@ Source: [captured python_main](wire/python_main.jsonl). Each JSON block below is
         "action": "decline"
       }
     },
-    "requestState": "v1.qOnaw7LWs7D5aAHsFlq96m2bAtxcKk6Nw4wisPGG-3jCHZyPyb7jcbfh0Y5Z_hY_LsUwEOjfDEkkfv9IaKxazfoBNP4XcGWr-hZ6ANZsOLPC_Y25gkveaxOyhqyeVucxyhmAEt2Y_TymLS7S-j9ezeWoTA74IH_Ml-ZDVYdKgQtJSwWdW4F24HnfMILw4IzoO_sB2cOKTgpLBuvcgls1Jq0j2PvB1WAZndADvgKORRUCCQKOhSnFTbUSPnggvgARab0SE0dCLYbcseX0D9Or-uCBcw",
+    "requestState": "v1.9VFCDyBdSKs98hXo8YrjwdSJoDt24Qc6josxbQpxCjOGbd9e7poG5aXVSN6e9bG6HzORkdi3FSEOCiayNGAhwW-xJo96lY1bnFgnyVAJvX0QL2kixU3TIqUejpAK3Y8RLn0bZeOV1x3FMnmcpPYGQCqhgpR0r_bZaObwflSwbF6iOyi8Xi7EzEQRZNfY2G-TnfVGlfIEKJL2dVuwY5b2fFwzGWxIHLkTAcyWMRPArEOEVWxhMRXenN27r-Z3EVIvMur0YSKGM9Qan5t8KP7k1xdUNQ",
     "name": "bulk_close",
     "arguments": {
       "issue_ids": [

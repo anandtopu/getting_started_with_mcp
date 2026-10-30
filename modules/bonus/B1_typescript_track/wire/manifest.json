@@ -2,8 +2,12 @@
   "date": "2026-10-30",
   "protocol": "2025-11-25 for Java; 2026-07-28 otherwise",
   "captures": [
+    "analytics.jsonl",
     "forms.jsonl",
+    "mirror.jsonl",
     "notes.jsonl",
+    "raw.jsonl",
+    "task_tools.jsonl",
     "tasks.jsonl"
   ],
   "command": "uv run python scripts/phase8.py --capture",

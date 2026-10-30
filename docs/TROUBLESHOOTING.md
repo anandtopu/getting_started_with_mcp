@@ -99,3 +99,11 @@ Start with `uv run python scripts/check_env.py`. Run commands at the repository 
 **Fix:** Run the documented --prepare build once with network access. Installed offline smoke tests then use the existing cache. Fresh installation is distinct from offline execution.
 
 [Host setup](HOST_SETUP.md) · [Migration](MIGRATING_FROM_OLDER_VERSIONS.md) · [Protocol guide](PROTOCOL_GUIDE.md)
+
+## A reviewed tool changed but the host still saw the old definition
+
+A server can advertise a catalog cache TTL. A default list call may return the cached response. Security revalidation uses Python `client.list_tools(cache_mode="refresh")` or TypeScript `client.listTools(undefined, {cacheMode: 'refresh'})`, then compares the complete definition with the original review. Reconnecting or clearing a UI display is not a substitute for this dispatch-time check.
+
+## Many simultaneous TypeScript workers time out during imports
+
+Run the repository's `npm test`, which limits Vitest to four workers. It retains test deadlines and assertions while avoiding dozens of competing compiler/worker processes. If a single case still times out, inspect that case rather than increasing every deadline.

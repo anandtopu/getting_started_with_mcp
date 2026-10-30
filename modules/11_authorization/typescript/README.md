@@ -1,6 +1,6 @@
 # TypeScript 11: Authorization
 
-Verify RS256 signatures against a pinned key and bind identity to issuer, audience and expiry. These are the TypeScript counterparts to [Module 11](../README.md). Read that lesson's explanation, diagram and quiz first; this page records language-specific behavior.
+Run native PKCE discovery and verify issuer, audience, signature, expiry and scope. These are the TypeScript counterparts to [Module 11](../README.md). Read that lesson's explanation, diagram and quiz first; this page records language-specific behavior.
 
 ## Prerequisites
 
@@ -14,7 +14,7 @@ From the root: `npm ci`. Node 24 or 26 is required. The pinned official MCP SDK 
 
 ## The big idea
 
-Verify RS256 signatures against a pinned key and bind identity to issuer, audience and expiry. The language changes syntax and library choices; the peer still sees the same JSON-RPC contract. A deterministic fixture is an integration check, not a measured model-quality claim.
+Run native PKCE discovery and verify issuer, audience, signature, expiry and scope. The language changes syntax and library choices; the peer still sees the same JSON-RPC contract. A deterministic fixture is an integration check, not a measured model-quality claim.
 
 ## How it works
 
@@ -49,6 +49,10 @@ sequenceDiagram
 - `03_expiry.ts`: run `node --import tsx modules/11_authorization/typescript/examples/03_expiry.ts`; expect `status: PASS`.
 
 The executable contracts live in [advanced_lessons.ts](../../../common/typescript/advanced_lessons.ts); follow the module-number branch to the focused implementation it invokes. This avoids copying the same host/security logic into every example.
+
+Run `uv run python scripts/ts_oauth.py` for the native SDK authorization-code client. The TypeScript transport discovers the resource and issuer, uses PKCE S256, validates the exact callback/state/issuer, exchanges the code, then opens an authenticated connection. It reads an issue and demonstrates that read scope cannot authorize a write. A wrong issuer is rejected before code exchange.
+
+[oauth_client.ts](oauth_client.ts) and [oauth.ts](../../../common/typescript/oauth.ts) own the native client. The Python harness starts the existing synthetic authority and resource server. Its automatic consent helper is restricted to this exact loopback fixture; real clients must use a browser and a user decision. No access tokens are printed. The existing `scripts/ts_auth.py` and `--enterprise` paths exercise machine and enterprise grants separately.
 
 ## Try it in a host
 

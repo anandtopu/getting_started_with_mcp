@@ -38,7 +38,8 @@ describe('Phase 8 authorization boundaries', () => {
       const found = await client.callTool({name:'search_notes',arguments:{query:'Reviewed'}});
       expect(JSON.stringify(found)).toContain('Reviewed');
       const denied = new CourseHost(new Map([['notes',client]]), async () => false);
-      await expect(denied.execute({name:'notes__create_note',arguments:{title:'Forbidden',body:'x',confirmed:true}})).rejects.toThrow('declined');
+      await expect(denied.execute({name:'notes__create_note',arguments:{title:'Forbidden',body:'x',confirmed:true}})).rejects.toThrow('Invalid arguments');
+      await expect(denied.execute({name:'notes__create_note',arguments:{title:'Forbidden',body:'x'}})).rejects.toThrow('declined');
       const absent = await client.callTool({name:'search_notes',arguments:{query:'Forbidden'}});
       expect(absent.structuredContent).toEqual({result:[]});
     });

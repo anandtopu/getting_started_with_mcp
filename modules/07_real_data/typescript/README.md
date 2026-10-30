@@ -1,6 +1,6 @@
 # TypeScript 07: Structured tools
 
-Read SQLite data, reject an unapproved write, and prove replay-safe issue creation. These are the TypeScript counterparts to [Module 07](../README.md). Read that lesson's explanation, diagram and quiz first; this page records language-specific behavior.
+Run issue CRUD, read-only analytics pages, resource links and bounded local REST calls. These are the TypeScript counterparts to [Module 07](../README.md). Read that lesson's explanation, diagram and quiz first; this page records language-specific behavior.
 
 ## Prerequisites
 
@@ -14,7 +14,7 @@ From the root: `npm ci`. Node 24 or 26 is required. The pinned official MCP SDK 
 
 ## The big idea
 
-Read SQLite data, reject an unapproved write, and prove replay-safe issue creation. The language changes syntax and library choices; the peer still sees the same JSON-RPC contract. A deterministic fixture is an integration check, not a measured model-quality claim.
+Run issue CRUD, read-only analytics pages, resource links and bounded local REST calls. The language changes syntax and library choices; the peer still sees the same JSON-RPC contract. A deterministic fixture is an integration check, not a measured model-quality claim.
 
 ## How it works
 
@@ -44,11 +44,17 @@ sequenceDiagram
 
 ## Walkthrough
 
-- `01_read.ts`: run `node --import tsx modules/07_real_data/typescript/examples/01_read.ts`; expect `status: PASS`.
-- `02_confirmation.ts`: run `node --import tsx modules/07_real_data/typescript/examples/02_confirmation.ts`; expect `status: PASS`.
-- `03_idempotency.ts`: run `node --import tsx modules/07_real_data/typescript/examples/03_idempotency.ts`; expect `status: PASS`.
+- `01_issue_crud.ts`: run `node --import tsx modules/07_real_data/typescript/examples/01_issue_crud.ts`; expect `status: PASS`.
+- `02_readonly_analytics.ts`: run `node --import tsx modules/07_real_data/typescript/examples/02_readonly_analytics.ts`; expect `status: PASS`.
+- `03_rest_wrapper.ts`: run `node --import tsx modules/07_real_data/typescript/examples/03_rest_wrapper.ts`; expect `status: PASS`.
 
 The executable contracts live in [advanced_lessons.ts](../../../common/typescript/advanced_lessons.ts); follow the module-number branch to the focused implementation it invokes. This avoids copying the same host/security logic into every example.
+
+1. `01_issue_crud.ts` creates, reads, updates and deletes an ephemeral issue. A missing confirmation is rejected; a repeated operation key returns the original creation, and a deleted receipt cannot recreate it.
+2. `02_readonly_analytics.ts` queries `analytics.db` using a read-only connection, a fixed parameterized query, ISO date validation and a 1–50 row page. It follows the actual next-page resource link and rejects an excessive limit. This fixture has 365 rows, so work is bounded by its fixed dataset; the Python variant also demonstrates a SQLite instruction deadline for larger databases.
+3. `03_rest_wrapper.ts` starts an actual local HTTP API, reads a project through MCP and rejects an invalid ID. Open-Meteo uses a fixed destination and requires explicit `allow_network=true`; default tests use an injected response. HTTP helpers reject redirects, enforce a five-second deadline and cap responses at 64 KB.
+
+Implementations: [real_data.ts](../../../common/typescript/real_data.ts), [remote.ts](../../../common/typescript/remote.ts). Inspect `node --import tsx modules/07_real_data/typescript/analytics_server.ts`; call `analytics_page` with `{"limit":2}`. [Captured analytics request and resource read](../../bonus/B1_typescript_track/wire/analytics.jsonl).
 
 ## Try it in a host
 

@@ -1,10 +1,13 @@
 # Module 04: Prompts — reusable workflows with source context
+> After this module you can assemble reusable prompts with validated arguments and source context.
 
-Workspace and Chat version 2: add incident, release-note and customer-meeting prompt workflows.
-
-**Time:** 60 minutes · **Level:** beginner · **LLM needed:** no · **Languages:** Python and TypeScript
+**Time:** ~60 min · **Level:** beginner · **LLM needed:** no · **Languages:** Python and TypeScript
 
 **Target:** [MCP 2026-07-28](https://modelcontextprotocol.io/specification/2026-07-28/server/prompts); official Python SDK 2.3 and TypeScript SDK 2.4 where shown.
+
+**Workspace and Chat version 2 / 0:** Assemble reusable prompts with validated arguments and source context.
+
+**Spec sections:** [Current specification](https://modelcontextprotocol.io/specification/2026-07-28/server/prompts).
 
 ## Prerequisites
 
@@ -232,7 +235,7 @@ Generate configurations for this machine:
 uv run python scripts/host_configs.py --module 4
 ```
 
-Use [the four host configurations](host_configs/README.md) and [host setup instructions](../../docs/HOST_SETUP.md). The JSON has the host’s exact outer envelope and absolute executable/project paths. Restart or reload the host after adding entries, inspect the listed capabilities, then type: **“Show the available Lumen capabilities and use the relevant read operation to find release context. Ask before any change.”** For prompts, choose `summarize_incident` in the host’s prompt picker and supply `incident_postmortems` and `page-01`; slash-command spelling varies by host.
+Use [the four host configurations](host_configs/README.md) and [host setup instructions](../../docs/HOST_SETUP.md). The JSON has the host’s exact outer envelope and absolute executable/project paths. Restart or reload the host after adding entries and inspect the listed capabilities. Choose `summarize_incident` in the prompt picker with `space=incident_postmortems` and `page=page-01`. Expect messages containing incident context; slash-command spelling varies by host.
 
 Use Inspector or the supplied client as the reproducible baseline; third-party host UI behavior is a separate learner verification step. Host configuration formats were checked against official documentation; interactive host UI behavior is not an automated test claim.
 
@@ -334,11 +337,11 @@ Answer the [five-question quiz](quiz.md) before opening its expandable answers.
 
 ## Key takeaways
 
-- No. It returns messages for the host to use.
-- They retain source identity and MIME information instead of turning everything into untyped prose.
-- No. Clients can ignore suggestions or send invalid values.
-- The selected wiki space.
-- Usually the user through the host’s picker or slash-command UI.
+- Getting a prompt returns messages; the host decides whether to send them to a model.
+- Embedded resources preserve source identity and MIME information.
+- Completion suggestions help input but do not replace argument validation.
+- Context-aware page completion depends on the selected wiki space.
+- The user normally selects a prompt through a host picker or slash command.
 
 ## Go deeper
 

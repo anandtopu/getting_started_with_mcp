@@ -1,8 +1,13 @@
 # Module 10: Streamable HTTP [TS]
+> After this module you can connect a host to a protected loopback Streamable HTTP endpoint.
 
-**Time:** 150 minutes · **Level:** intermediate · **Languages:** Python and TypeScript · **LLM needed:** no; optional direct generation only
+**Time:** ~150 min · **Level:** intermediate · **Languages:** Python and TypeScript · **LLM needed:** no; optional direct generation only
 
 **Target:** MCP 2026-07-28, Python SDK 2.3, TypeScript SDK 2.4. Commands run from the repository root on Windows, macOS, or Linux.
+
+**Workspace and Chat version 4 / 2:** Connect a host to a protected loopback streamable http endpoint.
+
+**Spec sections:** [Current specification](https://modelcontextprotocol.io/specification/2026-07-28).
 
 ## Prerequisites
 

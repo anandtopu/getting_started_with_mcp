@@ -55,13 +55,18 @@ def build():
     (bundle / "server").mkdir(parents=True, exist_ok=True)
     shutil.copyfile(wheel, bundle / "server" / wheel.name)
     (bundle / "server/main.py").write_text("from lumen_knowledge.__main__ import main\nmain()\n")
-    manifest = json.loads((source / "mcpb.json").read_text())
+    manifest_path = source / "mcpb.json"
+    if manifest_path.stat().st_size > 64000:
+        raise ValueError("Knowledge bundle manifest exceeds 64 KB.")
+    manifest = json.loads(manifest_path.read_text())
     (bundle / "manifest.json").write_text(json.dumps(manifest, indent=2))
     shutil.copyfile(ROOT / "LICENSE", bundle / "LICENSE")
     cli = ROOT / "node_modules/@anthropic-ai/mcpb/dist/cli/cli.js"
-    run([node, str(cli), "validate", str(bundle / "manifest.json")])
+    # MCPB's Zod 3 dependency has an upstream collection-memory advisory.
+    # Only our bounded manifest enters this build-only CLI; also cap its heap.
+    run([node, "--max-old-space-size=256", str(cli), "validate", str(bundle / "manifest.json")])
     artifact = output / "lumen-knowledge.mcpb"
-    run([node, str(cli), "pack", str(bundle), str(artifact)])
+    run([node, "--max-old-space-size=256", str(cli), "pack", str(bundle), str(artifact)])
     with zipfile.ZipFile(artifact) as archive:
         assert "server/" + wheel.name in archive.namelist()
         assert not any(".env" in name or ".." in Path(name).parts for name in archive.namelist())
