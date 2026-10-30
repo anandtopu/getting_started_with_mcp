@@ -575,7 +575,7 @@ Poll one owned task; completed state includes its original operation result. [Sp
   "id": 7,
   "method": "tasks/get",
   "params": {
-    "taskId": "jKMH9P-RoERzTGNlNyX15Xt5z9r1N2EP",
+    "taskId": "TP5TMKee-nuXk22c1ltVlDOgedElt8N0",
     "_meta": {
       "io.modelcontextprotocol/protocolVersion": "2026-07-28",
       "io.modelcontextprotocol/clientInfo": {
@@ -604,10 +604,10 @@ The same ID identifies this response:
   "id": 7,
   "result": {
     "resultType": "complete",
-    "taskId": "jKMH9P-RoERzTGNlNyX15Xt5z9r1N2EP",
+    "taskId": "TP5TMKee-nuXk22c1ltVlDOgedElt8N0",
     "status": "cancelled",
-    "createdAt": "2026-10-30T19:40:26.549Z",
-    "lastUpdatedAt": "2026-10-30T19:40:26.550Z",
+    "createdAt": "2026-10-30T19:59:20.737Z",
+    "lastUpdatedAt": "2026-10-30T19:59:20.738Z",
     "ttlMs": 300000,
     "pollIntervalMs": 25,
     "_meta": {
