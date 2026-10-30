@@ -1,0 +1,142 @@
+[
+  {
+    "stem": "01_practice",
+    "task": "Project an issue into concise or detailed output; never include unknown secret fields.",
+    "cases": [
+      [
+        [
+          {
+            "id": 1,
+            "title": "Release",
+            "status": "open",
+            "priority": "high",
+            "secret": "omit"
+          },
+          "concise"
+        ],
+        {
+          "id": 1,
+          "title": "Release",
+          "status": "open"
+        }
+      ],
+      [
+        [
+          {
+            "id": 2,
+            "status": "closed",
+            "priority": "low"
+          },
+          "detailed"
+        ],
+        {
+          "id": 2,
+          "status": "closed",
+          "priority": "low"
+        }
+      ]
+    ]
+  },
+  {
+    "stem": "02_apply",
+    "task": "Return a bounded page and its next ID only when additional records exist.",
+    "cases": [
+      [
+        [
+          [
+            {
+              "id": 1
+            },
+            {
+              "id": 2
+            },
+            {
+              "id": 3
+            }
+          ],
+          0,
+          2
+        ],
+        {
+          "items": [
+            {
+              "id": 1
+            },
+            {
+              "id": 2
+            }
+          ],
+          "next_after": 2
+        }
+      ],
+      [
+        [
+          [
+            {
+              "id": 1
+            },
+            {
+              "id": 2
+            },
+            {
+              "id": 3
+            }
+          ],
+          2,
+          2
+        ],
+        {
+          "items": [
+            {
+              "id": 3
+            }
+          ],
+          "next_after": null
+        }
+      ],
+      [
+        [
+          [],
+          0,
+          2
+        ],
+        {
+          "items": [],
+          "next_after": null
+        }
+      ]
+    ]
+  },
+  {
+    "stem": "03_stretch",
+    "task": "Build a deterministic tool-name catalog: distinct names, sorted, with an optional prefix.",
+    "cases": [
+      [
+        [
+          [
+            "wiki_read",
+            "issue_read",
+            "issue_read"
+          ],
+          "issue"
+        ],
+        [
+          "issue_read"
+        ]
+      ],
+      [
+        [
+          [
+            "b",
+            "a"
+          ],
+          ""
+        ],
+        [
+          "a",
+          "b"
+        ]
+      ]
+    ]
+  }
+]

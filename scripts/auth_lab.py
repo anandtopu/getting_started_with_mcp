@@ -68,7 +68,7 @@ async def auth_stack():
             yield authority
 
 
-def fixture_provider(authority):
+def fixture_provider(authority, scopes="issues:read"):
     result = None
     storage = MemoryStorage(authority.issuer)
 
@@ -88,7 +88,9 @@ def fixture_provider(authority):
     async def callback():
         return result
 
-    return provider(authority.resource, authority.issuer, storage, consent, callback), storage
+    return provider(
+        authority.resource, authority.issuer, storage, consent, callback, scopes
+    ), storage
 
 
 def rpc(name="read_issue", arguments=None):

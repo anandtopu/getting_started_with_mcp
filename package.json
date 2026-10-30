@@ -1,6 +1,6 @@
 {
   "name": "getting-started-with-mcp",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": true,
   "type": "module",
   "workspaces": [
@@ -15,15 +15,18 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint common/typescript modules scripts/check-exercise.ts",
     "inspector": "mcp-inspector",
-    "check": "npm run typecheck && npm run lint && npm test"
+    "check": "npm run typecheck && npm run lint && npm test",
+    "build:dashboard": "node scripts/build_dashboard.mjs"
   },
   "devDependencies": {
     "@eslint/js": "~10.0.1",
     "@modelcontextprotocol/client": "~2.4.0",
+    "@modelcontextprotocol/ext-apps": "2.0.4",
     "@modelcontextprotocol/inspector": "~2.13.0",
     "@modelcontextprotocol/server": "~2.4.0",
     "@modelcontextprotocol/server-filesystem": "2.1.0",
     "@types/node": "~26.6.6",
+    "esbuild": "0.28.2",
     "eslint": "~10.13.0",
     "tsx": "~4.23.15",
     "typescript": "~6.0.3",

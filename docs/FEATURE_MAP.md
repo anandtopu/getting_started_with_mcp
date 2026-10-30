@@ -1,12 +1,12 @@
 # Feature map
 
-Coverage contract updated October 30, 2026. **Modules 00–13 are delivered; modules 14–21, bonuses and capstones remain planned.** A row closes only when its runnable example, use case, captured exchange, exercises/solutions and tests are delivered. Future paths are code text, not dead links. Replace them with relative links as files land.
+Coverage contract updated October 30, 2026. **Modules 00–17 are delivered; modules 18–21, bonuses and capstones remain planned.** A row closes only when its runnable example, use case, captured exchange, exercises/solutions and tests are delivered. Future paths are code text, not dead links. Replace them with relative links as files land.
 
-The map covers the core protocol, official extension inventory, selected SDK facilities, and the requested application curriculum. It does not imply that every SDK implementation detail is a protocol feature. Framework rows name planned integrations; provider-specific primary API references must be verified and added before implementation.
+The map covers the core protocol, official extension inventory, selected SDK facilities, and the requested application curriculum. It does not imply that every SDK implementation detail is a protocol feature. Framework compatibility and verified primary API references are recorded in [frameworks](../frameworks/README.md) and Module 15.
 
 ## Path rules
 
-All paths are relative to the repository root. Delivered table links below point directly to implementations. Tier 1–3 captures group related operations into scenario files listed in each module's `wire/manifest.json`; example basenames need not equal capture filenames. The example column names a basename:
+All paths are relative to the repository root. Delivered table links below point directly to implementations. Tier 1–4 captures group related operations into scenario files listed in each module's `wire/manifest.json`; example basenames need not equal capture filenames. The example column names a basename:
 - Python example: `modules/<module>/python/examples/<basename>.py`.
 - For modules 02â€“05 and 10, TypeScript counterpart: `modules/<module>/typescript/examples/<basename>.ts`.
 - Other TypeScript counterparts: `modules/bonus/B1_typescript/<module>/examples/<basename>.ts`.
@@ -173,3 +173,20 @@ per module, and real wire captures. The entry-point manifest is
 | [06_building_a_host](../modules/06_building_a_host/README.md) | [Tests](../modules/06_building_a_host/python/tests/test_module.py) | [Capture commands](../modules/06_building_a_host/wire/manifest.json) |
 
 Cross-cutting runtime coverage: [Python protocol and host tests](../tests/test_tier1.py), [provider history tests](../tests/test_tool_models.py), [schema limits](../tests/test_schemas.py), and [TypeScript contracts](../common/typescript/tier1.test.ts).
+
+## Tier 4 acceptance evidence
+
+Modules 14–17 include 13 Python examples, four use cases, 12 exercise/solution
+pairs, four seven-question quizzes, 16 host configs and real stdio captures.
+The [entry-point inventory](../scripts/examples.json) runs them in CI.
+[Behavior tests](../tests/test_tier4.py) cover the two catalogs, real framework
+calls, gateway scope/cache isolation, input-required Tasks and App resource data.
+[App bridge tests](../common/typescript/apps.test.ts) cover initialization, tool
+results, refresh and teardown. GUI sandbox enforcement remains a documented
+[manual host check](PHASE_6_HOST_MATRIX.md); the full web host belongs to Module 21.
+
+The gateway intentionally proxies tools; original servers remain available for
+resources/prompts. It owns its App resource and Tasks lifecycle. No provider token
+is forwarded to upstreams. The deterministic evaluation measures plumbing and
+catalog size; optional live runs measure actual model completion without claiming
+an unmeasured accuracy improvement.

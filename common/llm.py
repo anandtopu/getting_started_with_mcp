@@ -77,6 +77,16 @@ def create_model(settings: Settings | None = None) -> FakeModel | ProviderModel:
     return FakeModel() if settings.provider == "fake" else ProviderModel(settings)
 
 
+async def remote_mcp(url: str, settings: Settings | None = None) -> dict:
+    """Explicit remote-MCP call; only invoked by the lesson's --live mode."""
+    from common.remote_models import execute_remote
+
+    settings = settings or load_settings()
+    if settings.provider not in {"openai", "anthropic", "gemini"}:
+        raise ValueError("Select openai, anthropic or gemini for remote MCP.")
+    return await execute_remote(settings, url)
+
+
 def create_tool_model(prompt: str, settings: Settings | None = None, turns=None):
     """Module 06's explicit tool loop uses the same configuration boundary."""
     from common.tool_formats import ToolCall, Turn

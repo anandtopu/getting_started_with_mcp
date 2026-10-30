@@ -74,6 +74,7 @@ def provider(
     storage: MemoryStorage,
     redirect=browser_redirect,
     callback=browser_callback,
+    scopes="issues:read",
 ) -> OAuthClientProvider:
     return OAuthClientProvider(
         server_url=url,
@@ -83,7 +84,7 @@ def provider(
             token_endpoint_auth_method="none",
             grant_types=["authorization_code"],
             response_types=["code"],
-            scope="issues:read",
+            scope=scopes,
         ),
         redirect_handler=redirect,
         callback_handler=callback,

@@ -12,8 +12,9 @@ from common.config import ROOT
 from scripts.tier1 import MODULES
 from scripts.tier2 import MODULES as TIER2_MODULES
 from scripts.tier3 import MODULES as TIER3_MODULES
+from scripts.tier4 import MODULES as TIER4_MODULES
 
-MODULES = MODULES + TIER2_MODULES + TIER3_MODULES
+MODULES = MODULES + TIER2_MODULES + TIER3_MODULES + TIER4_MODULES
 
 
 def check(module: int, exercise: int, solution: bool = False) -> None:
@@ -30,7 +31,7 @@ def check(module: int, exercise: int, solution: bool = False) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--module", type=int, choices=range(14), required=True)
+    parser.add_argument("--module", type=int, choices=range(18), required=True)
     parser.add_argument("--exercise", type=int, choices=range(1, 4), required=True)
     parser.add_argument("--solution", action="store_true")
     args = parser.parse_args()

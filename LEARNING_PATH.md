@@ -1,6 +1,6 @@
 # Learning path
 
-Delivery status: Phase 5. Tiers 1–3 (modules 00–13) and their checkpoints are delivered; later tiers, bonuses and capstones remain planned. See [the build plan](docs/PHASE_1_PLAN.md) and [verification notes](docs/VERIFICATION_NOTES.md).
+Delivery status: Phase 6. Tiers 1–4 (modules 00–17) and their checkpoints are delivered; later tiers, bonuses and capstones remain planned. See [the build plan](docs/PHASE_1_PLAN.md) and [verification notes](docs/VERIFICATION_NOTES.md).
 
 You need basic Python, terminal navigation, and basic git. You will learn the other prerequisites as they become useful. MCP means Model Context Protocol: a shared way for applications to discover and use tools, data, and reusable prompts. Lumen Labs supplies the synthetic workplace; your growing workspace supplies its servers, and Lumen Chat is the application that uses them.
 
@@ -76,6 +76,8 @@ You are ready to move on when wrong-audience and insufficient-scope tokens fail,
 | 16 Composition | 150 | Route through a gateway with per-user visibility, limits and audit | Workspace 6 |
 | 17 Official extensions | 165 | Negotiate Tasks and Apps, poll reports, supply input, display a dashboard | Chat 3 |
 | Checkpoint | 90 | Use a chosen framework through the gateway with Tasks and an App | Integrated system |
+
+[Tier 4 lessons](modules/14_tool_design/README.md) and the [checkpoint](checkpoints/04_ecosystem/README.md) are delivered.
 
 Separate MCP from agent orchestration and provider-specific tool schemas. Teach evaluation baselines and repeated trials before claiming improvement. The same fake-model fixtures support offline framework tests; live model measurements are opt-in and record model/version/cost.
 

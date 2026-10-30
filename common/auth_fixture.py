@@ -25,8 +25,9 @@ SCOPES = {"issues:read", "issues:write"}
 
 
 class Authority:
-    def __init__(self, issuer: str, resource: str):
+    def __init__(self, issuer: str, resource: str, scopes=None):
         self.issuer, self.resource = issuer, resource
+        self.scopes = set(SCOPES if scopes is None else scopes)
         self.key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
         jwk = json.loads(jwt.algorithms.RSAAlgorithm.to_jwk(self.key.public_key()))
         self.jwks = {"keys": [{**jwk, "kid": "fixture", "use": "sig", "alg": "RS256"}]}
@@ -59,7 +60,7 @@ class Authority:
                 grant_types_supported=["authorization_code"],
                 token_endpoint_auth_methods_supported=["none"],
                 code_challenge_methods_supported=["S256"],
-                scopes_supported=sorted(SCOPES),
+                scopes_supported=sorted(self.scopes),
                 authorization_response_iss_parameter_supported=True,
             )
         )
@@ -73,7 +74,7 @@ class Authority:
             and query.get("resource") == self.resource
             and query.get("code_challenge_method") == "S256"
             and re.fullmatch(r"[A-Za-z0-9_-]{43}", query.get("code_challenge", ""))
-            and set(query.get("scope", "").split()) <= SCOPES
+            and set(query.get("scope", "").split()) <= self.scopes
         )
         if not valid:
             return JSONResponse({"error": "invalid_request"}, status_code=400)

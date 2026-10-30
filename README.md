@@ -2,7 +2,7 @@
 
 Model Context Protocol (MCP) gives applications a common way to discover and use tools, data and reusable prompts. This hands-on course is for people who know basic Python and want to build the connections themselves.
 
-**Delivery status: Phase 5 — Tiers 1–3 delivered.** Modules 00–13 and their checkpoints run today; modules 14–21, bonus lessons and capstones remain planned. See [the learning path](LEARNING_PATH.md), [feature map](docs/FEATURE_MAP.md), and [verification notes](docs/VERIFICATION_NOTES.md).
+**Delivery status: Phase 6 — Tiers 1–4 delivered.** Modules 00–17 and their checkpoints run today; modules 18–21, bonus lessons and capstones remain planned. See [the learning path](LEARNING_PATH.md), [feature map](docs/FEATURE_MAP.md), and [verification notes](docs/VERIFICATION_NOTES.md).
 
 ## Start Tier 1
 
@@ -64,6 +64,26 @@ The [Tier 3 checkpoint](checkpoints/03_security/README.md) includes the filled
 [security checklist](docs/SECURITY_CHECKLIST.md). Default checks use a synthetic
 local OAuth fixture. [Keycloak Compose](deployment/auth/README.md) provides the
 separate identity-provider path; isolated Linux CI checks it and the container lab.
+
+## Continue with Tier 4
+
+| Module | Lesson |
+|---|---|
+| 14 | [Tool design and evaluation](modules/14_tool_design/README.md) |
+| 15 | [Agent frameworks and remote model APIs](modules/15_agent_frameworks/README.md) |
+| 16 | [Composition and the Lumen Gateway](modules/16_composition/README.md) |
+| 17 | [Tasks and MCP Apps](modules/17_extensions/README.md) |
+
+```text
+uv sync --frozen --all-extras
+uv run python scripts/tier4.py
+uv run python checkpoints/04_ecosystem/acceptance.py --framework agents
+```
+
+The [Tier 4 checkpoint](checkpoints/04_ecosystem/README.md) combines a chosen
+framework, seven gateway upstreams, durable report Tasks and an analytics App.
+Default models are deterministic. See the [framework compatibility table](frameworks/README.md)
+for isolated adapters and the [host matrix](docs/PHASE_6_HOST_MATRIX.md) for UI checks.
 
 ## What you will build
 

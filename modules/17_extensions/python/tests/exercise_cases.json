@@ -1,0 +1,123 @@
+[
+  {
+    "stem": "01_practice",
+    "task": "Negotiate Apps only when both sides advertise its ID and the client accepts its MIME type.",
+    "cases": [
+      [
+        [
+          {
+            "io.modelcontextprotocol/ui": {
+              "mimeTypes": [
+                "text/html;profile=mcp-app"
+              ]
+            }
+          },
+          {
+            "io.modelcontextprotocol/ui": {}
+          }
+        ],
+        true
+      ],
+      [
+        [
+          {
+            "io.modelcontextprotocol/ui": {}
+          },
+          {
+            "io.modelcontextprotocol/ui": {}
+          }
+        ],
+        false
+      ],
+      [
+        [
+          {},
+          {}
+        ],
+        false
+      ]
+    ]
+  },
+  {
+    "stem": "02_apply",
+    "task": "Distinguish a completed tool error from a failed protocol operation.",
+    "cases": [
+      [
+        [
+          {
+            "status": "completed",
+            "result": {
+              "isError": true
+            }
+          }
+        ],
+        "tool_error"
+      ],
+      [
+        [
+          {
+            "status": "completed",
+            "result": {
+              "isError": false
+            }
+          }
+        ],
+        "success"
+      ],
+      [
+        [
+          {
+            "status": "failed",
+            "error": {
+              "code": -32603
+            }
+          }
+        ],
+        "failed"
+      ],
+      [
+        [
+          {
+            "status": "input_required"
+          }
+        ],
+        "input_required"
+      ]
+    ]
+  },
+  {
+    "stem": "03_stretch",
+    "task": "Keep only outstanding input-response keys; stale responses are ignored.",
+    "cases": [
+      [
+        [
+          [
+            "details-1"
+          ],
+          {
+            "details-1": {
+              "action": "accept"
+            },
+            "old": {
+              "action": "decline"
+            }
+          }
+        ],
+        {
+          "details-1": {
+            "action": "accept"
+          }
+        }
+      ],
+      [
+        [
+          [],
+          {
+            "old": {}
+          }
+        ],
+        {}
+      ]
+    ]
+  }
+]

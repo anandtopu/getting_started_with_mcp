@@ -1,5 +1,69 @@
 # Verification notes
 
+## Phase 6 — Tier 4, October 30, 2026
+
+Course 0.6.0 retains MCP 2026-07-28, official Python SDK 2.3.0 and TypeScript
+SDK 2.4.0. MCP Apps uses `@modelcontextprotocol/ext-apps==2.0.4`, bundled with
+esbuild 0.28.2. The official Python SDK provides extension hooks and Apps; its
+installed release has no Tasks receiver. The teaching receiver implements the
+[released Tasks schema](https://github.com/modelcontextprotocol/ext-tasks/blob/main/schema/2026-07-28/schema.ts)
+through those hooks, with `tasks/get`, `tasks/update` and `tasks/cancel`.
+
+The [official inventory](https://modelcontextprotocol.io/extensions/overview)
+lists Tasks as Beta, to Core, and Apps as Stable. These maturity labels are
+separate from the released revision's frozen wire format. This course does not
+teach the older `tasks/result`/`tasks/list` generation as current protocol.
+
+### Dependencies and compatibility
+
+[Framework versions and APIs](../frameworks/README.md) include OpenAI Agents
+0.24.0, LangGraph 1.2.18/LangChain 1.4.7, Strands 1.62.0, Pydantic AI 2.63.0,
+Google ADK 2.13.0 and Claude Agent SDK 0.2.175. Independent uv locks isolate
+Strands' MCP <2.2 requirement and ADK's telemetry <=1.44 requirement. The main
+server keeps SDK 2.3.0 and OpenTelemetry 1.45.2. Current LangChain MCPAdapter
+(beta) replaces the requested legacy adapter package, which requires MCP <2.
+Third-party FastMCP is an internal client dependency, not the course server API.
+
+Remote API request constructors follow official
+[OpenAI Responses](https://developers.openai.com/api/docs/guides/tools-connectors-mcp),
+[Anthropic MCP connector](https://platform.claude.com/docs/en/agents-and-tools/mcp-connector)
+and [Gemini Interactions](https://ai.google.dev/gemini-api/docs/function-calling)
+documentation. Their tool definitions are checked against installed SDK schemas;
+Gemini's allowlist uses configuration objects containing tool names. Explicit
+`--live` calls require a reviewed public HTTPS endpoint and model credentials.
+No live provider calls were made. OpenAI approval requests are not auto-approved.
+
+### Local evidence
+
+- Full Windows Python 3.12 suite: 169 passed, one symlink-permission skip; the
+  subsequent provider-schema and completed-tool-error regressions are recorded
+  with publication results below. All 107 delivered entry points passed.
+- TypeScript compiler, ESLint and 36 tests passed, including the official App
+  bridge handshake, tool data, refresh allowlist and teardown.
+- Three actual framework runtimes complete the same two-tool workflow without
+  model keys. Strands and ADK invoke real tools from isolated environments;
+  Claude's bundled CLI establishes its real MCP connection without a model query.
+- The redesigned catalog exposes six tools versus 25. The deterministic runner
+  completes six of six read cases in each catalog. This measures plumbing and
+  catalog size, not a model accuracy improvement or billed token usage.
+- Gateway tests cover subject/scope-separated caches, runtime revocation, schema
+  validation, per-principal rate limits, upstream failure isolation and cleared
+  incoming context. A real loopback OAuth/PKCE test checks audience and Origin.
+- Tasks persist handles before returning them, scope reads to owners, resume
+  working jobs after restart, validate input responses, expire results and cancel
+  pending jobs. The SQLite receiver supports one process, not distributed workers.
+- Actual stdio captures include catalog/extension metadata, task handles, polling,
+  input updates, completion, cancellation and the complete bundled App resource.
+- [Host matrix](PHASE_6_HOST_MATRIX.md) distinguishes documented support from
+  tested behavior. No desktop rendering, browser sandbox enforcement, production
+  multi-tenant deployment or paid-model quality result is claimed.
+
+### Phase 6 publication
+
+Cross-platform CI publication results will be recorded after the implementation
+commit passes. Modules 18–21, bonus tracks and capstones remain planned.
+
+
 ## Phase 5 — Tier 3, October 30, 2026
 
 Modules 11–13 retain MCP **2026-07-28**, Python SDK **2.3.0**, and the existing

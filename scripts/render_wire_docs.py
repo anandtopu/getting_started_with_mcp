@@ -10,8 +10,9 @@ from common.config import ROOT
 from scripts.tier1 import MODULES
 from scripts.tier2 import MODULES as TIER2_MODULES
 from scripts.tier3 import MODULES as TIER3_MODULES
+from scripts.tier4 import MODULES as TIER4_MODULES
 
-MODULES = MODULES + TIER2_MODULES + TIER3_MODULES
+MODULES = MODULES + TIER2_MODULES + TIER3_MODULES + TIER4_MODULES
 
 SELECTION = [
     ("03_reference_server", ["tools/call"]),
@@ -29,6 +30,8 @@ SELECTION = [
     ("python_main", ["resources/read", "tools/call"]),
     ("python_main", ["tools/call"]),
 ]
+SELECTION += [("python_main", ["tools/call"])] * 3
+SELECTION += [("python_main", ["tools/call", "tasks/get", "tasks/update", "tasks/cancel"])]
 
 
 def excerpt(index: int) -> str:
@@ -61,6 +64,12 @@ def excerpt(index: int) -> str:
         )
         if reply:
             selected.append(reply)
+    if index == 17:
+        for state in ["input_required", "completed"]:
+            reply = next(m for m in messages if m.get("result", {}).get("status") == state)
+            request = next(m for m in messages if m.get("id") == reply["id"] and "method" in m)
+            if request not in selected:
+                selected.extend([request, reply])
     notifications = [
         m
         for m in messages

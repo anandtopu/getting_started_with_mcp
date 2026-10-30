@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.6.0 — Phase 6, 2026-10-30
+
+- Modules 14–17: measured tool redesign, six framework adapters, remote model APIs, gateway and extensions.
+- Three deterministic framework workflows through actual MCP tools; isolated locked Strands and ADK clients.
+- Seven-upstream gateway with OAuth, scoped catalogs, per-subject limits, minimal audit and upstream isolation.
+- Durable SQLite Tasks with input updates, cancellation, restart recovery and expiry; official MCP App bridge.
+- Twelve exercises/solutions, quizzes, host configs, wire captures and Tier 4 checkpoint.
+- Cross-platform framework CI and documented limits for live-model and desktop-rendering evidence.
+
 ## 0.5.0 — Phase 5, 2026-10-30
 
 - Modules 11–13: OAuth discovery and PKCE, secured issues, security repairs and observability.

@@ -34,6 +34,13 @@ async def check_lesson_server(entry: dict, capture_dir: Path | None) -> None:
         async with running_server(path) as url:
             await exercise_http(url, capture)
         return
+    if entry["kind"] == "tier4":
+        from scripts.tier4 import connection
+        from scripts.tier4 import exercise as exercise_tier4
+
+        async with connection(entry["module"], capture) as client:
+            await exercise_tier4(client, entry["module"])
+        return
     async with (
         asyncio.timeout(30),
         script_client(path, capture, entry.get("module") == 9) as client,
@@ -106,7 +113,7 @@ async def smoke(capture_dir: Path | None = None) -> int:
             text=True,
             encoding="utf-8",
             errors="replace",
-            timeout=30,
+            timeout=entry.get("timeout", 30),
         )
         if result.returncode:
             raise RuntimeError(f"Failed {entry['path']}\n{result.stdout}\n{result.stderr}")

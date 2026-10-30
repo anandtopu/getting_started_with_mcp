@@ -40,6 +40,8 @@ jobs:
       - run: uv run --frozen python scripts/tier2.py
       - run: uv run --frozen python scripts/tier3.py
       - run: uv run --frozen python checkpoints/03_security/acceptance.py
+      - run: uv run --frozen python scripts/tier4.py
+      - run: uv run --frozen python checkpoints/04_ecosystem/acceptance.py
   typescript:
     strategy:
       fail-fast: false
@@ -93,6 +95,21 @@ jobs:
       - run: uv sync --frozen --extra http --extra auth
       - run: docker compose -f deployment/security/compose.yaml build
       - run: uv run --frozen python scripts/container_check.py
+  frameworks:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        framework: [strands, adk]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.13.6'
+      - run: uv sync --frozen --all-extras --python 3.12
+      - run: uv sync --frozen --project frameworks/${{ matrix.framework }} --python 3.12
+      - run: uv run --frozen python scripts/framework_extras.py ${{ matrix.framework }}
   external-links:
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest

@@ -1,0 +1,95 @@
+[
+  {
+    "stem": "01_practice",
+    "task": "Allow only the two reviewed read tools; wildcard names must not grant access.",
+    "cases": [
+      [
+        [
+          "triage_week"
+        ],
+        true
+      ],
+      [
+        [
+          "draft_status"
+        ],
+        true
+      ],
+      [
+        [
+          "triage_delete"
+        ],
+        false
+      ],
+      [
+        [
+          "*"
+        ],
+        false
+      ]
+    ]
+  },
+  {
+    "stem": "02_apply",
+    "task": "Reject remote endpoints with HTTP, credentials, a query, or a fragment.",
+    "cases": [
+      [
+        [
+          "https://mcp.lumen.example/mcp"
+        ],
+        true
+      ],
+      [
+        [
+          "http://localhost/mcp"
+        ],
+        false
+      ],
+      [
+        [
+          "https://user:pass@example.com/mcp"
+        ],
+        false
+      ],
+      [
+        [
+          "https://example.com/mcp?token=secret"
+        ],
+        false
+      ]
+    ]
+  },
+  {
+    "stem": "03_stretch",
+    "task": "Normalize structured tool results and text JSON without losing the published flag.",
+    "cases": [
+      [
+        [
+          {
+            "structuredContent": {
+              "published": false
+            }
+          }
+        ],
+        {
+          "published": false
+        }
+      ],
+      [
+        [
+          {
+            "content": [
+              {
+                "text": "{\"published\": false, \"draft\": \"Lumen\"}"
+              }
+            ]
+          }
+        ],
+        {
+          "published": false,
+          "draft": "Lumen"
+        }
+      ]
+    ]
+  }
+]

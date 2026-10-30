@@ -211,6 +211,40 @@
       "lists": [
         "tools/list"
       ]
+    },
+    {
+      "path": "modules/14_tool_design/python/use_case/server.py",
+      "kind": "tier4",
+      "module": 14,
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/15_agent_frameworks/python/use_case/server.py",
+      "kind": "tier4",
+      "module": 15,
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/16_composition/python/use_case/server.py",
+      "kind": "tier4",
+      "module": 16,
+      "lists": [
+        "tools/list",
+        "resources/list"
+      ]
+    },
+    {
+      "path": "modules/17_extensions/python/use_case/server.py",
+      "kind": "tier4",
+      "module": 17,
+      "lists": [
+        "tools/list",
+        "resources/list"
+      ]
     }
   ],
   "scripts": [
@@ -467,6 +501,91 @@
     {
       "path": "modules/13_testing_observability/python/use_case/main.py",
       "arguments": []
+    },
+    {
+      "path": "modules/14_tool_design/python/examples/01_api_mirror.py",
+      "arguments": [],
+      "timeout": 45
+    },
+    {
+      "path": "modules/14_tool_design/python/examples/02_task_tools.py",
+      "arguments": [],
+      "timeout": 45
+    },
+    {
+      "path": "modules/14_tool_design/python/examples/03_measure_change.py",
+      "arguments": [],
+      "timeout": 45
+    },
+    {
+      "path": "modules/14_tool_design/python/use_case/main.py",
+      "arguments": [],
+      "timeout": 45
+    },
+    {
+      "path": "modules/15_agent_frameworks/python/examples/01_agents_and_langgraph.py",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/15_agent_frameworks/python/examples/02_strands_and_pydantic.py",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/15_agent_frameworks/python/examples/03_adk_and_claude.py",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/15_agent_frameworks/python/examples/04_remote_model_apis.py",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/15_agent_frameworks/python/use_case/main.py",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/16_composition/python/examples/01_server_as_client.py",
+      "arguments": [],
+      "timeout": 45
+    },
+    {
+      "path": "modules/16_composition/python/examples/02_policy_gateway.py",
+      "arguments": [],
+      "timeout": 45
+    },
+    {
+      "path": "modules/16_composition/python/examples/03_cache_isolation.py",
+      "arguments": [],
+      "timeout": 45
+    },
+    {
+      "path": "modules/16_composition/python/use_case/main.py",
+      "arguments": [],
+      "timeout": 45
+    },
+    {
+      "path": "modules/17_extensions/python/examples/01_negotiate.py",
+      "arguments": [],
+      "timeout": 45
+    },
+    {
+      "path": "modules/17_extensions/python/examples/02_report_task.py",
+      "arguments": [],
+      "timeout": 45
+    },
+    {
+      "path": "modules/17_extensions/python/examples/03_analytics_app.py",
+      "arguments": [],
+      "timeout": 45
+    },
+    {
+      "path": "modules/17_extensions/python/use_case/main.py",
+      "arguments": [],
+      "timeout": 45
     }
   ]
 }

@@ -16,14 +16,42 @@ from common.connections import SERVERS
 from scripts.tier1 import MODULES
 from scripts.tier2 import MODULES as TIER2_MODULES
 from scripts.tier3 import MODULES as TIER3_MODULES
+from scripts.tier4 import MODULES as TIER4_MODULES
 
-MODULES = MODULES + TIER2_MODULES + TIER3_MODULES
+MODULES = MODULES + TIER2_MODULES + TIER3_MODULES + TIER4_MODULES
 
 
 def configurations(index: int) -> dict:
     uv, node = shutil.which("uv"), shutil.which("node")
     if not uv or not node:
         raise RuntimeError(f"Install uv and Node, then reopen the terminal. {HELP}")
+    if index >= 14:
+        entry = {
+            "command": uv,
+            "args": [
+                "--directory",
+                str(ROOT),
+                "run",
+                "--frozen",
+                "--extra",
+                "http",
+                "--extra",
+                "auth",
+                "python",
+                str(ROOT / "modules" / MODULES[index] / "python/use_case/server.py"),
+            ],
+        }
+        return {
+            host: {
+                "servers" if host == "vscode" else "mcpServers": {
+                    "lumen-tier4": {
+                        **deepcopy(entry),
+                        **({"type": "stdio"} if host == "vscode" else {}),
+                    }
+                }
+            }
+            for host in ["claude-desktop", "claude-code", "vscode", "cursor"]
+        }
     aliases = {
         0: ["files"],
         1: ["raw"],
@@ -99,7 +127,7 @@ def configurations(index: int) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--module", type=int, choices=range(14), default=2)
+    parser.add_argument("--module", type=int, choices=range(18), default=2)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     output = args.output or ROOT / ".runtime/host_configs" / MODULES[args.module]

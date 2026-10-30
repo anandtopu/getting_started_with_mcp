@@ -1,4 +1,4 @@
-# Lumen security checklist — Tier 3
+# Lumen security checklist — Tiers 3–4
 
 Filled for the delivered course servers as of 2026-10-30. This is a fixture lab,
 not a production certification. Each row names the actual boundary and remaining
@@ -25,6 +25,20 @@ multiple examples that use the same factory share the row below.
 | Repaired lab / 12 | Server-bound synthetic principal | Own-employee permission, fixed backend, no outbound token forwarding, minimal audit | Injection/catalog/permission tests + isolated container; no production payroll data |
 | Traced notes / 13 | Same boundary as module 02 | JSON stderr exporter excludes raw arguments/results | Snapshot, trace and stdout checks; collector configuration is operator-owned |
 | Deliberately vulnerable fixture | Explicit isolated lab only | **Fails** object authorization by design | Regression reproduces leak, then verifies repair; excluded from ordinary host configs |
+
+## Tier 4 server additions
+
+| Family / module | Boundary | Enforcement and evidence |
+|---|---|---|
+| Mirror and task tools / 14–15 | Read-only synthetic database | Fixed tables, bounded pages/queries, no publishing; invalid-input tests |
+| Gateway / 16 | Fixed trusted upstreams; verified HTTP subject and resource audience | Read/write scopes checked at execution; catalog cache partitions by subject/scopes/policy; rate and principal limits; logs omit arguments/results; failure/context-isolation tests |
+| Tasks and App / 17 (also Gateway) | Local SQLite task owner; host-controlled App sandbox | Owner-bound random handles, TTL/quota, exact form response validation, cancellation; empty network/frame CSP and no HTML insertion; terminal and bridge tests |
+
+The stdio gateway assumes one trusted OS user. HTTP has separate authentication.
+Upstream clients use their own service identity; incoming auth context is cleared
+and bearer tokens are not forwarded. Local in-memory upstreams share one synthetic
+workspace, so this is not tenant-separated data storage. Apps metadata requests
+host enforcement; desktop sandbox behavior requires the manual host check.
 
 ## Host checklist
 

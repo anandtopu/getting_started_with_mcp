@@ -1,0 +1,107 @@
+[
+  {
+    "stem": "01_practice",
+    "task": "Namespace a safe tool name; reject separators that could impersonate an alias.",
+    "cases": [
+      [
+        [
+          "issues",
+          "read_issue"
+        ],
+        "issues__read_issue"
+      ],
+      [
+        [
+          "notes__issues",
+          "delete"
+        ],
+        null
+      ],
+      [
+        [
+          "notes",
+          "bad/name"
+        ],
+        null
+      ]
+    ]
+  },
+  {
+    "stem": "02_apply",
+    "task": "Require read permission, then require write permission for a changing tool.",
+    "cases": [
+      [
+        [
+          true,
+          [
+            "workspace:read"
+          ]
+        ],
+        true
+      ],
+      [
+        [
+          false,
+          [
+            "workspace:read"
+          ]
+        ],
+        false
+      ],
+      [
+        [
+          false,
+          [
+            "workspace:read",
+            "workspace:write"
+          ]
+        ],
+        true
+      ],
+      [
+        [
+          true,
+          []
+        ],
+        false
+      ]
+    ]
+  },
+  {
+    "stem": "03_stretch",
+    "task": "Partition catalog keys by principal, distinct scopes and policy revision.",
+    "cases": [
+      [
+        [
+          "alex",
+          [
+            "write",
+            "read",
+            "read"
+          ],
+          2
+        ],
+        [
+          "alex",
+          [
+            "read",
+            "write"
+          ],
+          2
+        ]
+      ],
+      [
+        [
+          "jo",
+          [],
+          3
+        ],
+        [
+          "jo",
+          [],
+          3
+        ]
+      ]
+    ]
+  }
+]
