@@ -6,6 +6,11 @@ The experimental `resource-indicators` feature binds tokens to the exact resourc
 The imported `lumen-issues` client declares `resource_url`; `lumen-chat` has the audience
 mapper and optional read/write scopes. Never reuse these fixture accounts in deployment.
 
+The default `basic` client scope explicitly maps the subject (`sub`) claim. Keycloak
+moved this claim into a mapper; omitting it produces tokens our verifier correctly
+rejects. Full-scope role access is disabled. The verifier still requires the subject,
+signature, issuer, audience and expiry rather than accepting an incomplete token.
+
 From the repository root:
 
 ```text

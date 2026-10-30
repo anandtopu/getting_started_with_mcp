@@ -14,6 +14,7 @@ from http.cookiejar import CookieJar, DefaultCookiePolicy
 from urllib.parse import urlsplit
 
 import httpx2 as httpx
+import jwt
 from mcp import Client
 from mcp.client.streamable_http import streamable_http_client
 
@@ -107,8 +108,24 @@ async def main():
             return callback_value
 
         verifier = JWTVerifier(ISSUER, RESOURCE, metadata["jwks_uri"])
+
+        class CheckedStorage(MemoryStorage):
+            async def set_tokens(self, tokens):
+                if await verifier.verify_token(tokens.access_token) is None:
+                    # Inspect presence only for diagnostics; unverified values grant nothing.
+                    claims = jwt.decode(tokens.access_token, options={"verify_signature": False})
+                    missing = sorted({"iss", "aud", "sub", "exp", "iat"} - claims.keys())
+                    audience = claims.get("aud", [])
+                    audience = [audience] if isinstance(audience, str) else audience
+                    raise RuntimeError(
+                        f"Keycloak token rejected: missing claims={missing}; "
+                        f"issuer matches={claims.get('iss') == ISSUER}; "
+                        f"audience matches={RESOURCE in audience}"
+                    )
+                await super().set_tokens(tokens)
+
         async with running_app(lambda _: make_app(verifier), port=8001):
-            storage = MemoryStorage(ISSUER)
+            storage = CheckedStorage(ISSUER)
             auth = provider(RESOURCE, ISSUER, storage, redirect, callback)
             async with httpx.AsyncClient(auth=auth, timeout=10) as http:
                 async with Client(

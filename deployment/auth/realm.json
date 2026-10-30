@@ -23,6 +23,25 @@
   ],
   "clientScopes": [
     {
+      "name": "basic",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "false",
+        "display.on.consent.screen": "false"
+      },
+      "protocolMappers": [
+        {
+          "name": "sub",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-sub-mapper",
+          "config": {
+            "access.token.claim": "true",
+            "introspection.token.claim": "true"
+          }
+        }
+      ]
+    },
+    {
       "name": "issues:read",
       "protocol": "openid-connect",
       "attributes": {
@@ -51,6 +70,7 @@
       "clientId": "lumen-chat",
       "enabled": true,
       "publicClient": true,
+      "fullScopeAllowed": false,
       "protocol": "openid-connect",
       "standardFlowEnabled": true,
       "directAccessGrantsEnabled": false,
@@ -63,7 +83,7 @@
       "attributes": {
         "pkce.code.challenge.method": "S256"
       },
-      "defaultClientScopes": [],
+      "defaultClientScopes": ["basic"],
       "optionalClientScopes": [
         "issues:read",
         "issues:write"
