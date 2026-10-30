@@ -60,8 +60,30 @@ No live provider calls were made. OpenAI approval requests are not auto-approved
 
 ### Phase 6 publication
 
-Cross-platform CI publication results will be recorded after the implementation
-commit passes. Modules 18–21, bonus tracks and capstones remain planned.
+Implementation commit `f5d1fc2e63e40a2a4e262a9fa7441bcf279540df` passed
+[all 18 required CI jobs](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41088110387):
+seven Python jobs (Linux/Windows 3.12–3.14 and macOS 3.12), four TypeScript jobs
+(Linux/Windows Node 24 and 26), four isolated Strands/ADK jobs (Linux/Windows),
+Inspector, Keycloak and container isolation. The optional external-link job was
+skipped.
+
+- Linux Python 3.13 reports **172 tests passed**, **107 delivered examples**
+  checked (29 servers, 78 scripts), and the Tier 4 checkpoint passed. All seven
+  Python jobs passed the same course/example/checkpoint workflow.
+- TypeScript reports **36 tests passed**, including the official App bridge.
+- Native Strands and ADK adapters passed from their isolated locks on both OSes.
+  Inspector passed every delivered server, including the four Tier 4 entry points.
+- Final local focused tests: **17 passed** after strict report-argument validation
+  and provider-schema checks were added. The full local diagnostic rerun passed
+  170 tests with one Windows symlink-permission skip before the final tool-error
+  regression; the final implementation's complete suite is established by CI.
+- The local Tier 4 checkpoint, refreshed actual captures, and isolated ADK/Strands
+  checks passed. Ruff, formatting and local course/link validation passed.
+- Desktop rendering and sandbox enforcement, paid model runs, and production
+  deployment remain the explicit manual/live boundaries documented above.
+
+This documentation-only publication records the tested implementation without
+changing it. Modules 18–21, bonus tracks and capstones remain planned.
 
 
 ## Phase 5 — Tier 3, October 30, 2026
