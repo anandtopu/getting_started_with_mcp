@@ -38,7 +38,10 @@ def build(language):
     OUT.mkdir(parents=True, exist_ok=True)
     commands = {
         "go": [["go", "test", "./..."], ["go", "build", "-o", command("go")[0], "."]],
-        "csharp": [[dotnet(), "build", "Notes.csproj", "--locked-mode", "-o", str(OUT / "csharp")]],
+        "csharp": [
+            [dotnet(), "restore", "Notes.csproj", "--locked-mode"],
+            [dotnet(), "build", "Notes.csproj", "--no-restore", "-o", str(OUT / "csharp")],
+        ],
         "rust": [["cargo", "build", "--locked"]],
         "java": [[shutil.which("mvn") or "mvn", "-q", "package"]],
     }
