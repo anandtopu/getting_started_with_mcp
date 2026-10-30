@@ -8,6 +8,9 @@ import json
 
 from common.config import ROOT
 from scripts.tier1 import MODULES
+from scripts.tier2 import MODULES as TIER2_MODULES
+
+MODULES = MODULES + TIER2_MODULES
 
 SELECTION = [
     ("03_reference_server", ["tools/call"]),
@@ -17,6 +20,10 @@ SELECTION = [
     ("python_main", ["completion/complete"]),
     ("02_pages_and_errors", ["resources/list"]),
     ("notes", ["tools/call"]),
+    ("python_main", ["tools/call", "resources/read"]),
+    ("python_main", ["tools/call"]),
+    ("python_main", ["tools/call"]),
+    ("python_http", ["subscriptions/listen", "tools/call"]),
 ]
 
 
@@ -33,6 +40,10 @@ def excerpt(index: int) -> str:
             request = next(m for m in requests if m.get("params", {}).get("cursor") == "middle")
         if index == 6:
             request = next(m for m in requests if m["params"].get("name") == "create_note")
+        if index == 9:
+            request = next(m for m in requests if m["params"].get("name") == "bulk_close")
+        if index == 10 and method == "tools/call":
+            request = next(m for m in requests if m["params"].get("name") == "route_region")
         selected.append(request)
         reply = next(
             (
@@ -50,6 +61,14 @@ def excerpt(index: int) -> str:
         if m.get("method", "").startswith("notifications/") and "cancelled" not in m["method"]
     ]
     selected.extend(notifications[:2])
+    if index == 9:
+        retry = next(
+            m
+            for m in messages
+            if m.get("method") == "tools/call" and m.get("params", {}).get("inputResponses")
+        )
+        selected.append(retry)
+        selected.append(next(m for m in messages if m.get("id") == retry["id"] and "result" in m))
     block = f"Source: [captured {filename}](wire/{filename}.jsonl). "
     block += "Each JSON block below is a complete message copied from that run.\n\n"
     block += "\n\n".join(

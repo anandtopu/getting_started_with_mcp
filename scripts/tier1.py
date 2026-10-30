@@ -31,7 +31,9 @@ MODULES = [
 ]
 
 
-def script_client(path: str, capture: Path | None = None) -> Client:
+def script_client(path: str, capture: Path | None = None, interactive: bool = False) -> Client:
+    from common.input_support import decline_unhandled_input
+
     command = sys.executable
     args = [str(ROOT / path)]
     if path.endswith(".ts"):
@@ -45,6 +47,7 @@ def script_client(path: str, capture: Path | None = None) -> Client:
         mode=SPEC_REVISION,
         raise_exceptions=False,
         read_timeout_seconds=10,
+        elicitation_callback=decline_unhandled_input if interactive else None,
     )
 
 

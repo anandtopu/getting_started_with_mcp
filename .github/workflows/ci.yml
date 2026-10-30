@@ -37,6 +37,7 @@ jobs:
       - run: uv run --frozen python scripts/check_course.py
       - run: uv run --frozen python scripts/run_all_examples.py
       - run: uv run --frozen python scripts/tier1.py
+      - run: uv run --frozen python scripts/tier2.py
   typescript:
     strategy:
       fail-fast: false
@@ -61,7 +62,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '26'
-      - run: uv sync --frozen
+      - run: uv sync --frozen --extra http
       - run: npm ci
       - run: uv run --frozen python scripts/inspector_smoke.py
       - run: npm run inspector -- --cli uv run python data/security/vulnerable_server.py --lab --method tools/list

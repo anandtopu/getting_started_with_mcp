@@ -2,7 +2,7 @@
 
 Model Context Protocol (MCP) gives applications a common way to discover and use tools, data and reusable prompts. This hands-on course is for people who know basic Python and want to build the connections themselves.
 
-**Delivery status: Phase 3 — Tier 1 complete.** Modules 00–06 are delivered; modules 07–21, bonus lessons and capstones remain planned. See [the learning path](LEARNING_PATH.md), [feature map](docs/FEATURE_MAP.md), and [verification notes](docs/VERIFICATION_NOTES.md). Tier 1 runs today; this is not yet the completed 22-module course.
+**Delivery status: Phase 3 â€” Tier 1 complete.** Modules 00â€“06 are delivered; modules 07â€“21, bonus lessons and capstones remain planned. See [the learning path](LEARNING_PATH.md), [feature map](docs/FEATURE_MAP.md), and [verification notes](docs/VERIFICATION_NOTES.md). Tiers 1–2 run today; this is not yet the completed 22-module course.
 
 ## Start Tier 1
 
@@ -27,6 +27,25 @@ two course servers and the restricted filesystem reference server. No model keys
 are needed. Run without `--demo` for interactive approval; provider configuration
 is explained in module 06.
 
+## Continue with Tier 2
+
+| Module | Lesson | Languages |
+|---|---|---|
+| 07 | [Real data: issues, analytics, APIs](modules/07_real_data/README.md) | Python |
+| 08 | [Context, lifetime, progress and cancellation](modules/08_server_utilities/README.md) | Python |
+| 09 | [User input, retries and current replacements](modules/09_elicitation_sampling_roots/README.md) | Python |
+| 10 | [Streamable HTTP](modules/10_streamable_http/README.md) | Python, TypeScript |
+
+```text
+uv sync --frozen --extra http --extra host
+uv run python -m common.chat_v2 --demo
+uv run python scripts/tier2.py
+```
+
+The [Tier 2 checkpoint](modules/10_streamable_http/CHECKPOINT.md) connects notes,
+wiki, issues and analytics, obtains confirmation, and shows report progress.
+Default runs use synthetic data and a fake model; no keys are needed.
+
 ## What you will build
 
 The Lumen workspace grows from notes and wiki servers into issues, analytics, calendar and a gateway. Lumen Chat starts as a terminal host and becomes a web application with model choice, approvals, Tasks and interactive Apps. Every example uses synthetic data for the fictional Lumen Labs company.
@@ -47,7 +66,7 @@ Install [Python 3.12](https://www.python.org/downloads/), [uv](https://docs.astr
 ```text
 git clone https://github.com/anandtopu/getting_started_with_mcp.git
 cd getting_started_with_mcp
-uv sync
+uv sync --extra http
 npm ci
 uv run python scripts/check_env.py
 npm run inspector -- uv run python scripts/foundation_server.py
@@ -88,11 +107,11 @@ Only use course synthetic data for published captures. Redaction covers sensitiv
 
 | Tier | Main Python route |
 |---|---:|
-| Foundations, 00–06 | 10 hours |
-| Real-world servers, 07–10 | 10 hours |
-| Security and quality, 11–13 | 12 hours |
-| Agent ecosystem, 14–17 | 12 hours |
-| Shipping, 18–21 | 10 hours |
+| Foundations, 00â€“06 | 10 hours |
+| Real-world servers, 07â€“10 | 10 hours |
+| Security and quality, 11â€“13 | 12 hours |
+| Agent ecosystem, 14â€“17 | 12 hours |
+| Shipping, 18â€“21 | 10 hours |
 | Total including checkpoints | 54 hours |
 
 ## Dependencies and models

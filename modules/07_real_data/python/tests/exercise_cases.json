@@ -1,0 +1,84 @@
+[
+  {
+    "stem": "01_page_limit",
+    "task": "Clamp requested pages to 1–50 rows.",
+    "cases": [
+      [
+        [
+          0
+        ],
+        1
+      ],
+      [
+        [
+          10
+        ],
+        10
+      ],
+      [
+        [
+          999
+        ],
+        50
+      ]
+    ]
+  },
+  {
+    "stem": "02_query_parameters",
+    "task": "Return SQL and a separate parameter list; never interpolate the title.",
+    "cases": [
+      [
+        [
+          "Release"
+        ],
+        [
+          "SELECT id FROM issues WHERE title=?",
+          [
+            "Release"
+          ]
+        ]
+      ],
+      [
+        [
+          "x' OR 1=1"
+        ],
+        [
+          "SELECT id FROM issues WHERE title=?",
+          [
+            "x' OR 1=1"
+          ]
+        ]
+      ]
+    ]
+  },
+  {
+    "stem": "03_page_cursor",
+    "task": "Return the next offset only when the fetched extra row proves more data exists.",
+    "cases": [
+      [
+        [
+          0,
+          10,
+          11
+        ],
+        10
+      ],
+      [
+        [
+          10,
+          10,
+          10
+        ],
+        null
+      ],
+      [
+        [
+          20,
+          10,
+          0
+        ],
+        null
+      ]
+    ]
+  }
+]

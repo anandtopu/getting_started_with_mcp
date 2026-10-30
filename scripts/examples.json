@@ -1,5 +1,5 @@
 {
-  "phase": 3,
+  "phase": 4,
   "servers": [
     {
       "path": "scripts/foundation_server.py",
@@ -112,6 +112,80 @@
       "kind": "paged",
       "lists": [
         "resources/list"
+      ]
+    },
+    {
+      "path": "modules/07_real_data/python/examples/01_issue_crud.py",
+      "kind": "tier2",
+      "module": 7,
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/07_real_data/python/examples/02_readonly_analytics.py",
+      "kind": "tier2",
+      "module": 7,
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/07_real_data/python/examples/03_rest_wrapper.py",
+      "kind": "tier2",
+      "module": 7,
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/07_real_data/python/use_case/server.py",
+      "kind": "tier2",
+      "module": 7,
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/08_server_utilities/python/examples/01_context_lifespan.py",
+      "kind": "tier2",
+      "module": 8,
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/08_server_utilities/python/use_case/server.py",
+      "kind": "tier2",
+      "module": 8,
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/09_elicitation_sampling_roots/python/use_case/server.py",
+      "kind": "tier2",
+      "module": 9,
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/10_streamable_http/python/examples/01_http_server.py",
+      "kind": "http",
+      "module": 10,
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/10_streamable_http/typescript/examples/01_http_server.ts",
+      "kind": "http",
+      "module": 10,
+      "lists": [
+        "tools/list",
+        "resources/list",
+        "prompts/list"
       ]
     }
   ],
@@ -256,6 +330,68 @@
     },
     {
       "path": "modules/06_building_a_host/python/use_case/main.py",
+      "arguments": [
+        "--demo"
+      ]
+    },
+    {
+      "path": "modules/07_real_data/python/use_case/main.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/08_server_utilities/python/examples/02_progress_cancel.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/08_server_utilities/python/examples/03_pages_completion.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/08_server_utilities/python/use_case/main.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/09_elicitation_sampling_roots/python/examples/01_form_retry.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/09_elicitation_sampling_roots/python/examples/02_url_retry.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/09_elicitation_sampling_roots/python/examples/03_files_and_model.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/09_elicitation_sampling_roots/python/use_case/main.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/10_streamable_http/python/examples/02_headers_and_origin.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/10_streamable_http/python/examples/03_stream_recovery.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/10_streamable_http/python/use_case/main.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/10_streamable_http/typescript/examples/02_headers_and_origin.ts",
+      "arguments": []
+    },
+    {
+      "path": "modules/10_streamable_http/typescript/examples/03_stream_recovery.ts",
+      "arguments": []
+    },
+    {
+      "path": "modules/10_streamable_http/typescript/use_case/main.ts",
+      "arguments": []
+    },
+    {
+      "path": "common/chat_v2.py",
       "arguments": [
         "--demo"
       ]

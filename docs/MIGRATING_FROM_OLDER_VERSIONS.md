@@ -76,11 +76,296 @@ do not assume missed events can be replayed.
 
 HTTP+SSE and Dynamic Client Registration are historical compatibility concerns;
 the planned current track uses Streamable HTTP and Client ID Metadata Documents.
-Roots, sampling and protocol logging are Deprecated topics. The course will teach
+Roots, sampling and protocol logging are Deprecated topics. Modules 08–09 teach
 configured path boundaries, direct model providers, and stderr/OpenTelemetry
-replacements before analyzing historical exchanges. No Tier 1 application depends
+replacements before analyzing historical exchanges. No current-track application depends
 on those deprecated features.
 
 Sources: [current specification](https://modelcontextprotocol.io/specification/2026-07-28),
 [official Python SDK](https://py.sdk.modelcontextprotocol.io/),
 [official TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk).
+
+## Phase 4 historical traffic lab — Deprecated, analysis only
+
+The following isolated fixture deliberately uses the older protocol to explain
+existing captures. It is not a current-track server. The sampling callback is a
+constant fake; no provider is contacted. A root is advisory context, not a filesystem
+sandbox. The current alternatives are [configured paths and direct generation](../common/files_model.py).
+Old HTTP `Mcp-Session-Id` and `Last-Event-ID` behavior must not be copied into the
+current transport: reconnect by reissuing a POST subscription and refetching state.
+
+Run `uv run python scripts/capture_migration.py` to extract these two code blocks
+into ignored scratch files, execute them, and refresh the actual messages below.
+Exact deprecated API calls stay in this guide; the extraction script is generic.
+
+<!-- migration:server -->
+```python
+from mcp.server import MCPServer
+from mcp.server.mcpserver import Context
+from mcp_types import SamplingMessage, TextContent
+
+server = MCPServer("Historical Lumen fixture")
+
+
+@server.tool()
+async def analyze_history(ctx: Context) -> str:
+    roots = await ctx.request_context.session.list_roots()
+    reply = await ctx.request_context.session.create_message(
+        messages=[
+            SamplingMessage(
+                role="user",
+                content=TextContent(type="text", text="Summarize the synthetic fixture."),
+            )
+        ],
+        max_tokens=40,
+    )
+    return f"Root count: {len(roots.roots)}; fake response: {reply.content.text}"
+
+
+if __name__ == "__main__":
+    server.run()
+```
+
+<!-- migration:client -->
+```python
+import asyncio
+import sys
+from mcp import Client, StdioServerParameters
+from mcp_types import CreateMessageResult, ListRootsResult, Root, TextContent
+from common.config import ROOT
+
+
+async def roots(context):
+    return ListRootsResult(roots=[Root(uri=(ROOT / "data/files").as_uri(), name="Fixture")])
+
+
+async def sample(context, params):
+    return CreateMessageResult(
+        role="assistant",
+        content=TextContent(type="text", text="Historical fake summary"),
+        model="fixture",
+        stop_reason="endTurn",
+    )
+
+
+async def main():
+    params = StdioServerParameters(
+        command=sys.executable,
+        cwd=str(ROOT),
+        args=[
+            str(ROOT / "scripts/wiretap.py"),
+            "--capture",
+            str(ROOT / ".runtime/migration.jsonl"),
+            "--",
+            sys.executable,
+            str(ROOT / ".runtime/migration_server.py"),
+        ],
+    )
+    async with Client(
+        params, mode="legacy", list_roots_callback=roots, sampling_callback=sample
+    ) as client:
+        result = await client.call_tool("analyze_history", {})
+        assert not result.is_error
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+### Captured historical messages
+
+<!-- migration:wire:start -->
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2025-11-25",
+    "capabilities": {
+      "sampling": {},
+      "roots": {
+        "listChanged": true
+      }
+    },
+    "clientInfo": {
+      "name": "mcp",
+      "version": "0.1.0"
+    }
+  }
+}
+```
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "capabilities": {
+      "prompts": {
+        "listChanged": false
+      },
+      "resources": {
+        "listChanged": false,
+        "subscribe": false
+      },
+      "tools": {
+        "listChanged": false
+      }
+    },
+    "protocolVersion": "2025-11-25",
+    "serverInfo": {
+      "name": "Historical Lumen fixture",
+      "version": ""
+    }
+  }
+}
+```
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "notifications/initialized"
+}
+```
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "method": "tools/call",
+  "params": {
+    "name": "analyze_history",
+    "arguments": {}
+  }
+}
+```
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "roots/list"
+}
+```
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "roots": [
+      {
+        "uri": "file:///D:/Learning_Projects/getting_started_with_mcp_prompt/data/files",
+        "name": "Fixture"
+      }
+    ]
+  }
+}
+```
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "method": "sampling/createMessage",
+  "params": {
+    "messages": [
+      {
+        "role": "user",
+        "content": {
+          "type": "text",
+          "text": "Summarize the synthetic fixture."
+        }
+      }
+    ],
+    "maxTokens": "[REDACTED]"
+  }
+}
+```
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "result": {
+    "role": "assistant",
+    "content": {
+      "type": "text",
+      "text": "Historical fake summary"
+    },
+    "model": "fixture",
+    "stopReason": "endTurn"
+  }
+}
+```
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "result": {
+    "content": [
+      {
+        "text": "Root count: 1; fake response: Historical fake summary",
+        "type": "text"
+      }
+    ],
+    "isError": false,
+    "structuredContent": {
+      "result": "Root count: 1; fake response: Historical fake summary"
+    }
+  }
+}
+```
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "method": "tools/list"
+}
+```
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "result": {
+    "tools": [
+      {
+        "description": "",
+        "inputSchema": {
+          "properties": {},
+          "type": "object",
+          "title": "analyze_historyArguments"
+        },
+        "name": "analyze_history",
+        "outputSchema": {
+          "properties": {
+            "result": {
+              "title": "Result",
+              "type": "string"
+            }
+          },
+          "required": [
+            "result"
+          ],
+          "type": "object",
+          "title": "analyze_historyOutput"
+        }
+      }
+    ]
+  }
+}
+```
+
+<!-- migration:wire:end -->
+
+Read the request IDs in both directions. In this old flow the server initiates
+separate root and sampling requests while a tool is running. The current input
+flow instead returns `input_required` and the host retries with an answer.
+Neither old roots nor a model response establishes permission to read a file or
+perform a write. Module 09 obtains human consent and enforces its own configured
+path boundary.

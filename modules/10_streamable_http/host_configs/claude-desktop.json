@@ -1,0 +1,30 @@
+{
+  "mcpServers": {
+    "wiki": {
+      "command": "C:\\Users\\anand\\.local\\bin\\uv.EXE",
+      "args": [
+        "--directory",
+        "D:\\Learning_Projects\\getting_started_with_mcp_prompt",
+        "run",
+        "--frozen",
+        "--extra",
+        "http",
+        "python",
+        "D:\\Learning_Projects\\getting_started_with_mcp_prompt\\modules\\03_resources\\python\\use_case\\main.py"
+      ]
+    },
+    "issues": {
+      "command": "C:\\Users\\anand\\.local\\bin\\uv.EXE",
+      "args": [
+        "--directory",
+        "D:\\Learning_Projects\\getting_started_with_mcp_prompt",
+        "run",
+        "--frozen",
+        "--extra",
+        "http",
+        "python",
+        "D:\\Learning_Projects\\getting_started_with_mcp_prompt\\modules\\09_elicitation_sampling_roots\\python\\use_case\\server.py"
+      ]
+    }
+  }
+}

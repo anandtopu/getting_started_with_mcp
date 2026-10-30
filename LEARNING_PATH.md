@@ -1,6 +1,6 @@
 # Learning path
 
-Delivery status: Phase 3. Tier 1 (modules 00–06) and its checkpoint are implemented; later tiers remain planned. See [the build plan](docs/PHASE_1_PLAN.md), [coverage contract](docs/FEATURE_MAP.md), and [verified dependency candidates](docs/VERIFICATION_NOTES.md).
+Delivery status: Phase 3. Tier 1 (modules 00â€“06) and its checkpoint are implemented; later tiers remain planned. See [the build plan](docs/PHASE_1_PLAN.md), [coverage contract](docs/FEATURE_MAP.md), and [verified dependency candidates](docs/VERIFICATION_NOTES.md).
 
 You need basic Python, terminal navigation, and basic git. You will learn the other prerequisites as they become useful. MCP means Model Context Protocol: a shared way for applications to discover and use tools, data, and reusable prompts. Lumen Labs supplies the synthetic workplace; your growing workspace supplies its servers, and Lumen Chat is the application that uses them.
 
@@ -21,7 +21,7 @@ flowchart TD
   C5 --> P4[Capstones: Lumen Ops and Chat Pro]
 ```
 
-## Tier 1 — Foundations: 10 hours
+## Tier 1 â€” Foundations: 10 hours
 
 | Module | Minutes | What you will demonstrate | Workspace / Chat |
 |---|---:|---|---|
@@ -40,21 +40,21 @@ You are ready to move on when you can explain a complete tool call from user req
 
 Run the [Tier 1 checkpoint and self-check](modules/06_building_a_host/CHECKPOINT.md) before continuing.
 
-## Tier 2 — Real-world servers: 10 hours
+## Tier 2 â€” Real-world servers: 10 hours
 
 | Module | Minutes | What you will demonstrate | Workspace / Chat |
 |---|---:|---|---|
-| 07 Real data | 150 | Issue CRUD, constrained analytics SQL, REST wrapping, limits and links | Workspace 3 |
-| 08 Utilities | 105 | Lifespans, progress, cancellation, pagination, completion and deadlines | Workspace 3 |
-| 09 Elicitation, sampling and roots | 135 | Request/retry confirmations; deprecated feature interpretation and current replacements | Chat 2 |
-| 10 Streamable HTTP [TS] | 150 | Serve wiki/issues remotely on loopback, validate Origin and stream safely | Workspace 4 |
+| [07 Real data](modules/07_real_data/README.md) | 150 | Issue CRUD, constrained analytics SQL, REST wrapping, limits and links | Workspace 3 |
+| [08 Utilities](modules/08_server_utilities/README.md) | 105 | Lifespans, progress, cancellation, pagination, completion and deadlines | Workspace 3 |
+| [09 Elicitation, sampling and roots](modules/09_elicitation_sampling_roots/README.md) | 135 | Request/retry confirmations; deprecated feature interpretation and current replacements | Chat 2 |
+| [10 Streamable HTTP [TS]](modules/10_streamable_http/README.md) | 150 | Serve wiki/issues remotely on loopback, validate Origin and stream safely | Workspace 4 |
 | Checkpoint | 60 | Operate notes/wiki/issues/analytics through Chat with approvals and progress | Usable workspace |
 
 Teach SQLite transactions and parameter binding before CRUD; explain HTTP requests, response bodies, headers, and event streams before transport code. Explain why a retry may duplicate a write. Treat the retired handshake only in the linked migration guide.
 
-You are ready to move on when you can reject a path escape and an unsafe SQL operation, cancel a report, deny a confirmation, and demonstrate an HTTP Origin rejection. A failed connection must not trigger an unapproved duplicate mutation. After this tier, attempt Personal Knowledge Server.
+You are ready to move on when you can reject a path escape and an unsafe SQL operation, cancel a report, deny a confirmation, and demonstrate an HTTP Origin rejection. A failed connection must not trigger an unapproved duplicate mutation. Run the [Tier 2 checkpoint](modules/10_streamable_http/CHECKPOINT.md). The Personal Knowledge Server capstone remains planned for Phase 8.
 
-## Tier 3 — Security, authorization and quality: 12 hours
+## Tier 3 â€” Security, authorization and quality: 12 hours
 
 | Module | Minutes | What you will demonstrate | Workspace / Chat |
 |---|---:|---|---|
@@ -67,7 +67,7 @@ Teach authorization versus authentication, redirects, bearer tokens and scopes b
 
 You are ready to move on when wrong-audience and insufficient-scope tokens fail, secrets stay out of logs, a poisoned result is treated as untrusted data, and CI catches stdout contamination. Explain what an evaluation measures and what it cannot prove. After this tier, attempt Security Audit Lab.
 
-## Tier 4 — Agent ecosystem: 12 hours
+## Tier 4 â€” Agent ecosystem: 12 hours
 
 | Module | Minutes | What you will demonstrate | Workspace / Chat |
 |---|---:|---|---|
@@ -81,7 +81,7 @@ Separate MCP from agent orchestration and provider-specific tool schemas. Teach 
 
 You are ready to move on when identical tool names cannot collide across servers, one user's cached catalog cannot expose another user's tools, and unsupported extensions degrade gracefully. Explain task handles, cancellation and mid-flight input. After this tier, attempt Lumen Gateway.
 
-## Tier 5 — Shipping: 10 hours
+## Tier 5 â€” Shipping: 10 hours
 
 | Module | Minutes | What you will demonstrate | Workspace / Chat |
 |---|---:|---|---|
@@ -101,15 +101,15 @@ The main route totals 54 hours including five checkpoints. Add time for setup is
 
 | Intensive week | Work | Hours |
 |---|---|---:|
-| 1 | Tier 1 (10h), then 07–09 and first 90 minutes of 10 (8h) | 18 |
+| 1 | Tier 1 (10h), then 07â€“09 and first 90 minutes of 10 (8h) | 18 |
 | 2 | Finish Tier 2 (2h), Tier 3 (12h), module 14 and first 105 minutes of 15 (4h) | 18 |
 | 3 | Finish Tier 4 (8h), Tier 5 (10h) | 18 |
 
 | Part-time week | Work | Hours |
 |---|---|---:|
-| 1 | Modules 00–06 | 9 |
-| 2 | Tier 1 checkpoint; 07–09 and first 90 minutes of 10 | 9 |
-| 3 | Finish Tier 2; modules 11–12 | 9 |
+| 1 | Modules 00â€“06 | 9 |
+| 2 | Tier 1 checkpoint; 07â€“09 and first 90 minutes of 10 | 9 |
+| 3 | Finish Tier 2; modules 11â€“12 | 9 |
 | 4 | Module 13 and Tier 3 checkpoint; module 14 and first 105 minutes of 15 | 9 |
 | 5 | Finish Tier 4; first hour of 18 | 9 |
 | 6 | Finish Tier 5 | 9 |

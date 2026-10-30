@@ -18,7 +18,16 @@ async def test_actual_server_stdout(tmp_path):
     await smoke(tmp_path)
     for path in tmp_path.glob("*.jsonl"):
         records = [json.loads(line) for line in path.read_text().splitlines()]
-        assert all(record["message"].get("jsonrpc") == "2.0" for record in records[1:]), path
+        if records[0]["transport"] == "streamable-http":
+            assert any(record.get("status") == 200 for record in records)
+            messages = [
+                record["message"]
+                for record in records[1:]
+                if record["message"] and "http_text" not in record["message"]
+            ]
+        else:
+            messages = [record["message"] for record in records[1:]]
+        assert all(message.get("jsonrpc") == "2.0" for message in messages), path
 
 
 @pytest.mark.anyio

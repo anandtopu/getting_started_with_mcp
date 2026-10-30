@@ -210,7 +210,7 @@ def test_provider_formats_preserve_schema(provider):
 def test_module_wire_captures_have_real_envelopes_and_notifications():
     messages = []
     for path in (ROOT / "modules").glob("*/wire/*.jsonl"):
-        rows = [json.loads(line) for line in path.read_text().splitlines()]
+        rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
         assert rows[0]["capture_version"] == 1
         messages.extend(row["message"] for row in rows[1:] if isinstance(row["message"], dict))
     methods = {m.get("method") for m in messages}
@@ -242,7 +242,7 @@ def test_readme_wire_excerpts_match_capture_records():
         captured = [
             json.loads(line)["message"]
             for path in (readme.parent / "wire").glob("*.jsonl")
-            for line in path.read_text().splitlines()[1:]
+            for line in path.read_text(encoding="utf-8").splitlines()[1:]
         ]
         for block in re.findall(r"```json\n(.*?)\n```", section, re.S):
             assert json.loads(block) in captured, readme

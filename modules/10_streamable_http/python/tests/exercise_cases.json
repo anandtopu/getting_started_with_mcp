@@ -1,0 +1,96 @@
+[
+  {
+    "stem": "01_origin",
+    "task": "Accept absent Origin or exactly the configured browser origin.",
+    "cases": [
+      [
+        [
+          null
+        ],
+        true
+      ],
+      [
+        [
+          "http://localhost:3000"
+        ],
+        true
+      ],
+      [
+        [
+          "http://localhost:3000.evil.example"
+        ],
+        false
+      ],
+      [
+        [
+          "null"
+        ],
+        false
+      ]
+    ]
+  },
+  {
+    "stem": "02_header_encoding",
+    "task": "Encode Unicode, edge whitespace, controls, and sentinel-shaped text as UTF-8 base64.",
+    "cases": [
+      [
+        [
+          "east"
+        ],
+        "east"
+      ],
+      [
+        [
+          "Hello, 世界"
+        ],
+        "=?base64?SGVsbG8sIOS4lueVjA==?="
+      ],
+      [
+        [
+          " padded "
+        ],
+        "=?base64?IHBhZGRlZCA=?="
+      ],
+      [
+        [
+          "=?base64?literal?="
+        ],
+        "=?base64?PT9iYXNlNjQ/bGl0ZXJhbD89?="
+      ]
+    ]
+  },
+  {
+    "stem": "03_retry_policy",
+    "task": "Retry a read, or a write with a server-enforced operation key; a lost response proves no outcome.",
+    "cases": [
+      [
+        [
+          "read",
+          false
+        ],
+        true
+      ],
+      [
+        [
+          "write",
+          true
+        ],
+        true
+      ],
+      [
+        [
+          "write",
+          false
+        ],
+        false
+      ],
+      [
+        [
+          "unknown",
+          true
+        ],
+        false
+      ]
+    ]
+  }
+]

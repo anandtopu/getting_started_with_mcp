@@ -56,6 +56,15 @@ server deliberately supports only the current revision.
 
 ## Official sources
 
+Module 10 includes HTTP URL configurations for Claude Code, VS Code and Cursor.
+Start the loopback server first, then generate them with
+`uv run python scripts/host_configs.py --module 10`. Claude Desktop retains its
+stdio reference entries; no desktop remote account or UI behavior is assumed.
+The course's current-only endpoint requires a host that supports MCP 2026-07-28.
+The supplied SDK clients and Inspector's modern mode are the verified baseline.
+Form/URL input and progress are exercised by Lumen Chat v2. Configuration syntax
+was checked against the sources below on October 30, 2026; GUI use was not tested.
+
 - [Claude Desktop local server setup](https://modelcontextprotocol.io/docs/2026-07-28/develop/connect-local-servers)
 - [Claude Code MCP configuration](https://code.claude.com/docs/en/mcp)
 - [VS Code MCP servers](https://code.visualstudio.com/docs/agent-customization/mcp-servers)

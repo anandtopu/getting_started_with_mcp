@@ -21,7 +21,17 @@ from scripts.tier1 import exercise, script_client
 async def check_lesson_server(entry: dict, capture_dir: Path | None) -> None:
     path = entry["path"]
     capture = capture_dir / (path.replace("/", "_") + ".jsonl") if capture_dir else None
-    async with asyncio.timeout(30), script_client(path, capture) as client:
+    if entry["kind"] == "http":
+        from scripts.http_lab import running_server
+        from scripts.tier2 import exercise_http
+
+        async with running_server(path) as url:
+            await exercise_http(url, capture)
+        return
+    async with (
+        asyncio.timeout(30),
+        script_client(path, capture, entry.get("module") == 9) as client,
+    ):
         if entry["kind"] == "raw":
             assert (await client.list_tools()).tools[0].name == "directory_count"
             assert not (await client.call_tool("directory_count", {})).is_error
@@ -29,6 +39,10 @@ async def check_lesson_server(entry: dict, capture_dir: Path | None) -> None:
             from common.pagination import all_resources
 
             assert len(await all_resources(client)) == 2
+        elif entry["kind"] == "tier2":
+            from scripts.tier2 import exercise as exercise_tier2
+
+            await exercise_tier2(client, entry["module"])
         else:
             await exercise(client, entry["module"])
 

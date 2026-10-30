@@ -70,8 +70,7 @@ class Host:
         if "confirmed" in tool.input_schema.get("properties", {}):
             arguments["confirmed"] = True
         try:
-            async with asyncio.timeout(15):
-                result = await client.call_tool(tool.name, arguments)
+            result = await self.call_tool(client, tool.name, arguments)
             text = json.dumps(result.model_dump(mode="json", by_alias=True), ensure_ascii=False)
             if len(text) > 16000:
                 text = json.dumps({"error": "Result exceeds 16000 characters; request less data."})
@@ -79,6 +78,10 @@ class Host:
             return ToolReply(call, text, bool(result.is_error))
         except Exception:
             return ToolReply(call, "Tool request failed; check the server and arguments.", True)
+
+    async def call_tool(self, client, name: str, arguments: dict):
+        async with asyncio.timeout(15):
+            return await client.call_tool(name, arguments)
 
     async def run(self, model) -> str:
         await self.discover()

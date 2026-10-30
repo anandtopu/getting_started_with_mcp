@@ -8,9 +8,13 @@ from mcp import Client, StdioServerParameters
 from mcp_types import DiscoverResult
 
 from common.config import HELP, ROOT
+from common.input_support import decline_unhandled_input
 from common.protocol import SPEC_REVISION
 
 SERVERS = {
+    "issues": "09_elicitation_sampling_roots/python/use_case/server.py",
+    "analytics": "07_real_data/python/examples/02_readonly_analytics.py",
+    "reports": "08_server_utilities/python/use_case/server.py",
     "notes": "02_first_server_tools/python/use_case/main.py",
     "wiki": "03_resources/python/use_case/main.py",
     "prompts": "04_prompts/python/use_case/main.py",
@@ -43,4 +47,5 @@ def connection(alias: str, capture: Path | None = None) -> Client:
         mode=SPEC_REVISION,
         read_timeout_seconds=10,
         raise_exceptions=False,
+        elicitation_callback=decline_unhandled_input if alias == "issues" else None,
     )

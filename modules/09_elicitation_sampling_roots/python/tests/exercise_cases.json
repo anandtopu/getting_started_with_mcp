@@ -1,0 +1,111 @@
+[
+  {
+    "stem": "01_form_decision",
+    "task": "Approve only accept plus a real boolean true; reject strings.",
+    "cases": [
+      [
+        [
+          "accept",
+          true
+        ],
+        true
+      ],
+      [
+        [
+          "decline",
+          true
+        ],
+        false
+      ],
+      [
+        [
+          "accept",
+          "true"
+        ],
+        false
+      ],
+      [
+        [
+          "cancel",
+          false
+        ],
+        false
+      ]
+    ]
+  },
+  {
+    "stem": "02_url_completion",
+    "task": "A URL accept must also have a completed out-of-band grant.",
+    "cases": [
+      [
+        [
+          "accept",
+          true
+        ],
+        true
+      ],
+      [
+        [
+          "accept",
+          false
+        ],
+        false
+      ],
+      [
+        [
+          "decline",
+          true
+        ],
+        false
+      ]
+    ]
+  },
+  {
+    "stem": "03_retry_binding",
+    "task": "Reject changed issue lists and expired continuations; assume one-use storage is separate.",
+    "cases": [
+      [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          9,
+          10
+        ],
+        true
+      ],
+      [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            2
+          ],
+          9,
+          10
+        ],
+        false
+      ],
+      [
+        [
+          [
+            1
+          ],
+          [
+            1
+          ],
+          10,
+          10
+        ],
+        false
+      ]
+    ]
+  }
+]

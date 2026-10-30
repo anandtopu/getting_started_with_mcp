@@ -13,6 +13,9 @@ from pathlib import Path
 from common.config import HELP, ROOT
 from common.connections import SERVERS
 from scripts.tier1 import MODULES
+from scripts.tier2 import MODULES as TIER2_MODULES
+
+MODULES = MODULES + TIER2_MODULES
 
 
 def configurations(index: int) -> dict:
@@ -27,6 +30,10 @@ def configurations(index: int) -> dict:
         4: ["prompts"],
         5: ["notes", "wiki", "prompts"],
         6: ["notes", "wiki", "files"],
+        7: ["issues", "analytics"],
+        8: ["reports"],
+        9: ["issues"],
+        10: ["wiki", "issues"],
     }[index]
     servers = {}
     for alias in aliases:
@@ -48,11 +55,12 @@ def configurations(index: int) -> dict:
                     str(ROOT),
                     "run",
                     "--frozen",
+                    *(["--extra", "http"] if index >= 7 else []),
                     "python",
                     str(ROOT / "modules" / SERVERS[alias]),
                 ],
             }
-    return {
+    configs = {
         host: {
             "servers" if host == "vscode" else "mcpServers": {
                 name: {**entry, **({"type": "stdio"} if host == "vscode" else {})}
@@ -61,11 +69,22 @@ def configurations(index: int) -> dict:
         }
         for host in ["claude-desktop", "claude-code", "vscode", "cursor"]
     }
+    if index == 10:
+        for host in ["claude-code", "vscode", "cursor"]:
+            configs[host] = {
+                "servers" if host == "vscode" else "mcpServers": {
+                    "lumen-remote": {
+                        "url": "http://127.0.0.1:8000/mcp",
+                        **({"type": "http"} if host != "cursor" else {}),
+                    }
+                }
+            }
+    return configs
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--module", type=int, choices=range(7), default=2)
+    parser.add_argument("--module", type=int, choices=range(11), default=2)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     output = args.output or ROOT / ".runtime/host_configs" / MODULES[args.module]

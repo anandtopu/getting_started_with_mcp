@@ -1,0 +1,92 @@
+[
+  {
+    "stem": "01_progress",
+    "task": "Convert completed work to bounded integer percentage, including a zero total.",
+    "cases": [
+      [
+        [
+          1,
+          4
+        ],
+        25
+      ],
+      [
+        [
+          9,
+          4
+        ],
+        100
+      ],
+      [
+        [
+          0,
+          0
+        ],
+        0
+      ]
+    ]
+  },
+  {
+    "stem": "02_empty_pages",
+    "task": "Flatten resource pages, preserving values after an empty page.",
+    "cases": [
+      [
+        [
+          [
+            [
+              "a"
+            ],
+            [],
+            [
+              "b"
+            ]
+          ]
+        ],
+        [
+          "a",
+          "b"
+        ]
+      ],
+      [
+        [
+          [
+            [],
+            [
+              "c"
+            ]
+          ]
+        ],
+        [
+          "c"
+        ]
+      ]
+    ]
+  },
+  {
+    "stem": "03_deadlines",
+    "task": "Stop at the deadline; progress never extends the absolute budget.",
+    "cases": [
+      [
+        [
+          1.0,
+          2.0
+        ],
+        true
+      ],
+      [
+        [
+          2.0,
+          2.0
+        ],
+        false
+      ],
+      [
+        [
+          3.0,
+          2.0
+        ],
+        false
+      ]
+    ]
+  }
+]

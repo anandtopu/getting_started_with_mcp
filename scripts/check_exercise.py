@@ -10,11 +10,16 @@ import runpy
 
 from common.config import ROOT
 from scripts.tier1 import MODULES
+from scripts.tier2 import MODULES as TIER2_MODULES
+
+MODULES = MODULES + TIER2_MODULES
 
 
 def check(module: int, exercise: int, solution: bool = False) -> None:
     folder = ROOT / "modules" / MODULES[module] / "python"
-    contract = json.loads((folder / "tests/exercise_cases.json").read_text())[exercise - 1]
+    contract = json.loads((folder / "tests/exercise_cases.json").read_text(encoding="utf-8"))[
+        exercise - 1
+    ]
     target = "solutions" if solution else "exercises"
     solve = runpy.run_path(str(folder / target / (contract["stem"] + ".py")))["solve"]
     for arguments, expected in contract["cases"]:
@@ -24,7 +29,7 @@ def check(module: int, exercise: int, solution: bool = False) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--module", type=int, choices=range(7), required=True)
+    parser.add_argument("--module", type=int, choices=range(11), required=True)
     parser.add_argument("--exercise", type=int, choices=range(1, 4), required=True)
     parser.add_argument("--solution", action="store_true")
     args = parser.parse_args()
