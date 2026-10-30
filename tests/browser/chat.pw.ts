@@ -1,5 +1,23 @@
 import { test, expect } from '@playwright/test';
 
+test('ordinary tool elicitation requires a separate human answer', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('#status')).toHaveText('Workspace ready', { timeout: 30000 });
+  await page.getByLabel('Message', { exact: true }).fill('Close the synthetic issues');
+  await page.getByRole('button', { name: /Send message/ }).click();
+  await expect(page.locator('#decision')).toContainText('issues__bulk_close');
+  await page.screenshot({ path: '.runtime/phase7/chat-approval.png', fullPage: true });
+  await page.getByRole('button', { name: 'Approve once' }).click();
+  await expect(page.locator('#decision')).toContainText('Close these synthetic issues');
+  await page.screenshot({ path: '.runtime/phase7/chat-input.png', fullPage: true });
+  await page.getByLabel('Approve', { exact: true }).check();
+  await page.getByRole('button', { name: 'Submit input' }).click();
+  await expect(page.locator('#status')).toHaveText('complete');
+  const state = await page.evaluate(async () => (await fetch('/api/state')).json());
+  const evidence = state.events.find((event: { type: string }) => event.type === 'tool_result');
+  expect(evidence.result.structuredContent.closed).toEqual([1, 2]);
+});
+
 test('review, deny, task input/cancel, App refresh and browser sandbox', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('#status')).toHaveText('Workspace ready', {timeout:30000});

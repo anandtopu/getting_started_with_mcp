@@ -191,7 +191,11 @@ If you prefer pip, create an environment with `python -m venv .venv`. In PowerSh
 
 ## Checks and data
 
+The complete course checks use all optional adapters; prepare them before going offline.
+
 ```text
+uv sync --all-extras
+npm ci
 uv run pytest
 uv run ruff check .
 uv run ruff format --check .

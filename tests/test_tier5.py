@@ -54,6 +54,10 @@ def test_archive_rejects_environment_files(tmp_path):
 
 
 def test_registry_identity_mismatch():
+    from jsonschema import ValidationError
+
+    with pytest.raises(ValidationError):
+        validate_metadata({})
     document = validate_metadata()
     document["version"] = "2.0.0"
     with pytest.raises(ValueError, match="identity/version"):

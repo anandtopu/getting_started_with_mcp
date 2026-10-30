@@ -14,7 +14,8 @@ REGISTRY = "https://registry.modelcontextprotocol.io"
 
 
 def validate_metadata(document=None):
-    document = document or json.loads((BASE / "server.json").read_text())
+    if document is None:
+        document = json.loads((BASE / "server.json").read_text())
     schema = json.loads((BASE / "server.schema.json").read_text())
     Draft7Validator(schema, format_checker=FormatChecker()).validate(document)
     if document.get("$schema") != schema["$id"]:

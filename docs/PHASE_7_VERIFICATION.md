@@ -22,6 +22,20 @@ The official `mcp-publisher validate distribution/registry/server.json` returned
 `server.json is valid`. This validation did not publish metadata or prove that the
 proposed npm artifact has been released.
 
+## Local check results
+
+- Python 3.12: **212 passed, 1 skipped** in the complete offline suite. The skip is
+  the existing Windows account restriction on creating symlinks; Linux CI covers it.
+- TypeScript: **36 passed**; type checking and ESLint pass, including the browser source/tests.
+- Chromium: three scenarios cover ordinary elicitation, the approvals/Tasks/App
+  workflow, and mobile/forged-origin behavior. Reconnect waits use the connection
+  startup budget rather than the test framework's five-second default.
+- **127 examples** (33 server entries, 94 scripts) pass the standalone runner.
+- Ruff, formatting, local links, course inventory, installed-package checks and the
+  Tier 5 checkpoint pass. The complete tests use `uv sync --all-extras` and `npm ci`.
+- Local Inspector encountered a Windows Node/libuv shutdown assertion in the
+  pre-existing Module 10 HTTP example. Linux Inspector CI remains the full smoke gate.
+
 ## Local evidence
 
 The Python wheel and npm tarball launch through uvx/npm exec from a temporary
