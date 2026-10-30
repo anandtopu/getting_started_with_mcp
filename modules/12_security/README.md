@@ -274,3 +274,7 @@ Answer the [seven questions with expandable answers](quiz.md) before reading the
 ## Next
 
 Continue to [Module 13: testing and observability](../13_testing_observability/README.md).
+
+## TypeScript counterpart
+
+The optional [full TypeScript track](typescript/README.md) supplies executable examples, a use case, exercises and tests for this module.

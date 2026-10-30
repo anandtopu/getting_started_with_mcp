@@ -245,3 +245,7 @@ Answer the [seven questions with expandable answers](quiz.md) before reading the
 ## Next
 
 Complete the [Tier 3 checkpoint](../../checkpoints/03_security/README.md). Module 14 and Tier 4 remain planned for Phase 6.
+
+## TypeScript counterpart
+
+The optional [full TypeScript track](typescript/README.md) supplies executable examples, a use case, exercises and tests for this module.

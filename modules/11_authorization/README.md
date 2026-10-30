@@ -284,3 +284,7 @@ Answer the [seven questions with expandable answers](quiz.md) before reading the
 ## Next
 
 Continue to [Module 12: security](../12_security/README.md).
+
+## TypeScript counterpart
+
+The optional [full TypeScript track](typescript/README.md) supplies executable examples, a use case, exercises and tests for this module.

@@ -6,7 +6,7 @@ import { McpServer, ResourceTemplate, completable, InMemoryServerEventBus } from
 import { z } from 'zod';
 import { root } from './data.ts';
 import { wikiText } from './wiki.ts';
-import { structured, failure } from './notes.ts';
+import { structured, failure, read as readAnnotation, write } from './notes.ts';
 import { serveHttp } from './http.ts';
 
 export function remoteWorkspace() {
@@ -27,10 +27,10 @@ export function remoteWorkspace() {
   function factory() {
     const server = new McpServer({ name: 'Lumen remote workspace', version: '4.0' },
       { capabilities: { resources: { subscribe: true } } });
-    server.registerTool('read_issue', { inputSchema: z.object({ issue_id: z.number().int() }) }, ({ issue_id }) => {
+    server.registerTool('read_issue', { annotations:readAnnotation, inputSchema: z.object({ issue_id: z.number().int() }) }, ({ issue_id }) => {
       const row = read(issue_id); return row ? structured(row) : failure('Issue not found');
     });
-    server.registerTool('create_issue', { inputSchema: z.object({ issue, operation_key: z.string().min(1).max(80), confirmed: z.boolean().default(false) }) }, args => {
+    server.registerTool('create_issue', { annotations:write, inputSchema: z.object({ issue, operation_key: z.string().min(1).max(80), confirmed: z.boolean().default(false) }) }, args => {
       if (!args.confirmed) return failure('Confirm this exact write in the host first.');
       const binding = JSON.stringify(args.issue);
       const prior = db.prepare('SELECT * FROM receipts WHERE key=?').get(args.operation_key);
@@ -46,12 +46,12 @@ export function remoteWorkspace() {
         db.exec('COMMIT'); return structured(read(Number(result.lastInsertRowid))!);
       } catch (error) { db.exec('ROLLBACK'); throw error; }
     });
-    server.registerTool('update_issue', { inputSchema: z.object({ issue_id: z.number().int(), status: z.enum(['open', 'in_progress', 'closed']), confirmed: z.boolean().default(false) }) }, args => {
+    server.registerTool('update_issue', { annotations:write, inputSchema: z.object({ issue_id: z.number().int(), status: z.enum(['open', 'in_progress', 'closed']), confirmed: z.boolean().default(false) }) }, args => {
       if (!args.confirmed || !read(args.issue_id)) return failure('Confirm an existing issue');
       db.prepare('UPDATE issues SET status=? WHERE id=?').run(args.status, args.issue_id);
       return structured(read(args.issue_id)!);
     });
-    server.registerTool('delete_issue', { inputSchema: z.object({ issue_id: z.number().int(), confirmed: z.boolean().default(false) }) }, args => {
+    server.registerTool('delete_issue', { annotations:write, inputSchema: z.object({ issue_id: z.number().int(), confirmed: z.boolean().default(false) }) }, args => {
       if (!args.confirmed || !read(args.issue_id)) return failure('Confirm an existing issue');
       db.exec('BEGIN');
       try {
@@ -60,9 +60,9 @@ export function remoteWorkspace() {
       } catch (error) { db.exec('ROLLBACK'); throw error; }
       return structured({ deleted: args.issue_id });
     });
-    server.registerTool('route_region', { inputSchema: z.object({ region: z.string().meta({ 'x-mcp-header': 'Region' }) }) }, args => structured(args));
-    server.registerTool('report_status', { inputSchema: z.object({}) }, () => structured({ active, issue_count: db.prepare('SELECT count(*) AS n FROM issues').get()!.n }));
-    server.registerTool('quarterly_report', { inputSchema: z.object({ quarter: z.enum(['Q1', 'Q2', 'Q3', 'Q4']).default('Q1'), delay: z.number().min(0).max(1).default(0.02) }) }, async ({ quarter, delay }, ctx) => {
+    server.registerTool('route_region', { annotations:readAnnotation, inputSchema: z.object({ region: z.string().meta({ 'x-mcp-header': 'Region' }) }) }, args => structured(args));
+    server.registerTool('report_status', { annotations:readAnnotation, inputSchema: z.object({}) }, () => structured({ active, issue_count: db.prepare('SELECT count(*) AS n FROM issues').get()!.n }));
+    server.registerTool('quarterly_report', { annotations:readAnnotation, inputSchema: z.object({ quarter: z.enum(['Q1', 'Q2', 'Q3', 'Q4']).default('Q1'), delay: z.number().min(0).max(1).default(0.02) }) }, async ({ quarter, delay }, ctx) => {
       active++;
       try {
         for (let i = 1; i <= 4; i++) {
@@ -75,12 +75,13 @@ export function remoteWorkspace() {
     });
     server.registerPrompt('report_brief', { argsSchema: z.object({ quarter: completable(z.string(), value => ['Q1', 'Q2', 'Q3', 'Q4'].filter(q => q.startsWith(value))) }) }, ({ quarter }) => ({ messages: [{ role: 'user', content: { type: 'text', text: `Summarize ${quarter}; dates are simulated.` } }] }));
     server.registerResource('wiki', new ResourceTemplate('wiki://{space}/{page}', { list: undefined }), {}, (uri, args) => ({ contents: [{ uri: uri.href, text: wikiText(String(args.space), String(args.page)) }] }));
-    server.registerTool('find_page', { inputSchema: z.object({ space: z.string().default('engineering'), page: z.string().default('page-01') }) }, ({ space, page }) => {
+    server.registerTool('find_page', { annotations:readAnnotation, inputSchema: z.object({ space: z.string().default('engineering'), page: z.string().default('page-01') }) }, ({ space, page }) => {
       wikiText(space, page);
       return { content: [{ type: 'resource_link', name: page, uri: `wiki://${space}/${page}`, mimeType: 'text/markdown' }] };
     });
     server.registerResource('review', 'workspace://review', {}, uri => ({ contents: [{ uri: uri.href, text: review }] }));
-    server.registerTool('publish_review', { inputSchema: z.object({ text: z.string().max(500) }) }, async ({ text }) => {
+    server.registerTool('publish_review', { annotations:write, inputSchema: z.object({ text: z.string().max(500), confirmed:z.boolean().default(false) }) }, async ({ text, confirmed }) => {
+      if (!confirmed) return failure('Confirm this exact write in the host first.');
       review = text; bus.publish({ kind: 'resource_updated', uri: 'workspace://review' }); return structured({ updated: true });
     });
     return server;

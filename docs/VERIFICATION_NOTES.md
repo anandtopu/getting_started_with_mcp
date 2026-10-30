@@ -1,5 +1,11 @@
 # Verification notes
 
+## Phase 8 — complete course, October 30, 2026
+
+Course 1.0.0 adds the full TypeScript route, four native SDKs, five capstones and final references. [Phase 8 evidence and explicit limits](PHASE_8_VERIFICATION.md) supersede delivery-status statements in historical sections below. [Native pins](../modules/bonus/B2_other_sdks/VERSIONS.md) distinguish Java compatibility from current-revision support. TypeScript uses Agents SDK 0.21.0, LangGraph 1.5.3 and LangChain core 1.3.2 with deterministic model fixtures. PDF regeneration pins ReportLab 5.1.0 in the optional docs group.
+
+Substitutions: the installed Python machine providers take singular `scope`; TypeScript StreamableHTTPClientTransport is exported from the main client package; high-level TS task-result validation requires the documented raw-receiver fallback. [B4](../modules/bonus/B4_whats_new/README.md) records current extension maturity and Server Card prototype caveats; [host setup](HOST_SETUP.md) records the four checked configuration formats.
+
 ## Phase 6 — Tier 4, October 30, 2026
 
 Course 0.6.0 retains MCP 2026-07-28, official Python SDK 2.3.0 and TypeScript
@@ -402,7 +408,7 @@ The SDK's top-level Python metadata permits 3.10+, but its current HTTP dependen
 | Area | Confirmed documentation evidence | Implementation decision |
 |---|---|---|
 | Python server | [Python SDK](https://py.sdk.modelcontextprotocol.io/) documents `from mcp.server import MCPServer` | Use v2 server and decorators |
-| Python client | [Client guide](https://py.sdk.modelcontextprotocol.io/clients/) documents `Client` | Same client abstraction for transport and in-memory tests |
+| Python client | [Client guide](https://py.sdk.modelcontextprotocol.io/client/) documents `Client` | Same client abstraction for transport and in-memory tests |
 | In-memory tests | [Testing guide](https://py.sdk.modelcontextprotocol.io/get-started/testing/) documents `Client(server, raise_exceptions=True)` | Offline unit tests; separate transport tests prove serialization |
 | HTTP library and models | [Migration guide](https://py.sdk.modelcontextprotocol.io/migration/) moves HTTP integration to `httpx2` and models to `mcp_types` | Avoid importing compatibility aliases |
 | Run configuration | [Running servers](https://py.sdk.modelcontextprotocol.io/run/) and migration guide place transport settings on run operations | Verify exact method signatures from the installed release |

@@ -29,12 +29,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '26'
-      - run: uv sync --frozen --all-extras --python ${{ matrix.python }}
+      - run: uv sync --frozen --python ${{ matrix.python }}
       - run: npm ci
       - run: uv run --frozen ruff check .
       - run: uv run --frozen ruff format --check .
       - run: uv run --frozen pytest
-      - run: uv run --frozen python scripts/check_course.py
+      - run: uv run --frozen python scripts/check_course.py --release
       - run: uv run --frozen python scripts/run_all_examples.py
       - run: uv run --frozen python scripts/tier1.py
       - run: uv run --frozen python scripts/tier2.py
@@ -124,6 +124,8 @@ jobs:
       - run: npm ci
       - run: uv run --frozen python scripts/package_lab.py --prepare
       - run: uv run --frozen python scripts/package_lab.py
+      - run: uv run --frozen python scripts/knowledge_package.py --prepare
+      - run: uv run --frozen python scripts/knowledge_package.py
       - run: npm run build:chat
       - run: npx playwright install --with-deps chromium
       - run: npm run test:browser
@@ -150,3 +152,50 @@ jobs:
           version: '0.13.6'
       - run: uv sync --frozen
       - run: uv run python scripts/check_links.py --external
+
+  native-sdks:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        language: [go, csharp, rust, java]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.13.6'
+      - run: uv sync --frozen --python 3.12
+      - if: matrix.language == 'go'
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.26.4'
+          cache-dependency-path: modules/bonus/B2_other_sdks/go/go.sum
+      - if: matrix.language == 'csharp'
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - if: matrix.language == 'rust'
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: '1.96.0'
+      - if: matrix.language == 'java'
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - run: uv run --frozen python scripts/native_sdks.py --language ${{ matrix.language }} --build
+  ops-deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.13.6'
+      - run: uv sync --frozen --python 3.12
+      - run: docker compose -f deployment/compose.yaml -f capstones/04_lumen_ops/deployment/compose.yaml up --build -d --wait --wait-timeout 180
+      - run: uv run --frozen python scripts/keycloak_check.py --deployed
+      - if: failure()
+        run: docker compose -f deployment/compose.yaml -f capstones/04_lumen_ops/deployment/compose.yaml logs --no-color --tail 80
+      - if: always()
+        run: docker compose -f deployment/compose.yaml -f capstones/04_lumen_ops/deployment/compose.yaml down --volumes --remove-orphans

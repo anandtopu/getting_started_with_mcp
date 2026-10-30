@@ -298,3 +298,7 @@ Answer the [quiz](quiz.md) before expanding its answers.
 ## Next
 
 Continue to [Module 08](../08_server_utilities/README.md).
+
+## TypeScript counterpart
+
+The optional [full TypeScript track](typescript/README.md) supplies executable examples, a use case, exercises and tests for this module.

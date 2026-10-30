@@ -1,0 +1,4 @@
+{"action": "read", "scopes": ["tool:read"], "human_approved": false, "expected": false}
+{"action": "read", "scopes": ["tool:read"], "human_approved": true, "expected": true}
+{"action": "write", "scopes": ["tool:write"], "human_approved": false, "expected": false}
+{"action": "write", "scopes": ["tool:write"], "human_approved": true, "expected": true}

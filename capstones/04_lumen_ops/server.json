@@ -1,0 +1,16 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.anandtopu/lumen-ops-course",
+  "description": "Synthetic issues, analytics, durable report Tasks and an MCP App.",
+  "repository": {
+    "url": "https://github.com/anandtopu/getting_started_with_mcp",
+    "source": "github"
+  },
+  "version": "1.0.0",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://ops.lumen.example/mcp"
+    }
+  ]
+}

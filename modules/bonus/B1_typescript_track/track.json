@@ -1,0 +1,138 @@
+{
+  "0": {
+    "title": "Environment and first contact",
+    "examples": [
+      "fixture",
+      "versions",
+      "discovery"
+    ]
+  },
+  "1": {
+    "title": "Protocol architecture",
+    "examples": [
+      "jsonrpc",
+      "capabilities",
+      "call"
+    ]
+  },
+  "6": {
+    "title": "Build a host",
+    "examples": [
+      "model_loop",
+      "approval",
+      "provider_shapes"
+    ]
+  },
+  "7": {
+    "title": "Structured tools",
+    "examples": [
+      "read",
+      "confirmation",
+      "idempotency"
+    ]
+  },
+  "8": {
+    "title": "Long operations",
+    "examples": [
+      "report",
+      "cancellation",
+      "limits"
+    ]
+  },
+  "9": {
+    "title": "Interactive input",
+    "examples": [
+      "accept",
+      "decline",
+      "state_binding"
+    ]
+  },
+  "11": {
+    "title": "Authorization",
+    "examples": [
+      "jwt",
+      "issuer",
+      "expiry"
+    ]
+  },
+  "12": {
+    "title": "Security boundaries",
+    "examples": [
+      "paths",
+      "redaction",
+      "destinations"
+    ]
+  },
+  "13": {
+    "title": "Quality and evaluation",
+    "examples": [
+      "contract",
+      "negative",
+      "inventory"
+    ]
+  },
+  "14": {
+    "title": "Tool design",
+    "examples": [
+      "descriptions",
+      "catalog_change",
+      "context_size"
+    ]
+  },
+  "15": {
+    "title": "Framework integration",
+    "examples": [
+      "agents",
+      "langchain",
+      "langgraph"
+    ]
+  },
+  "16": {
+    "title": "Composition",
+    "examples": [
+      "filter",
+      "write_policy",
+      "rates"
+    ]
+  },
+  "17": {
+    "title": "Tasks and Apps",
+    "examples": [
+      "tasks",
+      "input",
+      "app_bridge"
+    ]
+  },
+  "18": {
+    "title": "Packaging",
+    "examples": [
+      "readonly",
+      "version",
+      "bundle"
+    ]
+  },
+  "19": {
+    "title": "Registry",
+    "examples": [
+      "namespace",
+      "required_fields",
+      "trust"
+    ]
+  },
+  "20": {
+    "title": "Remote deployment",
+    "examples": [
+      "http",
+      "https_policy",
+      "rate_limit"
+    ]
+  },
+  "21": {
+    "title": "Production hosts",
+    "examples": [
+      "reconnect",
+      "catalog_review",
+      "compatibility"
+    ]
+  }
+}

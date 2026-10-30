@@ -2,19 +2,19 @@
 
 Model Context Protocol (MCP) gives applications a common way to discover and use tools, data and reusable prompts. This hands-on course is for people who know basic Python and want to build the connections themselves.
 
-**Delivery status: Phase 7 — Tiers 1–5 delivered.** Modules 00–21 and their checkpoints run today; Phase 8 bonus lessons, capstones and final reference material remain planned. See [the learning path](LEARNING_PATH.md), [feature map](docs/FEATURE_MAP.md), and [verification notes](docs/VERIFICATION_NOTES.md).
+**Delivery status: Phase 8 delivered.** All 22 modules, four bonus modules, five capstones and six printable cheatsheets are available. Python and TypeScript tracks use pinned official SDKs; native SDK examples cover Go, C#, Rust and Java. See [the learning path](LEARNING_PATH.md), [feature map](docs/FEATURE_MAP.md), and [verification notes](docs/VERIFICATION_NOTES.md).
 
 ## Start Tier 1
 
 | Module | Lesson | Languages |
 |---|---|---|
-| 00 | [Setup and orientation](modules/00_setup/README.md) | Python |
-| 01 | [Architecture and wire](modules/01_architecture_wire/README.md) | Python |
+| 00 | [Setup and orientation](modules/00_setup/README.md) | Python, TypeScript |
+| 01 | [Architecture and wire](modules/01_architecture_wire/README.md) | Python, TypeScript |
 | 02 | [Typed tools and notes](modules/02_first_server_tools/README.md) | Python, TypeScript |
 | 03 | [Resources and wiki](modules/03_resources/README.md) | Python, TypeScript |
 | 04 | [Prompt workflows](modules/04_prompts/README.md) | Python, TypeScript |
 | 05 | [Clients and pagination](modules/05_first_client/README.md) | Python, TypeScript |
-| 06 | [Lumen Chat v1](modules/06_building_a_host/README.md) | Python |
+| 06 | [Lumen Chat v1](modules/06_building_a_host/README.md) | Python, TypeScript |
 
 After setup, run the free, deterministic [Tier 1 checkpoint](modules/06_building_a_host/CHECKPOINT.md):
 
@@ -31,9 +31,9 @@ is explained in module 06.
 
 | Module | Lesson | Languages |
 |---|---|---|
-| 07 | [Real data: issues, analytics, APIs](modules/07_real_data/README.md) | Python |
-| 08 | [Context, lifetime, progress and cancellation](modules/08_server_utilities/README.md) | Python |
-| 09 | [User input, retries and current replacements](modules/09_elicitation_sampling_roots/README.md) | Python |
+| 07 | [Real data: issues, analytics, APIs](modules/07_real_data/README.md) | Python, TypeScript |
+| 08 | [Context, lifetime, progress and cancellation](modules/08_server_utilities/README.md) | Python, TypeScript |
+| 09 | [User input, retries and current replacements](modules/09_elicitation_sampling_roots/README.md) | Python, TypeScript |
 | 10 | [Streamable HTTP](modules/10_streamable_http/README.md) | Python, TypeScript |
 
 ```text
@@ -141,16 +141,16 @@ Only use course synthetic data for published captures. Redaction covers sensitiv
 ## Three ways to use the course
 
 1. Follow [LEARNING_PATH.md](LEARNING_PATH.md) in order, with a checkpoint after each tier.
-2. Find a topic in [FEATURE_MAP.md](docs/FEATURE_MAP.md); planned paths become links as lessons land.
-3. Use the capstone specifications once delivered in Phase 8. Their planned scope is in the learning path.
+2. Find a topic in [FEATURE_MAP.md](docs/FEATURE_MAP.md); follow a topic directly to its implementation.
+3. Choose a [capstone](capstones/README.md) with runnable starter, reference implementation and acceptance checks.
 
 | Tier | Main Python route |
 |---|---:|
-| Foundations, 00â€“06 | 10 hours |
-| Real-world servers, 07â€“10 | 10 hours |
-| Security and quality, 11â€“13 | 12 hours |
-| Agent ecosystem, 14â€“17 | 12 hours |
-| Shipping, 18â€“21 | 10 hours |
+| Foundations, 00–06 | 10 hours |
+| Real-world servers, 07–10 | 10 hours |
+| Security and quality, 11–13 | 12 hours |
+| Agent ecosystem, 14–17 | 12 hours |
+| Shipping, 18–21 | 10 hours |
 | Total including checkpoints | 54 hours |
 
 ## Ship with Tier 5
@@ -205,7 +205,7 @@ uv run python scripts/check_course.py
 uv run python scripts/run_all_examples.py
 ```
 
-Tests require no keys or internet. Package installation needs network on a fresh machine. In-memory tests check SDK behavior, subprocess tests check real stdio, and wiretap tests check byte preservation, EOF, failure and timeout. CI also runs Inspector and Windows/Linux matrices. `check_course.py --release` intentionally fails until Phase 8 is complete.
+Tests require no keys or internet. Package installation needs network on a fresh machine. In-memory tests check SDK behavior, subprocess tests check real stdio, and wiretap tests check byte preservation, EOF, failure and timeout. CI also runs Inspector and Windows/Linux matrices. `check_course.py --release` checks all modules, bonuses, capstones, references and printable sheets.
 
 Generated data is committed in [data/](data/). Rebuild it with `uv run python scripts/build_data.py`, or write a separate copy with `--output .runtime/data`. The seed and reference date are fixed; manifests record content hashes. Analytics money uses integer cents. Database byte reproducibility is tested on each runtime; SQLite versions can affect binary layout, so compare logical rows across different SQLite releases.
 
@@ -221,10 +221,34 @@ The deliberately vulnerable server is isolated under [data/security/](data/secur
 
 **Why are roots and sampling not defaults?** They are deprecated in the target revision. The course teaches current replacements and clearly labeled compatibility material.
 
-**Where are the lessons?** All 22 main modules are delivered; Phase 8 remains planned.
+**Where are the lessons?** All 22 main modules, four bonuses and five capstones are delivered.
 
 **Can I install just the wheel?** Shared code is packaged, but the course dataset lives in the checkout. Set `LUMEN_REPO_ROOT` to the checkout if using an installed wheel elsewhere.
 
 ## Contributing and license
 
 See [CONTRIBUTING.md](CONTRIBUTING.md), the [code of conduct](CODE_OF_CONDUCT.md), and [changelog](CHANGELOG.md). Original course code and synthetic data are [MIT licensed](LICENSE). Upstream SDKs retain their own licenses.
+
+## Bonus modules and capstones
+
+- [B1: full TypeScript track](modules/bonus/B1_typescript_track/README.md), including native hosts, frameworks, input, Tasks and Apps.
+- [B2: Go, C#, Rust and Java](modules/bonus/B2_other_sdks/README.md), with pinned builds and a shared client contract. Java uses the stable SDK's older protocol compatibility.
+- [B3: read the specification and contribute](modules/bonus/B3_spec_contributing/README.md).
+- [B4: Skills, Server Cards and authorization extensions](modules/bonus/B4_whats_new/README.md), with status and interoperability limits.
+- [Five capstones](capstones/README.md): Personal Knowledge, Security Audit, Lumen Gateway, Lumen Ops and Lumen Chat Pro.
+
+## Keep these references nearby
+
+[Mental model](docs/MENTAL_MODEL.md) · [Protocol messages](docs/PROTOCOL_GUIDE.md) · [Choosing a design](docs/CHOOSING_THE_RIGHT_DESIGN.md) · [Host setup](docs/HOST_SETUP.md) · [Glossary](docs/GLOSSARY.md) · [Troubleshooting](docs/TROUBLESHOOTING.md) · [Migration](docs/MIGRATING_FROM_OLDER_VERSIONS.md) · [Security](docs/SECURITY_CHECKLIST.md) · [Six PDF cheatsheets](cheatsheets/README.md).
+
+```text
+uv sync --frozen
+npm ci
+uv run pytest
+npm run check
+uv run python scripts/check_course.py --release
+uv run python scripts/run_all_examples.py
+uv run python scripts/phase8.py
+```
+
+Dependency installation needs network once. Default checks then use local fixtures and no model credentials. Native compiler builds, package installation, Docker and browser checks have explicit commands in [Phase 8 verification](docs/PHASE_8_VERIFICATION.md). See the [definition of done](docs/DEFINITION_OF_DONE.md) for completed gates and optional integrations.

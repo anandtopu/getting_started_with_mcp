@@ -119,7 +119,10 @@ async def exercise_http(url: str, capture=None) -> None:
 async def stream_checks(client) -> None:
     for _ in range(2):
         async with client.listen(resource_subscriptions=["workspace://review"]) as events:
-            await client.call_tool("publish_review", {"text": "Reviewed"})
+            result = await client.call_tool(
+                "publish_review", {"text": "Reviewed", "confirmed": True}
+            )
+            assert not result.is_error
             async with asyncio.timeout(3):
                 await anext(aiter(events))
         assert (await client.read_resource("workspace://review")).contents[0].text == "Reviewed"

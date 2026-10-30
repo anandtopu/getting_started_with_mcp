@@ -5,21 +5,37 @@ External checks require network; the default never does.
 """
 
 import argparse
+import os
 import re
 import urllib.error
 import urllib.parse
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from common.config import ROOT
 
-EXCLUDED = {".git", ".venv", "node_modules", ".runtime", ".uv-cache", ".npm-cache"}
+EXCLUDED = {
+    ".git",
+    ".venv",
+    "node_modules",
+    ".runtime",
+    ".uv-cache",
+    ".npm-cache",
+    "target",
+    "bin",
+    "obj",
+    "dist",
+    "build",
+}
 
 
 def documents(root: Path = ROOT):
-    for path in root.rglob("*.md"):
-        if not EXCLUDED.intersection(path.relative_to(root).parts):
-            yield path
+    for folder, directories, files in os.walk(root):
+        directories[:] = [name for name in directories if name not in EXCLUDED]
+        for name in files:
+            if name.endswith(".md"):
+                yield Path(folder) / name
 
 
 def check(external: bool = False) -> list[str]:
@@ -36,7 +52,8 @@ def check(external: bool = False) -> list[str]:
                 if not (path.parent / local).exists():
                     failures.append(f"{path.relative_to(ROOT)} -> {target}")
     if external:
-        for url in sorted(urls):
+
+        def probe(url):
             for attempt in range(2):
                 try:
                     request = urllib.request.Request(url, headers={"User-Agent": "LumenCourse/0.2"})
@@ -46,7 +63,11 @@ def check(external: bool = False) -> list[str]:
                     break
                 except (OSError, urllib.error.URLError) as error:
                     if attempt == 1:
-                        failures.append(f"{url}: {type(error).__name__}")
+                        return f"{url}: {error}"
+            return None
+
+        with ThreadPoolExecutor(max_workers=8) as workers:
+            failures.extend(error for error in workers.map(probe, sorted(urls)) if error)
     return failures
 
 

@@ -1,0 +1,4 @@
+{"action": "read", "scopes": ["notes:read"], "human_approved": false, "expected": true}
+{"action": "search_semantic", "scopes": ["notes:read"], "human_approved": false, "expected": true}
+{"action": "read", "scopes": [], "human_approved": true, "expected": false}
+{"action": "write", "scopes": ["notes:read"], "human_approved": true, "expected": false}

@@ -1,0 +1,2 @@
+{"capture_version": 1, "command": ["python", "capstones/02_security_audit/solution/server.py"], "transport": "stdio", "python": "3.12.13", "mcp": "2.3.0"}
+{"direction": "client->server", "elapsed_ms": 172.0, "message": {"jsonrpc": "2.0", "id": 1, "method": "tools/list", "params": {"_meta": {"io.modelcontextprotocol/protocolVersion": "2026-07-28", "io.modelcontextprotocol/clientInfo": {"name": "mcp", "version": "0.1.0"}, "io.modelcontextprotocol/clientCapabilities": {}}}}}

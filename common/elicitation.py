@@ -15,6 +15,7 @@ from mcp_types import (
 from pydantic import BaseModel, ConfigDict, StrictBool
 
 from common.issues import issue_lifespan, register_issues, store_from
+from common.notes import WRITE
 from common.portal import approval_portal
 from common.retry import RetryLedger
 
@@ -51,7 +52,7 @@ def require_mode(ctx: Context, mode: str) -> None:
 
 
 def register_input(server: MCPServer) -> None:
-    @server.tool()
+    @server.tool(annotations=WRITE)
     async def bulk_close(
         issue_ids: list[int], ctx: Context
     ) -> dict[str, object] | InputRequiredResult:
@@ -87,7 +88,7 @@ def register_input(server: MCPServer) -> None:
             raise ToolError("The form requires a boolean approve field.") from None
         return store.bulk_close(issue_ids) if confirmation.approve else {"closed": []}
 
-    @server.tool()
+    @server.tool(annotations=WRITE)
     async def export_report(ctx: Context) -> dict[str, object] | InputRequiredResult:
         """Ask the user to approve a fixture export in a separate local browser page."""
         state = ctx.request_context.lifespan_context

@@ -75,7 +75,7 @@ do not assume missed events can be replayed.
 ## Later-tier migrations
 
 HTTP+SSE and Dynamic Client Registration are historical compatibility concerns;
-the planned current track uses Streamable HTTP and Client ID Metadata Documents.
+the delivered current track uses Streamable HTTP and Client ID Metadata Documents.
 Roots, sampling and protocol logging are Deprecated topics. Modules 08–09 teach
 configured path boundaries, direct model providers, and stderr/OpenTelemetry
 replacements before analyzing historical exchanges. No current-track application depends
@@ -393,3 +393,19 @@ flow instead returns `input_required` and the host retries with an answer.
 Neither old roots nor a model response establishes permission to read a file or
 perform a write. Module 09 obtains human consent and enforces its own configured
 path boundary.
+
+## Complete-course migration checks
+
+The target remains 2026-07-28; preserve older exchanges as labeled compatibility fixtures. Do not mechanically rename an old initialization request and assume the lifecycle is unchanged. Use [all current messages](PROTOCOL_GUIDE.md) and the [24-method capture inventory](protocol_coverage.json) to check each boundary.
+
+| Older assumption | Current course behavior | Executable evidence |
+|---|---|---|
+| One initialization handshake supplies all request context | Discovery plus request metadata and matching HTTP headers | [Protocol guide](PROTOCOL_GUIDE.md) |
+| Server sends a free-standing elicitation request | Input-required result, opaque state and keyed retry answers | [Module 09](../modules/09_elicitation_sampling_roots/README.md) |
+| A task is created/retrieved with legacy result methods | Operation returns a task handle; get/update/cancel use the extension | [Native TS receiver](../common/typescript/task_receiver.ts) |
+| TS server's built-in call validator supports task handles | Pinned SDK 2.4 rejects a handle where it expects content; bounded raw peer uses official framing | [Interop capture](../modules/bonus/B1_typescript_track/wire/tasks.jsonl) |
+| Skills discovery grants permission to load instructions | list/get plus digest verification; activation remains a separate decision | [B4](../modules/bonus/B4_whats_new/README.md) |
+| Any stable SDK implements the newest revision | Java 2.1 uses the labeled 2025-11-25 compatibility path | [Native version matrix](../modules/bonus/B2_other_sdks/VERSIONS.md) |
+| Machine grant authenticates a person | Service credentials and ID-JAG have distinct identities and trust checks | [Authorization examples](../modules/bonus/B4_whats_new/README.md) |
+
+Re-run negative cases after upgrading: wrong audience, changed catalog, repeated review ticket, missing capability, expired Task and unverified source. Pin an SDK release and regenerate real captures; record substitutions rather than silently changing the teaching target. Live model calls, vendor SSO and third-party host support require their own evidence.

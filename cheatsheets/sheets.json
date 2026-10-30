@@ -1,0 +1,327 @@
+[
+  [
+    "01_tier_1",
+    "Tier 1 / Foundations",
+    "Read the wire; build a useful local server.",
+    [
+      [
+        "Mental model",
+        [
+          "Host = UI, model and permissions. Client = one protocol peer. Server = capabilities and allowed data.",
+          "Tools perform operations; resources expose content; prompts provide templates. The host chooses what enters model context."
+        ]
+      ],
+      [
+        "First run",
+        [
+          "uv sync; npm ci",
+          "uv run python scripts/check_env.py",
+          "uv run python scripts/foundation_server.py (waits for protocol input)",
+          "npm run inspector -- uv run python scripts/foundation_server.py"
+        ]
+      ],
+      [
+        "Current exchange",
+        [
+          "Target 2026-07-28. Discover support with server/discover. Every request carries revision and client capabilities in reserved _meta keys.",
+          "Match response IDs to request IDs. Notifications have no ID and no response.",
+          "A complete tool result may still have isError=true."
+        ]
+      ],
+      [
+        "Useful primitives",
+        [
+          "tools/list -> tools/call",
+          "resources/list or resources/templates/list -> resources/read",
+          "prompts/list -> prompts/get; completion/complete suggests an argument value."
+        ]
+      ],
+      [
+        "Security habits",
+        [
+          "Keep stdout exclusively for JSON-RPC; log to stderr.",
+          "Validate argument shape and bounds at runtime. Tool annotations are hints, not authorization.",
+          "Require a separate review before a write; never let a model grant its own permission."
+        ]
+      ],
+      [
+        "Checkpoint",
+        [
+          "uv run python scripts/tier1.py",
+          "Explain the request, response, resource URI and approval boundary.",
+          "Next: modules 07-10; details in docs/PROTOCOL_GUIDE.md."
+        ]
+      ]
+    ]
+  ],
+  [
+    "02_tier_2",
+    "Tier 2 / Real servers",
+    "Bound data, work and interactive retries.",
+    [
+      [
+        "Storage",
+        [
+          "Use fixed SQL and bound parameters. Limit rows and duration.",
+          "Keep filesystem reads inside a resolved allowed root; reject symlinks/escape, oversized files and unsupported types.",
+          "Use explicit idempotency receipts for safely replayable writes."
+        ]
+      ],
+      [
+        "Progress and cancellation",
+        [
+          "Progress uses a request-chosen token. It does not replace a final result.",
+          "Propagate cancellation and release work in finally blocks. A timeout does not prove an operation had no effect."
+        ]
+      ],
+      [
+        "Interactive input",
+        [
+          "An input_required result embeds elicitation/create requests.",
+          "The client asks the person, then retries with a fresh ID, exact requestState and keyed inputResponses.",
+          "Bind state to arguments and principal; consume once; expire it. Decline must not mutate data."
+        ]
+      ],
+      [
+        "HTTP",
+        [
+          "Use Streamable HTTP. Let the SDK derive matching version, method and name headers.",
+          "Bind to 127.0.0.1 by default. Validate Host and exact Origin; configure CORS separately.",
+          "Use request-body limits and deadlines. A public service also needs HTTPS and authorization."
+        ]
+      ],
+      [
+        "Run and inspect",
+        [
+          "uv run python scripts/tier2.py",
+          "uv run python scripts/http_lab.py --help",
+          "Capture real messages with scripts/wiretap.py; captures redact credentials."
+        ]
+      ],
+      [
+        "Checkpoint",
+        [
+          "Demonstrate read bounds, denied writes, idempotent replay, cancellation cleanup and Origin rejection.",
+          "Next: Personal Knowledge capstone and Tier 3."
+        ]
+      ]
+    ]
+  ],
+  [
+    "03_tier_3",
+    "Tier 3 / Security and quality",
+    "Verify identity; measure behavior.",
+    [
+      [
+        "Authorization",
+        [
+          "Discover protected-resource metadata, then the configured authorization server.",
+          "Check issuer, signature, audience, expiry and scopes. Never fetch keys from a token-supplied URL.",
+          "Use PKCE for interactive authorization. Bind stored credentials to the issuer."
+        ]
+      ],
+      [
+        "Per-call policy",
+        [
+          "Filter catalogs by verified identity, then check permission again on every call.",
+          "Do not forward an incoming token to an upstream API. Obtain separate credentials for that audience.",
+          "A model proposal, annotation, registry listing or resource text cannot authorize an operation."
+        ]
+      ],
+      [
+        "Approval integrity",
+        [
+          "Review exact tool meaning and exact arguments. Reject changed catalogs.",
+          "Use expiring one-use state and independent human approval.",
+          "Treat retrieved instructions as data, including hidden instructions in documents."
+        ]
+      ],
+      [
+        "Evidence",
+        [
+          "Use synthetic adversarial fixtures. Test denied paths and successful paths.",
+          "Separate protocol errors, tool errors, authentication failures and uncertain outcomes.",
+          "Redact secrets before logging or saving captures. Keep trace attributes bounded."
+        ]
+      ],
+      [
+        "Evaluation",
+        [
+          "An evaluation needs inputs, expected behavior, a fixed catalog, scorer and limits.",
+          "Fake models prove plumbing, not live model quality. Live comparison must record provider, model, date and cost."
+        ]
+      ],
+      [
+        "Checkpoint",
+        [
+          "uv run python scripts/tier3.py",
+          "uv run pytest tests/test_tier3.py -q",
+          "Audit the second fixture in capstones/02_security_audit."
+        ]
+      ]
+    ]
+  ],
+  [
+    "04_tier_4",
+    "Tier 4 / Ecosystem",
+    "Compose services and negotiate extensions.",
+    [
+      [
+        "Tool design",
+        [
+          "Descriptions state scope, input constraints, effect and returned evidence.",
+          "Compare catalog size and task success before adding more tools.",
+          "An output schema validates structure; it does not prove factual accuracy."
+        ]
+      ],
+      [
+        "Frameworks",
+        [
+          "Frameworks own orchestration; MCP owns the external capability boundary.",
+          "The TypeScript track runs Agents SDK, LangChain and LangGraph against one read-only workflow.",
+          "Keep model/runtime versions and approval policy explicit."
+        ]
+      ],
+      [
+        "Gateway",
+        [
+          "Use fixed upstream aliases and collision-free names. Partition catalogs/caches by principal and scopes.",
+          "Recheck permissions at execution; limit rates and record redacted audit events.",
+          "A failed upstream should not silently expose hidden tools or block unrelated safe reads."
+        ]
+      ],
+      [
+        "Tasks",
+        [
+          "Advertise io.modelcontextprotocol/tasks before accepting a task handle.",
+          "Poll tasks/get; answer input with tasks/update; cancel with tasks/cancel.",
+          "Persist ownership and expiry. Bound polling. A current Task handle is not the legacy SDK task shape."
+        ]
+      ],
+      [
+        "Apps and Skills",
+        [
+          "Apps link a tool to a UI resource and a controlled bridge. Enforce browser sandbox/CSP and a narrow tool allowlist.",
+          "Skills are discovered and byte-verified before a separate activation decision. Origin plus URI identifies a skill."
+        ]
+      ],
+      [
+        "Checkpoint",
+        [
+          "uv run python scripts/tier4.py",
+          "uv run python scripts/gateway_lab.py",
+          "Next: Gateway capstone and shipping modules 18-21."
+        ]
+      ]
+    ]
+  ],
+  [
+    "05_tier_5",
+    "Tier 5 / Shipping",
+    "Install, deploy, operate and recover.",
+    [
+      [
+        "Packages",
+        [
+          "Build wheel/sdist, npm package and MCPB bundle from reviewed source. Inspect archive contents.",
+          "Launch installed packages outside the checkout; test uvx/npx and environment configuration.",
+          "Publication is separate from local packaging and requires the learner account."
+        ]
+      ],
+      [
+        "Registry",
+        [
+          "Validate server.json against the pinned official schema and match package identity/version.",
+          "Verify namespace ownership before publishing. Registry metadata is discovery, not endorsement.",
+          "Review candidate endpoints and dependencies before installation or credential disclosure."
+        ]
+      ],
+      [
+        "Remote operations",
+        [
+          "Use HTTPS externally, exact public resource URLs and configured trusted key endpoints.",
+          "Separate health/readiness from protected data; limit rates, bytes, runtime and costs.",
+          "Single-worker teaching state must become shared durable state before scaling out."
+        ]
+      ],
+      [
+        "Production host",
+        [
+          "Bound connection attempts and calls. Retry only locally allowlisted reads; reconcile uncertain writes.",
+          "Refetch changed catalogs and revoke stale approvals.",
+          "Keep provider credentials server-side; isolate App frames and enforce their tool allowlist."
+        ]
+      ],
+      [
+        "Run and teardown",
+        [
+          "uv run python scripts/package_lab.py --prepare",
+          "npm run build:chat; npm run test:browser",
+          "Use the documented Docker Compose stack; stop it afterward. Remove persistent volumes only intentionally."
+        ]
+      ],
+      [
+        "Checkpoint",
+        [
+          "Prove installed launches, OAuth rejection, host approval/decline, Tasks and App isolation.",
+          "Finish Ops and Chat Pro capstones; review docs/DEFINITION_OF_DONE.md."
+        ]
+      ]
+    ]
+  ],
+  [
+    "06_protocol",
+    "Protocol / 2026-07-28",
+    "A compact message and trust reference.",
+    [
+      [
+        "Envelope",
+        [
+          "Request: jsonrpc=\"2.0\", id, method, params. Response: same id with result or error.",
+          "Notification: method and params, no id and no response.",
+          "Client _meta: io.modelcontextprotocol/protocolVersion, clientInfo, clientCapabilities."
+        ]
+      ],
+      [
+        "Ten core request methods",
+        [
+          "server/discover; tools/list; tools/call",
+          "resources/list; resources/templates/list; resources/read",
+          "prompts/list; prompts/get; completion/complete; subscriptions/listen"
+        ]
+      ],
+      [
+        "Results and caching",
+        [
+          "complete: inspect application outcome, including isError on tool results.",
+          "input_required: collect input, echo protected requestState, retry with inputResponses.",
+          "Cacheable results carry ttlMs and cacheScope. Keep private caches partitioned by identity."
+        ]
+      ],
+      [
+        "Notifications",
+        [
+          "Progress and cancellation are request-correlated. Subscription acknowledgment starts an event stream.",
+          "Resource update and tool/resource/prompt list-change events invalidate cached state.",
+          "Protocol logging remains deprecated optional vocabulary; prefer stderr or OpenTelemetry."
+        ]
+      ],
+      [
+        "Extensions",
+        [
+          "Tasks: resultType=task; tasks/get, tasks/update, tasks/cancel.",
+          "Skills: skills/list, skills/get; resources/read verifies bytes; directory reads are optional.",
+          "Apps have a separate UI bridge. OAuth exchanges and Server Cards are HTTP metadata, not new JSON-RPC methods."
+        ]
+      ],
+      [
+        "Failures and trust",
+        [
+          "-32601 unknown method; -32602 invalid params; -32020 HTTP metadata mismatch; -32021 missing capability; -32022 unsupported revision.",
+          "Descriptions and schemas do not grant permission. Verify identity, scopes, arguments and exact approval independently.",
+          "Full captured examples: docs/PROTOCOL_GUIDE.md."
+        ]
+      ]
+    ]
+  ]
+]

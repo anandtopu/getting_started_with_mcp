@@ -8,6 +8,7 @@ import socket
 import sys
 from contextlib import asynccontextmanager
 from pathlib import Path
+from urllib.parse import parse_qs
 
 import httpx2 as httpx
 from mcp import Client
@@ -96,9 +97,13 @@ class CaptureTransport(httpx.AsyncBaseTransport):
 
     async def handle_async_request(self, request):
         body = await request.aread()
+        if "application/x-www-form-urlencoded" in request.headers.get("content-type", ""):
+            message = {"http_form": parse_qs(body.decode())}
+        else:
+            message = json.loads(body) if body else None
         self.record(
             "client_to_server",
-            json.loads(body) if body else None,
+            message,
             headers=dict(request.headers),
             http_method=request.method,
         )

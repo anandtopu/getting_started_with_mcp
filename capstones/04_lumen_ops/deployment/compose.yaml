@@ -1,0 +1,10 @@
+services:
+  issues:
+    build:
+      context: ..
+      dockerfile: capstones/04_lumen_ops/deployment/Dockerfile
+    environment:
+      LUMEN_TASKS_DB: /state/tasks.db
+    volumes: ["ops_tasks:/state"]
+volumes:
+  ops_tasks:

@@ -21,6 +21,21 @@ from scripts.tier1 import exercise, script_client
 async def check_lesson_server(entry: dict, capture_dir: Path | None) -> None:
     path = entry["path"]
     capture = capture_dir / (path.replace("/", "_") + ".jsonl") if capture_dir else None
+    if entry["kind"] == "phase8":
+        async with asyncio.timeout(30), script_client(path, capture) as client:
+            from common.connections import discover
+
+            await discover(client)
+            for method in entry["lists"]:
+                await getattr(
+                    client,
+                    {
+                        "tools/list": "list_tools",
+                        "resources/list": "list_resources",
+                        "prompts/list": "list_prompts",
+                    }[method],
+                )()
+        return
     if entry["kind"] == "tier5":
         async with script_client(path, capture) as client:
             from common.connections import discover

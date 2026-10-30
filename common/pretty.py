@@ -6,7 +6,7 @@ from typing import Any
 
 from rich.console import Console
 
-SENSITIVE = re.compile(r"token|secret|password|authorization|api.?key", re.I)
+SENSITIVE = re.compile(r"token|secret|password|authorization|assertion|api.?key", re.I)
 
 
 def redact(value: Any, secrets: tuple[str, ...] = ()) -> Any:

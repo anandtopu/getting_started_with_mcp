@@ -36,6 +36,35 @@ async def inspect(command: list, entry: dict) -> None:
             timeout=30,
         )
         if result.returncode:
+            if (
+                sys.platform == "win32"
+                and "UV_HANDLE_CLOSING" in result.stderr
+                and command[0].startswith("http")
+            ):
+                # Node's Windows HTTP shutdown can abort after a valid exchange.
+                # Use the explicitly permitted equivalent SDK check; never mask a server error.
+                import httpx2 as httpx
+                from mcp import Client
+                from mcp.client.streamable_http import streamable_http_client
+
+                headers = {}
+                if "--header" in command:
+                    key, value = command[command.index("--header") + 1].split(": ", 1)
+                    headers[key] = value
+                async with httpx.AsyncClient(headers=headers) as http:
+                    transport = streamable_http_client(command[0], http_client=http)
+                    async with Client(transport, mode="2026-07-28") as client:
+                        operation = {
+                            "tools/list": client.list_tools,
+                            "resources/list": client.list_resources,
+                            "prompts/list": client.list_prompts,
+                        }[method]
+                        await operation()
+                print(
+                    f"PASS SDK equivalent (Windows Inspector shutdown failure) "
+                    f"{entry['path']} {method}"
+                )
+                continue
             raise RuntimeError(f"Inspector {entry['path']} {method}: {result.stderr}")
         json.loads(result.stdout)
         print(f"PASS Inspector {entry['path']} {method}")

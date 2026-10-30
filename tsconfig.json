@@ -13,7 +13,7 @@
   },
   "include": [
     "common/typescript/**/*.ts",
-    "modules/*/typescript/**/*.ts",
+    "modules/**/typescript/**/*.ts",
     "scripts/*.ts",
     "distribution/npm/src/*.ts"
   ]

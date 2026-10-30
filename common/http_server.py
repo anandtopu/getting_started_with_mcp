@@ -14,6 +14,7 @@ from starlette.responses import JSONResponse, Response
 
 from common.analytics import register_analytics
 from common.issues import IssueStore, register_issues
+from common.notes import WRITE
 from common.protocol import SPEC_REVISION
 from common.reports import register_reports
 
@@ -89,9 +90,11 @@ def make_app(json_response: bool = False):
             type="resource_link", name=page, uri=f"wiki://{space}/{page}", mime_type="text/markdown"
         )
 
-    @server.tool()
-    async def publish_review(text: str, ctx: Context) -> dict:
+    @server.tool(annotations=WRITE)
+    async def publish_review(text: str, ctx: Context, confirmed: bool = False) -> dict:
         """Publish an ephemeral review notification for reconnect demonstrations."""
+        if not confirmed:
+            raise ValueError("Human confirmation required")
         state["review"] = text[:500]
         await ctx.notify_resource_updated("workspace://review")
         return {"updated": True}

@@ -1,0 +1,4 @@
+{"action": "public", "scopes": ["read"], "human_approved": false, "expected": true}
+{"action": "private", "scopes": ["read"], "human_approved": true, "expected": false}
+{"action": "publish", "scopes": ["write"], "human_approved": false, "expected": false}
+{"action": "publish", "scopes": ["write"], "human_approved": true, "expected": true}

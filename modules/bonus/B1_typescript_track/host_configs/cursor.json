@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "lumen-typescript": {
+      "command": "node",
+      "args": [
+        "D:/Learning_Projects/getting_started_with_mcp_prompt/scripts/launch_ts.cjs",
+        "notes"
+      ]
+    }
+  }
+}

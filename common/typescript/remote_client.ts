@@ -68,7 +68,7 @@ export async function recoveryLab(url: URL) {
       const event = new Promise<void>(resolve => { notify = resolve; });
       client.setNotificationHandler('notifications/resources/updated', () => notify());
       const subscription = await client.listen({ resourceSubscriptions: ['workspace://review'] });
-      await client.callTool({ name: 'publish_review', arguments: { text: `Review ${i}` } });
+      await client.callTool({ name: 'publish_review', arguments: { text: `Review ${i}`, confirmed:true } });
       let timer: ReturnType<typeof setTimeout> | undefined;
       try { await Promise.race([event, new Promise((_, reject) => { timer = setTimeout(() => reject(new Error('Missing update')), 3000); })]); }
       finally { clearTimeout(timer); await subscription.close(); }

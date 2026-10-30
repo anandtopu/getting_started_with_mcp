@@ -1,0 +1,7 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/v1/server-card.schema.json",
+  "name": "io.github.anandtopu/lumen-ops",
+  "version": "1.0.0",
+  "description": "Synthetic Lumen operations teaching service; this domain is not deployed.",
+  "remotes": [{"type": "streamable-http", "url": "https://ops.lumen.example/mcp"}]
+}

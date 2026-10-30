@@ -1,5 +1,5 @@
 {
-  "phase": 4,
+  "phase": 8,
   "servers": [
     {
       "path": "scripts/foundation_server.py",
@@ -278,6 +278,90 @@
         "tools/list",
         "resources/list",
         "prompts/list"
+      ]
+    },
+    {
+      "path": "modules/bonus/B1_typescript_track/typescript/server.ts",
+      "kind": "phase8",
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/bonus/B1_typescript_track/typescript/forms_server.ts",
+      "kind": "phase8",
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/bonus/B1_typescript_track/typescript/tasks_server.ts",
+      "kind": "phase8",
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/bonus/B2_other_sdks/python/use_case/server.py",
+      "kind": "phase8",
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/bonus/B3_spec_contributing/python/use_case/server.py",
+      "kind": "phase8",
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/bonus/B4_whats_new/python/use_case/server.py",
+      "kind": "phase8",
+      "lists": [
+        "resources/list"
+      ]
+    },
+    {
+      "path": "modules/bonus/B4_whats_new/typescript/skills_server.ts",
+      "kind": "phase8",
+      "lists": [
+        "resources/list"
+      ]
+    },
+    {
+      "path": "scripts/reference_notifications.py",
+      "kind": "phase8",
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "capstones/01_personal_knowledge/solution/server.py",
+      "kind": "phase8",
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "capstones/02_security_audit/solution/server.py",
+      "kind": "phase8",
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "capstones/03_lumen_gateway/solution/server.py",
+      "kind": "phase8",
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "capstones/04_lumen_ops/solution/server.py",
+      "kind": "phase8",
+      "lists": [
+        "tools/list"
       ]
     }
   ],
@@ -700,6 +784,446 @@
       "path": "modules/21_production_hosts/python/use_case/main.py",
       "arguments": [],
       "timeout": 90
+    },
+    {
+      "path": "modules/00_setup/typescript/examples/01_fixture.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/00_setup/typescript/examples/02_versions.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/00_setup/typescript/examples/03_discovery.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/00_setup/typescript/use_case/main.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/01_architecture_wire/typescript/examples/01_jsonrpc.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/01_architecture_wire/typescript/examples/02_capabilities.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/01_architecture_wire/typescript/examples/03_call.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/01_architecture_wire/typescript/use_case/main.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/06_building_a_host/typescript/examples/01_model_loop.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/06_building_a_host/typescript/examples/02_approval.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/06_building_a_host/typescript/examples/03_provider_shapes.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/06_building_a_host/typescript/use_case/main.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/07_real_data/typescript/examples/01_read.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/07_real_data/typescript/examples/02_confirmation.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/07_real_data/typescript/examples/03_idempotency.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/07_real_data/typescript/use_case/main.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/08_server_utilities/typescript/examples/01_report.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/08_server_utilities/typescript/examples/02_cancellation.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/08_server_utilities/typescript/examples/03_limits.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/08_server_utilities/typescript/use_case/main.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/09_elicitation_sampling_roots/typescript/examples/01_accept.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/09_elicitation_sampling_roots/typescript/examples/02_decline.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/09_elicitation_sampling_roots/typescript/examples/03_state_binding.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/09_elicitation_sampling_roots/typescript/use_case/main.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/11_authorization/typescript/examples/01_jwt.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/11_authorization/typescript/examples/02_issuer.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/11_authorization/typescript/examples/03_expiry.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/11_authorization/typescript/use_case/main.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/12_security/typescript/examples/01_paths.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/12_security/typescript/examples/02_redaction.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/12_security/typescript/examples/03_destinations.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/12_security/typescript/use_case/main.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/13_testing_observability/typescript/examples/01_contract.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/13_testing_observability/typescript/examples/02_negative.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/13_testing_observability/typescript/examples/03_inventory.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/13_testing_observability/typescript/use_case/main.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/14_tool_design/typescript/examples/01_descriptions.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/14_tool_design/typescript/examples/02_catalog_change.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/14_tool_design/typescript/examples/03_context_size.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/14_tool_design/typescript/use_case/main.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/15_agent_frameworks/typescript/examples/01_agents.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/15_agent_frameworks/typescript/examples/02_langchain.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/15_agent_frameworks/typescript/examples/03_langgraph.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/15_agent_frameworks/typescript/use_case/main.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/16_composition/typescript/examples/01_filter.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/16_composition/typescript/examples/02_write_policy.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/16_composition/typescript/examples/03_rates.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/16_composition/typescript/use_case/main.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/17_extensions/typescript/examples/01_tasks.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/17_extensions/typescript/examples/02_input.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/17_extensions/typescript/examples/03_app_bridge.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/17_extensions/typescript/use_case/main.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/18_packaging/typescript/examples/01_readonly.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/18_packaging/typescript/examples/02_version.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/18_packaging/typescript/examples/03_bundle.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/18_packaging/typescript/use_case/main.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/19_registry/typescript/examples/01_namespace.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/19_registry/typescript/examples/02_required_fields.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/19_registry/typescript/examples/03_trust.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/19_registry/typescript/use_case/main.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/20_deployment/typescript/examples/01_http.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/20_deployment/typescript/examples/02_https_policy.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/20_deployment/typescript/examples/03_rate_limit.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/20_deployment/typescript/use_case/main.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/21_production_hosts/typescript/examples/01_reconnect.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/21_production_hosts/typescript/examples/02_catalog_review.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/21_production_hosts/typescript/examples/03_compatibility.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/21_production_hosts/typescript/use_case/main.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/bonus/B1_typescript_track/typescript/examples/01_contract.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/bonus/B1_typescript_track/typescript/examples/02_contract.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/bonus/B1_typescript_track/typescript/examples/03_contract.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/bonus/B3_spec_contributing/python/examples/01_schema_contract.py",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/bonus/B3_spec_contributing/python/examples/02_sep_index.py",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/bonus/B3_spec_contributing/python/examples/03_conformance_case.py",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/bonus/B4_whats_new/python/examples/01_skills.py",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/bonus/B4_whats_new/python/examples/02_server_cards.py",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/bonus/B4_whats_new/python/examples/03_client_credentials.py",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/bonus/B4_whats_new/python/examples/04_enterprise_auth.py",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/bonus/B4_whats_new/typescript/examples/01_skills.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/bonus/B4_whats_new/typescript/examples/02_server_cards.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/bonus/B4_whats_new/typescript/examples/03_client_credentials.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/bonus/B4_whats_new/typescript/examples/04_enterprise_auth.ts",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "capstones/01_personal_knowledge/solution/main.py",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "capstones/02_security_audit/solution/main.py",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "capstones/03_lumen_gateway/solution/main.py",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "capstones/04_lumen_ops/solution/main.py",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "capstones/05_lumen_chat_pro/solution/main.py",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "scripts/phase8.py",
+      "arguments": [],
+      "timeout": 180
     }
   ]
 }

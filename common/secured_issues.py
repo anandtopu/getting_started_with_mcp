@@ -20,8 +20,9 @@ WRITES = {"create_issue", "update_issue", "delete_issue"}
 class ScopeGate:
     """Inspect the bounded actual body, not spoofable routing headers."""
 
-    def __init__(self, app, verifier, hosts=None, origins=None):
+    def __init__(self, app, verifier, hosts=None, origins=None, write_tools=None):
         self.app, self.verifier = app, verifier
+        self.write_tools = WRITES if write_tools is None else set(write_tools)
         self.hosts = None if hosts is None else {h.encode() for h in hosts}
         self.origins = {o.encode() for o in (origins or ["http://localhost:6274"])}
 
@@ -62,7 +63,7 @@ class ScopeGate:
                     isinstance(message, dict)
                     and message.get("method") == "tools/call"
                     and isinstance(message.get("params"), dict)
-                    and message["params"].get("name") in WRITES
+                    and message["params"].get("name") in self.write_tools
                 )
             except (ValueError, TypeError):
                 write = False

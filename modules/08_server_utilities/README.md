@@ -287,3 +287,7 @@ Answer the [quiz](quiz.md) before expanding its answers.
 ## Next
 
 Continue to [Module 09](../09_elicitation_sampling_roots/README.md).
+
+## TypeScript counterpart
+
+The optional [full TypeScript track](typescript/README.md) supplies executable examples, a use case, exercises and tests for this module.

@@ -70,3 +70,16 @@ was checked against the sources below on October 30, 2026; GUI use was not teste
 - [VS Code MCP servers](https://code.visualstudio.com/docs/agent-customization/mcp-servers)
 - [Cursor MCP configuration](https://cursor.com/docs/mcp)
 - [Official filesystem server](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem)
+
+## Feature support snapshot: 2026-10-30
+
+| Host | Documented evidence | Revision/extension boundary |
+|---|---|---|
+| Claude Desktop | Local stdio configuration with `mcpServers` | Exact current revision and Tasks UI not established by the local setup page; manual GUI check |
+| Claude Code | stdio/HTTP; form and URL input; current v2 runtime | Documentation identifies 2026-07-28 runtime and version/flag conditions. Tasks require the documented CLI/SDK version and surface; desktop/VS Code are excluded from that Tasks statement |
+| VS Code | `servers` configuration with explicit stdio/HTTP type | Configuration page does not establish current revision or every extension; inspect connection before use |
+| Cursor | Tools, prompts, resources, elicitation and Apps listed | Exact wire revision and Tasks support not established by the overview |
+
+Sources: [Desktop](https://modelcontextprotocol.io/docs/2026-07-28/develop/connect-local-servers), [Claude Code](https://code.claude.com/docs/en/mcp), [VS Code](https://code.visualstudio.com/docs/agent-customization/mcp-servers), [Cursor](https://cursor.com/docs/mcp). These are documentation checks, not four executed GUI sessions. Conditional support must not be read as universal support across versions and accounts.
+
+B1 adds [native TypeScript launch configurations](../modules/bonus/B1_typescript_track/host_configs/vscode.json); B2's configurations require building the selected native executable first. Replace the generated absolute checkout paths on another machine. [Lumen Chat Pro](../capstones/05_lumen_chat_pro/README.md) and Inspector remain the locally tested UI/protocol baselines.

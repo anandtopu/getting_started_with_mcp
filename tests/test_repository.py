@@ -42,7 +42,7 @@ async def test_isolated_security_fixture():
 def test_links_and_course():
     assert check() == []
     assert validate() == []
-    assert validate(release=True)  # Do not call an incomplete course a release.
+    assert validate(release=True) == []
 
 
 def test_no_legacy_imports_or_stdout_in_servers():

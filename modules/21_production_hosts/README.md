@@ -328,3 +328,7 @@ Only the displayed analytics_dashboard with empty arguments through the pinned b
 ## Next: shipping checkpoint
 
 Run the [Tier 5 checkpoint](../../checkpoints/05_shipping/README.md). Phase 8 bonuses and capstones remain planned.
+
+## TypeScript counterpart
+
+The optional [full TypeScript track](typescript/README.md) supplies executable examples, a use case, exercises and tests for this module.

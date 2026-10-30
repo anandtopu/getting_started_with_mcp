@@ -247,3 +247,7 @@ Try the [seven-question quiz](quiz.md) before opening its expandable answers.
 ## Next
 
 [Module 17](../17_extensions/README.md)
+
+## TypeScript counterpart
+
+The optional [full TypeScript track](typescript/README.md) supplies executable examples, a use case, exercises and tests for this module.

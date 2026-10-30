@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-30",
+  "protocol": "2025-11-25 for Java; 2026-07-28 otherwise",
+  "captures": [
+    "enterprise.jsonl",
+    "machine.jsonl",
+    "skills.jsonl",
+    "typescript_skills.jsonl"
+  ],
+  "command": "uv run python scripts/phase8.py --capture",
+  "notes": "Synthetic actual exchanges. Per-file header records client runtime. B2/VERSIONS.md records native server versions."
+}

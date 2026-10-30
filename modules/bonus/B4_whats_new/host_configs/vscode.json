@@ -1,0 +1,15 @@
+{
+  "servers": {
+    "lumen-bonus": {
+      "type": "stdio",
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/absolute/path/to/getting_started_with_mcp",
+        "run",
+        "python",
+        "modules/bonus/B4_whats_new/python/use_case/server.py"
+      ]
+    }
+  }
+}

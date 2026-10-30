@@ -1,0 +1,34 @@
+{
+  "manifest_version": "0.3",
+  "name": "lumen-knowledge-course",
+  "display_name": "Personal Knowledge",
+  "version": "1.0.0",
+  "description": "Read-only Markdown search; requires uv installed on PATH.",
+  "author": {
+    "name": "Lumen course contributors"
+  },
+  "server": {
+    "type": "python",
+    "entry_point": "server/main.py",
+    "mcp_config": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "${__dirname}/server/lumen_knowledge_course_anandtopu-1.0.0-py3-none-any.whl",
+        "lumen-knowledge"
+      ]
+    }
+  },
+  "tools_generated": true,
+  "license": "MIT",
+  "compatibility": {
+    "platforms": [
+      "win32",
+      "darwin",
+      "linux"
+    ],
+    "runtimes": {
+      "python": ">=3.12,<3.15"
+    }
+  }
+}

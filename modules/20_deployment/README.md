@@ -329,3 +329,7 @@ No. Tear down infrastructure and verify remaining charges.
 ## Next: Module 21
 
 Continue to [Module 21](../21_production_hosts/README.md).
+
+## TypeScript counterpart
+
+The optional [full TypeScript track](typescript/README.md) supplies executable examples, a use case, exercises and tests for this module.

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "lumen-native-notes": {
+      "command": "D:/Learning_Projects/getting_started_with_mcp_prompt/.runtime/phase8/lumen-go.exe",
+      "args": []
+    }
+  }
+}

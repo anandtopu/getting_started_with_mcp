@@ -13,3 +13,6 @@ node_modules
 .pytest_cache
 .ruff_cache
 frameworks
+**/target
+**/bin
+**/obj

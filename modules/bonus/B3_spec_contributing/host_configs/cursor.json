@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "lumen-bonus": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/absolute/path/to/getting_started_with_mcp",
+        "run",
+        "python",
+        "modules/bonus/B3_spec_contributing/python/use_case/server.py"
+      ]
+    }
+  }
+}

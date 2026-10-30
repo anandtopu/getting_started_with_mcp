@@ -1,6 +1,6 @@
 # Learning path
 
-Delivery status: Phase 7. Tiers 1–5 (modules 00–21) and their checkpoints are delivered; Phase 8 bonuses, capstones and final reference material remain planned. See [the build plan](docs/PHASE_1_PLAN.md) and [verification notes](docs/VERIFICATION_NOTES.md).
+Delivery status: Phase 8. All five tiers, four bonus modules, five capstones and final references are delivered. See [the build plan](docs/PHASE_1_PLAN.md) and [verification notes](docs/VERIFICATION_NOTES.md).
 
 You need basic Python, terminal navigation, and basic git. You will learn the other prerequisites as they become useful. MCP means Model Context Protocol: a shared way for applications to discover and use tools, data, and reusable prompts. Lumen Labs supplies the synthetic workplace; your growing workspace supplies its servers, and Lumen Chat is the application that uses them.
 
@@ -21,7 +21,7 @@ flowchart TD
   C5 --> P4[Capstones: Lumen Ops and Chat Pro]
 ```
 
-## Tier 1 â€” Foundations: 10 hours
+## Tier 1 — Foundations: 10 hours
 
 | Module | Minutes | What you will demonstrate | Workspace / Chat |
 |---|---:|---|---|
@@ -40,7 +40,7 @@ You are ready to move on when you can explain a complete tool call from user req
 
 Run the [Tier 1 checkpoint and self-check](modules/06_building_a_host/CHECKPOINT.md) before continuing.
 
-## Tier 2 â€” Real-world servers: 10 hours
+## Tier 2 — Real-world servers: 10 hours
 
 | Module | Minutes | What you will demonstrate | Workspace / Chat |
 |---|---:|---|---|
@@ -52,9 +52,9 @@ Run the [Tier 1 checkpoint and self-check](modules/06_building_a_host/CHECKPOINT
 
 Teach SQLite transactions and parameter binding before CRUD; explain HTTP requests, response bodies, headers, and event streams before transport code. Explain why a retry may duplicate a write. Treat the retired handshake only in the linked migration guide.
 
-You are ready to move on when you can reject a path escape and an unsafe SQL operation, cancel a report, deny a confirmation, and demonstrate an HTTP Origin rejection. A failed connection must not trigger an unapproved duplicate mutation. Run the [Tier 2 checkpoint](modules/10_streamable_http/CHECKPOINT.md). The Personal Knowledge Server capstone remains planned for Phase 8.
+You are ready to move on when you can reject a path escape and an unsafe SQL operation, cancel a report, deny a confirmation, and demonstrate an HTTP Origin rejection. A failed connection must not trigger an unapproved duplicate mutation. Run the [Tier 2 checkpoint](modules/10_streamable_http/CHECKPOINT.md). Continue with the [Personal Knowledge capstone](capstones/01_personal_knowledge/README.md).
 
-## Tier 3 â€” Security, authorization and quality: 12 hours
+## Tier 3 — Security, authorization and quality: 12 hours
 
 | Module | Minutes | What you will demonstrate | Workspace / Chat |
 |---|---:|---|---|
@@ -65,9 +65,9 @@ You are ready to move on when you can reject a path escape and an unsafe SQL ope
 
 Teach authorization versus authentication, redirects, bearer tokens and scopes before OAuth helpers. Use local identities and synthetic secrets. Keep the vulnerable lab isolated from production entry points; payloads operate only on fixtures.
 
-You are ready to move on when wrong-audience and insufficient-scope tokens fail, secrets stay out of logs, a poisoned result is treated as untrusted data, and CI catches stdout contamination. Explain what an evaluation measures and what it cannot prove. Run the [Tier 3 checkpoint](checkpoints/03_security/README.md). The full Security Audit capstone remains planned for Phase 8.
+You are ready to move on when wrong-audience and insufficient-scope tokens fail, secrets stay out of logs, a poisoned result is treated as untrusted data, and CI catches stdout contamination. Explain what an evaluation measures and what it cannot prove. Run the [Tier 3 checkpoint](checkpoints/03_security/README.md). Continue with the [Security Audit capstone](capstones/02_security_audit/README.md).
 
-## Tier 4 â€” Agent ecosystem: 12 hours
+## Tier 4 — Agent ecosystem: 12 hours
 
 | Module | Minutes | What you will demonstrate | Workspace / Chat |
 |---|---:|---|---|
@@ -83,7 +83,7 @@ Separate MCP from agent orchestration and provider-specific tool schemas. Teach 
 
 You are ready to move on when identical tool names cannot collide across servers, one user's cached catalog cannot expose another user's tools, and unsupported extensions degrade gracefully. Explain task handles, cancellation and mid-flight input. After this tier, attempt Lumen Gateway.
 
-## Tier 5 â€” Shipping: 10 hours
+## Tier 5 — Shipping: 10 hours
 
 | Module | Minutes | What you will demonstrate | Workspace / Chat |
 |---|---:|---|---|
@@ -105,15 +105,15 @@ The main route totals 54 hours including five checkpoints. Add time for setup is
 
 | Intensive week | Work | Hours |
 |---|---|---:|
-| 1 | Tier 1 (10h), then 07â€“09 and first 90 minutes of 10 (8h) | 18 |
+| 1 | Tier 1 (10h), then 07–09 and first 90 minutes of 10 (8h) | 18 |
 | 2 | Finish Tier 2 (2h), Tier 3 (12h), module 14 and first 105 minutes of 15 (4h) | 18 |
 | 3 | Finish Tier 4 (8h), Tier 5 (10h) | 18 |
 
 | Part-time week | Work | Hours |
 |---|---|---:|
-| 1 | Modules 00â€“06 | 9 |
-| 2 | Tier 1 checkpoint; 07â€“09 and first 90 minutes of 10 | 9 |
-| 3 | Finish Tier 2; modules 11â€“12 | 9 |
+| 1 | Modules 00–06 | 9 |
+| 2 | Tier 1 checkpoint; 07–09 and first 90 minutes of 10 | 9 |
+| 3 | Finish Tier 2; modules 11–12 | 9 |
 | 4 | Module 13 and Tier 3 checkpoint; module 14 and first 105 minutes of 15 | 9 |
 | 5 | Finish Tier 4; first hour of 18 | 9 |
 | 6 | Finish Tier 5 | 9 |
@@ -124,14 +124,14 @@ Keep each checkpoint as a gate even if you spread a week across more calendar da
 
 | Route | Outcome | Start after |
 |---|---|---|
-| B1 Full TypeScript | Reproduce all remaining Python lessons in TypeScript | Corresponding Python module |
-| B2 Other SDKs | Build equivalent notes servers in confirmed official Go/C#/Java/Kotlin/Rust SDKs | 05 |
-| B3 Reading and contributing | Trace schema to prose, inspect SEPs, prepare a small contribution | 01; revisit after 17 |
-| B4 What's new | Skills, Server Cards, authorization extensions and newly verified capabilities | 17 |
-| Personal Knowledge Server | Markdown full-text/semantic search, resources, prompts, completion and packaging | Tier 2 |
-| Security Audit Lab | Findings, fixes and regression tests for a second vulnerable server | Tier 3 |
-| Lumen Gateway | OAuth, per-user filtering, audit and rate limits | Tier 4 |
+| [B1 Full TypeScript](modules/bonus/B1_typescript_track/README.md) | Reproduce all remaining Python lessons in TypeScript | Corresponding Python module |
+| [B2 Other SDKs](modules/bonus/B2_other_sdks/README.md) | Build equivalent notes servers in confirmed official Go/C#/Java/Rust SDKs | 05 |
+| [B3 Reading and contributing](modules/bonus/B3_spec_contributing/README.md) | Trace schema to prose, inspect SEPs, prepare a small contribution | 01; revisit after 17 |
+| [B4 What's new](modules/bonus/B4_whats_new/README.md) | Skills, Server Cards, authorization extensions and newly verified capabilities | 17 |
+| [Personal Knowledge Server](capstones/01_personal_knowledge/README.md) | Markdown full-text/semantic search, resources, prompts, completion and packaging | Tier 2 |
+| [Security Audit Lab](capstones/02_security_audit/README.md) | Findings, fixes and regression tests for a second vulnerable server | Tier 3 |
+| [Lumen Gateway](capstones/03_lumen_gateway/README.md) | OAuth, per-user filtering, audit and rate limits | Tier 4 |
 | Lumen Ops | Secured issues/analytics, elicitation, Tasks, App, evaluation and deployment | Tier 5 |
-| Lumen Chat Pro | Multi-server web host, selectable provider, approvals and extension UI | Tier 5 |
+| [Lumen Chat Pro](capstones/05_lumen_chat_pro/README.md) | Multi-server web host, selectable provider, approvals and extension UI | Tier 5 |
 
-Each capstone includes user stories, acceptance criteria, Mermaid architecture, runnable starter, full reference solution, tests, completed security checklist, extension challenges and rubric. Semantic search uses a reproducible local model with explicit first-download instructions; acceptance tests use fixed vectors without network access.
+Each capstone includes user stories, acceptance criteria, Mermaid architecture, runnable starter, full reference solution, tests, completed security checklist, extension challenges and rubric. Semantic search uses an explicit five-concept local encoder with normalized vectors. It needs no model download; its limited vocabulary is part of the lesson, not a claim of general semantic understanding.

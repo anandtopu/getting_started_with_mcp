@@ -521,3 +521,7 @@ Try the [seven-question quiz](quiz.md) before opening its expandable answers.
 ## Next
 
 [Tier 4 checkpoint](../../checkpoints/04_ecosystem/README.md). Module 18 packaging follows in Phase 7.
+
+## TypeScript counterpart
+
+The optional [full TypeScript track](typescript/README.md) supplies executable examples, a use case, exercises and tests for this module.
