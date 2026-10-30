@@ -68,8 +68,8 @@ live model call was performed. Learners verify the module 00 two-host chat step.
   include requests, responses, errors, acknowledgements and change notifications.
 - The runner inventories **13 server entry points and 34 executable scripts**.
   It includes both language tracks and the three-server fake Chat checkpoint.
-- **79 Python tests passed, one Windows symlink-permission skip**, before the final
-  publication checks; **33 TypeScript tests passed**. Ruff, formatting, TypeScript
+- **79 Python tests passed, one Windows symlink-permission skip**, in the final
+  local suite; **33 TypeScript tests passed**. Ruff, formatting, TypeScript
   compilation, ESLint, local links and delivered-course checks pass.
 - The Python/TypeScript parity tests compare note state, rich content bytes and
   embedded prompt messages, rather than merely checking that processes start.
@@ -78,7 +78,16 @@ live model call was performed. Learners verify the module 00 two-host chat step.
 - A full external-link sweep is not claimed. The release coverage gate still
   intentionally fails because later tiers are planned.
 
-CI publication results are recorded below after the hosted matrix completes.
+### Published Phase 3 and CI
+
+Implementation commit `01f462b4f0fba2c0492674318d15bbf0f6ac6a08` passed
+[the complete Phase 3 CI run](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41011844541).
+All seven Python jobs passed (Windows/Linux 3.12–3.14 and macOS 3.12), all four
+TypeScript jobs passed (Windows/Linux Node 24/26), and Inspector passed.
+Linux Python 3.14 ran **80 tests with no skips**, including the symlink boundary
+case. Every Python job also ran the full example runner and seven Tier 1 scenarios.
+The external-link job is intentionally manual and was skipped. The final
+documentation-only commit records these results without rerunning unchanged code.
 
 ---
 
