@@ -305,21 +305,27 @@
       "path": "modules/bonus/B2_other_sdks/python/use_case/server.py",
       "kind": "phase8",
       "lists": [
-        "tools/list"
+        "tools/list",
+        "resources/list",
+        "prompts/list"
       ]
     },
     {
       "path": "modules/bonus/B3_spec_contributing/python/use_case/server.py",
       "kind": "phase8",
       "lists": [
-        "tools/list"
+        "tools/list",
+        "resources/list",
+        "prompts/list"
       ]
     },
     {
       "path": "modules/bonus/B4_whats_new/python/use_case/server.py",
       "kind": "phase8",
       "lists": [
-        "resources/list"
+        "tools/list",
+        "resources/list",
+        "prompts/list"
       ]
     },
     {
@@ -333,35 +339,45 @@
       "path": "scripts/reference_notifications.py",
       "kind": "phase8",
       "lists": [
-        "tools/list"
+        "tools/list",
+        "resources/list",
+        "prompts/list"
       ]
     },
     {
       "path": "capstones/01_personal_knowledge/solution/server.py",
       "kind": "phase8",
       "lists": [
-        "tools/list"
+        "tools/list",
+        "resources/list",
+        "prompts/list"
       ]
     },
     {
       "path": "capstones/02_security_audit/solution/server.py",
       "kind": "phase8",
       "lists": [
-        "tools/list"
+        "tools/list",
+        "resources/list",
+        "prompts/list"
       ]
     },
     {
       "path": "capstones/03_lumen_gateway/solution/server.py",
       "kind": "phase8",
       "lists": [
-        "tools/list"
+        "tools/list",
+        "resources/list",
+        "prompts/list"
       ]
     },
     {
       "path": "capstones/04_lumen_ops/solution/server.py",
       "kind": "phase8",
       "lists": [
-        "tools/list"
+        "tools/list",
+        "resources/list",
+        "prompts/list"
       ]
     }
   ],
