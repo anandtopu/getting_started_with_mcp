@@ -1,6 +1,6 @@
 # Learning path
 
-Delivery status: Phase 3. Tier 1 (modules 00â€“06) and its checkpoint are implemented; later tiers remain planned. See [the build plan](docs/PHASE_1_PLAN.md), [coverage contract](docs/FEATURE_MAP.md), and [verified dependency candidates](docs/VERIFICATION_NOTES.md).
+Delivery status: Phase 5. Tiers 1–3 (modules 00–13) and their checkpoints are delivered; later tiers, bonuses and capstones remain planned. See [the build plan](docs/PHASE_1_PLAN.md) and [verification notes](docs/VERIFICATION_NOTES.md).
 
 You need basic Python, terminal navigation, and basic git. You will learn the other prerequisites as they become useful. MCP means Model Context Protocol: a shared way for applications to discover and use tools, data, and reusable prompts. Lumen Labs supplies the synthetic workplace; your growing workspace supplies its servers, and Lumen Chat is the application that uses them.
 
@@ -58,14 +58,14 @@ You are ready to move on when you can reject a path escape and an unsafe SQL ope
 
 | Module | Minutes | What you will demonstrate | Workspace / Chat |
 |---|---:|---|---|
-| 11 Authorization | 210 | OAuth discovery, client metadata, PKCE, audience/issuer/scope checks | Workspace 5 |
-| 12 Security | 210 | Reproduce bounded attacks and add defenses and regression tests | Workspace 5 |
-| 13 Testing and observability | 210 | Offline tests, real captures, Inspector, traces, load and tool-selection evaluation | Workspace 5 |
+| [11 Authorization](modules/11_authorization/README.md) | 210 | OAuth discovery, client metadata, PKCE, audience/issuer/scope checks | Workspace 5 |
+| [12 Security](modules/12_security/README.md) | 210 | Reproduce bounded attacks and add defenses and regression tests | Workspace 5 |
+| [13 Testing and observability](modules/13_testing_observability/README.md) | 210 | Offline tests, real captures, Inspector, traces, load and tool-selection evaluation | Workspace 5 |
 | Checkpoint | 90 | Complete a security checklist backed by tests for each server | Tested workspace |
 
 Teach authorization versus authentication, redirects, bearer tokens and scopes before OAuth helpers. Use local identities and synthetic secrets. Keep the vulnerable lab isolated from production entry points; payloads operate only on fixtures.
 
-You are ready to move on when wrong-audience and insufficient-scope tokens fail, secrets stay out of logs, a poisoned result is treated as untrusted data, and CI catches stdout contamination. Explain what an evaluation measures and what it cannot prove. After this tier, attempt Security Audit Lab.
+You are ready to move on when wrong-audience and insufficient-scope tokens fail, secrets stay out of logs, a poisoned result is treated as untrusted data, and CI catches stdout contamination. Explain what an evaluation measures and what it cannot prove. Run the [Tier 3 checkpoint](checkpoints/03_security/README.md). The full Security Audit capstone remains planned for Phase 8.
 
 ## Tier 4 â€” Agent ecosystem: 12 hours
 

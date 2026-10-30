@@ -187,6 +187,30 @@
         "resources/list",
         "prompts/list"
       ]
+    },
+    {
+      "path": "modules/12_security/python/use_case/server.py",
+      "kind": "tier3",
+      "module": 12,
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/13_testing_observability/python/use_case/server.py",
+      "kind": "tier3",
+      "module": 13,
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/11_authorization/python/use_case/server.py",
+      "kind": "auth",
+      "module": 11,
+      "lists": [
+        "tools/list"
+      ]
     }
   ],
   "scripts": [
@@ -395,6 +419,54 @@
       "arguments": [
         "--demo"
       ]
+    },
+    {
+      "path": "modules/11_authorization/python/examples/01_discovery_registration.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/11_authorization/python/examples/02_pkce_and_tokens.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/11_authorization/python/examples/03_local_auth.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/11_authorization/python/use_case/main.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/12_security/python/examples/01_poisoned_content.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/12_security/python/examples/02_boundaries.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/12_security/python/examples/03_defense_lab.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/12_security/python/use_case/main.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/13_testing_observability/python/examples/01_inmemory_contracts.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/13_testing_observability/python/examples/02_inspector_stdout.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/13_testing_observability/python/examples/03_traces_load_eval.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/13_testing_observability/python/use_case/main.py",
+      "arguments": []
     }
   ]
 }

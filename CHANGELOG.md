@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.5.0 — Phase 5, 2026-10-30
+
+- Modules 11–13: OAuth discovery and PKCE, secured issues, security repairs and observability.
+- Keycloak Compose with a dedicated interoperability check; separate synthetic offline authority.
+- Catalog review, bounded destinations/commands, minimal audit logs and container isolation lab.
+- Actual auth/stdio captures, semantic snapshots, SDK traces, bounded load and fixture evaluation.
+- Nine exercises with solutions, quizzes, host configs, a filled security checklist and Tier 3 checkpoint.
+- Dedicated Keycloak and isolation CI alongside the existing cross-platform and Inspector checks.
+
 ## 0.4.0 — Phase 4, 2026-10-30
 
 - Modules 07–10: transactional issues, bounded analytics, REST mocks, progress and cancellation.

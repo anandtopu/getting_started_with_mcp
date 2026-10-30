@@ -2,7 +2,7 @@
 
 Model Context Protocol (MCP) gives applications a common way to discover and use tools, data and reusable prompts. This hands-on course is for people who know basic Python and want to build the connections themselves.
 
-**Delivery status: Phase 3 â€” Tier 1 complete.** Modules 00â€“06 are delivered; modules 07â€“21, bonus lessons and capstones remain planned. See [the learning path](LEARNING_PATH.md), [feature map](docs/FEATURE_MAP.md), and [verification notes](docs/VERIFICATION_NOTES.md). Tiers 1–2 run today; this is not yet the completed 22-module course.
+**Delivery status: Phase 5 — Tiers 1–3 delivered.** Modules 00–13 and their checkpoints run today; modules 14–21, bonus lessons and capstones remain planned. See [the learning path](LEARNING_PATH.md), [feature map](docs/FEATURE_MAP.md), and [verification notes](docs/VERIFICATION_NOTES.md).
 
 ## Start Tier 1
 
@@ -46,6 +46,25 @@ The [Tier 2 checkpoint](modules/10_streamable_http/CHECKPOINT.md) connects notes
 wiki, issues and analytics, obtains confirmation, and shows report progress.
 Default runs use synthetic data and a fake model; no keys are needed.
 
+## Continue with Tier 3
+
+| Module | Lesson |
+|---|---|
+| 11 | [OAuth authorization and secured issues](modules/11_authorization/README.md) |
+| 12 | [Security threats and defenses](modules/12_security/README.md) |
+| 13 | [Testing, debugging and observability](modules/13_testing_observability/README.md) |
+
+```text
+uv sync --frozen --all-extras
+uv run python scripts/tier3.py
+uv run python checkpoints/03_security/acceptance.py
+```
+
+The [Tier 3 checkpoint](checkpoints/03_security/README.md) includes the filled
+[security checklist](docs/SECURITY_CHECKLIST.md). Default checks use a synthetic
+local OAuth fixture. [Keycloak Compose](deployment/auth/README.md) provides the
+separate identity-provider path; isolated Linux CI checks it and the container lab.
+
 ## What you will build
 
 The Lumen workspace grows from notes and wiki servers into issues, analytics, calendar and a gateway. Lumen Chat starts as a terminal host and becomes a web application with model choice, approvals, Tasks and interactive Apps. Every example uses synthetic data for the fictional Lumen Labs company.
@@ -66,7 +85,7 @@ Install [Python 3.12](https://www.python.org/downloads/), [uv](https://docs.astr
 ```text
 git clone https://github.com/anandtopu/getting_started_with_mcp.git
 cd getting_started_with_mcp
-uv sync --extra http
+uv sync --frozen --extra http --extra auth --extra observability
 npm ci
 uv run python scripts/check_env.py
 npm run inspector -- uv run python scripts/foundation_server.py

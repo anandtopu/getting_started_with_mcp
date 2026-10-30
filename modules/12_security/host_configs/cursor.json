@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "lumen-lab": {
+      "command": "C:\\Users\\anand\\.local\\bin\\uv.EXE",
+      "args": [
+        "--directory",
+        "D:\\Learning_Projects\\getting_started_with_mcp_prompt",
+        "run",
+        "--frozen",
+        "--extra",
+        "http",
+        "python",
+        "D:\\Learning_Projects\\getting_started_with_mcp_prompt\\modules\\12_security\\python\\use_case\\server.py"
+      ]
+    }
+  }
+}

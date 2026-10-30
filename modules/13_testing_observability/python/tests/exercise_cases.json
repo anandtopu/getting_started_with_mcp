@@ -1,0 +1,130 @@
+[
+  {
+    "stem": "01_practice",
+    "task": "Accept only JSON-RPC object lines on protocol stdout, not arbitrary JSON or debug text.",
+    "cases": [
+      [
+        [
+          [
+            "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{}}"
+          ]
+        ],
+        true
+      ],
+      [
+        [
+          [
+            "{\"debug\":true}"
+          ]
+        ],
+        false
+      ],
+      [
+        [
+          [
+            "debug startup"
+          ]
+        ],
+        false
+      ],
+      [
+        [
+          [
+            "[]"
+          ]
+        ],
+        false
+      ]
+    ]
+  },
+  {
+    "stem": "02_apply",
+    "task": "Score exact tool name AND arguments; empty evaluations return zero.",
+    "cases": [
+      [
+        [
+          [
+            {
+              "name": "read",
+              "arguments": {
+                "id": 1
+              }
+            }
+          ],
+          [
+            {
+              "name": "read",
+              "arguments": {
+                "id": 1
+              }
+            }
+          ]
+        ],
+        1
+      ],
+      [
+        [
+          [
+            {
+              "name": "read",
+              "arguments": {
+                "id": 2
+              }
+            }
+          ],
+          [
+            {
+              "name": "read",
+              "arguments": {
+                "id": 1
+              }
+            }
+          ]
+        ],
+        0
+      ],
+      [
+        [
+          [],
+          []
+        ],
+        0
+      ]
+    ]
+  },
+  {
+    "stem": "03_stretch",
+    "task": "Summarize timings without dropping failures; errors remain visible and input order is irrelevant.",
+    "cases": [
+      [
+        [
+          [
+            {
+              "ok": true,
+              "ms": 3
+            },
+            {
+              "ok": false,
+              "ms": 8
+            }
+          ]
+        ],
+        {
+          "requests": 2,
+          "errors": 1,
+          "max_ms": 8
+        }
+      ],
+      [
+        [
+          []
+        ],
+        {
+          "requests": 0,
+          "errors": 0,
+          "max_ms": 0
+        }
+      ]
+    ]
+  }
+]

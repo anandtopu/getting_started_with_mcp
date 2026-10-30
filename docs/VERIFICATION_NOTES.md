@@ -1,5 +1,48 @@
 # Verification notes
 
+## Phase 5 — Tier 3, October 30, 2026
+
+Modules 11–13 retain MCP **2026-07-28**, Python SDK **2.3.0**, and the existing
+TypeScript **2.4.0** companions. Course package version: **0.5.0**. The previously
+locked PyJWT/cryptography and OpenTelemetry extras supply auth and tracing.
+
+### Implementation and local evidence
+
+- Real loopback HTTP tests exercise the SDK OAuth client, metadata discovery,
+  S256 PKCE, state/issuer binding, one-use codes, resource indicators, scope
+  step-up, and token signature/audience/expiry checks. Resource-server tests
+  use SDK bearer middleware plus a body-derived write scope gate.
+- Keycloak **26.8.1** remains the preferred identity provider, with an imported
+  pre-registered public client and resource-indicator configuration. A separate
+  synthetic authority supports offline failure tests; it has no real login.
+  [Keycloak's MCP guide](https://www.keycloak.org/securing-apps/mcp-authz-server)
+  documents the experimental resource-indicator and CIMD features.
+- Security tests reproduce the fake salary leak and verify the repair, detect
+  catalog changes, reject injected host routes, constrain URL/command choices,
+  and check minimal audit records. A dedicated container configuration runs the
+  repaired server unprivileged, read-only and without a network.
+- The SDK trace example verifies shared trace IDs and error spans. Actual stdio
+  captures include trace context. Semantic wire snapshots preserve call inputs
+  and result/error payloads while excluding IDs, timing and metadata.
+- The bounded load example completed 20 requests at concurrency 4 with no errors.
+  Latencies include discovery and connection setup and are not a capacity claim.
+  The deterministic evaluation scores 30/30 homogeneous issue-read fixtures;
+  a bad selector scores 0/30. An explicit `--live` mode evaluates real model
+  proposals without executing them; it has not been run against a live provider.
+- Local Windows/Python 3.12 focused checks: **32 passed**. TypeScript compiler,
+  ESLint and **35 tests** passed. Ruff, formatting, local links, lesson structure
+  and the Tier 3 checkpoint passed. The full suite's supported-OS evidence will
+  be recorded below after CI completes.
+- Docker CLI is installed locally, but its configured daemon is unavailable.
+  Keycloak/container runtime validation therefore runs in dedicated Linux CI.
+  No host GUI, browser-login UI, external collector or paid model call is claimed.
+  The previously documented Windows Inspector HTTP shutdown issue remains a
+  limitation; Linux Inspector tests authenticated and ordinary HTTP.
+
+### Phase 5 publication
+
+CI verification pending for the Phase 5 implementation commit.
+
 ## Phase 4 — Tier 2, October 30, 2026
 
 Modules 07–10 use the same pinned **MCP 2026-07-28**, **Python SDK 2.3.0**,

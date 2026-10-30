@@ -72,7 +72,7 @@ def main() -> None:
     parser.add_argument("--release", action="store_true")
     args = parser.parse_args()
     errors = validate(args.release)
-    print("Phase 4: modules 00-10 delivered; modules 11-21 remain planned.")
+    print("Phase 5: modules 00-13 delivered; modules 14-21 remain planned.")
     for error in errors:
         print(error)
     raise SystemExit(bool(errors))

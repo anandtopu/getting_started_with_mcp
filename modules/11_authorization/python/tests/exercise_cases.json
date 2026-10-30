@@ -1,0 +1,144 @@
+[
+  {
+    "stem": "01_practice",
+    "task": "Combine prior scopes and a scope challenge without duplicates.",
+    "cases": [
+      [
+        [
+          [
+            "issues:read"
+          ],
+          [
+            "issues:write"
+          ]
+        ],
+        [
+          "issues:read",
+          "issues:write"
+        ]
+      ],
+      [
+        [
+          [
+            "issues:read"
+          ],
+          [
+            "issues:read"
+          ]
+        ],
+        [
+          "issues:read"
+        ]
+      ],
+      [
+        [
+          [],
+          []
+        ],
+        []
+      ]
+    ]
+  },
+  {
+    "stem": "02_apply",
+    "task": "Match the exact issuer recorded before redirect; missing or changed issuer fails.",
+    "cases": [
+      [
+        [
+          "https://auth.example",
+          "https://auth.example"
+        ],
+        true
+      ],
+      [
+        [
+          "https://auth.example",
+          "https://evil.example"
+        ],
+        false
+      ],
+      [
+        [
+          "https://auth.example",
+          null
+        ],
+        false
+      ],
+      [
+        [
+          "https://auth.example",
+          "https://auth.example/"
+        ],
+        false
+      ]
+    ]
+  },
+  {
+    "stem": "03_stretch",
+    "task": "After signature verification, require the intended audience, unexpired claims and required scopes.",
+    "cases": [
+      [
+        [
+          {
+            "aud": "mcp",
+            "exp": 20,
+            "scope": "read write"
+          },
+          "mcp",
+          10,
+          [
+            "read"
+          ]
+        ],
+        true
+      ],
+      [
+        [
+          {
+            "aud": "other",
+            "exp": 20,
+            "scope": "read"
+          },
+          "mcp",
+          10,
+          [
+            "read"
+          ]
+        ],
+        false
+      ],
+      [
+        [
+          {
+            "aud": [
+              "mcp"
+            ],
+            "exp": 10,
+            "scope": "read"
+          },
+          "mcp",
+          10,
+          [
+            "read"
+          ]
+        ],
+        false
+      ],
+      [
+        [
+          {
+            "aud": "mcp",
+            "exp": 20,
+            "scope": "read"
+          },
+          "mcp",
+          10,
+          [
+            "write"
+          ]
+        ],
+        false
+      ]
+    ]
+  }
+]

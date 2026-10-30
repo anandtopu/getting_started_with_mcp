@@ -1,0 +1,11 @@
+{
+  "command": "uv run python scripts/tier3.py --module 13 --capture",
+  "spec": "2026-07-28",
+  "python_sdk": "2.3.0",
+  "files": [
+    "python_main.jsonl"
+  ],
+  "redactions": [
+    "Authorization headers and credential fields"
+  ]
+}

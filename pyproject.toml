@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "getting-started-with-mcp"
-version = "0.4.0"
+version = "0.5.0"
 description = "A practical MCP course built around synthetic Lumen Labs data"
 readme = "README.md"
 requires-python = ">=3.12,<3.15"

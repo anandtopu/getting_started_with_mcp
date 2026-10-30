@@ -8,14 +8,16 @@ No credentials are embedded. Copy the relevant entries into existing host config
 import argparse
 import json
 import shutil
+from copy import deepcopy
 from pathlib import Path
 
 from common.config import HELP, ROOT
 from common.connections import SERVERS
 from scripts.tier1 import MODULES
 from scripts.tier2 import MODULES as TIER2_MODULES
+from scripts.tier3 import MODULES as TIER3_MODULES
 
-MODULES = MODULES + TIER2_MODULES
+MODULES = MODULES + TIER2_MODULES + TIER3_MODULES
 
 
 def configurations(index: int) -> dict:
@@ -34,6 +36,9 @@ def configurations(index: int) -> dict:
         8: ["reports"],
         9: ["issues"],
         10: ["wiki", "issues"],
+        11: ["issues"],
+        12: ["notes"],
+        13: ["notes"],
     }[index]
     servers = {}
     for alias in aliases:
@@ -63,28 +68,38 @@ def configurations(index: int) -> dict:
     configs = {
         host: {
             "servers" if host == "vscode" else "mcpServers": {
-                name: {**entry, **({"type": "stdio"} if host == "vscode" else {})}
+                name: {**deepcopy(entry), **({"type": "stdio"} if host == "vscode" else {})}
                 for name, entry in servers.items()
             }
         }
         for host in ["claude-desktop", "claude-code", "vscode", "cursor"]
     }
-    if index == 10:
+    if index in {12, 13}:
+        for config in configs.values():
+            entries = config.get("servers", config.get("mcpServers"))
+            entry = entries.pop("notes")
+            entry["args"][-1] = str(ROOT / "modules" / MODULES[index] / "python/use_case/server.py")
+            if index == 13:
+                entry["args"][4:4] = ["--extra", "observability"]
+            entries["lumen-lab" if index == 12 else "lumen-quality"] = entry
+    if index in {10, 11}:
         for host in ["claude-code", "vscode", "cursor"]:
             configs[host] = {
                 "servers" if host == "vscode" else "mcpServers": {
                     "lumen-remote": {
-                        "url": "http://127.0.0.1:8000/mcp",
+                        "url": f"http://127.0.0.1:{8001 if index == 11 else 8000}/mcp",
                         **({"type": "http"} if host != "cursor" else {}),
                     }
                 }
             }
+    if index == 11:
+        configs["claude-desktop"] = {"mcpServers": {}}
     return configs
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--module", type=int, choices=range(11), default=2)
+    parser.add_argument("--module", type=int, choices=range(14), default=2)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     output = args.output or ROOT / ".runtime/host_configs" / MODULES[args.module]

@@ -9,8 +9,9 @@ import json
 from common.config import ROOT
 from scripts.tier1 import MODULES
 from scripts.tier2 import MODULES as TIER2_MODULES
+from scripts.tier3 import MODULES as TIER3_MODULES
 
-MODULES = MODULES + TIER2_MODULES
+MODULES = MODULES + TIER2_MODULES + TIER3_MODULES
 
 SELECTION = [
     ("03_reference_server", ["tools/call"]),
@@ -24,6 +25,9 @@ SELECTION = [
     ("python_main", ["tools/call"]),
     ("python_main", ["tools/call"]),
     ("python_http", ["subscriptions/listen", "tools/call"]),
+    ("python_http", ["server/discover", "tools/call"]),
+    ("python_main", ["resources/read", "tools/call"]),
+    ("python_main", ["tools/call"]),
 ]
 
 
@@ -44,6 +48,8 @@ def excerpt(index: int) -> str:
             request = next(m for m in requests if m["params"].get("name") == "bulk_close")
         if index == 10 and method == "tools/call":
             request = next(m for m in requests if m["params"].get("name") == "route_region")
+        if index == 11 and method == "tools/call":
+            request = next(m for m in requests if m["id"] != "auth-check")
         selected.append(request)
         reply = next(
             (

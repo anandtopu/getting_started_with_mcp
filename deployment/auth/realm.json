@@ -1,0 +1,85 @@
+{
+  "realm": "lumen",
+  "enabled": true,
+  "sslRequired": "none",
+  "registrationAllowed": false,
+  "accessTokenLifespan": 120,
+  "users": [
+    {
+      "username": "learner",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Synthetic",
+      "lastName": "Learner",
+      "email": "learner@example.test",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "lumen-local-only",
+          "temporary": false
+        }
+      ]
+    }
+  ],
+  "clientScopes": [
+    {
+      "name": "issues:read",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true"
+      }
+    },
+    {
+      "name": "issues:write",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true"
+      }
+    }
+  ],
+  "clients": [
+    {
+      "clientId": "lumen-issues",
+      "enabled": true,
+      "bearerOnly": true,
+      "protocol": "openid-connect",
+      "attributes": {
+        "resource_url": "http://127.0.0.1:8001/mcp"
+      }
+    },
+    {
+      "clientId": "lumen-chat",
+      "enabled": true,
+      "publicClient": true,
+      "protocol": "openid-connect",
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": [
+        "http://127.0.0.1:8765/callback"
+      ],
+      "webOrigins": [
+        "http://localhost:6274"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256"
+      },
+      "defaultClientScopes": [],
+      "optionalClientScopes": [
+        "issues:read",
+        "issues:write"
+      ],
+      "protocolMappers": [
+        {
+          "name": "issues-audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "config": {
+            "included.client.audience": "lumen-issues",
+            "access.token.claim": "true",
+            "id.token.claim": "false"
+          }
+        }
+      ]
+    }
+  ]
+}

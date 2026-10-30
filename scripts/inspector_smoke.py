@@ -44,6 +44,21 @@ async def inspect(command: list, entry: dict) -> None:
 async def main() -> None:
     manifest = json.loads((ROOT / "scripts/examples.json").read_text())
     for entry in manifest["servers"]:
+        if entry.get("kind") == "auth":
+            from scripts.auth_lab import auth_stack
+
+            async with auth_stack() as authority:
+                await inspect(
+                    [
+                        authority.resource,
+                        "--transport",
+                        "http",
+                        "--header",
+                        "Authorization: Bearer " + authority.token(),
+                    ],
+                    entry,
+                )
+            continue
         if entry.get("kind") == "http":
             from scripts.http_lab import running_server
 

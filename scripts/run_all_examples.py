@@ -21,6 +21,12 @@ from scripts.tier1 import exercise, script_client
 async def check_lesson_server(entry: dict, capture_dir: Path | None) -> None:
     path = entry["path"]
     capture = capture_dir / (path.replace("/", "_") + ".jsonl") if capture_dir else None
+    if entry["kind"] == "auth":
+        from scripts.auth_lab import auth_stack, exercise_auth
+
+        async with auth_stack() as authority:
+            await exercise_auth(authority, capture)
+        return
     if entry["kind"] == "http":
         from scripts.http_lab import running_server
         from scripts.tier2 import exercise_http
@@ -39,6 +45,10 @@ async def check_lesson_server(entry: dict, capture_dir: Path | None) -> None:
             from common.pagination import all_resources
 
             assert len(await all_resources(client)) == 2
+        elif entry["kind"] == "tier3":
+            from scripts.tier3 import exercise as exercise_tier3
+
+            await exercise_tier3(client, entry["module"])
         elif entry["kind"] == "tier2":
             from scripts.tier2 import exercise as exercise_tier2
 

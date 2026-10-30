@@ -132,6 +132,13 @@ class CaptureTransport(httpx.AsyncBaseTransport):
                         message = json.loads(buffer)
                     except ValueError:
                         message = {"http_text": buffer.decode(errors="replace")}
+                    if (
+                        isinstance(message, dict)
+                        and "jsonrpc" not in message
+                        and "http_text" not in message
+                    ):
+                        capture.record("http_body", None, http_json=message)
+                        return
                     capture.record("server_to_client", message)
 
             async def aclose(self):

@@ -1,0 +1,49 @@
+[
+  {
+    "call": {
+      "name": "search_notes",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "text": "{\n  \"id\": 1,\n  \"title\": \"Release handover\",\n  \"body\": \"Review the release checklist.\",\n  \"tags\": [\n    \"release\"\n  ]\n}",
+          "type": "text"
+        }
+      ],
+      "isError": false,
+      "resultType": "complete",
+      "structuredContent": {
+        "result": [
+          {
+            "id": 1,
+            "title": "Release handover",
+            "body": "Review the release checklist.",
+            "tags": [
+              "release"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "call": {
+      "name": "create_note",
+      "arguments": {
+        "title": "",
+        "body": "x"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "text": "Error executing tool create_note: 1 validation error for create_noteArguments\ntitle\n  String should have at least 1 character [type=string_too_short, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/string_too_short",
+          "type": "text"
+        }
+      ],
+      "isError": true,
+      "resultType": "complete"
+    }
+  }
+]

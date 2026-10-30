@@ -1,0 +1,13 @@
+services:
+  repaired-lab:
+    build:
+      context: ../..
+      dockerfile: deployment/security/Dockerfile
+    stdin_open: true
+    network_mode: none
+    read_only: true
+    tmpfs: ["/tmp:size=16m,noexec,nosuid"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    pids_limit: 64
+    mem_limit: 256m

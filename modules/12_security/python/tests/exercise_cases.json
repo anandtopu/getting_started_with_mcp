@@ -1,0 +1,108 @@
+[
+  {
+    "stem": "01_practice",
+    "task": "Approve only the exact configured backend URL.",
+    "cases": [
+      [
+        [
+          "https://api.lumen.example/projects"
+        ],
+        true
+      ],
+      [
+        [
+          "https://api.lumen.example.evil/projects"
+        ],
+        false
+      ],
+      [
+        [
+          "http://169.254.169.254"
+        ],
+        false
+      ],
+      [
+        [
+          "https://api.lumen.example/projects?next=private"
+        ],
+        false
+      ]
+    ]
+  },
+  {
+    "stem": "02_apply",
+    "task": "Allow a proposed namespaced tool only if it is both pinned and approved for this host.",
+    "cases": [
+      [
+        [
+          "wiki__read",
+          [
+            "wiki__read"
+          ],
+          [
+            "wiki__read"
+          ]
+        ],
+        true
+      ],
+      [
+        [
+          "mail__send",
+          [
+            "mail__send"
+          ],
+          [
+            "wiki__read"
+          ]
+        ],
+        false
+      ],
+      [
+        [
+          "read",
+          [
+            "wiki__read"
+          ],
+          [
+            "wiki__read"
+          ]
+        ],
+        false
+      ]
+    ]
+  },
+  {
+    "stem": "03_stretch",
+    "task": "Reduce an audit event to the approved field set; no arguments or tokens.",
+    "cases": [
+      [
+        [
+          {
+            "event": "read",
+            "principal": "learner",
+            "allowed": false,
+            "token": "fake",
+            "arguments": {
+              "salary": 1
+            }
+          }
+        ],
+        {
+          "event": "read",
+          "principal": "learner",
+          "allowed": false
+        }
+      ],
+      [
+        [
+          {
+            "event": "deny"
+          }
+        ],
+        {
+          "event": "deny"
+        }
+      ]
+    ]
+  }
+]

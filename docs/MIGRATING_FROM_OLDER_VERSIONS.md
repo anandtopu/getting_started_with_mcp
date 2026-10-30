@@ -109,6 +109,7 @@ server = MCPServer("Historical Lumen fixture")
 
 @server.tool()
 async def analyze_history(ctx: Context) -> str:
+    await ctx.log("info", {"event": "historical-analysis"}, logger_name="fixture")
     roots = await ctx.request_context.session.list_roots()
     reply = await ctx.request_context.session.create_message(
         messages=[
@@ -171,6 +172,15 @@ async def main():
 if __name__ == "__main__":
     asyncio.run(main())
 ```
+
+### Deprecated logging comparison
+
+The historical server above sends a protocol log notification while handling the
+tool. Its captured `notifications/message` is diagnostic data, not a tool result.
+Module 13 uses JSON stderr events and OpenTelemetry spans instead; it never asks
+a current client to enable the deprecated logging capability. Dynamic Client
+Registration is also Deprecated: the current authorization lesson uses a reviewed
+metadata-document example and an issuer-bound pre-registration with Keycloak.
 
 ### Captured historical messages
 
@@ -238,6 +248,20 @@ if __name__ == "__main__":
   "params": {
     "name": "analyze_history",
     "arguments": {}
+  }
+}
+```
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "notifications/message",
+  "params": {
+    "level": "info",
+    "logger": "fixture",
+    "data": {
+      "event": "historical-analysis"
+    }
   }
 }
 ```
