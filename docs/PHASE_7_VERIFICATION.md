@@ -55,11 +55,44 @@ capacity. Browser tests passed on Windows and screenshots were visually inspecte
 at desktop and mobile sizes. App tests prove parent DOM access and external fetch
 are blocked, then exercise the allowed refresh and bridge teardown.
 
-Docker CLI is installed locally but its Linux engine is not running. The shipping
-CI job builds the notes image, exercises it with an MCP client, builds the full
-Keycloak/issues/NGINX stack, runs real OAuth plus web-host approval through the
-proxy, and tears down in an always-run step. Final CI outcomes are recorded below
-after the implementation run completes.
+The configured Docker Desktop pipe was unavailable locally. An alternate default
+context reached Podman 6.0.2, but its netavark/nftables setup failed before building
+containers. No host firewall configuration was changed; the lab Compose project
+was torn down. Container acceptance therefore runs on the Linux shipping CI job.
+
+That job found NGINX's default FastCGI temporary directory was incompatible with a
+read-only root filesystem. The fix puts all five NGINX temporary directories in
+`/tmp` and adds a proxy health probe plus Compose readiness waiting. The notes
+container, browser tests and package checks already passed before this fix.
+
+GitHub's status listings were stale during verification. Downloadable job logs
+provided the actual results, including the proxy startup error; the verification
+below records the final implementation run rather than relying on a queued label.
+
+## Final implementation CI
+
+[Run 41102934115](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41102934115)
+tests implementation commit `06ec1f177375b41193ffb7df9ba1cadb13733049`.
+Downloaded job logs confirm all **19 required jobs passed**:
+
+- Python 3.12–3.14 on Linux/Windows and Python 3.12 on macOS: **213 tests passed**,
+  all **127 examples** ran, and all earlier tier checkpoints passed.
+- Node 24 and 26 on Linux and Windows: type checking, ESLint and **36 tests passed**.
+- Inspector passed for every delivered server, including the authenticated
+  deployment server. Isolation, Keycloak, Strands and ADK jobs passed.
+- Shipping: wheel/sdist/npm/MCPB checks, installed-package checks, **three browser
+  tests**, the notes container and Tier 5 acceptance passed.
+- The complete Compose deployment became healthy. A real Keycloak PKCE flow,
+  audience checks and scope step-up passed through NGINX; an explicitly approved
+  web-host call reached the OAuth-protected issues service and returned its result.
+  All three containers and the project network were removed afterward.
+- Five browser screenshots were uploaded as the run's `browser-evidence` artifact.
+
+The final documentation-only commit records these results without rerunning
+unchanged implementation. External-link sweeping remains a manual workflow.
+Python 3.14 reports upstream LangSmith asyncio deprecations; the framework adapter
+also reports its existing LangChain beta warning. No MCP deprecation warning was
+reported.
 
 ## Scope and limitations
 

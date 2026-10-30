@@ -148,7 +148,7 @@ Use Docker Desktop with Linux containers on Windows/macOS, or Docker Engine with
 
 ```text
 docker compose -f deployment/auth/compose.yaml down
-docker compose -f deployment/compose.yaml up --build -d
+docker compose -f deployment/compose.yaml up --build -d --wait --wait-timeout 120
 uv run python scripts/keycloak_check.py --deployed
 docker compose -f deployment/compose.yaml ps
 ```
@@ -220,6 +220,7 @@ Expected: `PASS Module 20`. This finite acceptance check exits; the walkthrough 
 
 | Error or status you will see | Fix |
 |---|---|
+| `mkdir() "/var/cache/nginx/fastcgi_temp" failed (30: Read-only file system)` | Use the committed proxy config: all temporary directories belong under the writable /tmp mount. |
 | `Public endpoints require HTTPS; HTTP is loopback-only.` | Use HTTPS or the exact localhost/127.0.0.1 development exception. |
 | `Keycloak not ready; start the auth Compose service` | Start the complete stack, check port conflicts and wait for realm import. |
 | `HTTP 421` | Preserve the configured public Host through the proxy. |

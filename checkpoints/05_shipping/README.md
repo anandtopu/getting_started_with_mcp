@@ -16,7 +16,7 @@ uv run python scripts/package_lab.py
 uv run python checkpoints/05_shipping/acceptance.py
 docker build -f distribution/notes.Dockerfile -t lumen-notes-course:1.0.0 .
 uv run python checkpoints/05_shipping/acceptance.py --container
-docker compose -f deployment/compose.yaml up --build -d
+docker compose -f deployment/compose.yaml up --build -d --wait --wait-timeout 120
 uv run python scripts/keycloak_check.py --deployed
 npm run build:chat
 npx playwright install chromium
@@ -25,6 +25,8 @@ docker compose -f deployment/compose.yaml down --remove-orphans
 ```
 
 Stop the old `deployment/auth/compose.yaml` lab before starting the full stack.
+If you use a named local container context, add `--docker-context <name>` to the
+container acceptance command and use that same context for build/Compose.
 The scripts print PASS for package launch, module contracts, container protocol,
 PKCE/audience/scope step-up and web-host approval through the proxy. Browser tests
 cover refusal, approved reads, input, cancellation, App refresh/isolation and mobile

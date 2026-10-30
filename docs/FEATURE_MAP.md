@@ -114,9 +114,9 @@ These are explicit subcases within the files above; they must receive named test
 | Issuer/audience/scope enforcement | 11/02_pkce_and_tokens | Wrong issuer/audience, expired token and insufficient-scope tests |
 | Extension fallback | 17/01_negotiate | Missing capability results in a useful plain-text alternative |
 | Tasks lifecycle | 17/02_report_task | Creation/handle return, polling, updates, cancellation, completion, failure and expiry; exact methods from pinned extension |
-| App lifecycle | 17/03_analytics_app; 21/03_apps_compatibility | Tool association, UI resource load, bridge messages, sandbox enforcement and teardown |
+| App lifecycle | 17/03_analytics_app; [Module 21 browser host](../common/web_ui/app.source.js) | Tool association, UI resource load, bridge messages, sandbox enforcement and teardown in [browser tests](../tests/browser/chat.pw.ts) |
 | SDK low-level escape hatch | 01/02_raw_server; 17/01_negotiate | Handwritten mechanism first; SDK-supported extension dispatch next |
-| Legacy protocol compatibility | 21/03_apps_compatibility | Current SDK interoperates with an older fixture; exact old syntax remains in migration guide |
+| Legacy protocol compatibility | 21/03_older_protocol | Current SDK interoperates with an older fixture; exact old syntax remains in migration guide |
 | Deprecated roots and sampling | 09/03_files_and_model | Captured exchange analysis plus safe current replacement on client/server sides |
 | Deprecated protocol logging | 08/03_pages_completion; 13/03_traces_load_eval | Per-request legacy behavior explained in migration guide; stderr/OTel replacement tested |
 | Removed operations and historical transport/registration | docs/MIGRATING_FROM_OLDER_VERSIONS.md | Old/new comparisons only; ban legacy spellings from runnable course code |
