@@ -1,5 +1,87 @@
 # Verification notes
 
+## Phase 3 — Tier 1, October 30, 2026
+
+Modules 00–06 target the same **2026-07-28** revision and locked Python SDK
+**2.3.0** / split TypeScript SDK **2.4.0**. The added official filesystem
+reference package is pinned to **2.1.0**, verified against its npm metadata and
+[maintained source](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem).
+No framework dependency was introduced. JSON Schema validation moved from the
+development group into runtime dependencies because the host validates tool calls.
+
+### APIs checked and substitutions made
+
+- Python uses `MCPServer`, `mcp_types`, typed tool/resource/prompt decorators,
+  `Context` notifications, `Client.listen`, and completion references. Sources:
+  [subscriptions](https://py.sdk.modelcontextprotocol.io/handlers/subscriptions/),
+  [completions](https://py.sdk.modelcontextprotocol.io/servers/completions/), and
+  the installed 2.3.0 API signatures and implementations.
+- High-level Python prompts must return `UserMessage` from
+  `mcp.server.mcpserver.prompts.base`, or supported message dictionaries.
+  Returning a wire `PromptMessage` object caused stringification. Regression
+  tests and Python/TypeScript parity checks now verify embedded resource blocks.
+- Expected Python tool failures raise `ToolError`, so the user receives actionable
+  text. Arbitrary exceptions are masked by the SDK; expected failures should not
+  be implemented as accidental crashes.
+- A Python client pinned with `mode="2026-07-28"` skips discovery. The explicit
+  helper calls `session.send_discover` and adopts the validated `DiscoverResult`
+  before inspecting capability flags. This is a discovery request, not a session
+  handshake. Both SDK tracks exercise it in current-revision captures.
+- TypeScript uses `serveStdio`, `z.object`, `completable`, literal notification
+  method names, and `versionNegotiation`. Its resource server explicitly declares
+  `resources.subscribe`; otherwise a resource update filter is not honored.
+  These APIs were checked in the installed 2.4.0 declarations and runtime source.
+- Inspector **2.13.0** defaults ad-hoc connections to an older mode. The smoke
+  runner passes **`--protocol-era modern`**, verified in CLI help and source.
+  All 13 delivered server entry points pass the applicable list operations.
+- The low-level pagination server uses the public v2 runner metadata parameter
+  described in the [migration guide](MIGRATING_FROM_OLDER_VERSIONS.md). Its real
+  capture demonstrates an empty intermediate page and a terminal cursor.
+
+### Provider and host verification
+
+All models are still configured through `common/llm.py` and `.env`; fake mode is
+the default. Offline adapter tests verify tool envelopes, result IDs, denial
+results, native OpenAI/Anthropic history, Gemini thought-signature preservation,
+disabled automatic execution, and Ollama tool messages. Sources checked:
+
+- [OpenAI function calling](https://developers.openai.com/api/docs/guides/function-calling)
+- [Anthropic tool-call handling](https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls)
+- [Gemini Generate Content function calling](https://ai.google.dev/gemini-api/docs/generate-content/function-calling)
+- [Gemini thought signatures](https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures)
+- [Ollama tool calling](https://github.com/ollama/ollama/blob/main/docs/capabilities/tool-calling.mdx)
+
+Gemini's supported Generate Content interface is retained for consistency with
+the existing helper; Google now labels those documentation pages Legacy relative
+to its Interactions API. This is a provider API designation, not an MCP revision.
+Live provider behavior, account permissions, model availability and cost are not
+certified by the offline fixtures.
+
+[Host setup](HOST_SETUP.md) records four official configuration formats and their
+verification limits. Configs are generated with this machine's absolute paths and
+must be regenerated in another checkout. No interactive third-party host UI or
+live model call was performed. Learners verify the module 00 two-host chat step.
+
+### Local evidence
+
+- Seven module scenarios pass through actual stdio processes; **20 captures**
+  include requests, responses, errors, acknowledgements and change notifications.
+- The runner inventories **13 server entry points and 34 executable scripts**.
+  It includes both language tracks and the three-server fake Chat checkpoint.
+- **79 Python tests passed, one Windows symlink-permission skip**, before the final
+  publication checks; **33 TypeScript tests passed**. Ruff, formatting, TypeScript
+  compilation, ESLint, local links and delivered-course checks pass.
+- The Python/TypeScript parity tests compare note state, rich content bytes and
+  embedded prompt messages, rather than merely checking that processes start.
+- The notification CLI's explicit `--watch-once --confirm-demo-write` path passes
+  in both languages and prints the refetched bulletin. Denial does not update it.
+- A full external-link sweep is not claimed. The release coverage gate still
+  intentionally fails because later tiers are planned.
+
+CI publication results are recorded below after the hosted matrix completes.
+
+---
+
 Checked: **October 29, 2026, America/Chicago**. Phase 1 records source verification, not installation or runtime certification.
 
 ## Specification baseline

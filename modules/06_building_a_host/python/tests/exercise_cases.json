@@ -1,0 +1,86 @@
+[
+  {
+    "name": "provider_definition",
+    "task": "Convert a MCP definition to Anthropic input_schema without losing its description.",
+    "stem": "01_practice",
+    "cases": [
+      [
+        [
+          {
+            "name": "search",
+            "description": "Find notes",
+            "inputSchema": {
+              "type": "object"
+            }
+          }
+        ],
+        {
+          "name": "search",
+          "description": "Find notes",
+          "input_schema": {
+            "type": "object"
+          }
+        }
+      ]
+    ]
+  },
+  {
+    "name": "route_call",
+    "task": "Return a configured route only; unknown names must return None.",
+    "stem": "02_apply",
+    "cases": [
+      [
+        [
+          "notes__search",
+          {
+            "notes__search": [
+              "notes",
+              "search"
+            ]
+          }
+        ],
+        [
+          "notes",
+          "search"
+        ]
+      ],
+      [
+        [
+          "unknown",
+          {}
+        ],
+        null
+      ]
+    ]
+  },
+  {
+    "name": "trusted_arguments",
+    "task": "Ignore model confirmation; inject True only after a trusted human decision, else return None.",
+    "stem": "03_stretch",
+    "cases": [
+      [
+        [
+          {
+            "title": "Review",
+            "confirmed": true
+          },
+          false
+        ],
+        null
+      ],
+      [
+        [
+          {
+            "title": "Review",
+            "confirmed": false
+          },
+          true
+        ],
+        {
+          "title": "Review",
+          "confirmed": true
+        }
+      ]
+    ]
+  }
+]

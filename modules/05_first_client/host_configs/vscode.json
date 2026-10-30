@@ -1,0 +1,40 @@
+{
+  "servers": {
+    "notes": {
+      "command": "C:\\Users\\anand\\.local\\bin\\uv.EXE",
+      "args": [
+        "--directory",
+        "D:\\Learning_Projects\\getting_started_with_mcp_prompt",
+        "run",
+        "--frozen",
+        "python",
+        "D:\\Learning_Projects\\getting_started_with_mcp_prompt\\modules\\02_first_server_tools\\python\\use_case\\main.py"
+      ],
+      "type": "stdio"
+    },
+    "wiki": {
+      "command": "C:\\Users\\anand\\.local\\bin\\uv.EXE",
+      "args": [
+        "--directory",
+        "D:\\Learning_Projects\\getting_started_with_mcp_prompt",
+        "run",
+        "--frozen",
+        "python",
+        "D:\\Learning_Projects\\getting_started_with_mcp_prompt\\modules\\03_resources\\python\\use_case\\main.py"
+      ],
+      "type": "stdio"
+    },
+    "prompts": {
+      "command": "C:\\Users\\anand\\.local\\bin\\uv.EXE",
+      "args": [
+        "--directory",
+        "D:\\Learning_Projects\\getting_started_with_mcp_prompt",
+        "run",
+        "--frozen",
+        "python",
+        "D:\\Learning_Projects\\getting_started_with_mcp_prompt\\modules\\04_prompts\\python\\use_case\\main.py"
+      ],
+      "type": "stdio"
+    }
+  }
+}

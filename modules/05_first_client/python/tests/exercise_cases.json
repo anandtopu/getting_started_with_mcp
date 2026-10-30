@@ -1,0 +1,105 @@
+[
+  {
+    "name": "next_page",
+    "task": "Continue pagination by nextCursor even if the current page is empty.",
+    "stem": "01_practice",
+    "cases": [
+      [
+        [
+          {
+            "resources": [],
+            "nextCursor": "next"
+          }
+        ],
+        "next"
+      ],
+      [
+        [
+          {
+            "resources": [
+              {
+                "name": "Index"
+              }
+            ]
+          }
+        ],
+        null
+      ]
+    ]
+  },
+  {
+    "name": "failure_kind",
+    "task": "Distinguish protocol errors, tool failures, and successful responses.",
+    "stem": "02_apply",
+    "cases": [
+      [
+        [
+          {
+            "error": {
+              "code": -32601
+            }
+          }
+        ],
+        "protocol"
+      ],
+      [
+        [
+          {
+            "result": {
+              "isError": true
+            }
+          }
+        ],
+        "tool"
+      ],
+      [
+        [
+          {
+            "result": {}
+          }
+        ],
+        "success"
+      ]
+    ]
+  },
+  {
+    "name": "catalog_change",
+    "task": "Clear only the resource catalog on its list-change event.",
+    "stem": "03_stretch",
+    "cases": [
+      [
+        [
+          {
+            "resources": [
+              "old"
+            ],
+            "tools": [
+              "search"
+            ]
+          },
+          "notifications/resources/list_changed"
+        ],
+        {
+          "tools": [
+            "search"
+          ]
+        }
+      ],
+      [
+        [
+          {
+            "resources": [
+              "old"
+            ]
+          },
+          "notifications/tools/list_changed"
+        ],
+        {
+          "resources": [
+            "old"
+          ]
+        }
+      ]
+    ]
+  }
+]

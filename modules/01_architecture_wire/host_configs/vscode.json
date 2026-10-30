@@ -1,0 +1,16 @@
+{
+  "servers": {
+    "raw": {
+      "command": "C:\\Users\\anand\\.local\\bin\\uv.EXE",
+      "args": [
+        "--directory",
+        "D:\\Learning_Projects\\getting_started_with_mcp_prompt",
+        "run",
+        "--frozen",
+        "python",
+        "D:\\Learning_Projects\\getting_started_with_mcp_prompt\\modules\\01_architecture_wire\\python\\examples\\02_raw_server.py"
+      ],
+      "type": "stdio"
+    }
+  }
+}

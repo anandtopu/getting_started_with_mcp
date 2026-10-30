@@ -75,3 +75,20 @@ class ProviderModel:
 def create_model(settings: Settings | None = None) -> FakeModel | ProviderModel:
     settings = settings or load_settings()
     return FakeModel() if settings.provider == "fake" else ProviderModel(settings)
+
+
+def create_tool_model(prompt: str, settings: Settings | None = None, turns=None):
+    """Module 06's explicit tool loop uses the same configuration boundary."""
+    from common.tool_formats import ToolCall, Turn
+    from common.tool_models import ProviderToolModel, ScriptedModel
+
+    settings = settings or load_settings()
+    if settings.provider == "fake":
+        return ScriptedModel(
+            turns
+            or [
+                Turn(calls=[ToolCall("read-1", "notes__search_notes", {"query": "release"})]),
+                Turn("Fixture completed: inspect the returned release note; no LLM was contacted."),
+            ]
+        )
+    return ProviderToolModel(settings, prompt)

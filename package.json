@@ -1,27 +1,33 @@
 {
   "name": "getting-started-with-mcp",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
-  "workspaces": ["common/typescript", "modules/*/typescript"],
-  "engines": {"node": "^24.0.0 || ^26.0.0"},
+  "workspaces": [
+    "common/typescript",
+    "modules/*/typescript"
+  ],
+  "engines": {
+    "node": "^24.0.0 || ^26.0.0"
+  },
   "scripts": {
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint common/typescript",
+    "lint": "eslint common/typescript modules scripts/check-exercise.ts",
     "inspector": "mcp-inspector",
     "check": "npm run typecheck && npm run lint && npm test"
   },
   "devDependencies": {
-    "@modelcontextprotocol/server": "~2.4.0",
+    "@eslint/js": "~10.0.1",
     "@modelcontextprotocol/client": "~2.4.0",
     "@modelcontextprotocol/inspector": "~2.13.0",
+    "@modelcontextprotocol/server": "~2.4.0",
+    "@modelcontextprotocol/server-filesystem": "2.1.0",
     "@types/node": "~26.6.6",
-    "@eslint/js": "~10.0.1",
     "eslint": "~10.13.0",
-    "typescript-eslint": "~8.72.1",
-    "typescript": "~6.0.3",
     "tsx": "~4.23.15",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "~8.72.1",
     "vitest": "~5.0.5",
     "zod": "~4.6.7"
   }

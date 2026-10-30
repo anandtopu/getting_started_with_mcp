@@ -1,0 +1,89 @@
+[
+  {
+    "name": "input_schema",
+    "task": "Make the name field required and reject empty names in a tool input schema.",
+    "stem": "01_practice",
+    "cases": [
+      [
+        [],
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "name"
+          ]
+        }
+      ]
+    ]
+  },
+  {
+    "name": "confirm_write",
+    "task": "Return an error tool result on denial and a text result after approval.",
+    "stem": "02_apply",
+    "cases": [
+      [
+        [
+          false
+        ],
+        {
+          "content": [
+            {
+              "type": "text",
+              "text": "Confirmation required"
+            }
+          ],
+          "isError": true
+        }
+      ],
+      [
+        [
+          true
+        ],
+        {
+          "content": [
+            {
+              "type": "text",
+              "text": "Saved"
+            }
+          ],
+          "isError": false
+        }
+      ]
+    ]
+  },
+  {
+    "name": "unique_tags",
+    "task": "Add a tag idempotently while preserving insertion order and the original list.",
+    "stem": "03_stretch",
+    "cases": [
+      [
+        [
+          [
+            "release"
+          ],
+          "release"
+        ],
+        [
+          "release"
+        ]
+      ],
+      [
+        [
+          [
+            "release"
+          ],
+          "review"
+        ],
+        [
+          "release",
+          "review"
+        ]
+      ]
+    ]
+  }
+]

@@ -2,7 +2,30 @@
 
 Model Context Protocol (MCP) gives applications a common way to discover and use tools, data and reusable prompts. This hands-on course is for people who know basic Python and want to build the connections themselves.
 
-**Delivery status: Phase 2 foundation.** The 22 lessons arrive in later phases. See [the learning path](LEARNING_PATH.md), [feature map](docs/FEATURE_MAP.md), and [verification notes](docs/VERIFICATION_NOTES.md). The foundation runs today; this is not yet the completed course.
+**Delivery status: Phase 3 — Tier 1 complete.** Modules 00–06 are delivered; modules 07–21, bonus lessons and capstones remain planned. See [the learning path](LEARNING_PATH.md), [feature map](docs/FEATURE_MAP.md), and [verification notes](docs/VERIFICATION_NOTES.md). Tier 1 runs today; this is not yet the completed 22-module course.
+
+## Start Tier 1
+
+| Module | Lesson | Languages |
+|---|---|---|
+| 00 | [Setup and orientation](modules/00_setup/README.md) | Python |
+| 01 | [Architecture and wire](modules/01_architecture_wire/README.md) | Python |
+| 02 | [Typed tools and notes](modules/02_first_server_tools/README.md) | Python, TypeScript |
+| 03 | [Resources and wiki](modules/03_resources/README.md) | Python, TypeScript |
+| 04 | [Prompt workflows](modules/04_prompts/README.md) | Python, TypeScript |
+| 05 | [Clients and pagination](modules/05_first_client/README.md) | Python, TypeScript |
+| 06 | [Lumen Chat v1](modules/06_building_a_host/README.md) | Python |
+
+After setup, run the free, deterministic [Tier 1 checkpoint](modules/06_building_a_host/CHECKPOINT.md):
+
+```text
+uv run python modules/06_building_a_host/python/use_case/main.py --demo
+```
+
+It performs three documented reads and one approved in-memory note creation across
+two course servers and the restricted filesystem reference server. No model keys
+are needed. Run without `--demo` for interactive approval; provider configuration
+is explained in module 06.
 
 ## What you will build
 
@@ -25,7 +48,7 @@ Install [Python 3.12](https://www.python.org/downloads/), [uv](https://docs.astr
 git clone https://github.com/anandtopu/getting_started_with_mcp.git
 cd getting_started_with_mcp
 uv sync
-npm install
+npm ci
 uv run python scripts/check_env.py
 npm run inspector -- uv run python scripts/foundation_server.py
 ```
@@ -35,7 +58,7 @@ The Inspector opens a local interface. Connect to the server, select **Tools**, 
 In PowerShell, use `npm.cmd` if execution policy blocks `npm.ps1`. All other commands above are identical across platforms. For a terminal-only check:
 
 ```text
-npm run inspector -- --cli uv run python scripts/foundation_server.py --method tools/list
+npm run inspector -- --cli uv run python scripts/foundation_server.py --protocol-era modern --method tools/list
 uv run python scripts/run_all_examples.py
 ```
 

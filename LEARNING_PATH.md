@@ -1,6 +1,6 @@
 # Learning path
 
-Plan status: Phase 1. The course is not implemented yet. See [the build plan](docs/PHASE_1_PLAN.md), [coverage contract](docs/FEATURE_MAP.md), and [verified dependency candidates](docs/VERIFICATION_NOTES.md).
+Delivery status: Phase 3. Tier 1 (modules 00–06) and its checkpoint are implemented; later tiers remain planned. See [the build plan](docs/PHASE_1_PLAN.md), [coverage contract](docs/FEATURE_MAP.md), and [verified dependency candidates](docs/VERIFICATION_NOTES.md).
 
 You need basic Python, terminal navigation, and basic git. You will learn the other prerequisites as they become useful. MCP means Model Context Protocol: a shared way for applications to discover and use tools, data, and reusable prompts. Lumen Labs supplies the synthetic workplace; your growing workspace supplies its servers, and Lumen Chat is the application that uses them.
 
@@ -25,18 +25,20 @@ flowchart TD
 
 | Module | Minutes | What you will demonstrate | Workspace / Chat |
 |---|---:|---|---|
-| 00 Setup | 45 | Explain hosts/clients/servers; inspect a restricted reference server in two hosts | Orientation |
-| 01 Architecture and wire | 75 | Read JSON-RPC, discover capabilities, build a small raw server, capture traffic | Protocol foundations |
-| 02 First server: tools [TS] | 90 | Build typed, annotated tools and distinguish tool failures from protocol failures | Workspace 1: notes |
-| 03 Resources [TS] | 75 | Expose wiki URIs, templates, binary content, links and subscriptions | Workspace 2: wiki |
-| 04 Prompts [TS] | 60 | Compose incident, release-note and meeting prompts with completions | Workspace 2 |
-| 05 First client [TS] | 75 | Query both servers without a language model; handle pages and errors | Workspace 2 |
-| 06 Building a host | 120 | Write the tool-call loop, provider mappings, routing and approvals | Chat 1: terminal |
+| [00 Setup](modules/00_setup/README.md) | 45 | Explain hosts/clients/servers; inspect a restricted reference server in two hosts | Orientation |
+| [01 Architecture and wire](modules/01_architecture_wire/README.md) | 75 | Read JSON-RPC, discover capabilities, build a small raw server, capture traffic | Protocol foundations |
+| [02 First server: tools [TS]](modules/02_first_server_tools/README.md) | 90 | Build typed, annotated tools and distinguish tool failures from protocol failures | Workspace 1: notes |
+| [03 Resources [TS]](modules/03_resources/README.md) | 75 | Expose wiki URIs, templates, binary content, links and subscriptions | Workspace 2: wiki |
+| [04 Prompts [TS]](modules/04_prompts/README.md) | 60 | Compose incident, release-note and meeting prompts with completions | Workspace 2 |
+| [05 First client [TS]](modules/05_first_client/README.md) | 75 | Query both servers without a language model; handle pages and errors | Workspace 2 |
+| [06 Building a host](modules/06_building_a_host/README.md) | 120 | Write the tool-call loop, provider mappings, routing and approvals | Chat 1: terminal |
 | Checkpoint | 60 | Connect two course servers and a reference server through Chat | End-to-end foundation |
 
 Introduce JSON and JSON-RPC in 01, JSON Schema in 02, async and context managers before 05, and language models/tool calling before 06. [TS] includes a complete parallel TypeScript lesson; it is optional for the Python schedule.
 
 You are ready to move on when you can explain a complete tool call from user request to response, inspect the actual JSON, identify who approves an action, and run your client without an LLM. Demonstrate a malformed request and a successful recovery. The checkpoint must reject an unapproved write.
+
+Run the [Tier 1 checkpoint and self-check](modules/06_building_a_host/CHECKPOINT.md) before continuing.
 
 ## Tier 2 — Real-world servers: 10 hours
 

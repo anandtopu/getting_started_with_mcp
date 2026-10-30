@@ -1,0 +1,93 @@
+[
+  {
+    "name": "integration_counts",
+    "task": "Return custom connectors and standard adapters for N hosts and M systems.",
+    "stem": "01_practice",
+    "cases": [
+      [
+        [
+          3,
+          4
+        ],
+        {
+          "custom": 12,
+          "standard": 7
+        }
+      ],
+      [
+        [
+          2,
+          5
+        ],
+        {
+          "custom": 10,
+          "standard": 7
+        }
+      ]
+    ]
+  },
+  {
+    "name": "allowed_paths",
+    "task": "Filter relative filenames, rejecting absolute paths, parent segments, and backslash traversal.",
+    "stem": "02_apply",
+    "cases": [
+      [
+        [
+          [
+            "notes/a.md",
+            "../secret",
+            "C:/secret",
+            "/tmp/x",
+            "..\\secret"
+          ]
+        ],
+        [
+          "notes/a.md"
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "host_config",
+    "task": "Build the two different host envelopes without changing the server entry.",
+    "stem": "03_stretch",
+    "cases": [
+      [
+        [
+          "vscode",
+          {
+            "command": "uv",
+            "args": [
+              "run"
+            ]
+          }
+        ],
+        {
+          "servers": {
+            "lumen": {
+              "command": "uv",
+              "args": [
+                "run"
+              ]
+            }
+          }
+        }
+      ],
+      [
+        [
+          "cursor",
+          {
+            "command": "uv"
+          }
+        ],
+        {
+          "mcpServers": {
+            "lumen": {
+              "command": "uv"
+            }
+          }
+        }
+      ]
+    ]
+  }
+]

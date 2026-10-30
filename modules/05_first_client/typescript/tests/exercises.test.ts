@@ -1,0 +1,11 @@
+import { test, expect } from 'vitest';
+import { solve as solve1 } from '../solutions/01_practice.ts';
+import { solve as solve2 } from '../solutions/02_apply.ts';
+import { solve as solve3 } from '../solutions/03_stretch.ts';
+test('next_page case 1', () => { expect(Reflect.apply(solve1, null, [{"resources": [], "nextCursor": "next"}])).toEqual("next"); });
+test('next_page case 2', () => { expect(Reflect.apply(solve1, null, [{"resources": [{"name": "Index"}]}])).toEqual(null); });
+test('failure_kind case 1', () => { expect(Reflect.apply(solve2, null, [{"error": {"code": -32601}}])).toEqual("protocol"); });
+test('failure_kind case 2', () => { expect(Reflect.apply(solve2, null, [{"result": {"isError": true}}])).toEqual("tool"); });
+test('failure_kind case 3', () => { expect(Reflect.apply(solve2, null, [{"result": {}}])).toEqual("success"); });
+test('catalog_change case 1', () => { expect(Reflect.apply(solve3, null, [{"resources": ["old"], "tools": ["search"]}, "notifications/resources/list_changed"])).toEqual({"tools": ["search"]}); });
+test('catalog_change case 2', () => { expect(Reflect.apply(solve3, null, [{"resources": ["old"]}, "notifications/tools/list_changed"])).toEqual({"resources": ["old"]}); });

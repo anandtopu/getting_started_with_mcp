@@ -1,5 +1,264 @@
 {
-  "phase": 2,
-  "servers": [{"path": "scripts/foundation_server.py", "tool": "dataset_counts", "arguments": {}, "expected": {"employees": 80, "issues": 400}}],
-  "scripts": [{"path": "scripts/check_env.py", "arguments": []}]
+  "phase": 3,
+  "servers": [
+    {
+      "path": "scripts/foundation_server.py",
+      "kind": "foundation",
+      "tool": "dataset_counts",
+      "arguments": {},
+      "expected": {
+        "employees": 80,
+        "issues": 400
+      },
+      "lists": [
+        "tools/list",
+        "resources/list",
+        "prompts/list"
+      ]
+    },
+    {
+      "path": "modules/02_first_server_tools/python/use_case/main.py",
+      "kind": "lesson",
+      "module": 2,
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/02_first_server_tools/python/examples/01_hello_server.py",
+      "kind": "lesson",
+      "module": 2,
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/02_first_server_tools/python/examples/02_rich_results.py",
+      "kind": "lesson",
+      "module": 2,
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/02_first_server_tools/typescript/use_case/main.ts",
+      "kind": "lesson",
+      "module": 2,
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/02_first_server_tools/typescript/examples/01_hello_server.ts",
+      "kind": "lesson",
+      "module": 2,
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/02_first_server_tools/typescript/examples/02_rich_results.ts",
+      "kind": "lesson",
+      "module": 2,
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/03_resources/python/use_case/main.py",
+      "kind": "lesson",
+      "module": 3,
+      "lists": [
+        "tools/list",
+        "resources/list"
+      ]
+    },
+    {
+      "path": "modules/03_resources/typescript/use_case/main.ts",
+      "kind": "lesson",
+      "module": 3,
+      "lists": [
+        "tools/list",
+        "resources/list"
+      ]
+    },
+    {
+      "path": "modules/04_prompts/python/use_case/main.py",
+      "kind": "lesson",
+      "module": 4,
+      "lists": [
+        "tools/list",
+        "prompts/list"
+      ]
+    },
+    {
+      "path": "modules/04_prompts/typescript/use_case/main.ts",
+      "kind": "lesson",
+      "module": 4,
+      "lists": [
+        "tools/list",
+        "prompts/list"
+      ]
+    },
+    {
+      "path": "modules/01_architecture_wire/python/examples/02_raw_server.py",
+      "kind": "raw",
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/05_first_client/python/use_case/paged_server.py",
+      "kind": "paged",
+      "lists": [
+        "resources/list"
+      ]
+    }
+  ],
+  "scripts": [
+    {
+      "path": "scripts/check_env.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/00_setup/python/examples/01_ecosystem.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/00_setup/python/examples/02_environment.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/00_setup/python/examples/03_reference_server.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/00_setup/python/use_case/main.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/01_architecture_wire/python/examples/01_jsonrpc.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/01_architecture_wire/python/examples/03_wiretap_client.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/01_architecture_wire/python/use_case/main.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/02_first_server_tools/python/examples/03_errors_approval.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/02_first_server_tools/typescript/examples/03_errors_approval.ts",
+      "arguments": []
+    },
+    {
+      "path": "modules/03_resources/python/examples/01_static_resources.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/03_resources/python/examples/02_resource_templates.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/03_resources/python/examples/03_resource_changes.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/03_resources/typescript/examples/01_static_resources.ts",
+      "arguments": []
+    },
+    {
+      "path": "modules/03_resources/typescript/examples/02_resource_templates.ts",
+      "arguments": []
+    },
+    {
+      "path": "modules/03_resources/typescript/examples/03_resource_changes.ts",
+      "arguments": []
+    },
+    {
+      "path": "modules/04_prompts/python/examples/01_prompt_arguments.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/04_prompts/python/examples/02_embedded_context.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/04_prompts/python/examples/03_prompt_completion.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/04_prompts/typescript/examples/01_prompt_arguments.ts",
+      "arguments": []
+    },
+    {
+      "path": "modules/04_prompts/typescript/examples/02_embedded_context.ts",
+      "arguments": []
+    },
+    {
+      "path": "modules/04_prompts/typescript/examples/03_prompt_completion.ts",
+      "arguments": []
+    },
+    {
+      "path": "modules/05_first_client/python/examples/01_stdio_client.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/05_first_client/python/examples/02_pages_and_errors.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/05_first_client/python/examples/03_cli_and_changes.py",
+      "arguments": [
+        "--watch-once",
+        "--confirm-demo-write"
+      ]
+    },
+    {
+      "path": "modules/05_first_client/typescript/examples/01_stdio_client.ts",
+      "arguments": []
+    },
+    {
+      "path": "modules/05_first_client/typescript/examples/02_pages_and_errors.ts",
+      "arguments": []
+    },
+    {
+      "path": "modules/05_first_client/typescript/examples/03_cli_and_changes.ts",
+      "arguments": [
+        "--watch-once",
+        "--confirm-demo-write"
+      ]
+    },
+    {
+      "path": "modules/05_first_client/python/use_case/main.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/05_first_client/typescript/use_case/main.ts",
+      "arguments": []
+    },
+    {
+      "path": "modules/06_building_a_host/python/examples/01_provider_formats.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/06_building_a_host/python/examples/02_manual_host_loop.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/06_building_a_host/python/examples/03_routing_and_approval.py",
+      "arguments": []
+    },
+    {
+      "path": "modules/06_building_a_host/python/use_case/main.py",
+      "arguments": [
+        "--demo"
+      ]
+    }
+  ]
 }

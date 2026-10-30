@@ -48,6 +48,22 @@ def validate(release: bool = False) -> list[str]:
                 errors.append(f"{readme.parent.name}: needs three {folder}")
         if not list((readme.parent / "wire").glob("*.jsonl")):
             errors.append(f"{readme.parent.name}: missing wire captures")
+        for required in [
+            "python/use_case/main.py",
+            "python/tests/test_module.py",
+            "quiz.md",
+            "host_configs/vscode.json",
+            "wire/manifest.json",
+        ]:
+            if not (readme.parent / required).is_file():
+                errors.append(f"{readme.parent.name}: missing {required}")
+        quiz = readme.parent / "quiz.md"
+        if quiz.exists() and not 5 <= quiz.read_text(encoding="utf-8").count("<details>") <= 8:
+            errors.append(f"{readme.parent.name}: quiz needs 5–8 expandable answers")
+        if readme.parent.name[:2] in {"02", "03", "04", "05"}:
+            for folder in ("examples", "exercises", "solutions"):
+                if len(list((readme.parent / "typescript" / folder).glob("[0-9][0-9]_*.ts"))) < 3:
+                    errors.append(f"{readme.parent.name}: needs three TypeScript {folder}")
     return errors
 
 
@@ -56,7 +72,7 @@ def main() -> None:
     parser.add_argument("--release", action="store_true")
     args = parser.parse_args()
     errors = validate(args.release)
-    print("Phase 2 foundation; modules 00-21 remain planned.")
+    print("Phase 3: modules 00-06 delivered; modules 07-21 remain planned.")
     for error in errors:
         print(error)
     raise SystemExit(bool(errors))

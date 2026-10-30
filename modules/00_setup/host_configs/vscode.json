@@ -1,0 +1,12 @@
+{
+  "servers": {
+    "files": {
+      "command": "C:\\Program Files\\nodejs\\node.EXE",
+      "args": [
+        "D:\\Learning_Projects\\getting_started_with_mcp_prompt\\node_modules\\@modelcontextprotocol\\server-filesystem\\dist\\index.js",
+        "D:\\Learning_Projects\\getting_started_with_mcp_prompt\\data\\files"
+      ],
+      "type": "stdio"
+    }
+  }
+}

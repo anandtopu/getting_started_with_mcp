@@ -1,0 +1,11 @@
+{
+  "command": "uv run python scripts/tier1.py --module 1 --capture",
+  "spec": "2026-07-28",
+  "python_sdk": "2.3.0",
+  "typescript_sdk": "2.4.0",
+  "filesystem": "2.1.0",
+  "files": [
+    "01_jsonrpc.jsonl",
+    "03_wiretap_client.jsonl"
+  ]
+}

@@ -1,4 +1,4 @@
-name: Foundation checks
+name: Course checks
 on:
   push:
   pull_request:
@@ -30,11 +30,13 @@ jobs:
         with:
           node-version: '26'
       - run: uv sync --frozen --all-extras --python ${{ matrix.python }}
+      - run: npm ci
       - run: uv run --frozen ruff check .
       - run: uv run --frozen ruff format --check .
       - run: uv run --frozen pytest
       - run: uv run --frozen python scripts/check_course.py
       - run: uv run --frozen python scripts/run_all_examples.py
+      - run: uv run --frozen python scripts/tier1.py
   typescript:
     strategy:
       fail-fast: false
@@ -61,10 +63,9 @@ jobs:
           node-version: '26'
       - run: uv sync --frozen
       - run: npm ci
-      - run: npm run inspector -- --cli uv run python scripts/foundation_server.py --method tools/list
-      - run: npm run inspector -- --cli uv run python scripts/foundation_server.py --method resources/list
-      - run: npm run inspector -- --cli uv run python scripts/foundation_server.py --method prompts/list
+      - run: uv run --frozen python scripts/inspector_smoke.py
       - run: npm run inspector -- --cli uv run python data/security/vulnerable_server.py --lab --method tools/list
+      - run: npm run inspector -- --cli node node_modules/@modelcontextprotocol/server-filesystem/dist/index.js data/files --method tools/list
   external-links:
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest

@@ -11,3 +11,25 @@ Keep fixtures synthetic and deterministic. Never attach real credentials or cust
 A contribution should include the problem, resulting behavior, exact check results, and limitations. Add meaningful regression tests for behavior changes. Examples that require an external service need an offline fixture path. Do not claim a complete module based on file count alone.
 
 Report content errors using the issue template with the module, quoted sentence, and primary source. For a suspected security issue, use the repository's private vulnerability reporting if enabled; otherwise contact the repository owner without posting exploit details or secrets publicly.
+
+## Python venv/pip fallback
+
+If uv is unavailable, install Python 3.12 and run `python -m venv .venv` from the
+repository root. Activate it with `.venv\Scripts\Activate.ps1` in PowerShell or
+`source .venv/bin/activate` on macOS/Linux. If PowerShell blocks activation, use
+`.venv\Scripts\python.exe` directly instead of changing a machine-wide policy.
+
+```text
+python -m pip install --upgrade pip
+python -m pip install -e ".[host]" --group dev
+npm ci
+python scripts/check_env.py
+```
+
+Use a recent pip with dependency-group support, or install the dev tools listed in
+pyproject.toml separately. After activation, replace `uv run python` with `python`
+and `uv run pytest` with `python -m pytest` in lesson commands. This fallback uses
+the compatible ranges in pyproject.toml; `uv sync --frozen` remains the lockfile
+reproduction path. Host config generation requires uv; when using only pip, set
+the generated server command to your absolute virtual-environment Python path
+and pass the absolute script path as its argument.

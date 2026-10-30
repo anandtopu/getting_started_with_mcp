@@ -16,10 +16,9 @@ from scripts.run_all_examples import smoke
 @pytest.mark.anyio
 async def test_actual_server_stdout(tmp_path):
     await smoke(tmp_path)
-    records = [
-        json.loads(line) for line in (tmp_path / "foundation_server.jsonl").read_text().splitlines()
-    ]
-    assert all(record["message"].get("jsonrpc") == "2.0" for record in records[1:])
+    for path in tmp_path.glob("*.jsonl"):
+        records = [json.loads(line) for line in path.read_text().splitlines()]
+        assert all(record["message"].get("jsonrpc") == "2.0" for record in records[1:]), path
 
 
 @pytest.mark.anyio
@@ -39,9 +38,13 @@ def test_links_and_course():
 
 def test_no_legacy_imports_or_stdout_in_servers():
     banned = ["mcp.server." + "fastmcp", "mcp." + "types"]
+    manifest = json.loads((ROOT / "scripts/examples.json").read_text())
+    servers = {ROOT / entry["path"] for entry in manifest["servers"]}
+    servers.add(ROOT / "data/security/vulnerable_server.py")
     paths = [
         *ROOT.joinpath("common").rglob("*.py"),
         *ROOT.joinpath("scripts").glob("*.py"),
+        *ROOT.joinpath("modules").rglob("*.py"),
         ROOT / "data/security/vulnerable_server.py",
     ]
     for path in paths:
@@ -51,7 +54,7 @@ def test_no_legacy_imports_or_stdout_in_servers():
                 assert node.module not in banned, path
             if isinstance(node, ast.Import):
                 assert not any(alias.name in banned for alias in node.names), path
-            if path.name.endswith("server.py") and isinstance(node, ast.Call):
+            if path in servers and isinstance(node, ast.Call):
                 assert not (isinstance(node.func, ast.Name) and node.func.id == "print"), path
 
 

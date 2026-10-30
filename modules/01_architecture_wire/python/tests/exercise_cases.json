@@ -1,0 +1,86 @@
+[
+  {
+    "name": "correlate",
+    "task": "Preserve the request ID when constructing a JSON-RPC result.",
+    "stem": "01_practice",
+    "cases": [
+      [
+        [
+          {
+            "id": "read-7"
+          },
+          {
+            "resultType": "complete"
+          }
+        ],
+        {
+          "jsonrpc": "2.0",
+          "id": "read-7",
+          "result": {
+            "resultType": "complete"
+          }
+        }
+      ]
+    ]
+  },
+  {
+    "name": "is_notification",
+    "task": "Identify a valid method notification without treating errors as notifications.",
+    "stem": "02_apply",
+    "cases": [
+      [
+        [
+          {
+            "jsonrpc": "2.0",
+            "method": "ping"
+          }
+        ],
+        true
+      ],
+      [
+        [
+          {
+            "error": {
+              "code": -32600
+            }
+          }
+        ],
+        false
+      ],
+      [
+        [
+          {
+            "jsonrpc": "2.0",
+            "id": 0,
+            "method": "ping"
+          }
+        ],
+        false
+      ]
+    ]
+  },
+  {
+    "name": "validate_meta",
+    "task": "Reject a missing capability object or a different protocol revision.",
+    "stem": "03_stretch",
+    "cases": [
+      [
+        [
+          {
+            "io.modelcontextprotocol/protocolVersion": "2026-07-28"
+          }
+        ],
+        false
+      ],
+      [
+        [
+          {
+            "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+            "io.modelcontextprotocol/clientCapabilities": {}
+          }
+        ],
+        true
+      ]
+    ]
+  }
+]

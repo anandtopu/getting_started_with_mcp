@@ -1,0 +1,61 @@
+[
+  {
+    "name": "resource_uri",
+    "task": "Validate known wiki segments before assembling a URI; return None for unknown pages.",
+    "stem": "01_practice",
+    "cases": [
+      [
+        [
+          "engineering",
+          "page-01"
+        ],
+        "wiki://engineering/page-01"
+      ],
+      [
+        [
+          "engineering",
+          "../secret"
+        ],
+        null
+      ]
+    ]
+  },
+  {
+    "name": "content_field",
+    "task": "Choose text for text/* and blob for binary MIME types.",
+    "stem": "02_apply",
+    "cases": [
+      [
+        [
+          "text/markdown"
+        ],
+        "text"
+      ],
+      [
+        [
+          "application/pdf"
+        ],
+        "blob"
+      ]
+    ]
+  },
+  {
+    "name": "invalidate_resource",
+    "task": "Invalidate only the updated URI; preserve unrelated cached values.",
+    "stem": "03_stretch",
+    "cases": [
+      [
+        [
+          {
+            "wiki://index": "index",
+            "lumen://bulletin": "old"
+          },
+          "lumen://bulletin"
+        ],
+        {
+          "wiki://index": "index"
+        }
+      ]
+    ]
+  }
+]

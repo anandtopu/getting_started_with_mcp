@@ -1,0 +1,72 @@
+[
+  {
+    "name": "complete_space",
+    "task": "Filter wiki spaces by a case-sensitive prefix.",
+    "stem": "01_practice",
+    "cases": [
+      [
+        [
+          "eng"
+        ],
+        [
+          "engineering"
+        ]
+      ],
+      [
+        [
+          "missing"
+        ],
+        []
+      ]
+    ]
+  },
+  {
+    "name": "embedded_prompt",
+    "task": "Keep source text in an embedded resource with its URI and MIME type.",
+    "stem": "02_apply",
+    "cases": [
+      [
+        [
+          "wiki://engineering/page-01",
+          "# Review"
+        ],
+        {
+          "role": "user",
+          "content": {
+            "type": "resource",
+            "resource": {
+              "uri": "wiki://engineering/page-01",
+              "mimeType": "text/markdown",
+              "text": "# Review"
+            }
+          }
+        }
+      ]
+    ]
+  },
+  {
+    "name": "complete_page",
+    "task": "Offer page completions only when prior context names a valid space.",
+    "stem": "03_stretch",
+    "cases": [
+      [
+        [
+          "page-01",
+          {
+            "space": "engineering"
+          }
+        ],
+        [
+          "page-01"
+        ]
+      ],
+      [
+        [
+          "page-",
+          {}
+        ],
+        []
+      ]
+    ]
+  }
+]
