@@ -1,0 +1,722 @@
+[
+  {
+    "id": 1,
+    "name": "Synthetic Colleague 001",
+    "team": "engineering",
+    "role": "Team lead",
+    "email": "person1@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": null
+  },
+  {
+    "id": 2,
+    "name": "Synthetic Colleague 002",
+    "team": "product",
+    "role": "Team lead",
+    "email": "person2@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": null
+  },
+  {
+    "id": 3,
+    "name": "Synthetic Colleague 003",
+    "team": "hr",
+    "role": "Team lead",
+    "email": "person3@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": null
+  },
+  {
+    "id": 4,
+    "name": "Synthetic Colleague 004",
+    "team": "onboarding",
+    "role": "Team lead",
+    "email": "person4@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": null
+  },
+  {
+    "id": 5,
+    "name": "Synthetic Colleague 005",
+    "team": "incident_postmortems",
+    "role": "Team lead",
+    "email": "person5@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": null
+  },
+  {
+    "id": 6,
+    "name": "Synthetic Colleague 006",
+    "team": "engineering",
+    "role": "Specialist",
+    "email": "person6@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 1
+  },
+  {
+    "id": 7,
+    "name": "Synthetic Colleague 007",
+    "team": "product",
+    "role": "Specialist",
+    "email": "person7@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 2
+  },
+  {
+    "id": 8,
+    "name": "Synthetic Colleague 008",
+    "team": "hr",
+    "role": "Specialist",
+    "email": "person8@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 3
+  },
+  {
+    "id": 9,
+    "name": "Synthetic Colleague 009",
+    "team": "onboarding",
+    "role": "Specialist",
+    "email": "person9@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 4
+  },
+  {
+    "id": 10,
+    "name": "Synthetic Colleague 010",
+    "team": "incident_postmortems",
+    "role": "Specialist",
+    "email": "person10@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 5
+  },
+  {
+    "id": 11,
+    "name": "Synthetic Colleague 011",
+    "team": "engineering",
+    "role": "Specialist",
+    "email": "person11@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 1
+  },
+  {
+    "id": 12,
+    "name": "Synthetic Colleague 012",
+    "team": "product",
+    "role": "Specialist",
+    "email": "person12@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 2
+  },
+  {
+    "id": 13,
+    "name": "Synthetic Colleague 013",
+    "team": "hr",
+    "role": "Specialist",
+    "email": "person13@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 3
+  },
+  {
+    "id": 14,
+    "name": "Synthetic Colleague 014",
+    "team": "onboarding",
+    "role": "Specialist",
+    "email": "person14@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 4
+  },
+  {
+    "id": 15,
+    "name": "Synthetic Colleague 015",
+    "team": "incident_postmortems",
+    "role": "Specialist",
+    "email": "person15@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 5
+  },
+  {
+    "id": 16,
+    "name": "Synthetic Colleague 016",
+    "team": "engineering",
+    "role": "Specialist",
+    "email": "person16@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 1
+  },
+  {
+    "id": 17,
+    "name": "Synthetic Colleague 017",
+    "team": "product",
+    "role": "Specialist",
+    "email": "person17@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 2
+  },
+  {
+    "id": 18,
+    "name": "Synthetic Colleague 018",
+    "team": "hr",
+    "role": "Specialist",
+    "email": "person18@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 3
+  },
+  {
+    "id": 19,
+    "name": "Synthetic Colleague 019",
+    "team": "onboarding",
+    "role": "Specialist",
+    "email": "person19@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 4
+  },
+  {
+    "id": 20,
+    "name": "Synthetic Colleague 020",
+    "team": "incident_postmortems",
+    "role": "Specialist",
+    "email": "person20@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 5
+  },
+  {
+    "id": 21,
+    "name": "Synthetic Colleague 021",
+    "team": "engineering",
+    "role": "Specialist",
+    "email": "person21@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 1
+  },
+  {
+    "id": 22,
+    "name": "Synthetic Colleague 022",
+    "team": "product",
+    "role": "Specialist",
+    "email": "person22@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 2
+  },
+  {
+    "id": 23,
+    "name": "Synthetic Colleague 023",
+    "team": "hr",
+    "role": "Specialist",
+    "email": "person23@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 3
+  },
+  {
+    "id": 24,
+    "name": "Synthetic Colleague 024",
+    "team": "onboarding",
+    "role": "Specialist",
+    "email": "person24@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 4
+  },
+  {
+    "id": 25,
+    "name": "Synthetic Colleague 025",
+    "team": "incident_postmortems",
+    "role": "Specialist",
+    "email": "person25@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 5
+  },
+  {
+    "id": 26,
+    "name": "Synthetic Colleague 026",
+    "team": "engineering",
+    "role": "Specialist",
+    "email": "person26@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 1
+  },
+  {
+    "id": 27,
+    "name": "Synthetic Colleague 027",
+    "team": "product",
+    "role": "Specialist",
+    "email": "person27@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 2
+  },
+  {
+    "id": 28,
+    "name": "Synthetic Colleague 028",
+    "team": "hr",
+    "role": "Specialist",
+    "email": "person28@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 3
+  },
+  {
+    "id": 29,
+    "name": "Synthetic Colleague 029",
+    "team": "onboarding",
+    "role": "Specialist",
+    "email": "person29@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 4
+  },
+  {
+    "id": 30,
+    "name": "Synthetic Colleague 030",
+    "team": "incident_postmortems",
+    "role": "Specialist",
+    "email": "person30@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 5
+  },
+  {
+    "id": 31,
+    "name": "Synthetic Colleague 031",
+    "team": "engineering",
+    "role": "Specialist",
+    "email": "person31@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 1
+  },
+  {
+    "id": 32,
+    "name": "Synthetic Colleague 032",
+    "team": "product",
+    "role": "Specialist",
+    "email": "person32@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 2
+  },
+  {
+    "id": 33,
+    "name": "Synthetic Colleague 033",
+    "team": "hr",
+    "role": "Specialist",
+    "email": "person33@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 3
+  },
+  {
+    "id": 34,
+    "name": "Synthetic Colleague 034",
+    "team": "onboarding",
+    "role": "Specialist",
+    "email": "person34@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 4
+  },
+  {
+    "id": 35,
+    "name": "Synthetic Colleague 035",
+    "team": "incident_postmortems",
+    "role": "Specialist",
+    "email": "person35@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 5
+  },
+  {
+    "id": 36,
+    "name": "Synthetic Colleague 036",
+    "team": "engineering",
+    "role": "Specialist",
+    "email": "person36@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 1
+  },
+  {
+    "id": 37,
+    "name": "Synthetic Colleague 037",
+    "team": "product",
+    "role": "Specialist",
+    "email": "person37@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 2
+  },
+  {
+    "id": 38,
+    "name": "Synthetic Colleague 038",
+    "team": "hr",
+    "role": "Specialist",
+    "email": "person38@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 3
+  },
+  {
+    "id": 39,
+    "name": "Synthetic Colleague 039",
+    "team": "onboarding",
+    "role": "Specialist",
+    "email": "person39@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 4
+  },
+  {
+    "id": 40,
+    "name": "Synthetic Colleague 040",
+    "team": "incident_postmortems",
+    "role": "Specialist",
+    "email": "person40@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 5
+  },
+  {
+    "id": 41,
+    "name": "Synthetic Colleague 041",
+    "team": "engineering",
+    "role": "Specialist",
+    "email": "person41@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 1
+  },
+  {
+    "id": 42,
+    "name": "Synthetic Colleague 042",
+    "team": "product",
+    "role": "Specialist",
+    "email": "person42@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 2
+  },
+  {
+    "id": 43,
+    "name": "Synthetic Colleague 043",
+    "team": "hr",
+    "role": "Specialist",
+    "email": "person43@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 3
+  },
+  {
+    "id": 44,
+    "name": "Synthetic Colleague 044",
+    "team": "onboarding",
+    "role": "Specialist",
+    "email": "person44@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 4
+  },
+  {
+    "id": 45,
+    "name": "Synthetic Colleague 045",
+    "team": "incident_postmortems",
+    "role": "Specialist",
+    "email": "person45@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 5
+  },
+  {
+    "id": 46,
+    "name": "Synthetic Colleague 046",
+    "team": "engineering",
+    "role": "Specialist",
+    "email": "person46@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 1
+  },
+  {
+    "id": 47,
+    "name": "Synthetic Colleague 047",
+    "team": "product",
+    "role": "Specialist",
+    "email": "person47@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 2
+  },
+  {
+    "id": 48,
+    "name": "Synthetic Colleague 048",
+    "team": "hr",
+    "role": "Specialist",
+    "email": "person48@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 3
+  },
+  {
+    "id": 49,
+    "name": "Synthetic Colleague 049",
+    "team": "onboarding",
+    "role": "Specialist",
+    "email": "person49@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 4
+  },
+  {
+    "id": 50,
+    "name": "Synthetic Colleague 050",
+    "team": "incident_postmortems",
+    "role": "Specialist",
+    "email": "person50@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 5
+  },
+  {
+    "id": 51,
+    "name": "Synthetic Colleague 051",
+    "team": "engineering",
+    "role": "Specialist",
+    "email": "person51@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 1
+  },
+  {
+    "id": 52,
+    "name": "Synthetic Colleague 052",
+    "team": "product",
+    "role": "Specialist",
+    "email": "person52@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 2
+  },
+  {
+    "id": 53,
+    "name": "Synthetic Colleague 053",
+    "team": "hr",
+    "role": "Specialist",
+    "email": "person53@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 3
+  },
+  {
+    "id": 54,
+    "name": "Synthetic Colleague 054",
+    "team": "onboarding",
+    "role": "Specialist",
+    "email": "person54@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 4
+  },
+  {
+    "id": 55,
+    "name": "Synthetic Colleague 055",
+    "team": "incident_postmortems",
+    "role": "Specialist",
+    "email": "person55@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 5
+  },
+  {
+    "id": 56,
+    "name": "Synthetic Colleague 056",
+    "team": "engineering",
+    "role": "Specialist",
+    "email": "person56@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 1
+  },
+  {
+    "id": 57,
+    "name": "Synthetic Colleague 057",
+    "team": "product",
+    "role": "Specialist",
+    "email": "person57@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 2
+  },
+  {
+    "id": 58,
+    "name": "Synthetic Colleague 058",
+    "team": "hr",
+    "role": "Specialist",
+    "email": "person58@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 3
+  },
+  {
+    "id": 59,
+    "name": "Synthetic Colleague 059",
+    "team": "onboarding",
+    "role": "Specialist",
+    "email": "person59@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 4
+  },
+  {
+    "id": 60,
+    "name": "Synthetic Colleague 060",
+    "team": "incident_postmortems",
+    "role": "Specialist",
+    "email": "person60@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 5
+  },
+  {
+    "id": 61,
+    "name": "Synthetic Colleague 061",
+    "team": "engineering",
+    "role": "Specialist",
+    "email": "person61@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 1
+  },
+  {
+    "id": 62,
+    "name": "Synthetic Colleague 062",
+    "team": "product",
+    "role": "Specialist",
+    "email": "person62@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 2
+  },
+  {
+    "id": 63,
+    "name": "Synthetic Colleague 063",
+    "team": "hr",
+    "role": "Specialist",
+    "email": "person63@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 3
+  },
+  {
+    "id": 64,
+    "name": "Synthetic Colleague 064",
+    "team": "onboarding",
+    "role": "Specialist",
+    "email": "person64@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 4
+  },
+  {
+    "id": 65,
+    "name": "Synthetic Colleague 065",
+    "team": "incident_postmortems",
+    "role": "Specialist",
+    "email": "person65@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 5
+  },
+  {
+    "id": 66,
+    "name": "Synthetic Colleague 066",
+    "team": "engineering",
+    "role": "Specialist",
+    "email": "person66@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 1
+  },
+  {
+    "id": 67,
+    "name": "Synthetic Colleague 067",
+    "team": "product",
+    "role": "Specialist",
+    "email": "person67@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 2
+  },
+  {
+    "id": 68,
+    "name": "Synthetic Colleague 068",
+    "team": "hr",
+    "role": "Specialist",
+    "email": "person68@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 3
+  },
+  {
+    "id": 69,
+    "name": "Synthetic Colleague 069",
+    "team": "onboarding",
+    "role": "Specialist",
+    "email": "person69@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 4
+  },
+  {
+    "id": 70,
+    "name": "Synthetic Colleague 070",
+    "team": "incident_postmortems",
+    "role": "Specialist",
+    "email": "person70@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 5
+  },
+  {
+    "id": 71,
+    "name": "Synthetic Colleague 071",
+    "team": "engineering",
+    "role": "Specialist",
+    "email": "person71@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 1
+  },
+  {
+    "id": 72,
+    "name": "Synthetic Colleague 072",
+    "team": "product",
+    "role": "Specialist",
+    "email": "person72@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 2
+  },
+  {
+    "id": 73,
+    "name": "Synthetic Colleague 073",
+    "team": "hr",
+    "role": "Specialist",
+    "email": "person73@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 3
+  },
+  {
+    "id": 74,
+    "name": "Synthetic Colleague 074",
+    "team": "onboarding",
+    "role": "Specialist",
+    "email": "person74@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 4
+  },
+  {
+    "id": 75,
+    "name": "Synthetic Colleague 075",
+    "team": "incident_postmortems",
+    "role": "Specialist",
+    "email": "person75@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 5
+  },
+  {
+    "id": 76,
+    "name": "Synthetic Colleague 076",
+    "team": "engineering",
+    "role": "Specialist",
+    "email": "person76@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 1
+  },
+  {
+    "id": 77,
+    "name": "Synthetic Colleague 077",
+    "team": "product",
+    "role": "Specialist",
+    "email": "person77@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 2
+  },
+  {
+    "id": 78,
+    "name": "Synthetic Colleague 078",
+    "team": "hr",
+    "role": "Specialist",
+    "email": "person78@lumen.example",
+    "time_zone": "America/Chicago",
+    "manager": 3
+  },
+  {
+    "id": 79,
+    "name": "Synthetic Colleague 079",
+    "team": "onboarding",
+    "role": "Specialist",
+    "email": "person79@lumen.example",
+    "time_zone": "Europe/London",
+    "manager": 4
+  },
+  {
+    "id": 80,
+    "name": "Synthetic Colleague 080",
+    "team": "incident_postmortems",
+    "role": "Specialist",
+    "email": "person80@lumen.example",
+    "time_zone": "Asia/Kolkata",
+    "manager": 5
+  }
+]

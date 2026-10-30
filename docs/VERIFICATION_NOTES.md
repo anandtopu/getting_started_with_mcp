@@ -1,0 +1,167 @@
+# Verification notes
+
+Checked: **October 29, 2026, America/Chicago**. Phase 1 records source verification, not installation or runtime certification.
+
+## Specification baseline
+
+The [stable specification entry point](https://modelcontextprotocol.io/specification) resolves to **2026-07-28**. Read the complete [Key Changes page](https://modelcontextprotocol.io/specification/2026-07-28/changelog), including minor changes, deprecated features, schema and governance updates.
+
+Key changes affecting this course: self-contained requests carry version/capability metadata; discovery replaces connection setup. Subscription streams replace previous subscription operations. Results identify completion versus further input. Retry exchanges carry requested input. Tasks move into an extension. HTTP uses method/name headers; response-stream recovery requires a new request. Cache hints accompany eligible results. Schemas allow richer JSON Schema and structured content. Authorization binds credentials to issuers and validates returned issuer information. Roots, sampling, protocol logging, the older HTTP transport and dynamic registration are deprecated. Revised error allocation and feature lifecycle rules also matter. These changes determine the current track; historical behavior belongs in the migration guide.
+
+Read the [schema](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/schema/2026-07-28/schema.ts) alongside the prose when implementing. Do not confuse SDK convenience methods with protocol methods.
+
+## Verified release candidates
+
+Versions below were read directly from PyPI JSON metadata and npm registry `latest` metadata. Links identify the exact inspected release. Proposed Python ranges permit patch updates within the selected minor; npm uses tilde ranges. Exact resolved versions go into lockfiles. Date-versioned reference servers and the MCP types companion are exact pins. Compatibility among all rows has **not** been resolved yet.
+
+| Python package | Observed version | Proposed requirement | Role | Source |
+|---|---|---|---|---|
+| `mcp[cli]` | 2.3.0 | `mcp[cli]>=2.3.0,<2.4.0` | core | [PyPI](https://pypi.org/pypi/mcp/2.3.0/json) |
+| `mcp-types` | 2.3.0 | `mcp-types==2.3.0` | core: exact SDK companion | [PyPI](https://pypi.org/pypi/mcp-types/2.3.0/json) |
+| `httpx2` | 2.16.0 | `httpx2>=2.16.0,<2.17.0` | core HTTP | [PyPI](https://pypi.org/pypi/httpx2/2.16.0/json) |
+| `pydantic` | 2.14.2 | `pydantic>=2.14.2,<2.15.0` | core | [PyPI](https://pypi.org/pypi/pydantic/2.14.2/json) |
+| `python-dotenv` | 1.2.4 | `python-dotenv>=1.2.4,<1.3.0` | core | [PyPI](https://pypi.org/pypi/python-dotenv/1.2.4/json) |
+| `jsonschema` | 4.26.0 | `jsonschema>=4.26.0,<4.27.0` | dev/contracts | [PyPI](https://pypi.org/pypi/jsonschema/4.26.0/json) |
+| `rich` | 15.0.0 | `rich>=15.0.0,<15.1.0` | core output | [PyPI](https://pypi.org/pypi/rich/15.0.0/json) |
+| `httpx` | 0.28.1 | `httpx>=0.28.1,<0.29.0` | optional provider/REST compatibility | [PyPI](https://pypi.org/pypi/httpx/0.28.1/json) |
+| `starlette` | 1.10.0 | `starlette>=1.10.0,<1.11.0` | HTTP | [PyPI](https://pypi.org/pypi/starlette/1.10.0/json) |
+| `fastapi` | 0.162.0 | `fastapi>=0.162.0,<0.163.0` | HTTP and web host | [PyPI](https://pypi.org/pypi/fastapi/0.162.0/json) |
+| `uvicorn` | 0.54.0 | `uvicorn>=0.54.0,<0.55.0` | HTTP | [PyPI](https://pypi.org/pypi/uvicorn/0.54.0/json) |
+| `aiosqlite` | 0.22.1 | `aiosqlite>=0.22.1,<0.23.0` | data | [PyPI](https://pypi.org/pypi/aiosqlite/0.22.1/json) |
+| `pypdf` | 6.21.4 | `pypdf>=6.21.4,<6.22.0` | data | [PyPI](https://pypi.org/pypi/pypdf/6.21.4/json) |
+| `anthropic` | 2.3.0 | `anthropic>=2.3.0,<2.4.0` | host | [PyPI](https://pypi.org/pypi/anthropic/2.3.0/json) |
+| `openai` | 3.41.0 | `openai>=3.41.0,<3.42.0` | host | [PyPI](https://pypi.org/pypi/openai/3.41.0/json) |
+| `google-genai` | 2.34.0 | `google-genai>=2.34.0,<2.35.0` | host | [PyPI](https://pypi.org/pypi/google-genai/2.34.0/json) |
+| `ollama` | 0.6.3 | `ollama>=0.6.3,<0.7.0` | host | [PyPI](https://pypi.org/pypi/ollama/0.6.3/json) |
+| `pyjwt[crypto]` | 2.15.1 | `pyjwt[crypto]>=2.15.1,<2.16.0` | auth | [PyPI](https://pypi.org/pypi/pyjwt/2.15.1/json) |
+| `opentelemetry-sdk` | 1.45.2 | `opentelemetry-sdk>=1.45.2,<1.46.0` | observability | [PyPI](https://pypi.org/pypi/opentelemetry-sdk/1.45.2/json) |
+| `opentelemetry-exporter-otlp` | 1.45.2 | `opentelemetry-exporter-otlp>=1.45.2,<1.46.0` | observability | [PyPI](https://pypi.org/pypi/opentelemetry-exporter-otlp/1.45.2/json) |
+| `openai-agents` | 0.24.0 | `openai-agents>=0.24.0,<0.25.0` | frameworks | [PyPI](https://pypi.org/pypi/openai-agents/0.24.0/json) |
+| `langchain-mcp-adapters` | 0.3.2 | `langchain-mcp-adapters>=0.3.2,<0.4.0` | frameworks | [PyPI](https://pypi.org/pypi/langchain-mcp-adapters/0.3.2/json) |
+| `langgraph` | 1.2.18 | `langgraph>=1.2.18,<1.3.0` | frameworks | [PyPI](https://pypi.org/pypi/langgraph/1.2.18/json) |
+| `strands-agents` | 1.62.0 | `strands-agents>=1.62.0,<1.63.0` | frameworks | [PyPI](https://pypi.org/pypi/strands-agents/1.62.0/json) |
+| `pydantic-ai` | 2.63.0 | `pydantic-ai>=2.63.0,<2.64.0` | frameworks | [PyPI](https://pypi.org/pypi/pydantic-ai/2.63.0/json) |
+| `google-adk` | 2.13.0 | `google-adk>=2.13.0,<2.14.0` | frameworks | [PyPI](https://pypi.org/pypi/google-adk/2.13.0/json) |
+| `claude-agent-sdk` | 0.2.175 | `claude-agent-sdk>=0.2.175,<0.3.0` | frameworks | [PyPI](https://pypi.org/pypi/claude-agent-sdk/0.2.175/json) |
+| `pytest` | 9.2.0 | `pytest>=9.2.0,<9.3.0` | dev | [PyPI](https://pypi.org/pypi/pytest/9.2.0/json) |
+| `anyio` | 4.15.1 | `anyio>=4.15.1,<4.16.0` | core/tests | [PyPI](https://pypi.org/pypi/anyio/4.15.1/json) |
+| `ruff` | 0.17.3 | `ruff>=0.17.3,<0.18.0` | dev | [PyPI](https://pypi.org/pypi/ruff/0.17.3/json) |
+| `pre-commit` | 4.7.0 | `pre-commit>=4.7.0,<4.8.0` | dev | [PyPI](https://pypi.org/pypi/pre-commit/4.7.0/json) |
+| `uv` | 0.13.6 | `uv>=0.13.6,<0.14.0` | installer | [PyPI](https://pypi.org/pypi/uv/0.13.6/json) |
+| `mcp-server-fetch` | 2026.10.28 | `mcp-server-fetch==2026.10.28` | reference candidate | [PyPI](https://pypi.org/pypi/mcp-server-fetch/2026.10.28/json) |
+| `mcp-server-git` | 2026.10.28 | `mcp-server-git==2026.10.28` | reference candidate | [PyPI](https://pypi.org/pypi/mcp-server-git/2026.10.28/json) |
+| `mcp-server-time` | 2026.10.28 | `mcp-server-time==2026.10.28` | reference candidate | [PyPI](https://pypi.org/pypi/mcp-server-time/2026.10.28/json) |
+
+| npm package | Observed version | Proposed range | Source |
+|---|---|---|---|
+| `@modelcontextprotocol/server` | 2.4.0 | `~2.4.0` | [npm registry](https://registry.npmjs.org/@modelcontextprotocol/server/2.4.0) |
+| `@modelcontextprotocol/client` | 2.4.0 | `~2.4.0` | [npm registry](https://registry.npmjs.org/@modelcontextprotocol/client/2.4.0) |
+| `@modelcontextprotocol/core` | 2.4.0 | `~2.4.0` | [npm registry](https://registry.npmjs.org/@modelcontextprotocol/core/2.4.0) |
+| `@modelcontextprotocol/node` | 2.1.2 | `~2.1.2` | [npm registry](https://registry.npmjs.org/@modelcontextprotocol/node/2.1.2) |
+| `@modelcontextprotocol/inspector` | 2.13.0 | `~2.13.0` | [npm registry](https://registry.npmjs.org/@modelcontextprotocol/inspector/2.13.0) |
+| `@modelcontextprotocol/ext-apps` | 2.0.4 | `~2.0.4` | [npm registry](https://registry.npmjs.org/@modelcontextprotocol/ext-apps/2.0.4) |
+| `@modelcontextprotocol/server-filesystem` | 2.1.0 | `~2.1.0` | [npm registry](https://registry.npmjs.org/@modelcontextprotocol/server-filesystem/2.1.0) |
+| `@modelcontextprotocol/server-memory` | 2.0.1 | `~2.0.1` | [npm registry](https://registry.npmjs.org/@modelcontextprotocol/server-memory/2.0.1) |
+| `zod` | 4.6.7 | `~4.6.7` | [npm registry](https://registry.npmjs.org/zod/4.6.7) |
+| `tsx` | 4.23.15 | `~4.23.15` | [npm registry](https://registry.npmjs.org/tsx/4.23.15) |
+| `vitest` | 5.0.5 | `~5.0.5` | [npm registry](https://registry.npmjs.org/vitest/5.0.5) |
+| `typescript` | 7.0.2 | `~7.0.2` | [npm registry](https://registry.npmjs.org/typescript/7.0.2) |
+| `eslint` | 10.13.0 | `~10.13.0` | [npm registry](https://registry.npmjs.org/eslint/10.13.0) |
+| `typescript-eslint` | 8.72.1 | `~8.72.1` | [npm registry](https://registry.npmjs.org/typescript-eslint/8.72.1) |
+| `@eslint/js` | 10.0.1 | `~10.0.1` | [npm registry](https://registry.npmjs.org/@eslint/js/10.0.1) |
+| `@types/node` | 26.6.6 | `~26.6.6` | [npm registry](https://registry.npmjs.org/@types/node/26.6.6) |
+
+The requested `@modelcontextprotocol/sdk` is published at **1.32.2**, but the [official repository](https://github.com/modelcontextprotocol/typescript-sdk) identifies it as the v1 maintenance line. The stable current-spec implementation uses `@modelcontextprotocol/server` and `@modelcontextprotocol/client` instead. This is a deliberate package substitution, following the request to use confirmed current alternatives. [v2 migration guide](https://ts.sdk.modelcontextprotocol.io/v2/migration/upgrade-to-v2).
+
+Node **26.13.0** is the observed current LTS release (Lithium); Node 24 is also an LTS line. Recommend 26 and test both 24 and 26. [Release schedule](https://nodejs.org/en/about/previous-releases), [release metadata](https://nodejs.org/dist/index.json).
+
+The SDK's top-level Python metadata permits 3.10+, but its current HTTP dependency requires 3.11+. Recommend 3.12; propose CI for 3.12–3.14, and verify all selected extras before making a support promise. Framework packages are optional and may need independent environments. Latest releases alone do not establish mutual compatibility.
+
+## Confirmed APIs and intentional substitutions
+
+| Area | Confirmed documentation evidence | Implementation decision |
+|---|---|---|
+| Python server | [Python SDK](https://py.sdk.modelcontextprotocol.io/) documents `from mcp.server import MCPServer` | Use v2 server and decorators |
+| Python client | [Client guide](https://py.sdk.modelcontextprotocol.io/clients/) documents `Client` | Same client abstraction for transport and in-memory tests |
+| In-memory tests | [Testing guide](https://py.sdk.modelcontextprotocol.io/get-started/testing/) documents `Client(server, raise_exceptions=True)` | Offline unit tests; separate transport tests prove serialization |
+| HTTP library and models | [Migration guide](https://py.sdk.modelcontextprotocol.io/migration/) moves HTTP integration to `httpx2` and models to `mcp_types` | Avoid importing compatibility aliases |
+| Run configuration | [Running servers](https://py.sdk.modelcontextprotocol.io/run/) and migration guide place transport settings on run operations | Verify exact method signatures from the installed release |
+| TypeScript | [Official SDK README](https://github.com/modelcontextprotocol/typescript-sdk) shows `McpServer`, `registerTool`, and stdio exports in split packages | Use v2 imports and Zod 4 |
+| Inspector automation | [CLI guide](https://modelcontextprotocol.io/docs/2026-07-28/tools/inspector/cli) documents CLI methods for tools/resources/templates/prompts | Pin Inspector; use CLI for independent smoke calls |
+| Deprecated client features | [Sampling and roots guide](https://py.sdk.modelcontextprotocol.io/handlers/sampling-and-roots/) | Explain compatibility; use explicit directories and provider calls for new applications |
+
+The `mcp` 2.3.0 registry metadata confirms the `cli` extra and `mcp-types==2.3.0` dependency. Some documentation examples still use old model import aliases; the migration guide takes precedence until release-specific imports are tested. No unsupported signatures are invented in Phase 1.
+
+## Extension inventory
+
+The [official extension index](https://modelcontextprotocol.io/extensions/overview) currently lists these six extensions. Distinguish extension maturity from the core specification's stable status. Snapshot the exact extension revision/commit before implementation, especially for Beta extensions.
+
+| Extension | Listed stage | Course location | Primary source |
+|---|---|---|---|
+| MCP Apps | Stable | 17, 21, Ops and Chat Pro | [Apps](https://modelcontextprotocol.io/extensions/apps/overview) |
+| Tasks | Beta, intended for Core | 17, 21, Ops | [Tasks](https://modelcontextprotocol.io/extensions/tasks/overview) |
+| Skills over MCP | Beta | B4 | [Skills](https://modelcontextprotocol.io/extensions/skills/overview) |
+| Server Cards | Beta | 19, B4 | [Server Cards](https://modelcontextprotocol.io/seps/2127-mcp-server-cards) |
+| OAuth Client Credentials | Stable | 11/B4 | [Client credentials](https://modelcontextprotocol.io/extensions/auth/oauth-client-credentials) |
+| Enterprise-Managed Authorization | Stable | 11/B4 | [Enterprise authorization](https://modelcontextprotocol.io/extensions/auth/enterprise-managed-authorization) |
+
+The extension index specifies capability advertisement per request and server discovery for the current revision. Its guidance supersedes stale initialization wording on the general specification overview.
+
+## Verification still required
+
+- Resolve and install the proposed dependency sets, then confirm exact APIs against each pinned release. Check TypeScript/ESLint peer compatibility and Python framework dependency conflicts.
+- Check and test four host configurations: Claude Desktop, Claude Code, VS Code and Cursor. No host support matrix has been certified.
+- Confirm every framework integration and remote model API feature before module 15. A published package version is not proof of current-protocol compatibility.
+- Verify hosted low-cost model IDs and an Ollama model before writing `.env.example`; do not infer availability from SDK versions.
+- Verify Keycloak image version, authorization-server configuration and compatibility with Client ID Metadata Documents. If necessary, use documented pre-registration for the local provider and teach metadata documents separately.
+- Confirm OpenTelemetry semantic-convention status, exporter compatibility, and trace-context fields before module 13; do not label draft conventions stable.
+- Check repository maintenance and inspect reference-server tools before using the fetch/git/time/filesystem/memory candidates. Recent registry releases are evidence of publication, not a security assessment.
+- Verify desktop bundle format and supported hosts; registry publisher/version/schema; cloud deployment offerings; official SDK status for Go/C#/Java/Kotlin/Rust.
+- Pin extension revisions and app integration APIs before module 17/B4.
+- Run all code, capture actual exchanges and exercise host UIs in implementation phases.
+
+## Phase 1 checks performed
+
+Read the supplied request and inspected the empty workspace. Read the full stable changelog. Checked primary SDK documentation and migration guides, the Inspector CLI documentation, extension inventory, runtime releases and package registries. Registry access succeeded after using the available external-network execution path.
+
+No application code, tests, linters, installs, Inspector sessions, wire captures, CI jobs or GitHub publication were run. There are no implementation pass claims in this document.
+
+## Phase 2 implementation evidence
+
+The paragraph above describes Phase 1 only. Phase 2 adds runnable foundation code, committed data, real lockfiles and validation.
+
+### Dependency resolution
+
+Python resolution succeeded for the core and all four optional extras (host, HTTP, auth and observability), including 88 installed dependencies on Python 3.12.13. `uv.lock` is the exact resolved record. Framework dependencies remain deferred until module 15 so they cannot silently constrain the core environment.
+
+The first npm resolution correctly rejected TypeScript 7.0.2: `typescript-eslint` 8.72.1 declares a compiler peer range below 6.1. The implementation uses **TypeScript 6.0.3**, verified from the [npm registry](https://registry.npmjs.org/typescript/6.0.3), with the previously checked ESLint versions. No force/legacy-peer override was used. The npm lock contains the successful resolution; installation reported no known vulnerabilities. Hatchling **1.33.0** was verified from [PyPI](https://pypi.org/pypi/hatchling/1.33.0/json) and pinned to its minor range for builds.
+
+### API and model verification
+
+Installed-code inspection confirmed `MCPServer.run`, `tool`, `resource`, `Client`, `StdioServerParameters`, the current revision selector, and `mcp_types.ToolAnnotations` snake-case fields. In-memory and actual subprocess tests exercise these APIs. The foundation server advertises read-only, non-destructive, idempotent, closed-world behavior.
+
+The provider helper currently provides bounded one-shot text generation and a deterministic fake. Module 06 will add tool conversion and multi-turn orchestration. Offline doubles exercise all four provider branches and cleanup; installed-SDK signature checks cover the public API calls. Ollama uses its public async context manager. No paid model request has been made.
+
+The `.env.example` suggestions were checked against provider catalogs on October 29, 2026:
+
+| Provider | Suggested model | Source |
+|---|---|---|
+| OpenAI | `gpt-6-luna` | [Model page](https://developers.openai.com/api/docs/models/gpt-6-luna) |
+| Anthropic | `claude-haiku-5-5` | [Model overview](https://platform.claude.com/docs/en/models/overview) |
+| Gemini | `gemini-3.5-flash-lite` | [Model catalog](https://ai.google.dev/gemini-api/docs/models) |
+| Ollama | `qwen3:4b` | [Model library](https://ollama.com/library/qwen3) |
+
+These are catalog checks, not proof of account access or local model availability. No model ID is hard-coded into the provider helper; the default is the offline fake.
+
+### Local validation
+
+- Python 3.12.13, Node 24.18.0, npm 11.16.0, uv 0.12.18 on Windows.
+- 22 Python tests passed; one symlink test skipped because the account cannot create symlinks. Linux CI must exercise that case.
+- Five TypeScript tests passed; compiler, ESLint, ruff and formatting checks passed.
+- SDK in-memory tools/resources/prompts checks and real stdio smoke run passed.
+- Inspector CLI lists the foundation server's tools. Resource/prompt CLI checks and package build are included in final validation.
+- Actual current-revision wire traffic is saved in `docs/wire/foundation_server.jsonl`. The proxy preserves protocol bytes, handles EOF/failure/timeout and redacts capture copies. Captures do not claim to observe HTTP, which arrives in a later tier.
+- Data counts, references, PDF text extraction, integrity hashes and repeated regeneration are tested. The generator explicitly closes SQLite connections after committing; Windows exposed and verified that fix.
+- Local Markdown links and delivered-file checks passed. The release coverage gate intentionally fails until all 22 modules exist.
+
+No live provider call, complete host UI test, cloud deployment or external-link sweep has been performed. GitHub CI outcomes will be recorded after publication. Phase 2 does not claim later module coverage.

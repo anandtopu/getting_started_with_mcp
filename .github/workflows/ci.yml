@@ -1,0 +1,74 @@
+name: Foundation checks
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  python:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.12', '3.13', '3.14']
+        include:
+          - os: macos-latest
+            python: '3.12'
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.13.6'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '26'
+      - run: uv sync --frozen --all-extras --python ${{ matrix.python }}
+      - run: uv run --frozen ruff check .
+      - run: uv run --frozen ruff format --check .
+      - run: uv run --frozen pytest
+      - run: uv run --frozen python scripts/check_course.py
+      - run: uv run --frozen python scripts/run_all_examples.py
+  typescript:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: ['24', '26']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci
+      - run: npm run check
+  inspector:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.13.6'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '26'
+      - run: uv sync --frozen
+      - run: npm ci
+      - run: npm run inspector -- --cli uv run python scripts/foundation_server.py --method tools/list
+      - run: npm run inspector -- --cli uv run python scripts/foundation_server.py --method resources/list
+      - run: npm run inspector -- --cli uv run python scripts/foundation_server.py --method prompts/list
+  external-links:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.13.6'
+      - run: uv sync --frozen
+      - run: uv run python scripts/check_links.py --external

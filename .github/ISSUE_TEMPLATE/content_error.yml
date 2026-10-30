@@ -1,0 +1,22 @@
+name: Content error
+description: Report an incorrect explanation or command
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Module, command, operating system, and package versions.
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Expected and actual behavior, or the scenario and learning outcome.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Primary sources or a minimal reproduction. Remove secrets and personal data.

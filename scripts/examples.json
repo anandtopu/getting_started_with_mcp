@@ -1,0 +1,5 @@
+{
+  "phase": 2,
+  "servers": [{"path": "scripts/foundation_server.py", "tool": "dataset_counts", "arguments": {}, "expected": {"employees": 80, "issues": 400}}],
+  "scripts": [{"path": "scripts/check_env.py", "arguments": []}]
+}
