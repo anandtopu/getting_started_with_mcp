@@ -1,0 +1,94 @@
+[
+  {
+    "stem": "01_env_bool",
+    "task": "Accept only true/false, ignoring case; return None for invalid settings.",
+    "cases": [
+      [
+        [
+          "TRUE"
+        ],
+        true
+      ],
+      [
+        [
+          "false"
+        ],
+        false
+      ],
+      [
+        [
+          "yes"
+        ],
+        null
+      ]
+    ]
+  },
+  {
+    "stem": "02_bump",
+    "task": "Classify tool changes: removed or newly required inputs need major; additive optional inputs need minor; docs-only patch.",
+    "cases": [
+      [
+        [
+          "removed"
+        ],
+        "major"
+      ],
+      [
+        [
+          "required"
+        ],
+        "major"
+      ],
+      [
+        [
+          "optional"
+        ],
+        "minor"
+      ],
+      [
+        [
+          "docs"
+        ],
+        "patch"
+      ]
+    ]
+  },
+  {
+    "stem": "03_inventory",
+    "task": "Reject any archive member with traversal, absolute paths, or private environment/git files (Windows paths included).",
+    "cases": [
+      [
+        [
+          [
+            "pkg/main.py"
+          ]
+        ],
+        true
+      ],
+      [
+        [
+          [
+            "../secret"
+          ]
+        ],
+        false
+      ],
+      [
+        [
+          [
+            "C:\\token"
+          ]
+        ],
+        false
+      ],
+      [
+        [
+          [
+            "pkg/.env.local"
+          ]
+        ],
+        false
+      ]
+    ]
+  }
+]

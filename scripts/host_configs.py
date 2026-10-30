@@ -17,14 +17,29 @@ from scripts.tier1 import MODULES
 from scripts.tier2 import MODULES as TIER2_MODULES
 from scripts.tier3 import MODULES as TIER3_MODULES
 from scripts.tier4 import MODULES as TIER4_MODULES
+from scripts.tier5 import MODULES as TIER5_MODULES
 
-MODULES = MODULES + TIER2_MODULES + TIER3_MODULES + TIER4_MODULES
+MODULES = MODULES + TIER2_MODULES + TIER3_MODULES + TIER4_MODULES + TIER5_MODULES
 
 
 def configurations(index: int) -> dict:
     uv, node = shutil.which("uv"), shutil.which("node")
     if not uv or not node:
         raise RuntimeError(f"Install uv and Node, then reopen the terminal. {HELP}")
+    if index == 20:
+        return {
+            host: {
+                "servers" if host == "vscode" else "mcpServers": {
+                    "lumen-issues": {
+                        "url": "http://127.0.0.1:8001/mcp",
+                        **({"type": "http"} if host != "cursor" else {}),
+                    }
+                }
+            }
+            if host != "claude-desktop"
+            else {"mcpServers": {}}
+            for host in ["claude-desktop", "claude-code", "vscode", "cursor"]
+        }
     if index >= 14:
         entry = {
             "command": uv,
@@ -44,7 +59,7 @@ def configurations(index: int) -> dict:
         return {
             host: {
                 "servers" if host == "vscode" else "mcpServers": {
-                    "lumen-tier4": {
+                    "lumen-lab": {
                         **deepcopy(entry),
                         **({"type": "stdio"} if host == "vscode" else {}),
                     }
@@ -127,7 +142,7 @@ def configurations(index: int) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--module", type=int, choices=range(18), default=2)
+    parser.add_argument("--module", type=int, choices=range(22), default=2)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     output = args.output or ROOT / ".runtime/host_configs" / MODULES[args.module]

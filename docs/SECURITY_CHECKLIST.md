@@ -63,3 +63,14 @@ tool definitions and least-privilege host configs. For new server entries, add a
 with identity source, data boundaries, approval policy and a regression proving denial.
 Use the Keycloak and container checks for their respective runtime boundaries;
 the offline fixture cannot establish interoperability or OS isolation by itself.
+
+## Phase 7 shipping boundaries
+
+- [x] Inspect wheel/sdist/npm/MCPB for private files and escaping paths; rebuild sdist without checkout sources.
+- [x] Keep registry discovery read-only; match package identity/version; never auto-install a listing.
+- [x] Bind local Compose ports to loopback, retain public issuer/audience through proxy, bound body/rate/memory/PIDs.
+- [x] Revalidate full tool definition after human approval; never automatically retry writes with unknown outcomes.
+- [x] Bind one-use answers to a session/question, validate Host/Origin/CSRF and cap sessions.
+- [x] Isolate App with opaque-origin iframe/CSP and exact refresh allowlist; test parent DOM/network denial.
+- [x] Keep model keys and upstream tokens server-side; use a trusted config file for destinations.
+- [ ] Public multi-user deployment, shared durable state and real user login are outside this local teaching host; see [limitations](PHASE_7_VERIFICATION.md).

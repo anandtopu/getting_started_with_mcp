@@ -1,0 +1,18 @@
+[build-system]
+requires = ["hatchling==1.33.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "lumen-notes-course-anandtopu"
+version = "1.0.0"
+description = "Synthetic Lumen notes server for the MCP course"
+readme = "README.md"
+requires-python = ">=3.12,<3.15"
+license = "MIT"
+dependencies = ["mcp==2.3.0", "mcp-types==2.3.0", "pydantic>=2.14.2,<2.15"]
+
+[project.scripts]
+lumen-notes = "lumen_notes.__main__:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/lumen_notes"]

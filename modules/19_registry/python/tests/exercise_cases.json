@@ -1,0 +1,107 @@
+[
+  {
+    "stem": "01_identity",
+    "task": "Require matching nonempty registry identity and package mcpName.",
+    "cases": [
+      [
+        [
+          "io.github.a/notes",
+          "io.github.a/notes"
+        ],
+        true
+      ],
+      [
+        [
+          "io.github.a/notes",
+          "io.github.b/notes"
+        ],
+        false
+      ],
+      [
+        [
+          "",
+          ""
+        ],
+        false
+      ]
+    ]
+  },
+  {
+    "stem": "02_cursor",
+    "task": "Reject repeated or oversized cursors and stop after three pages; empty cursor means done.",
+    "cases": [
+      [
+        [
+          null,
+          [],
+          1
+        ],
+        "done"
+      ],
+      [
+        [
+          "next",
+          [],
+          1
+        ],
+        "continue"
+      ],
+      [
+        [
+          "next",
+          [
+            "next"
+          ],
+          2
+        ],
+        "reject"
+      ],
+      [
+        [
+          "next",
+          [],
+          3
+        ],
+        "reject"
+      ]
+    ]
+  },
+  {
+    "stem": "03_install_policy",
+    "task": "Allow a reviewed installation only when identity, source and requested permissions are approved and an exact version is pinned.",
+    "cases": [
+      [
+        [
+          {
+            "identity": true,
+            "source": true,
+            "permissions": true,
+            "version": "1.0.0"
+          }
+        ],
+        true
+      ],
+      [
+        [
+          {
+            "identity": true,
+            "source": true,
+            "permissions": true,
+            "version": "latest"
+          }
+        ],
+        false
+      ],
+      [
+        [
+          {
+            "source": true,
+            "permissions": true,
+            "version": "1.0.0"
+          }
+        ],
+        false
+      ]
+    ]
+  }
+]

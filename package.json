@@ -1,6 +1,6 @@
 {
   "name": "getting-started-with-mcp",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "private": true,
   "type": "module",
   "workspaces": [
@@ -13,18 +13,24 @@
   "scripts": {
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint common/typescript modules scripts/check-exercise.ts",
+    "lint": "eslint common/typescript modules scripts/check-exercise.ts distribution/npm/src tests/browser playwright.config.ts common/web_ui/app.source.js scripts/build_notes.mjs scripts/build_web_chat.mjs scripts/bundle_licenses.mjs",
     "inspector": "mcp-inspector",
     "check": "npm run typecheck && npm run lint && npm test",
-    "build:dashboard": "node scripts/build_dashboard.mjs"
+    "build:dashboard": "node scripts/build_dashboard.mjs",
+    "build:notes": "node scripts/build_notes.mjs",
+    "mcpb": "mcpb",
+    "build:chat": "node scripts/build_web_chat.mjs",
+    "test:browser": "playwright test --config playwright.config.ts"
   },
   "devDependencies": {
+    "@anthropic-ai/mcpb": "2.1.2",
     "@eslint/js": "~10.0.1",
     "@modelcontextprotocol/client": "~2.4.0",
     "@modelcontextprotocol/ext-apps": "2.0.4",
     "@modelcontextprotocol/inspector": "~2.13.0",
     "@modelcontextprotocol/server": "~2.4.0",
     "@modelcontextprotocol/server-filesystem": "2.1.0",
+    "@playwright/test": "1.64.1",
     "@types/node": "~26.6.6",
     "esbuild": "0.28.2",
     "eslint": "~10.13.0",
@@ -33,5 +39,8 @@
     "typescript-eslint": "~8.72.1",
     "vitest": "~5.0.5",
     "zod": "~4.6.7"
+  },
+  "overrides": {
+    "tmp": ">=0.2.6 <0.3"
   }
 }

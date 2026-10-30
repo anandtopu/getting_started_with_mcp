@@ -10,6 +10,7 @@ import html
 import logging
 import re
 import time
+from contextlib import nullcontext
 from http.cookiejar import CookieJar, DefaultCookiePolicy
 from urllib.parse import urlsplit
 
@@ -48,7 +49,7 @@ class FixtureBrowserCookies(DefaultCookiePolicy):
         return (target.scheme, target.netloc) == ("http", "127.0.0.1:8080")
 
 
-async def main():
+async def main(deployed=False):
     logging.getLogger("httpx2").setLevel(logging.WARNING)
     logging.getLogger("httpx").setLevel(logging.WARNING)
     async with httpx.AsyncClient(
@@ -124,7 +125,9 @@ async def main():
                     )
                 await super().set_tokens(tokens)
 
-        async with running_app(lambda _: make_app(verifier), port=8001):
+        async with (
+            nullcontext() if deployed else running_app(lambda _: make_app(verifier), port=8001)
+        ):
             storage = CheckedStorage(ISSUER)
             auth = provider(RESOURCE, ISSUER, storage, redirect, callback)
             async with httpx.AsyncClient(auth=auth, timeout=10) as http:
@@ -148,6 +151,10 @@ async def main():
                     assert not result.is_error
                     stepped = await verifier.verify_token(storage.tokens.access_token)
                     assert stepped and {"issues:read", "issues:write"} <= set(stepped.scopes)
+                    if deployed:
+                        from scripts.shipping_check import web_remote_check
+
+                        await web_remote_check(storage.tokens.access_token)
                     # Same verifier must reject a token for a different resource.
                     verifier.resource = "https://different.example/mcp"
                     assert await verifier.verify_token(storage.tokens.access_token) is None
@@ -155,4 +162,8 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--deployed", action="store_true")
+    asyncio.run(main(parser.parse_args().deployed))

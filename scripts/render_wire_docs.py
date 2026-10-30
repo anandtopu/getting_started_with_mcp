@@ -11,8 +11,9 @@ from scripts.tier1 import MODULES
 from scripts.tier2 import MODULES as TIER2_MODULES
 from scripts.tier3 import MODULES as TIER3_MODULES
 from scripts.tier4 import MODULES as TIER4_MODULES
+from scripts.tier5 import MODULES as TIER5_MODULES
 
-MODULES = MODULES + TIER2_MODULES + TIER3_MODULES + TIER4_MODULES
+MODULES = MODULES + TIER2_MODULES + TIER3_MODULES + TIER4_MODULES + TIER5_MODULES
 
 SELECTION = [
     ("03_reference_server", ["tools/call"]),
@@ -32,6 +33,8 @@ SELECTION = [
 ]
 SELECTION += [("python_main", ["tools/call"])] * 3
 SELECTION += [("python_main", ["tools/call", "tasks/get", "tasks/update", "tasks/cancel"])]
+
+SELECTION += [("python_main", ["tools/call"])] * 4
 
 
 def excerpt(index: int) -> str:

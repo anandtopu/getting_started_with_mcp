@@ -1,0 +1,43 @@
+{
+  "manifest_version": "0.3",
+  "name": "lumen-notes-course",
+  "display_name": "Lumen Notes",
+  "version": "1.0.0",
+  "description": "Synthetic in-memory notes for learning MCP. Restarting clears changes.",
+  "author": {
+    "name": "Lumen MCP course contributors"
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "server/cli.cjs",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/server/cli.cjs"
+      ],
+      "env": {
+        "LUMEN_NOTES_READ_ONLY": "${user_config.read_only}"
+      }
+    }
+  },
+  "user_config": {
+    "read_only": {
+      "type": "boolean",
+      "title": "Read-only mode",
+      "description": "Keep writes disabled. When disabled, writes still need confirmation.",
+      "default": true
+    }
+  },
+  "tools_generated": true,
+  "license": "MIT",
+  "compatibility": {
+    "platforms": [
+      "win32",
+      "darwin",
+      "linux"
+    ],
+    "runtimes": {
+      "node": ">=24"
+    }
+  }
+}

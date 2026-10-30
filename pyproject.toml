@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "getting-started-with-mcp"
-version = "0.6.0"
+version = "0.7.0"
 description = "A practical MCP course built around synthetic Lumen Labs data"
 readme = "README.md"
 requires-python = ">=3.12,<3.15"
@@ -29,7 +29,7 @@ frameworks = [
 ]
 
 [dependency-groups]
-dev = ["pytest>=9.2,<9.3", "ruff>=0.17.3,<0.18", "pre-commit>=4.7,<4.8"]
+dev = ["hatchling==1.33.0", "pytest>=9.2,<9.3", "ruff>=0.17.3,<0.18", "pre-commit>=4.7,<4.8"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["common", "scripts"]

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.anandtopu/lumen-notes",
+  "description": "Synthetic Lumen notes for the MCP course. Read-only by default; ephemeral storage.",
+  "repository": {
+    "url": "https://github.com/anandtopu/getting_started_with_mcp",
+    "source": "github"
+  },
+  "version": "1.0.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@anandtopu/lumen-notes-course",
+      "version": "1.0.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "LUMEN_NOTES_READ_ONLY",
+          "description": "true disables write tools; false exposes confirmed writes",
+          "default": "true",
+          "format": "string",
+          "isSecret": false
+        }
+      ]
+    }
+  ]
+}

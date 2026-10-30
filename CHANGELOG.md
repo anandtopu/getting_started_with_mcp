@@ -46,3 +46,10 @@
 ## 0.1.0 â€” Phase 1 plan
 
 - Record the target specification, verified release candidates, feature map, repository design and study schedules.
+
+## 0.7.0 — Phase 7 shipping
+
+- Modules 18–21: installable notes artifacts, registry review, secured Compose deployment and Lumen Chat v4.
+- Browser approvals/input/Tasks, isolated MCP App, catalog revalidation, bounded reconnect and older-protocol checks.
+- Shipping checkpoint, real captures, packaging and browser/container CI.
+- Phase 8 bonuses/capstones remain planned.

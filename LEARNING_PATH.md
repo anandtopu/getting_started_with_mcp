@@ -93,6 +93,8 @@ You are ready to move on when identical tool names cannot collide across servers
 | 21 Production hosts | 180 | Web Chat with bounded retries, approvals, configuration and extension UI | Chat 4 |
 | Checkpoint | 90 | Rebuild and start the complete local stack, then tear it down | Release rehearsal |
 
+[Tier 5 lessons](modules/18_packaging/README.md) and the [shipping checkpoint](checkpoints/05_shipping/README.md) are delivered.
+
 Teach package indexes, containers and reverse proxies before deployment. Publishing and cloud accounts remain optional learner actions. Budget controls and teardown are part of the acceptance criteria.
 
 You are ready to finish when a fresh environment can reproduce your build, timeouts and reconnects preserve approval boundaries, compatibility is visible to the user, and teardown removes local services without losing committed data. Then attempt Lumen Ops or Lumen Chat Pro.

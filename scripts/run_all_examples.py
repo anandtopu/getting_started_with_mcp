@@ -21,6 +21,14 @@ from scripts.tier1 import exercise, script_client
 async def check_lesson_server(entry: dict, capture_dir: Path | None) -> None:
     path = entry["path"]
     capture = capture_dir / (path.replace("/", "_") + ".jsonl") if capture_dir else None
+    if entry["kind"] == "tier5":
+        async with script_client(path, capture) as client:
+            from common.connections import discover
+
+            await discover(client)
+            assert (await client.list_tools()).tools
+            assert not (await client.call_tool("search_notes", {"query": "release"})).is_error
+        return
     if entry["kind"] == "auth":
         from scripts.auth_lab import auth_stack, exercise_auth
 

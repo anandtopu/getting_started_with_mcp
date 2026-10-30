@@ -20,16 +20,24 @@ WRITES = {"create_issue", "update_issue", "delete_issue"}
 class ScopeGate:
     """Inspect the bounded actual body, not spoofable routing headers."""
 
-    def __init__(self, app, verifier):
+    def __init__(self, app, verifier, hosts=None, origins=None):
         self.app, self.verifier = app, verifier
+        self.hosts = None if hosts is None else {h.encode() for h in hosts}
+        self.origins = {o.encode() for o in (origins or ["http://localhost:6274"])}
 
     async def __call__(self, scope, receive, send):
         if scope["type"] != "http":
             return await self.app(scope, receive, send)
         headers = dict(scope["headers"])
-        if not re.fullmatch(rb"(?:127\.0\.0\.1|localhost):[0-9]{1,5}", headers.get(b"host", b"")):
+        host = headers.get(b"host", b"")
+        valid_host = (
+            host in self.hosts
+            if self.hosts is not None
+            else re.fullmatch(rb"(?:127\.0\.0\.1|localhost):[0-9]{1,5}", host)
+        )
+        if not valid_host:
             return await Response(status_code=421)(scope, receive, send)
-        if headers.get(b"origin") not in {None, b"http://localhost:6274"}:
+        if headers.get(b"origin") not in {None, *self.origins}:
             return await Response(status_code=403)(scope, receive, send)
         if scope["path"] == "/mcp":
             if scope["method"] == "OPTIONS":
@@ -77,7 +85,7 @@ class ScopeGate:
                         "WWW-Authenticate": challenge,
                         **(
                             {
-                                "Access-Control-Allow-Origin": "http://localhost:6274",
+                                "Access-Control-Allow-Origin": headers[b"origin"].decode(),
                                 "Access-Control-Expose-Headers": "WWW-Authenticate",
                                 "Vary": "Origin",
                             }
@@ -99,7 +107,7 @@ class ScopeGate:
         await self.app(scope, receive, send)
 
 
-def make_app(verifier: JWTVerifier):
+def make_app(verifier: JWTVerifier, *, hosts=None, origins=None):
     state = {}
 
     @asynccontextmanager
@@ -122,7 +130,8 @@ def make_app(verifier: JWTVerifier):
         json_response=True,
         max_request_body_size=64000,
         transport_security=TransportSecuritySettings(
-            allowed_hosts=["127.0.0.1:*", "localhost:*"], allowed_origins=["http://localhost:6274"]
+            allowed_hosts=hosts or ["127.0.0.1:*", "localhost:*"],
+            allowed_origins=origins or ["http://localhost:6274"],
         ),
     )
     sdk_lifespan = app.router.lifespan_context
@@ -141,7 +150,7 @@ def make_app(verifier: JWTVerifier):
     return ScopeGate(
         CORSMiddleware(
             app,
-            allow_origins=["http://localhost:6274"],
+            allow_origins=origins or ["http://localhost:6274"],
             allow_methods=["POST"],
             allow_headers=[
                 "Authorization",
@@ -153,6 +162,8 @@ def make_app(verifier: JWTVerifier):
             expose_headers=["WWW-Authenticate", "MCP-Protocol-Version"],
         ),
         verifier,
+        hosts,
+        origins,
     )
 
 

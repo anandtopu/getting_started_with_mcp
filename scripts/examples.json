@@ -245,6 +245,40 @@
         "tools/list",
         "resources/list"
       ]
+    },
+    {
+      "path": "modules/18_packaging/python/use_case/server.py",
+      "kind": "tier5",
+      "module": 18,
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/19_registry/python/use_case/server.py",
+      "kind": "tier5",
+      "module": 19,
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/21_production_hosts/python/use_case/server.py",
+      "kind": "tier5",
+      "module": 21,
+      "lists": [
+        "tools/list"
+      ]
+    },
+    {
+      "path": "modules/20_deployment/python/use_case/server.py",
+      "kind": "auth",
+      "module": 20,
+      "lists": [
+        "tools/list",
+        "resources/list",
+        "prompts/list"
+      ]
     }
   ],
   "scripts": [
@@ -586,6 +620,86 @@
       "path": "modules/17_extensions/python/use_case/main.py",
       "arguments": [],
       "timeout": 45
+    },
+    {
+      "path": "modules/18_packaging/python/examples/01_build_artifacts.py",
+      "arguments": [],
+      "timeout": 180
+    },
+    {
+      "path": "modules/18_packaging/python/examples/02_environment.py",
+      "arguments": [],
+      "timeout": 180
+    },
+    {
+      "path": "modules/18_packaging/python/examples/03_compatibility.py",
+      "arguments": [],
+      "timeout": 180
+    },
+    {
+      "path": "modules/18_packaging/python/use_case/main.py",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/19_registry/python/examples/01_metadata.py",
+      "arguments": [],
+      "timeout": 60
+    },
+    {
+      "path": "modules/19_registry/python/examples/02_discovery.py",
+      "arguments": [],
+      "timeout": 60
+    },
+    {
+      "path": "modules/19_registry/python/examples/03_review.py",
+      "arguments": [],
+      "timeout": 60
+    },
+    {
+      "path": "modules/19_registry/python/use_case/main.py",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/20_deployment/python/examples/01_public_url.py",
+      "arguments": [],
+      "timeout": 60
+    },
+    {
+      "path": "modules/20_deployment/python/examples/02_rate_budget.py",
+      "arguments": [],
+      "timeout": 60
+    },
+    {
+      "path": "modules/20_deployment/python/examples/03_health_and_auth.py",
+      "arguments": [],
+      "timeout": 60
+    },
+    {
+      "path": "modules/20_deployment/python/use_case/main.py",
+      "arguments": [],
+      "timeout": 90
+    },
+    {
+      "path": "modules/21_production_hosts/python/examples/01_connections.py",
+      "arguments": [],
+      "timeout": 60
+    },
+    {
+      "path": "modules/21_production_hosts/python/examples/02_catalog_change.py",
+      "arguments": [],
+      "timeout": 60
+    },
+    {
+      "path": "modules/21_production_hosts/python/examples/03_older_protocol.py",
+      "arguments": [],
+      "timeout": 60
+    },
+    {
+      "path": "modules/21_production_hosts/python/use_case/main.py",
+      "arguments": [],
+      "timeout": 90
     }
   ]
 }

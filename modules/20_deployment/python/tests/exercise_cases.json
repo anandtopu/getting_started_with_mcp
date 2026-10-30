@@ -1,0 +1,108 @@
+[
+  {
+    "stem": "01_endpoint",
+    "task": "Accept HTTPS public URLs or exact loopback HTTP, rejecting credentials/query/fragment.",
+    "cases": [
+      [
+        [
+          "https://issues.example/mcp"
+        ],
+        true
+      ],
+      [
+        [
+          "http://127.0.0.1:8001/mcp"
+        ],
+        true
+      ],
+      [
+        [
+          "http://127.0.0.1.evil.test/mcp"
+        ],
+        false
+      ],
+      [
+        [
+          "https://user:secret@issues.example/mcp"
+        ],
+        false
+      ]
+    ]
+  },
+  {
+    "stem": "02_scale",
+    "task": "Return missing prerequisites before more than one replica: shared_store and shared_limiter.",
+    "cases": [
+      [
+        [
+          1,
+          false,
+          false
+        ],
+        []
+      ],
+      [
+        [
+          2,
+          false,
+          false
+        ],
+        [
+          "shared_store",
+          "shared_limiter"
+        ]
+      ],
+      [
+        [
+          2,
+          true,
+          false
+        ],
+        [
+          "shared_limiter"
+        ]
+      ],
+      [
+        [
+          3,
+          true,
+          true
+        ],
+        []
+      ]
+    ]
+  },
+  {
+    "stem": "03_log_redaction",
+    "task": "Return only aggregate status, duration_ms, and request_id; omit token, arguments, and unknown fields.",
+    "cases": [
+      [
+        [
+          {
+            "status": 200,
+            "token": "secret",
+            "arguments": {
+              "body": "private"
+            }
+          }
+        ],
+        {
+          "status": 200
+        }
+      ],
+      [
+        [
+          {
+            "duration_ms": 12,
+            "request_id": "a",
+            "message": "private"
+          }
+        ],
+        {
+          "duration_ms": 12,
+          "request_id": "a"
+        }
+      ]
+    ]
+  }
+]

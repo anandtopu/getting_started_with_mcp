@@ -1,0 +1,116 @@
+[
+  {
+    "stem": "01_catalog",
+    "task": "Approve only if the exact full definition fingerprint is unchanged.",
+    "cases": [
+      [
+        [
+          "hash-a",
+          "hash-a"
+        ],
+        true
+      ],
+      [
+        [
+          "hash-a",
+          "hash-b"
+        ],
+        false
+      ],
+      [
+        [
+          "hash-a",
+          null
+        ],
+        false
+      ],
+      [
+        [
+          "",
+          ""
+        ],
+        false
+      ]
+    ]
+  },
+  {
+    "stem": "02_retry",
+    "task": "Retry once only when local policy marks a read safe and there is a transport failure.",
+    "cases": [
+      [
+        [
+          true,
+          true,
+          0
+        ],
+        true
+      ],
+      [
+        [
+          false,
+          true,
+          0
+        ],
+        false
+      ],
+      [
+        [
+          true,
+          true,
+          1
+        ],
+        false
+      ],
+      [
+        [
+          true,
+          false,
+          0
+        ],
+        false
+      ]
+    ]
+  },
+  {
+    "stem": "03_decision",
+    "task": "Accept a decision only for the current unexpired unanswered question ID.",
+    "cases": [
+      [
+        [
+          "a",
+          "a",
+          false,
+          false
+        ],
+        true
+      ],
+      [
+        [
+          "a",
+          "b",
+          false,
+          false
+        ],
+        false
+      ],
+      [
+        [
+          "a",
+          "a",
+          true,
+          false
+        ],
+        false
+      ],
+      [
+        [
+          "a",
+          "a",
+          false,
+          true
+        ],
+        false
+      ]
+    ]
+  }
+]

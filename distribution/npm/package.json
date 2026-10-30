@@ -1,0 +1,24 @@
+{
+  "name": "@anandtopu/lumen-notes-course",
+  "version": "1.0.0",
+  "description": "Synthetic Lumen notes MCP server",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "lumen-notes": "dist/cli.cjs"
+  },
+  "files": [
+    "dist/cli.cjs",
+    "README.md",
+    "LICENSE",
+    "dist/THIRD_PARTY_LICENSES.txt"
+  ],
+  "engines": {
+    "node": "^24.0.0 || ^26.0.0"
+  },
+  "mcpName": "io.github.anandtopu/lumen-notes",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anandtopu/getting_started_with_mcp.git"
+  }
+}

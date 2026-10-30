@@ -11,7 +11,7 @@ export const structured = (value: Record<string, unknown>) => ({
   ...text(JSON.stringify(value)), structuredContent: value,
 });
 
-export function notesServer(): McpServer {
+export function configuredNotesServer(readOnly = false): McpServer {
   const server = new McpServer({ name: 'Lumen notes', version: '1.0' });
   const notes = [{ id: 1, title: 'Release handover', body: 'Review the release checklist.', tags: ['release'] }];
   server.registerTool('search_notes', {
@@ -19,7 +19,7 @@ export function notesServer(): McpServer {
     inputSchema: z.object({ query: z.string().max(100).default('') }), annotations: read,
     outputSchema: z.object({ result: z.array(z.object({ id: z.number(), title: z.string(), body: z.string(), tags: z.array(z.string()) })) }),
   }, ({ query }) => structured({ result: notes.filter(n => `${n.title} ${n.body}`.toLowerCase().includes(query.toLowerCase())) }));
-  server.registerTool('create_note', {
+  const create = server.registerTool('create_note', {
     description: 'Create an ephemeral note only after the user confirms. Restarting clears new notes.',
     inputSchema: z.object({ title: z.string().min(1).max(100), body: z.string().min(1).max(2000), confirmed: z.boolean().default(false) }),
     outputSchema: z.object({ id: z.number(), title: z.string() }), annotations: write,
@@ -29,7 +29,7 @@ export function notesServer(): McpServer {
     notes.push(note);
     return structured({ id: note.id, title });
   });
-  server.registerTool('tag_note', {
+  const tag = server.registerTool('tag_note', {
     description: 'Add a tag once to an existing note. Confirm the note ID and tag first.',
     inputSchema: z.object({ note_id: z.number().int(), tag: z.string().min(1).max(40), confirmed: z.boolean().default(false) }),
     outputSchema: z.object({ id: z.number(), tags: z.array(z.string()) }),
@@ -41,5 +41,8 @@ export function notesServer(): McpServer {
     if (!note.tags.includes(tag)) note.tags.push(tag);
     return structured({ id: note_id, tags: note.tags });
   });
+  if (readOnly) { create.remove(); tag.remove(); }
   return server;
 }
+
+export function notesServer(): McpServer { return configuredNotesServer(false); }

@@ -491,3 +491,7 @@ No live provider call, complete host UI test, cloud deployment or external-link 
 Published [anandtopu/getting_started_with_mcp](https://github.com/anandtopu/getting_started_with_mcp). Implementation commit `ed0ba217967394ac2a8ce1bafadb00621b028012` passed [the complete CI run](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41005633590): seven Python jobs (Windows/Linux on 3.12–3.14 and macOS on 3.12), four TypeScript jobs (Windows/Linux on Node 24/26), and Inspector. The external-link job is intentionally manual and was skipped.
 
 Linux Python 3.12 ran **25 tests with no skips**, including the symlink boundary test. Each matrix job sets `UV_PYTHON` explicitly so the checkout's recommended `.python-version` cannot silently change its interpreter. The subsequent documentation-only commit records these outcomes without rerunning the unchanged implementation.
+
+## Phase 7
+
+See [Phase 7 evidence and limitations](PHASE_7_VERIFICATION.md) for packages, registry publisher, deployment and the browser host.

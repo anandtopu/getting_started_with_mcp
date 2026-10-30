@@ -1,7 +1,7 @@
 """Validate delivered files and report planned lessons honestly.
 
 Run: uv run python scripts/check_course.py [--release]
---release fails until all 22 modules and their learning materials exist.
+--release also requires the planned Phase 8 bonuses and capstones.
 """
 
 import argparse
@@ -38,6 +38,13 @@ def validate(release: bool = False) -> list[str]:
     modules = sorted((ROOT / "modules").glob("[0-9][0-9]_*/README.md"))
     if release and len(modules) != 22:
         errors.append(f"Release needs 22 modules; {len(modules)} delivered.")
+    if release:
+        for index in range(1, 6):
+            if not list((ROOT / "capstones").glob(f"{index:02d}_*/README.md")):
+                errors.append(f"Release needs Phase 8 capstone {index}.")
+        for index in range(1, 5):
+            if not list((ROOT / "modules/bonus").glob(f"B{index}_*/README.md")):
+                errors.append(f"Release needs Phase 8 bonus B{index}.")
     for readme in modules:
         text = readme.read_text(encoding="utf-8")
         for section in SECTIONS:
@@ -72,7 +79,7 @@ def main() -> None:
     parser.add_argument("--release", action="store_true")
     args = parser.parse_args()
     errors = validate(args.release)
-    print("Phase 6: modules 00-17 delivered; modules 18-21 remain planned.")
+    print("Phase 7: modules 00-21 delivered; Phase 8 bonuses and capstones remain planned.")
     for error in errors:
         print(error)
     raise SystemExit(bool(errors))

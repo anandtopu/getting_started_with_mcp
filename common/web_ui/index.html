@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lumen Chat · Workspace</title><link rel="stylesheet" href="/assets/style.css"></head>
+<body><div class="shell"><aside class="sidebar"><a class="brand" href="/" aria-label="Lumen home"><span class="mark">L</span> lumen<span class="brand-dot">.</span></a>
+<div class="workspace-label">YOUR WORKSPACE</div><div class="nav-active"><span>◉</span> Workspace chat</div>
+<section class="connections"><div class="section-label">CONNECTED SERVICES <span id="connection-count">0</span></div><div id="connections"><p class="muted">Connecting…</p></div></section>
+<div class="sidebar-bottom"><div class="avatar">LL</div><div><strong>Lumen Labs</strong><small>Synthetic learning workspace</small></div></div></aside>
+<main><header class="topbar"><div><span class="eyebrow">WORKSPACE / CHAT</span><h1>A little context. A lot possible.</h1></div><span class="pill" id="status">Connecting</span></header>
+<div class="content"><section class="intro"><div class="eyebrow teal">LUMEN CHAT · VERSION 4</div><h2>Your workspace, in one conversation.</h2><p>Explore the work, draft an update, or build a report.<br>You review every tool call before it runs.</p>
+<div class="suggestions"><button data-prompt="Triage the fixture week and draft a status update"><span>01</span><strong>Draft a weekly update</strong><small>Use evidence from the issue tracker →</small></button><button data-prompt="Create a follow-up note"><span>02</span><strong>Save a follow-up note</strong><small>Review the content before creating →</small></button><button data-prompt="Generate a quarterly report"><span>03</span><strong>Build a quarterly report</strong><small>Choose detail and follow progress →</small></button><button data-prompt="Show the analytics dashboard"><span>04</span><strong>Open analytics</strong><small>A live, read-only workspace view →</small></button></div></section>
+<section id="conversation" aria-live="polite" aria-label="Conversation"></section>
+<section id="decision" class="decision" hidden aria-label="Your decision"></section>
+<section id="app-panel" class="app-panel" hidden><div class="app-heading"><strong>Workspace analytics</strong><button id="close-app" class="text-button">Close view</button></div><div id="app-frame"></div></section>
+<div id="notice" role="alert" hidden></div>
+<form id="composer"><label class="sr-only" for="prompt">Message</label><textarea id="prompt" rows="2" placeholder="What would you like to work on?" maxlength="3000" required></textarea><div class="composer-toolbar"><div class="provider-controls"><label for="provider">Provider</label><select id="provider"><option value="fake">Practice · no model calls</option value="openai">OpenAI</option><option value="anthropic">Anthropic</option><option value="gemini">Gemini</option><option value="ollama">Ollama</option></select><input id="model" aria-label="Configured model name" placeholder="Configured model name" maxlength="100" hidden></div><button id="send" type="submit">Send message <span>↑</span></button></div></form>
+<div class="footer-note"><span id="mode-note">Practice mode uses real synthetic data and scripted tool choices. No model key needed.</span><div><button id="cancel" class="text-button" disabled>Cancel operation</button><span>·</span><button id="reconnect" class="text-button">Reconnect</button></div></div></div>
+</main></div><script type="module" src="/assets/app.js"></script></body></html>
