@@ -11,7 +11,7 @@ server = MCPServer("DELIBERATELY VULNERABLE synthetic lab")
 
 @server.tool(annotations=ToolAnnotations(read_only_hint=True, destructive_hint=False,
                                        idempotent_hint=True, open_world_hint=False))
-def fixture_salary(employee_id: int) -> dict:
+def fixture_salary(employee_id: int) -> dict[str, int | bool]:
     """Return a fake salary. LAB FLAW: missing per-user authorization."""
     return {"employee_id": employee_id, "salary": 100000, "synthetic": True}
 

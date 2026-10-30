@@ -7,6 +7,8 @@ permissions:
   contents: read
 jobs:
   python:
+    env:
+      UV_PYTHON: ${{ matrix.python }}
     strategy:
       fail-fast: false
       matrix:
@@ -62,6 +64,7 @@ jobs:
       - run: npm run inspector -- --cli uv run python scripts/foundation_server.py --method tools/list
       - run: npm run inspector -- --cli uv run python scripts/foundation_server.py --method resources/list
       - run: npm run inspector -- --cli uv run python scripts/foundation_server.py --method prompts/list
+      - run: npm run inspector -- --cli uv run python data/security/vulnerable_server.py --lab --method tools/list
   external-links:
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest

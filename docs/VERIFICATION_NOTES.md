@@ -156,10 +156,10 @@ These are catalog checks, not proof of account access or local model availabilit
 ### Local validation
 
 - Python 3.12.13, Node 24.18.0, npm 11.16.0, uv 0.12.18 on Windows.
-- 22 Python tests passed; one symlink test skipped because the account cannot create symlinks. Linux CI must exercise that case.
+- 24 Python tests passed; one symlink test skipped because the account cannot create symlinks. Linux CI must exercise that case.
 - Five TypeScript tests passed; compiler, ESLint, ruff and formatting checks passed.
 - SDK in-memory tools/resources/prompts checks and real stdio smoke run passed.
-- Inspector CLI lists the foundation server's tools. Resource/prompt CLI checks and package build are included in final validation.
+- Inspector CLI tools/resources/prompts checks passed, and both wheel and source distribution builds succeeded. The isolated synthetic lab also passes an Inspector tools listing.
 - Actual current-revision wire traffic is saved in `docs/wire/foundation_server.jsonl`. The proxy preserves protocol bytes, handles EOF/failure/timeout and redacts capture copies. Captures do not claim to observe HTTP, which arrives in a later tier.
 - Data counts, references, PDF text extraction, integrity hashes and repeated regeneration are tested. The generator explicitly closes SQLite connections after committing; Windows exposed and verified that fix.
 - Local Markdown links and delivered-file checks passed. The release coverage gate intentionally fails until all 22 modules exist.
