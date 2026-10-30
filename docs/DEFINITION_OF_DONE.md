@@ -1,17 +1,32 @@
 # Definition of done
 
-Use [verification evidence](PHASE_8_VERIFICATION.md) for measured results and the [feature map](FEATURE_MAP.md) for implementations. These gates concern the delivered local course, not optional live accounts.
+Verification date: **2026-10-30**. Scope: the delivered local course and its CI. [Measured evidence and limits](PHASE_8_VERIFICATION.md) identify the tested versions and optional integrations.
 
-- [x] 22 numbered modules with structured README, examples, runnable use case, three exercises/solutions, quiz, host configs and actual captures.
-- [x] Python and TypeScript tracks, with explicit SDK compatibility limits.
-- [x] Four bonus modules covering native languages, specification workflow and current extensions.
-- [x] Five capstones with stories, acceptance, architecture, starter policy, reference runtime, tests, evaluated cases, security checklist and rubric.
-- [x] Mental model, full current protocol reference, four design decisions, host setup, migration, glossary and troubleshooting.
-- [x] Six one-page PDF cheatsheets with editable source and reproducible generator.
-- [x] No model credentials required for default tests; fixtures use synthetic Lumen data.
-- [x] Pin dependencies, preserve actual wire evidence and distinguish deprecated/experimental behavior.
-- [x] Local links and release inventory checked automatically.
-- [ ] Optional learner deployment: vendor SSO, cloud account, real provider credentials and external host GUI checks.
-- [ ] Optional learner publishing: package indexes, public Registry and desktop installation.
+## Requested release gates
 
-A checked content gate is not a claim of live external integration. The verification record lists the final executed checks, failures if any, and CI evidence.
+- [x] Default cached `uv sync --offline --frozen` and offline Python tests pass without API keys. TypeScript tests pass. Fresh dependency installation needs network.
+- [x] Ruff check/format, TypeScript compiler and ESLint pass.
+- [x] Final CI matrix: all 28 required jobs passed, covering Python 3.12–3.14 and Node 24/26 on Windows/Linux, plus macOS Python 3.12 and four native SDKs on Windows/Linux. See the linked run in the verification record.
+- [x] Every advertised primitive is listed by Inspector or an equivalent client check. Native SDK contracts cover tools/resources/prompts; the explicit audit fixture has a separate stdio regression.
+- [x] Repository-wide subprocess tests enforce protocol-only stdout; the TypeScript launcher also runs outside the checkout.
+- [x] The source audit rejects banned legacy imports; MCP deprecation warnings are test errors. Labeled older-protocol interoperability is retained deliberately.
+- [x] Local HTTP defaults to 127.0.0.1, checks Origin/Host and validates audience on authorized routes. Container-wide binding is explicit and exposed through a loopback proxy.
+- [x] Mutating tools require confirmation and appropriate annotations; regression tests reject missing approval, stale decisions and insufficient scope. The deliberately unsafe audit fixtures are labeled and require explicit lab mode.
+- [x] All modules and bonuses include the required teaching sections, examples/use cases, three exercises with solutions, quizzes and tests. B1 adds native TypeScript counterparts with documented API limits.
+- [x] Feature-map links resolve; local and external link sweeps report zero failures.
+- [ ] A first-time human GUI setup in under ten minutes was not timed. The prerequisite-ready CI cold checkout/install/Inspector path is tested; download speed and host account setup remain variable.
+- [x] Complete files and runnable reference code are delivered. Intentional exercise stubs are labeled and have independent checkers; no production placeholder is presented as implemented behavior.
+
+## Phase 8 deliverables
+
+- [x] Four bonus modules: full TypeScript route, Go/C#/Rust/Java SDKs, specification workflow, current extensions.
+- [x] Five capstones: stories, acceptance, distinct Mermaid architecture, runnable policy starter, reference runtime, tests, evaluated cases, security checklist, rubric and extension ideas.
+- [x] Reference docs: mental model, all 24 taught current methods/notifications, four design flowcharts, four-host setup matrix, security, 100-term glossary, troubleshooting and migration.
+- [x] Six one-page PDF cheatsheets, editable content and reproducible generator; rendered and visually checked.
+
+## Optional integrations outside the tested release
+
+- [ ] Live model measurements, external vendor SSO and a production multi-user deployment require learner credentials and additional evaluation.
+- [ ] Public Registry/package publication, cloud deployment and third-party desktop GUI installation were not performed.
+
+Java's stable SDK uses the labeled older-revision path. TypeScript Tasks uses official framing with a bounded receiver because the pinned high-level validator lacks task-result support. Knowledge semantic search uses a small explicit concept encoder. These choices are explained at their teaching points, with runnable evidence.

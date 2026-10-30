@@ -29,7 +29,7 @@ Default tests require no model keys and make no live model calls. Dependency ins
 | Personal Knowledge packaging | `uv run python scripts/knowledge_package.py --prepare`, then the same command without prepare; wheel and MCPB embedded wheel launch outside checkout |
 | Audit, Gateway, Ops, Chat Pro | [Five reference contracts](../scripts/capstones.py); [Python regression tests](../tests/test_phase8.py); [browser tests](../tests/browser/chat.pw.ts) |
 | Policy evaluation | `uv run python scripts/check_capstone.py --project 1`; repeat 2–5. Each compares four actual policy decisions with expected cases; starter intentionally fails |
-| Reference completeness | [24 captured methods/notifications](protocol_coverage.json), 60+ glossary terms, design flows, host matrix, migration and troubleshooting |
+| Reference completeness | [24 captured methods/notifications](protocol_coverage.json), 100 glossary terms, design flows, host matrix, migration and troubleshooting |
 | Printable references | `uv run --group docs python scripts/build_cheatsheets.py`; six PDFs asserted one page, rendered for visual inspection |
 
 ## Regenerate evidence
@@ -47,4 +47,18 @@ The Ops deployment combines `deployment/compose.yaml` with `capstones/04_lumen_o
 - Java's stable SDK uses older-revision interoperability; TS Tasks uses official transport framing around a bounded receiver because the pinned high-level validator lacks task-result support.
 - Ops Task storage and limits are single-process teaching infrastructure; multi-worker scheduling/recovery needs additional design.
 
-Final measured command counts and CI run are recorded below after the release checks finish.
+## Measured release checks
+
+- The full local Python suite passed **238 tests**, with one OS symlink-permission skip. Three later entry-point/resource regressions were added; the final Phase 8 subset passed **10/10**. All seven final Python CI jobs passed the complete **242-test** suite and all **227 examples**.
+- TypeScript: **107 tests in 27 files**, with compiler and ESLint passing.
+- Standalone example runner: **227 entry points** (45 servers and 182 scripts), all passed.
+- Inspector/equivalent: **73 catalog checks across 45 listed servers** passed advertised primitive discovery. The Windows Node Inspector has a reproducible `UV_HANDLE_CLOSING` shutdown crash for HTTP; the runner uses an explicitly identified SDK equivalent only for that specific failure. Linux CI runs the Inspector path directly.
+- Four native SDK contracts passed; nine bonus exercise solutions and **20 capstone policy cases** passed.
+- Knowledge wheel and MCPB embedded wheel: **two isolated launches outside the checkout** passed, including the nested-note routing fix.
+- Real browser acceptance: **three Chromium tests** passed (approvals, input, Tasks, App sandbox, mobile layout and forged requests).
+- Ruff check/format, release inventory, local/external links, 24-method coverage and six one-page PDF checks passed. All six PDF renders were visually inspected.
+- Ops Docker/OAuth deployment passed in Linux CI. Local Docker was unavailable; its stalled startup command was stopped. No local container success is claimed.
+
+The [final CI run](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41123051680) passed all **28 required jobs** on `40ff40b`, including expanded Inspector coverage for every advertised Phase 8 resource/prompt list. The optional external-link CI job was skipped; the separate local external-link sweep passed. Earlier runs exposed an invalid C# build switch; the corrected runner performs locked restore followed by `build --no-restore` and passes locally and in CI.
+
+Python 3.14 also reports LangSmith warnings for its use of `asyncio.iscoroutinefunction`; the LangChain MCP adapter emits its documented beta warning. These third-party warnings are recorded, not suppressed. Official MCP deprecation warnings remain test errors.
