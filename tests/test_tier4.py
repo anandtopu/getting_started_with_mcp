@@ -180,13 +180,13 @@ async def test_actual_frameworks(framework):
 
 @pytest.mark.anyio
 async def test_evaluation_reports_real_catalogs_without_claiming_model_accuracy():
-    from common.tool_evaluation import evaluate
+    from common.tool_evaluation import EvaluationConfigurationError, evaluate
 
     result = await evaluate()
     assert result["mirror"]["completed"] == result["task_tools"]["completed"] == 6
     assert result["mirror"]["tools"] == 25 and result["task_tools"]["tools"] == 6
     assert result["mirror"]["catalog_characters"] > result["task_tools"]["catalog_characters"]
-    with pytest.raises(ValueError, match="1–6"):
+    with pytest.raises(EvaluationConfigurationError, match="integer from 1 to 6.*check_env.py"):
         await evaluate(limit=0)
 
 

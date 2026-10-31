@@ -46,6 +46,12 @@ the follow-up status.
 - Full Python suite and CI: in progress. Final counts and the exact CI-tested
   revision will be recorded when complete.
 
+The [initial CI run](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41176718847)
+on `f406b51` exposed an older Tier 4 assertion matching the previous `1–6` error
+text. The new evaluator tests passed; the older assertion was updated to require
+the specific configuration-error class, the new range wording and setup guidance.
+The superseded run was stopped and a fresh full matrix is required for sign-off.
+
 ## Remaining acceptance items
 
 This follow-up does not claim E-001 (timed setup/two GUI hosts), E-002 (TestPyPI
