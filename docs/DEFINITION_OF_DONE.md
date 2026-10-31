@@ -45,7 +45,7 @@ tests on Linux (158 plus one existing skip on Windows), and the complete
 Python/application/package/deployment matrix. The dependency record documents
 the Windows fixture correction made after the first CI run.
 
-## Optional integrations outside the tested release
+## Final review follow-up
 
 The [final review follow-up](FINAL_REVIEW_FIXES_VERIFICATION.md) records the
 packaging containment correction, native module 14 evaluation and module 18
@@ -54,6 +54,14 @@ acceptance evidence remains outstanding for the first-time setup/two GUI hosts,
 TestPyPI publication and actual live-model comparison; see E-001–E-003 in the
 [final review](reviews/2026-10-30-final-review.md). These should not be read as
 completed merely because the local implementation and CI pass.
+
+[All 29 required final-fix CI jobs passed](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41168471133)
+on `b0b1301`, without reruns. Native tests: 171 on Linux, 170 plus one existing
+skip on Windows. Local Python: 249 passed plus one existing permission skip.
+The npm audit reports zero vulnerabilities. F-001 through F-004 are closed;
+the three acceptance-evidence items above remain explicit exceptions.
+
+## Optional integrations outside the tested release
 
 - [ ] Live model measurements, external vendor SSO and a production multi-user deployment require learner credentials and additional evaluation.
 - [ ] Public Registry/package publication, cloud deployment and third-party desktop GUI installation were not performed.

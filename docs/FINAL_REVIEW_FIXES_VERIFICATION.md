@@ -22,8 +22,19 @@ original baseline; this record tracks the subsequent fixes.
 - Fresh npm audit: **zero vulnerabilities**; dependency versions and overrides are unchanged.
 - Full native checks passed: TypeScript compiler, ESLint and **170 tests**, with
   one existing Windows symlink skip (171 collected across 35 files).
-- Full Python suite and the required CI matrix: in progress. Final results and
-  the exact tested revision will be recorded after completion.
+- Full local Python suite: **249 passed, one Windows symlink-permission skip**,
+  including the 233 standalone examples. The existing LangChain beta warning
+  remains informational.
+- [All 29 required CI jobs passed](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41168471133)
+  on `b0b1301c07d2bc4484d690a71090ab9dc625aa4a`, without a rerun. All four Node
+  24/26 jobs passed: Linux **171 tests**, Windows **170 passed and one skipped**,
+  with zero audit findings. Python 3.12–3.14 on Windows/Linux and Python 3.12 on
+  macOS passed the suites, standalone examples and checkpoints. Shipping,
+  browser applications, real Keycloak deployments, Inspector, native SDKs and
+  framework jobs also passed. The optional manual external-link job was skipped.
+
+The subsequent verification-record commit changes only documentation and is
+marked `[skip ci]`; the link above identifies the tested implementation revision.
 
 ## Remaining acceptance evidence
 
