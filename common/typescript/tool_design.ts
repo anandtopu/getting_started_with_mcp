@@ -6,6 +6,8 @@ import { z } from 'zod';
 import { root } from './data.ts';
 import { read, structured, failure } from './notes.ts';
 import { inMemory } from './clients.ts';
+import { CourseHost, type Model } from './advanced_host.ts';
+import { createModel, modelSettings, type ModelSettings } from './llm.ts';
 
 const tables=['issues','projects','users','comments','labels'] as const;
 type Table=typeof tables[number];
@@ -69,20 +71,43 @@ export function taskToolsServer() {
   return server;
 }
 
-export async function designEvaluation() {
-  const output:Record<string,unknown>={mode:'deterministic retrieval; not live model accuracy'};
+export async function designEvaluation(options: {live?:boolean;limit?:number;settings?:ModelSettings;fetcher?:typeof fetch} = {}) {
+  const count=options.limit??6;
+  if(!Number.isInteger(count) || count<1 || count>6)throw new Error('limit must be an integer from 1 to 6');
+  const settings=options.live?(options.settings??modelSettings()):undefined;
+  const output:Record<string,unknown>={mode:options.live?'live':'deterministic plumbing only',cases:count,budget:{turns:4,calls:4}};
   for(const [label,factory,name,key] of [
     ['mirror',mirrorServer,'get_issues','row_id'],['task_tools',taskToolsServer,'issue_brief','issue_id'],
   ] as const) {
     await inMemory(factory,async client=>{
-      const catalog=(await client.listTools()).tools;let completed=0;
-      for(const id of [1,13,55,112,239,400]) {
-        const response=await client.callTool({name,arguments:{[key]:id}});
-        const actual=response.structuredContent as {id?:number;status?:string};
-        const expected=brief(id)!;
-        if(!response.isError && actual.id===expected.id && actual.status===expected.status)completed++;
+      const catalog=(await client.listTools()).tools;
+      const results=[];
+      for(const id of [1,13,55,112,239,400].slice(0,count)) {
+        let calls=0;let toolError=false;const started=performance.now();
+        const host=new CourseHost(new Map([['issues',client]]),async call=>call.name.startsWith('issues__'));
+        const execute=host.execute.bind(host);
+        host.execute=async call=>{calls++;const result=await execute(call);toolError ||= result.isError===true;return result;};
+        const fixture:Model=async history=>{
+          const last=history.at(-1) as {role?:string;result?:{structuredContent?:{id?:number;status?:string}}};
+          if(last.role==='tool') {
+            const evidence=last.result?.structuredContent;
+            return {text:JSON.stringify({id:evidence?.id,status:evidence?.status})};
+          }
+          return {calls:[{name:`issues__${name}`,arguments:{[key]:id}}]};
+        };
+        let passed=false;let error=false;
+        try {
+          const reply=await host.run(settings?createModel(settings,options.fetcher):fixture,
+            `Read issue ${id}. Return exactly a JSON object with id and status. No other text.`,{turns:4,calls:4});
+          const actual=JSON.parse(reply.text) as {id?:number;status?:string};
+          const expected=brief(id)!;
+          passed=!toolError && calls>0 && actual?.id===expected.id && actual?.status===expected.status;
+        } catch {error=true;}
+        results.push({id,passed,error,calls,seconds:(performance.now()-started)/1000});
       }
-      output[label]={tools:catalog.length,completed,cases:6,catalog_characters:JSON.stringify(catalog).length};
+      output[label]={tools:catalog.length,completed:results.filter(r=>r.passed).length,cases:count,
+        catalog_characters:JSON.stringify(catalog).length,calls:results.reduce((sum,r)=>sum+r.calls,0),
+        seconds:results.reduce((sum,r)=>sum+r.seconds,0),results};
     });
   }
   return output;

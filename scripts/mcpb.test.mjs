@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, expect, test } from 'vitest';
-import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync, symlinkSync, truncateSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync, symlinkSync, truncateSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
@@ -71,6 +71,20 @@ test('rejects missing entry points and outputs inside the staging directory', ()
   expect(() => pack(stage, join(stage, 'out.mcpb'))).toThrow('outside');
   rmSync(join(stage, 'server/cli.cjs'));
   expect(() => pack(stage, output)).toThrow('entry point is missing');
+});
+
+test.each(['nested', '..inside', '..cache/nested'])('rejects output in contained directory %s before writing', directory => {
+  mkdirSync(join(stage, directory), { recursive: true });
+  const destination = join(stage, directory, 'out.mcpb');
+  expect(() => pack(stage, destination)).toThrow('outside');
+  expect(existsSync(destination)).toBe(false);
+});
+
+test('allows actual sibling directories, including names beginning with two dots', () => {
+  for (const directory of ['sibling', '..sibling']) {
+    mkdirSync(join(root, directory));
+    expect(pack(stage, join(root, directory, 'out.mcpb')).files).toBe(2);
+  }
 });
 
 test('bounds archive size before reading oversized files', () => {

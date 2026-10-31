@@ -166,8 +166,8 @@ Source: [captured python_main](wire/python_main.jsonl). Each JSON block below is
 |---|---|---|---|
 
 | IssueInput / bound SQL | Module 10 remoteWorkspace | Validate writes | Before touching data |
-| readonly_database / usage_page | B1 counterpart planned | Limit reads | For analytics |
-| httpx2.AsyncClient / ASGITransport | B1 counterpart planned | Wrap a REST API | For mock or opt-in live calls |
+| readonly_database / usage_page | `DatabaseSync` read-only / `usagePage` in [real_data.ts](../../common/typescript/real_data.ts) | Limit reads | For analytics |
+| httpx2.AsyncClient / ASGITransport | `fetchObject` / `withInternalAPI` in [real_data.ts](../../common/typescript/real_data.ts) | Wrap a REST API | For mock or opt-in live calls |
 
 ## Walkthrough
 

@@ -13,7 +13,7 @@
   "scripts": {
     "test": "vitest run --maxWorkers=4",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint common/typescript modules scripts/check-exercise.ts scripts/check-ts-extension-exercise.ts scripts/typescript_*.ts distribution/npm/src tests/browser playwright*.config.ts common/web_ui/app.source.js scripts/build_notes.mjs scripts/build_web_chat.mjs scripts/bundle_licenses.mjs scripts/mcpb.mjs scripts/mcpb.test.mjs scripts/dependencies.test.mjs",
+    "lint": "eslint common/typescript modules scripts/check-exercise.ts scripts/check-ts-extension-exercise.ts scripts/typescript_*.ts distribution/npm/src tests/browser playwright*.config.ts common/web_ui/app.source.js scripts/build_notes.mjs scripts/build_web_chat.mjs scripts/bundle_licenses.mjs scripts/mcpb.mjs scripts/mcpb.test.mjs scripts/dependencies.test.mjs scripts/notes_packaging.mjs",
     "inspector": "mcp-inspector",
     "check": "npm run typecheck && npm run lint && npm test",
     "build:dashboard": "node scripts/build_dashboard.mjs",

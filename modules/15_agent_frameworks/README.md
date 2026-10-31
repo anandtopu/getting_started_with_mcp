@@ -139,8 +139,8 @@ Source: [captured python_main](wire/python_main.jsonl). Each JSON block below is
 | Python API | TypeScript / browser API | What it does | When to use it |
 |---|---|---|---|
 | `MCPServerStdio` + `Runner.run` | OpenAI Agents MCP client | Manages a server connection and agent loop | OpenAI Agents example |
-| `MCPAdapter` + `StateGraph` | Full TS counterpart planned in B1 | Adapts tools and runs graph nodes | LangGraph workflow |
-| `MCPToolset` + `FunctionModel` | Full TS counterpart planned in B1 | Runs Pydantic AI with a local fixture | Reproducible integration tests |
+| `MCPAdapter` + `StateGraph` | `Client.callTool` + `StateGraph` in [frameworkDemo](../../common/typescript/frameworks.ts) | Adapts tools and runs graph nodes | LangGraph workflow |
+| `MCPToolset` + `FunctionModel` | Pydantic AI is Python-only; the [native track](typescript/README.md) teaches OpenAI Agents, LangChain and LangGraph | Runs Pydantic AI with a local fixture | Reproducible integration tests |
 
 ## Walkthrough
 

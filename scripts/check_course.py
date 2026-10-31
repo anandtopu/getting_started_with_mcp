@@ -34,6 +34,8 @@ def teaching_contract(path) -> list[str]:
     """Check promises that headings alone cannot establish."""
     text = path.read_text(encoding="utf-8")
     errors = []
+    if re.search(r"(?:counterpart planned|planned in B1|later counterpart)", text, re.I):
+        errors.append(f"{path.parent.name}: stale TypeScript delivery-status wording")
     for marker in [
         "> After this module you can",
         "**Time:**",

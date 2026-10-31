@@ -47,6 +47,14 @@ the Windows fixture correction made after the first CI run.
 
 ## Optional integrations outside the tested release
 
+The [final review follow-up](FINAL_REVIEW_FIXES_VERIFICATION.md) records the
+packaging containment correction, native module 14 evaluation and module 18
+build/install lessons, and corrected API tables. Separate original-prompt
+acceptance evidence remains outstanding for the first-time setup/two GUI hosts,
+TestPyPI publication and actual live-model comparison; see E-001–E-003 in the
+[final review](reviews/2026-10-30-final-review.md). These should not be read as
+completed merely because the local implementation and CI pass.
+
 - [ ] Live model measurements, external vendor SSO and a production multi-user deployment require learner credentials and additional evaluation.
 - [ ] Public Registry/package publication, cloud deployment and third-party desktop GUI installation were not performed.
 

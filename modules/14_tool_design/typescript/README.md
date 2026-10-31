@@ -46,13 +46,21 @@ sequenceDiagram
 
 - `01_endpoint_mirror.ts`: run `node --import tsx modules/14_tool_design/typescript/examples/01_endpoint_mirror.ts`; expect `status: PASS`.
 - `02_task_tools.ts`: run `node --import tsx modules/14_tool_design/typescript/examples/02_task_tools.ts`; expect `status: PASS`.
-- `03_evaluation.ts`: run `node --import tsx modules/14_tool_design/typescript/examples/03_evaluation.ts`; expect `status: PASS`.
+- `03_evaluation.ts`: run `node --import tsx modules/14_tool_design/typescript/examples/03_evaluation.ts`; expect JSON with `completed: 6`, `calls: 6` for both catalogs and `mode: "deterministic plumbing only"`.
 
 The executable contracts live in [advanced_lessons.ts](../../../common/typescript/advanced_lessons.ts); follow the module-number branch to the focused implementation it invokes. This avoids copying the same host/security logic into every example.
 
 Compare actual native catalogs over identical `issues.db` data: [mirror_server.ts](mirror_server.ts) registers 25 endpoint tools; [task_tools_server.ts](task_tools_server.ts) registers six workflow tools. Inspect the first with `npm run inspector -- --cli node --import tsx modules/14_tool_design/typescript/mirror_server.ts --protocol-era modern --method tools/list`. Replace `mirror_server.ts` with `task_tools_server.ts` for the workflow catalog.
 
-The first example asserts the 25-tool inventory. The second calls the six-tool server, compares concise and detailed issue evidence and checks an actionable invalid-ID failure. The third evaluates six known issue retrievals against both servers, checking ID and status and measuring catalog characters. These measurements compare deterministic retrieval and catalog size; a model-quality conclusion requires a separate live evaluation. [tool_design.ts](../../../common/typescript/tool_design.ts) is the full implementation. [Mirror capture](../../bonus/B1_typescript_track/wire/mirror.jsonl), [workflow capture](../../bonus/B1_typescript_track/wire/task_tools.jsonl).
+The first example asserts the 25-tool inventory. The second calls the six-tool server, compares concise and detailed issue evidence and checks an actionable invalid-ID failure. The third runs both catalogs through `CourseHost.run`, checks the final JSON ID/status against SQLite evidence, and reports catalog characters, completion, tool calls, elapsed seconds and per-case outcomes. Each case has four model turns and four tool calls. The offline model reads the actual MCP result before answering. These fixture measurements check the plumbing; they do not establish model quality. [tool_design.ts](../../../common/typescript/tool_design.ts) is the full implementation. [Mirror capture](../../bonus/B1_typescript_track/wire/mirror.jsonl), [workflow capture](../../bonus/B1_typescript_track/wire/task_tools.jsonl).
+
+For an actual model comparison, set `LLM_PROVIDER`, `LLM_MODEL` and the provider key in your root `.env` as described in [environment setup](../../../.env.example), then opt in:
+
+```bash
+node --import tsx modules/14_tool_design/typescript/examples/03_evaluation.ts --live --limit 3
+```
+
+`--limit` accepts 1–6 and selects the same prefix of `[1, 13, 55, 112, 239, 400]` for both catalogs. OpenAI, Anthropic, Gemini and Ollama use the shared native provider adapters. Each case gets a fresh conversation and the same prompt and budgets. Failed requests, malformed answers, tool errors and exhausted budgets count as failed cases; provider error text is not included in results. A guessed answer without a tool call is not a completion. Repeat the run with the same model/settings and save the JSON before interpreting differences; six cases and one trial are weak evidence. CI exercises the live route with injected provider responses without making paid requests.
 
 ## Try it in a host
 

@@ -1,6 +1,6 @@
 // Course-only MCPB 0.3 validator/packer. No install, unpack, signing or script execution.
 import { readFileSync, lstatSync, readdirSync, realpathSync, writeFileSync, renameSync, rmSync } from 'node:fs';
-import { resolve, dirname, basename, join, relative, isAbsolute } from 'node:path';
+import { resolve, dirname, basename, join, relative, isAbsolute, sep } from 'node:path';
 import { fileURLToPath, URL } from 'node:url';
 import { randomUUID } from 'node:crypto';
 import Ajv from 'ajv';
@@ -39,7 +39,7 @@ export function pack(source, destination) {
   const root = realpathSync(source);
   const output = join(realpathSync(dirname(resolve(destination))), basename(destination));
   const rel = relative(root, output);
-  if (!rel || (!rel.startsWith('..') && !isAbsolute(rel))) throw new Error('Output must be outside the bundle directory');
+  if (!(rel === '..' || rel.startsWith('..' + sep) || isAbsolute(rel))) throw new Error('Output must be outside the bundle directory');
   const manifest = validateManifest(join(root, 'manifest.json'));
   const files = Object.create(null);
   const names = new Set();

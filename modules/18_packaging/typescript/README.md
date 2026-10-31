@@ -48,7 +48,11 @@ sequenceDiagram
 - `02_version.ts`: run `node --import tsx modules/18_packaging/typescript/examples/02_version.ts`; expect `status: PASS`.
 - `03_bundle.ts`: run `node --import tsx modules/18_packaging/typescript/examples/03_bundle.ts`; expect `status: PASS`.
 
-The executable contracts live in [advanced_lessons.ts](../../../common/typescript/advanced_lessons.ts); follow the module-number branch to the focused implementation it invokes. This avoids copying the same host/security logic into every example.
+The executable contracts live in [advanced_lessons.ts](../../../common/typescript/advanced_lessons.ts), which invokes the native [packaging lab](../../../scripts/notes_packaging.mjs). No Python orchestration is needed.
+
+Example 01 verifies that read-only mode removes write tools. Example 02 builds the bundled CLI and license notices in temporary staging, runs `npm pack`, checks the five-file inventory, and installs that tarball offline with scripts disabled. It compares the installed files with staging, then launches the installed `lumen-notes` command with `npm exec --offline` from an empty directory outside the checkout. Example 03 validates the MCPB 0.3 manifest, packs and inspects the four-file ZIP, extracts only those allowed files, and launches its entry point from the same kind of isolated directory. Both discover only `search_notes`, call it with `release`, and check the returned note title.
+
+Expect the package examples to print `kind`, `version: '1.0.0'`, the inspected `files`, `outside_checkout: true`, `tools: ['search_notes']` and `matches: 1` alongside `status: 'PASS'`. Temporary builds/installations are removed after each run. All dependencies must already be installed by `npm ci`; the lesson performs no package upload. The shared builder still supports `npm run build:notes` for a retained CLI. See [the main lesson](../README.md) for retained artifacts and learner-controlled publication.
 
 ## Try it in a host
 

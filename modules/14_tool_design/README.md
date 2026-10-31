@@ -138,7 +138,7 @@ Source: [captured python_main](wire/python_main.jsonl). Each JSON block below is
 |---|---|---|---|
 | `MCPServer.add_tool` | Official server tool registration | Derives an advertised schema | Register reviewed operations |
 | `Client.list_tools(cache_mode="refresh")` | Client catalog refresh | Refetches definitions | Catalog changes |
-| `Host.run` + `create_tool_model` | Full TS counterpart planned in B1 | Runs the measured tool loop | Controlled comparisons |
+| `Host.run` + `create_tool_model` | `CourseHost.run` + `createModel`, via [designEvaluation](../../common/typescript/tool_design.ts) | Runs the measured tool loop | Controlled comparisons |
 
 ## Walkthrough
 

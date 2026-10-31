@@ -198,9 +198,9 @@ Source: [captured python_main](wire/python_main.jsonl). Each JSON block below is
 | Python | TypeScript | What it does | When to use |
 |---|---|---|---|
 
-| InputRequiredResult | InputRequiredResult (later counterpart) | Request missing input | Before effects |
+| InputRequiredResult | `inputRequired` / `inputRequired.elicit` in [advanced_server.ts](../../common/typescript/advanced_server.ts) | Request missing input | Before effects |
 | ctx.input_responses / request_state | inputResponses / requestState | Read a continuation | On retry |
-| HostV2 / InteractiveClient | B1 counterpart planned | Keep input outside model | At the host boundary |
+| HostV2 / InteractiveClient | `Client.setRequestHandler` / [formDemo](../../common/typescript/advanced_lessons.ts) and [urlInputDemo](../../common/typescript/url_input.ts) | Keep input outside model | At the host boundary |
 | safe_path / create_model | Configured path / direct provider | Replace deprecated features | For files and generation |
 
 ## Walkthrough

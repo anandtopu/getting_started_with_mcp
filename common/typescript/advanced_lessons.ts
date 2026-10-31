@@ -17,6 +17,7 @@ import { utilityLesson } from './utilities.ts';
 import { mirrorServer, taskToolsServer, designEvaluation } from './tool_design.ts';
 import { validateMetadata, registryPages } from './registry.ts';
 import { traces, load, evaluate, validateStdout } from './quality.ts';
+import { packagingLesson } from '../../scripts/notes_packaging.mjs';
 
 import { Gateway } from './gateway.ts';
 import { taskDemo } from './task_receiver.ts';
@@ -127,8 +128,7 @@ export async function lesson(module:number, part:number) {
     if(part===3) await appDemo();
   } else if(module===18) {
     if(part===1) await inMemory(()=>configuredNotesServer(true),async c=>assert.deepEqual((await c.listTools()).tools.map(t=>t.name),['search_notes']));
-    if(part===2) assert.equal(JSON.parse(readFileSync(resolve(root,'distribution/npm/package.json'),'utf8')).version,'1.0.0');
-    if(part===3) {const manifest=JSON.parse(readFileSync(resolve(root,'distribution/mcpb/manifest.json'),'utf8'));assert.equal(manifest.manifest_version,'0.3');assert.equal(manifest.server.type,'node');}
+    if(part===2 || part===3) return {module,example:part,status:'PASS',...await packagingLesson(part===2?'npm':'mcpb')};
   } else if(module===19) {
     const metadata=validateMetadata();
     if(part===1) assert.ok(metadata.name.startsWith('io.github.anandtopu/'));

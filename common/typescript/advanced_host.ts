@@ -55,15 +55,17 @@ export class CourseHost {
     if(JSON.stringify(result).length>16000)throw new Error('Result exceeds 16000 characters; request less data.');
     return result as CallToolResult;
   }
-  async run(model: Model, request: string) {
+  async run(model: Model, request: string, budget = { turns: 6, calls: 8 }) {
+    if (!Number.isInteger(budget.turns) || budget.turns < 1 || budget.turns > 6 ||
+        !Number.isInteger(budget.calls) || budget.calls < 1 || budget.calls > 8) throw new Error('Invalid host budget');
     const history: unknown[] = [{ role: 'user', content: request }];
     let calls = 0;const ids=new Set<string>();
-    for (let turn = 0; turn < 6; turn++) {
+    for (let turn = 0; turn < budget.turns; turn++) {
       const reply = await model(history, (await this.catalog()).map(modelTool));
       if (!reply.calls?.length) return { text: reply.text ?? '', calls };
       history.push(reply);
       for (const proposal of reply.calls) {
-        if (++calls > 8) throw new Error('Tool call budget exceeded');
+        if (++calls > budget.calls) throw new Error('Tool call budget exceeded');
         const id=proposal.id??`fixture-${calls}`;
         if(!id || ids.has(id))throw new Error('Missing or repeated tool call ID');
         ids.add(id);
