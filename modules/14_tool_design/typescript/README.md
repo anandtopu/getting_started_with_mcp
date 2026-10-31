@@ -62,6 +62,10 @@ node --import tsx modules/14_tool_design/typescript/examples/03_evaluation.ts --
 
 `--limit` accepts 1–6 and selects the same prefix of `[1, 13, 55, 112, 239, 400]` for both catalogs. OpenAI, Anthropic, Gemini and Ollama use the shared native provider adapters. Each case gets a fresh conversation and the same prompt and budgets. Failed requests, malformed answers, tool errors and exhausted budgets count as failed cases; provider error text is not included in results. A guessed answer without a tool call is not a completion. Repeat the run with the same model/settings and save the JSON before interpreting differences; six cases and one trial are weak evidence. CI exercises the live route with injected provider responses without making paid requests.
 
+The Python and TypeScript graders both require exactly the `id` and `status` properties, with the correct numeric ID and status. Extra properties, string or boolean IDs, and answers without tool evidence fail. Both suites consume the same [16 replay cases](../../../tests/fixtures/tool_evaluation.json), including successful answers, failed calls and exhausted budgets.
+
+If live configuration is missing or invalid, the command exits nonzero with concise guidance ending in `Run uv run python scripts/check_env.py for setup help.` Expected configuration and usage errors do not print stack traces or echo configuration values. The offline command still needs no model key.
+
 ## Try it in a host
 
 Use the [B1 host configs](../../bonus/B1_typescript_track/host_configs/vscode.json), replacing the absolute repository path. Ask "Find release notes." The fixed `notes` profile starts with protocol-only stdout. The `forms` profile asks for a bulletin decision; the `workflow` profile reads and drafts without publishing.

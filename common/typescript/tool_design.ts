@@ -71,10 +71,18 @@ export function taskToolsServer() {
   return server;
 }
 
+export class EvaluationConfigurationError extends Error {
+  constructor(message:string) {super(`${message} Run uv run python scripts/check_env.py for setup help.`);}
+}
+
 export async function designEvaluation(options: {live?:boolean;limit?:number;settings?:ModelSettings;fetcher?:typeof fetch} = {}) {
   const count=options.limit??6;
-  if(!Number.isInteger(count) || count<1 || count>6)throw new Error('limit must be an integer from 1 to 6');
-  const settings=options.live?(options.settings??modelSettings()):undefined;
+  if(!Number.isInteger(count) || count<1 || count>6)throw new EvaluationConfigurationError('Evaluation limit must be an integer from 1 to 6.');
+  let settings:ModelSettings|undefined;
+  if(options.live) {
+    try {settings=options.settings??modelSettings();}
+    catch {throw new EvaluationConfigurationError('Choose a live LLM_PROVIDER and LLM_MODEL, and set the provider key in your environment or .env.');}
+  }
   const output:Record<string,unknown>={mode:options.live?'live':'deterministic plumbing only',cases:count,budget:{turns:4,calls:4}};
   for(const [label,factory,name,key] of [
     ['mirror',mirrorServer,'get_issues','row_id'],['task_tools',taskToolsServer,'issue_brief','issue_id'],
@@ -99,9 +107,11 @@ export async function designEvaluation(options: {live?:boolean;limit?:number;set
         try {
           const reply=await host.run(settings?createModel(settings,options.fetcher):fixture,
             `Read issue ${id}. Return exactly a JSON object with id and status. No other text.`,{turns:4,calls:4});
-          const actual=JSON.parse(reply.text) as {id?:number;status?:string};
+          const actual:unknown=JSON.parse(reply.text);
           const expected=brief(id)!;
-          passed=!toolError && calls>0 && actual?.id===expected.id && actual?.status===expected.status;
+          // Exact answer shape and actual successful tool evidence, as in Python.
+          const parsed=z.strictObject({id:z.number().int(),status:z.string()}).safeParse(actual);
+          passed=!toolError && calls>0 && parsed.success && parsed.data.id===expected.id && parsed.data.status===expected.status;
         } catch {error=true;}
         results.push({id,passed,error,calls,seconds:(performance.now()-started)/1000});
       }

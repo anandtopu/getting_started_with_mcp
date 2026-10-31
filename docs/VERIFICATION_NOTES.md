@@ -1,5 +1,13 @@
 # Verification notes
 
+## Module 14 follow-up — October 31, 2026
+
+The [grading and configuration verification record](MODULE_14_PARITY_VERIFICATION.md)
+tracks R-101/R-102 from the final follow-up review. Both evaluators now use the
+same scoring contract and shared replay fixtures; expected CLI configuration
+errors give concise setup guidance. The record distinguishes implementation
+verification from the three outstanding manual/live acceptance items.
+
 ## Post-build prompt review — October 30, 2026
 
 [Review findings, completed validation and explicit gaps](reviews/2026-10-30-review-summary.md) supersede unqualified completion language in historical phase records. The current spec index and full 2026-07-28 changelog were rechecked. Native additions use verified installed SDK APIs, four provider HTTP contracts, and pinned `@opentelemetry/api` 1.10.0 plus `@opentelemetry/sdk-trace` 3.0.0. The latter replaces the older split trace packages; the lesson uses explicit host spans. The exact lockfile is the reproducible record.

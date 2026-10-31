@@ -1,0 +1,18 @@
+[
+  {"name":"exact evidence answer","turns":[{"calls":[1]},{"answer":{"id":1,"status":"$status"}}],"completed":1},
+  {"name":"numeric integer notation","turns":[{"calls":[1]},{"raw":"{\"id\":1.0,\"status\":\"$status\"}"}],"completed":1},
+  {"name":"no tool guess","turns":[{"answer":{"id":1,"status":"$status"}}],"completed":0},
+  {"name":"extra property","turns":[{"calls":[1]},{"answer":{"id":1,"status":"$status","extra":true}}],"completed":0},
+  {"name":"boolean id","turns":[{"calls":[1]},{"answer":{"id":true,"status":"$status"}}],"completed":0},
+  {"name":"string id","turns":[{"calls":[1]},{"answer":{"id":"1","status":"$status"}}],"completed":0},
+  {"name":"wrong id","turns":[{"calls":[1]},{"answer":{"id":13,"status":"$status"}}],"completed":0},
+  {"name":"wrong status","turns":[{"calls":[1]},{"answer":{"id":1,"status":"not-a-status"}}],"completed":0},
+  {"name":"missing property","turns":[{"calls":[1]},{"answer":{"id":1}}],"completed":0},
+  {"name":"null answer","turns":[{"calls":[1]},{"answer":null}],"completed":0},
+  {"name":"array answer","turns":[{"calls":[1]},{"answer":[1,"$status"]}],"completed":0},
+  {"name":"malformed JSON","turns":[{"calls":[1]},{"raw":"not JSON"}],"completed":0},
+  {"name":"tool failure cannot be hidden","turns":[{"calls":[-1]},{"calls":[1]},{"answer":{"id":1,"status":"$status"}}],"completed":0},
+  {"name":"provider failure","turns":[{"failure":true}],"completed":0},
+  {"name":"call budget","turns":[{"calls":[1,1,1,1,1]},{"answer":{"id":1,"status":"$status"}}],"completed":0},
+  {"name":"turn budget","turns":[{"calls":[1]},{"calls":[1]},{"calls":[1]},{"calls":[1]},{"answer":{"id":1,"status":"$status"}}],"completed":0}
+]

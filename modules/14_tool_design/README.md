@@ -174,6 +174,10 @@ Expected: `PASS dynamic catalog refreshed`.
 
 For a paid or local model trial, configure both variables in `.env` and add `--live --limit 3` to example 03. The default comparison is a fixture check; no live accuracy claim is included.
 
+Both language tracks use the same completion rule: the final answer must be a JSON object with exactly `id` and `status`, the ID must be a number matching the requested issue (not a string or boolean), and the status must match the fixture. At least one tool call must have completed and none may have failed. Correct guesses without a tool call, extra properties, malformed answers and exhausted budgets do not count. The [shared replay cases](../../tests/fixtures/tool_evaluation.json) test this contract against both catalogs in both languages.
+
+Missing or invalid live-model configuration exits with a short message and `Run uv run python scripts/check_env.py for setup help.` It does not print a stack trace or echo configuration values. Configure the provider, model and required key, or omit `--live` to use the offline fixture.
+
 ## Try it in a host
 
 Generate absolute paths for your own checkout:
@@ -209,7 +213,7 @@ Expected: both deterministic designs complete six cases, with a 25-versus-6 tool
 | Exact diagnostic | Trigger and fix |
 |---|---|
 | `Issue not found. Use search_issues and choose an ID from its results.` | Call issue_brief with -1; first search and choose an existing ID. |
-| `Evaluation limit must be 1–6.` | Use --limit 1 through 6, not zero or an unbounded batch. |
+| `Evaluation limit must be an integer from 1 to 6.` | Use --limit 1 through 6, not zero or an unbounded batch. Setup guidance follows this message. |
 | `Choose a real LLM_PROVIDER and LLM_MODEL for --live.` | Set both variables in .env, or omit --live. |
 | `Use week_start as an ISO date, for example 2026-07-13.` | Use YYYY-MM-DD; the fixture window is July 13–19. |
 

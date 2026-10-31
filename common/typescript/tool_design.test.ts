@@ -1,9 +1,51 @@
 import { afterEach, expect, test, vi } from 'vitest';
 import { designEvaluation } from './tool_design.ts';
 import type { ModelSettings } from './llm.ts';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { DatabaseSync } from 'node:sqlite';
+import { root } from './data.ts';
 
 const settings:ModelSettings={provider:'ollama',model:'fixture',key:'',ollamaHost:'http://127.0.0.1:11434'};
 afterEach(()=>vi.unstubAllEnvs());
+
+type Replay={name:string;turns:{calls?:number[];answer?:unknown;raw?:string;failure?:boolean}[];completed:number};
+const replays:Replay[]=JSON.parse(readFileSync(resolve(root,'tests/fixtures/tool_evaluation.json'),'utf8'));
+test.each(replays)('shared cross-language grading: $name',async replay=>{
+  const db=new DatabaseSync(resolve(root,'data/issues.db'),{readOnly:true});
+  const status=String(db.prepare('SELECT status FROM issues WHERE id=1').get()!.status);db.close();
+  const turns=new Map<number,number>();
+  const fetcher:typeof fetch=async(_url,init)=>{
+    const body=JSON.parse(String(init?.body));
+    const size=body.tools.length;const index=turns.get(size)??0;turns.set(size,index+1);
+    const step=replay.turns[index];
+    if(step.failure)return new Response('Private provider failure',{status:503});
+    if(step.calls)return Response.json({message:{tool_calls:step.calls.map(id=>({function:{
+      name:size===25?'issues__get_issues':'issues__issue_brief',arguments:{[size===25?'row_id':'issue_id']:id},
+    }}))}});
+    return Response.json({message:{content:(step.raw??JSON.stringify(step.answer)).replaceAll('$status',status)}});
+  };
+  const result=await designEvaluation({live:true,limit:1,settings,fetcher});
+  for(const catalog of ['mirror','task_tools'])expect(result[catalog]).toMatchObject({completed:replay.completed});
+});
+
+test.each([
+  ['fake','fixture',['--live']],
+  ['PRIVATE_PROVIDER_SENTINEL','fixture',['--live']],
+  ['ollama','fixture',['--live']],
+  ['openai','configured-model',['--live']],
+  ['fake','fixture',['--limit','0']],
+] as const)('CLI configuration errors are friendly: %s %s %j',(provider,model,args)=>{
+  const result=spawnSync(process.execPath,['--import','tsx',resolve(root,'modules/14_tool_design/typescript/examples/03_evaluation.ts'),...args],{
+    cwd:root,encoding:'utf8',timeout:30000,windowsHide:true,
+    env:{...process.env,LLM_PROVIDER:provider,LLM_MODEL:model,OPENAI_API_KEY:'',ANTHROPIC_API_KEY:'',GEMINI_API_KEY:''},
+  });
+  expect(result.status).toBe(1);expect(result.stdout).toBe('');
+  expect(result.stderr).toContain('scripts/check_env.py');
+  expect(result.stderr).not.toMatch(/\n\s+at /);
+  expect(result.stderr).not.toContain('PRIVATE_PROVIDER_SENTINEL');
+});
 
 test('offline evaluation uses real evidence through the host for all six cases',async()=>{
   const result=await designEvaluation();

@@ -6,8 +6,16 @@
  */
 import { parseArgs } from 'node:util';
 import { existsSync } from 'node:fs';
-import { designEvaluation } from '../../../../common/typescript/tool_design.ts';
+import { designEvaluation, EvaluationConfigurationError } from '../../../../common/typescript/tool_design.ts';
 
-if(existsSync('.env'))process.loadEnvFile('.env');
-const {values}=parseArgs({options:{live:{type:'boolean',default:false},limit:{type:'string',default:'6'}}});
-console.log(JSON.stringify(await designEvaluation({live:values.live,limit:Number(values.limit)}),null,2));
+try {
+  let values;
+  try {
+    if(existsSync('.env'))process.loadEnvFile('.env');
+    values=parseArgs({options:{live:{type:'boolean',default:false},limit:{type:'string',default:'6'}}}).values;
+  } catch {throw new EvaluationConfigurationError('Check .env access and use --live and/or --limit 1–6.');}
+  console.log(JSON.stringify(await designEvaluation({live:values.live,limit:Number(values.limit)}),null,2));
+} catch(error) {
+  if(!(error instanceof EvaluationConfigurationError))throw error;
+  console.error(error.message);process.exitCode=1;
+}

@@ -63,6 +63,10 @@ the three acceptance-evidence items above remain explicit exceptions.
 
 ## Optional integrations outside the tested release
 
+The [module 14 follow-up](MODULE_14_PARITY_VERIFICATION.md) implements the final
+R-101/R-102 corrections: identical scoring rules in both languages and friendly
+configuration failures. Its verification record tracks full-suite and CI status.
+
 - [ ] Live model measurements, external vendor SSO and a production multi-user deployment require learner credentials and additional evaluation.
 - [ ] Public Registry/package publication, cloud deployment and third-party desktop GUI installation were not performed.
 

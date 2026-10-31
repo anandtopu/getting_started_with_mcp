@@ -8,11 +8,12 @@ Spec: https://modelcontextprotocol.io/specification/2026-07-28/server/tools
 import argparse
 import asyncio
 import json
+import sys
 
 from mcp import Client
 
 from common.tool_design import task_server
-from common.tool_evaluation import evaluate
+from common.tool_evaluation import EvaluationConfigurationError, evaluate
 
 
 async def main():
@@ -31,4 +32,8 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except EvaluationConfigurationError as error:
+        print(str(error), file=sys.stderr)
+        raise SystemExit(1) from None
