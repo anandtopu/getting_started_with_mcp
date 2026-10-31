@@ -92,7 +92,7 @@ try {
     await chat.locator('#status').getByText('Workspace ready', { exact: true }).waitFor();
     await chat.getByLabel('Message', { exact: true }).fill('Read a deployed issue'); await chat.getByRole('button', { name: /Send message/ }).click();
     await chat.getByRole('button', { name: 'Approve once' }).click(); await chat.locator('#status').getByText('complete', { exact: true }).waitFor();
-    assert.ok(await chat.locator('#conversation').getByText('Tool evidence', { exact: false }).isVisible());
+    assert.ok(await chat.getByText('Tool evidence · gateway__issues__read_issue', { exact: true }).isVisible());
     const visible = await chat.content(); assert.ok(!visible.includes(provider.saved!.access_token)); await chat.close();
   } finally { await app.close(); delete process.env.LUMEN_NATIVE_TEST_TOKEN; }
   console.log('PASS native deployment: Keycloak PKCE, audience, scope step-up, five upstreams, approved write, Chat Pro remote tool review');
