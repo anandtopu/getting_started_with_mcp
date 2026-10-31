@@ -1,7 +1,7 @@
 # Final follow-up review — pass 1: per-file analysis
 
 Historical baseline evidence. The [module 14 follow-up](../MODULE_14_PARITY_VERIFICATION.md)
-records the R-101/R-102 fixes and their current validation status.
+records the R-101/R-102 fixes, passing full CI and closure of both findings.
 
 Date: 2026-10-31 (America/Chicago). Baseline: `639e04355087b6816e113cd887cc562f18095fe1`.
 Original prompt SHA-256: `e05f61c45b2023c6923e34fa5f757fe5671df9228ab113df1da13be4489aa39c`.

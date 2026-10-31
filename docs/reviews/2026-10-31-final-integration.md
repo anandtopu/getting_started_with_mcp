@@ -1,7 +1,7 @@
 # Final follow-up review — pass 2: integration
 
 Historical baseline evidence. The [module 14 follow-up](../MODULE_14_PARITY_VERIFICATION.md)
-records the R-101/R-102 fixes and their current validation status.
+records the R-101/R-102 fixes, passing full CI and closure of both findings.
 
 Baseline: `639e043`. See the [action plan](2026-10-31-final-review.md) and
 [per-file findings](2026-10-31-final-per-file.md).

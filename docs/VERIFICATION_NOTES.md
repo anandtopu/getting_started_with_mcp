@@ -8,6 +8,11 @@ same scoring contract and shared replay fixtures; expected CLI configuration
 errors give concise setup guidance. The record distinguishes implementation
 verification from the three outstanding manual/live acceptance items.
 
+R-101/R-102 are closed: [all 29 required CI jobs passed](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41177147316)
+on `52612c5`. Linux passed 275 Python and 192 native tests; local Windows Python
+passed 274 with one permission skip. The record documents the initial stale
+error-message assertion, its correction, and the successful full reruns.
+
 ## Post-build prompt review — October 30, 2026
 
 [Review findings, completed validation and explicit gaps](reviews/2026-10-30-review-summary.md) supersede unqualified completion language in historical phase records. The current spec index and full 2026-07-28 changelog were rechecked. Native additions use verified installed SDK APIs, four provider HTTP contracts, and pinned `@opentelemetry/api` 1.10.0 plus `@opentelemetry/sdk-trace` 3.0.0. The latter replaces the older split trace packages; the lesson uses explicit host spans. The exact lockfile is the reproducible record.

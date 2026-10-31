@@ -1,7 +1,8 @@
 # Module 14 grading and configuration follow-up
 
-Date: 2026-10-31 (America/Chicago). Resolves R-101 and R-102 from the
-[final follow-up review](reviews/2026-10-31-final-review.md), baseline `639e043`.
+Date: 2026-10-31 (America/Chicago). **R-101 and R-102 are closed.** These findings
+originated in the [final follow-up review](reviews/2026-10-31-final-review.md)
+of baseline `639e043`.
 
 ## Delivered behavior
 
@@ -43,14 +44,26 @@ the follow-up status.
 - Full native checks: TypeScript compiler, ESLint and **191 tests passed**, with
   one existing Windows symlink skip (192 collected across 35 files).
 - Release/teaching/local-link checks passed; npm audit reports **zero vulnerabilities**.
-- Full Python suite and CI: in progress. Final counts and the exact CI-tested
-  revision will be recorded when complete.
+- Full corrected local Python suite: **274 passed, one existing Windows
+  symlink-permission skip**; the existing LangChain beta warning remains.
+- Tier 4 plus the new evaluation regressions: **42 passed** after updating the
+  older diagnostic assertion; Ruff check/format passed.
+- [All 29 required CI jobs passed](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41177147316)
+  on `52612c5b97e02faae35df8c1fd6d99f139caac93`. Linux Python reports **275 passed**
+  and **233 standalone examples** checked. All seven Python jobs, four Node
+  24/26 Windows/Linux jobs, application/browser/deployment, packaging, Inspector,
+  framework and native SDK checks passed. Linux native tests: **192 passed**;
+  Windows native tests: **191 passed, one existing skip**. The optional manual
+  external-link job was skipped.
 
 The [initial CI run](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41176718847)
 on `f406b51` exposed an older Tier 4 assertion matching the previous `1–6` error
 text. The new evaluator tests passed; the older assertion was updated to require
 the specific configuration-error class, the new range wording and setup guidance.
-The superseded run was stopped and a fresh full matrix is required for sign-off.
+The superseded run was stopped. The fresh full matrix above passed. The initial
+local suite had already loaded the old assertion; a full local rerun after the
+correction also passed. The final documentation-only commit records this evidence
+with `[skip ci]`; the CI link identifies the tested code revision.
 
 ## Remaining acceptance items
 

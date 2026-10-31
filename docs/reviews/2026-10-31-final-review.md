@@ -4,22 +4,24 @@ Date: 2026-10-31 (America/Chicago). Baseline: `639e04355087b6816e113cd887cc562f1
 
 ## Verdict and release gate
 
-**Follow-up:** R-101 and R-102 are implemented and their focused regressions pass.
-See the [module 14 verification record](../MODULE_14_PARITY_VERIFICATION.md) for
-the full test/CI status. The findings below describe baseline `639e043`, before
-these fixes. E-001/E-002/E-003 remain separate unverified acceptance items.
+**Follow-up: R-101 and R-102 are closed.** The shared grading replays, friendly
+configuration-error subprocess checks, full local suites and all 29 required CI
+jobs passed. See the [module 14 verification record](../MODULE_14_PARITY_VERIFICATION.md)
+for the tested revision and the corrected diagnostic assertion. No implementation
+finding from this review remains open. E-001/E-002/E-003 remain separate unverified
+acceptance items.
 
-**Two additional implementation gaps remain beyond the three unverified acceptance
-items:** inconsistent cross-language evaluation grading (R-101, P2) and unfriendly
-missing-configuration CLI failures (R-102, P3). A strict "only those three items
-remain" confirmation would therefore be inaccurate.
+At baseline `639e043`, two additional implementation gaps remained beyond the
+three unverified acceptance items: inconsistent cross-language evaluation grading
+(R-101, P2) and unfriendly missing-configuration CLI failures (R-102, P3). The
+historical evidence below explains the fixes now verified above.
 
 No P0/P1 issue or separate new documentation-content gap was identified in this
 scope. The previous packaging boundary defect and missing native evaluation and
 packaging workflows are fixed. R-101 concerns consistency of the implemented
 evaluation paths, not their existence.
 
-## Fix queue
+## Resolved fix queue
 
 | ID | Priority | Owner/scope | Action | Acceptance check |
 |---|---|---|---|---|
@@ -64,6 +66,6 @@ The prior review's three unverified items are unchanged:
 2. **E-002:** actual TestPyPI publication and verification of the published package.
 3. **E-003:** controlled live-model before/after measurement.
 
-Fixing R-101/R-102 will not itself complete those external/manual outcomes.
-After fixing and verifying these two findings, update the completion record to
-separate implementation closure from the remaining acceptance evidence.
+R-101/R-102 closure does not complete those external/manual outcomes. The
+completion record now separates verified implementation fixes from this remaining
+acceptance evidence.

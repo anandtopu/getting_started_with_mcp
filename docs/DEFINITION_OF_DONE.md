@@ -61,11 +61,18 @@ skip on Windows. Local Python: 249 passed plus one existing permission skip.
 The npm audit reports zero vulnerabilities. F-001 through F-004 are closed;
 the three acceptance-evidence items above remain explicit exceptions.
 
-## Optional integrations outside the tested release
+## Module 14 review closure
 
-The [module 14 follow-up](MODULE_14_PARITY_VERIFICATION.md) implements the final
+The [module 14 follow-up](MODULE_14_PARITY_VERIFICATION.md) closes the final
 R-101/R-102 corrections: identical scoring rules in both languages and friendly
-configuration failures. Its verification record tracks full-suite and CI status.
+configuration failures. [All 29 required CI jobs passed](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41177147316)
+on `52612c5`. Linux: 275 Python and 192 native tests passed. Local Windows:
+274 Python and 191 native tests passed, with one existing permission skip in
+each suite. Ruff, TypeScript compilation, ESLint, release/link checks and the
+zero-vulnerability npm audit passed. No implementation finding from the final
+review remains open; E-001/E-002/E-003 remain unverified as described above.
+
+## Optional integrations outside the tested release
 
 - [ ] Live model measurements, external vendor SSO and a production multi-user deployment require learner credentials and additional evaluation.
 - [ ] Public Registry/package publication, cloud deployment and third-party desktop GUI installation were not performed.
