@@ -34,6 +34,19 @@ Windows symlink skip. Both packaging commands passed with dependency preparation
 and again using cached dependencies: Notes wheel/npm/extracted MCPB and Knowledge
 wheel/extracted MCPB all completed real MCP calls outside the checkout. Ruff
 check/format and the release/local-link checker passed. The full Python suite
-and GitHub CI results will be recorded after verification completes.
+passed **249 tests**, with one Windows symlink-permission skip and the existing
+LangChain beta API warning.
+
+[GitHub CI passed all 29 required jobs](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41161721989)
+on implementation commit `1224c4581eb15cef11cc8edea96276f137a26640`, without repair
+or rerun. The optional manual external-link job was skipped. The Node 24/26
+Windows/Linux matrix passed the audit gate and native checks; Linux ran all
+**154 tests**, including symlink rejection, while Windows skipped that one
+test. The shipping job passed both package checks with preparation and again
+from cached dependencies, all three browser scenarios, container shipping and
+OAuth deployment. Native Chat Pro browser/gateway deployment, Python 3.12–3.14
+Windows/Linux plus macOS 3.12, course examples/checkpoints, framework adapters,
+Inspector, isolation, ops deployment and four other SDKs also passed.
+
 Desktop GUI installation remains a manual host-specific check. No public
 package publication or desktop install is performed by this build helper.

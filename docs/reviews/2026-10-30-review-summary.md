@@ -13,6 +13,7 @@ The scoped per-file pass and cross-file integration pass are complete. Security 
 | Integration pass | Complete for listed flows | [Contracts and flows](2026-10-30-integration-checks.md) |
 | Fix validation | Local checks and all 28 required CI jobs passed | Implementation commit `723eb3b`; completed results below |
 | Native application follow-up | Implemented; browser and deployment CI passed | [Native application evidence](../TYPESCRIPT_APPLICATIONS_VERIFICATION.md) closes the earlier R-009 implementation gap |
+| Packaging advisory follow-up | Removed affected dependency; all 29 required CI jobs passed on `1224c45` | [Packaging evidence](../PACKAGING_ADVISORY_VERIFICATION.md) closes R-010 and records the separate moderate findings |
 
 ## Findings
 

@@ -29,6 +29,15 @@ Verification date: **2026-10-30**. Scope: the delivered local course and its CI.
 - [x] Implement native OAuth gateway deployment and complete Chat Pro web backend, including providers, approvals, ordinary input, Tasks, Apps, cancellation, reconnect and legacy configuration. See the [application guide](TYPESCRIPT_APPLICATIONS.md).
 - [x] Complete the new required native deployment CI job: [native browser and real Keycloak deployment acceptance passed](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41155958759/job/124402681257). The [verification record](TYPESCRIPT_APPLICATIONS_VERIFICATION.md) includes local browser/security acceptance and the full-matrix status.
 
+## Packaging advisory follow-up
+
+The [packaging advisory follow-up](PACKAGING_ADVISORY_VERIFICATION.md) also closes
+R-010: the vulnerable MCPB/Zod dependency is removed, both bundles build and
+launch outside the checkout, and the new audit/regression gates pass.
+[All 29 required CI jobs passed](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41161721989)
+on `1224c45`, with no repair or rerun. There are zero high/critical npm audit
+findings; 13 separate moderate dependency nodes remain documented in that record.
+
 ## Optional integrations outside the tested release
 
 - [ ] Live model measurements, external vendor SSO and a production multi-user deployment require learner credentials and additional evaluation.
