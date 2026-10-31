@@ -12,6 +12,11 @@ The native parity follow-up is complete: [all 29 required CI jobs passed](https:
 
 The packaging follow-up is complete: [all 29 required CI jobs passed](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41161721989) on `1224c45`, without repair or rerun. R-010 is closed by removing the vulnerable MCPB/Zod dependency. The native suite now has 154 tests (one Windows-only skip), both MCPB bundles launch outside the checkout, and the high/critical audit gate passes. The [packaging record](PACKAGING_ADVISORY_VERIFICATION.md) distinguishes the 13 separate moderate dependency findings from the resolved advisory.
 
+The later [dependency audit follow-up](DEPENDENCY_AUDIT_VERIFICATION.md) resolves
+all 13 moderate nodes recorded in the packaging follow-up. The current lockfile
+uses reviewed minimatch/glob overrides and reports zero npm vulnerabilities;
+CI now rejects findings at every severity.
+
 ## Phase 8 — complete course, October 30, 2026
 
 Course 1.0.0 adds the full TypeScript route, four native SDKs, five capstones and final references. [Phase 8 evidence and explicit limits](PHASE_8_VERIFICATION.md) supersede delivery-status statements in historical sections below. [Native pins](../modules/bonus/B2_other_sdks/VERSIONS.md) distinguish Java compatibility from current-revision support. TypeScript uses Agents SDK 0.21.0, LangGraph 1.5.3 and LangChain core 1.3.2 with deterministic model fixtures. PDF regeneration pins ReportLab 5.1.0 in the optional docs group.

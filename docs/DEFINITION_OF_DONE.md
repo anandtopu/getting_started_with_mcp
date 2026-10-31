@@ -35,8 +35,9 @@ The [packaging advisory follow-up](PACKAGING_ADVISORY_VERIFICATION.md) also clos
 R-010: the vulnerable MCPB/Zod dependency is removed, both bundles build and
 launch outside the checkout, and the new audit/regression gates pass.
 [All 29 required CI jobs passed](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41161721989)
-on `1224c45`, with no repair or rerun. There are zero high/critical npm audit
-findings; 13 separate moderate dependency nodes remain documented in that record.
+on `1224c45`, with no repair or rerun. The later [dependency audit follow-up](DEPENDENCY_AUDIT_VERIFICATION.md)
+resolves the 13 moderate nodes recorded at that commit; the current audit reports
+zero vulnerabilities at every severity.
 
 ## Optional integrations outside the tested release
 

@@ -2,6 +2,10 @@
 
 Date: 2026-10-30. Baseline: `1586a96`.
 
+This record describes the packaging implementation at `1224c45`. The later
+[dependency audit follow-up](DEPENDENCY_AUDIT_VERIFICATION.md) resolves the 13
+moderate findings recorded below and strengthens the CI audit gate to all severities.
+
 R-010 is resolved in the repository by removing `@anthropic-ai/mcpb@2.1.2`
 and its nested Zod 3.25.76. The latest upstream CLI still requires Zod 3;
 [GHSA-mrhx-c7xc-m3w5](https://github.com/advisories/GHSA-mrhx-c7xc-m3w5)

@@ -18,4 +18,4 @@ Date: 2026-10-30. Scope: original-prompt compliance and affected runtime boundar
 
 ## Status summary
 
-All eleven review findings are fixed. The [native application record](../TYPESCRIPT_APPLICATIONS_VERIFICATION.md) tracks R-009 acceptance, and the [packaging record](../PACKAGING_ADVISORY_VERIFICATION.md) tracks R-010's replacement, validation and separate remaining moderate dependency findings.
+All eleven review findings are fixed. The [native application record](../TYPESCRIPT_APPLICATIONS_VERIFICATION.md) tracks R-009 acceptance, and the [packaging record](../PACKAGING_ADVISORY_VERIFICATION.md) tracks R-010's replacement and validation. The subsequent [dependency audit follow-up](../DEPENDENCY_AUDIT_VERIFICATION.md) resolves the separate moderate findings recorded at that time.
