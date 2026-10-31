@@ -38,6 +38,7 @@ it('serves real SDK HTTP requests with concurrent identity/scope isolation, step
     expect((await fetch(url + '/mcp', { method: 'POST' })).status).toBe(421);
     expect((await rawHttp(url + '/mcp', { method: 'POST', headers: { Host: '127.0.0.1:8001', Origin: 'https://evil.example' } })).status).toBe(403);
     const absent = await post(); expect(absent.status).toBe(401); expect(absent.headers.get('www-authenticate')).toContain('/.well-known/oauth-protected-resource/mcp');
+    expect(absent.headers.get('www-authenticate')).toContain('scope="workspace:read"'); expect(absent.headers.get('www-authenticate')).not.toContain('workspace:write');
     const metadata = await rawHttp(url + '/.well-known/oauth-protected-resource/mcp', { headers: { Host: '127.0.0.1:8001' } }); expect((await metadata.json()).authorization_servers).toEqual([issuer]);
     expect((await post(token({ scope: '' }))).status).toBe(403); expect((await post(token({ aud: 'other' }))).status).toBe(401);
     const makeTransport = (value: string) => new StreamableHTTPClientTransport(new URL(url + '/mcp'), { fetch: rawHttp, requestInit: { headers: { Host: '127.0.0.1:8001', Authorization: 'Bearer ' + value } } });

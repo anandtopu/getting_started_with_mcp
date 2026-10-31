@@ -80,7 +80,7 @@ export async function oauthGateway(options: GatewayOptions) {
       if (req.method !== 'POST') { res.writeHead(405, { Allow: 'POST' }).end(); return; }
       let identity: Identity;
       try { const auth = req.headers.authorization ?? ''; if (!auth.startsWith('Bearer ')) throw new Error('Missing token'); identity = await verifier.verify(auth.slice(7)); }
-      catch { res.writeHead(401, { 'WWW-Authenticate': `Bearer resource_metadata="${metadataUrl}"` }).end(); return; }
+      catch { res.writeHead(401, { 'WWW-Authenticate': `Bearer scope="workspace:read", resource_metadata="${metadataUrl}"` }).end(); return; }
       if (!identity.scopes.includes('workspace:read')) { res.writeHead(403, { 'WWW-Authenticate': `Bearer error="insufficient_scope", scope="workspace:read", resource_metadata="${metadataUrl}"` }).end(); return; }
       if (!limit.allow(identity.subject)) { res.writeHead(429, { 'Retry-After': '60' }).end(); return; }
       const chunks: Buffer[] = []; let size = 0;

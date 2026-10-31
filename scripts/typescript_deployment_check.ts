@@ -7,7 +7,7 @@ import { createServer } from 'node:http';
 import { once } from 'node:events';
 import { setTimeout as pause } from 'node:timers/promises';
 import { chromium } from '@playwright/test';
-import { StreamableHTTPClientTransport, type OAuthClientProvider, type OAuthClientInformationContext, type StoredOAuthTokens } from '@modelcontextprotocol/client';
+import { StreamableHTTPClientTransport, type OAuthClientProvider, type OAuthClientInformationContext, type StoredOAuthTokens, type OAuthDiscoveryState } from '@modelcontextprotocol/client';
 import { callback, callbackParams } from '../common/typescript/oauth.ts';
 import { JwksVerifier } from '../common/typescript/gateway_http.ts';
 import { newClient } from '../common/typescript/clients.ts';
@@ -33,6 +33,9 @@ class Provider implements OAuthClientProvider {
   redirectUrl = callback;
   clientMetadata = { redirect_uris: [callback], token_endpoint_auth_method: 'none', grant_types: ['authorization_code'], response_types: ['code'], scope: 'workspace:read' };
   saved?: StoredOAuthTokens; params?: URLSearchParams; private code = ''; private nonce = '';
+  private discovery?: OAuthDiscoveryState;
+  saveDiscoveryState(state: OAuthDiscoveryState) { assert.equal(state.authorizationServerUrl, issuer); this.discovery = structuredClone(state); }
+  discoveryState() { return this.discovery; }
   bind(c?: OAuthClientInformationContext) { if (c && c.issuer !== issuer) throw new Error('Unreviewed issuer'); }
   clientInformation(c?: OAuthClientInformationContext) { this.bind(c); return { client_id: 'lumen-chat', issuer }; }
   tokens(c?: OAuthClientInformationContext) { this.bind(c); return this.saved; }
