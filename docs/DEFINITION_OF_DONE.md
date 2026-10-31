@@ -39,6 +39,12 @@ on `1224c45`, with no repair or rerun. The later [dependency audit follow-up](DE
 resolves the 13 moderate nodes recorded at that commit; the current audit reports
 zero vulnerabilities at every severity.
 
+[All 29 required dependency-fix CI jobs passed](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41163625829)
+on `d13a210`. This includes clean installs, the stricter audit gate, 159 native
+tests on Linux (158 plus one existing skip on Windows), and the complete
+Python/application/package/deployment matrix. The dependency record documents
+the Windows fixture correction made after the first CI run.
+
 ## Optional integrations outside the tested release
 
 - [ ] Live model measurements, external vendor SSO and a production multi-user deployment require learner credentials and additional evaluation.

@@ -96,6 +96,6 @@ Evidence: [Python regressions](../tests/test_phase8.py), [TypeScript regressions
 - Native model schemas exclude host-only confirmation; invalid or self-approved proposals fail before human review.
 - Failed/cancelled connection startup cleans up before ownership transfers to the host.
 - The vulnerable MCPB CLI/Zod 3 dependency has been removed. Both packaging paths use the pinned official MCPB 0.3 JSON Schema with Ajv and a bounded fflate ZIP packer. The helper rejects symlinks, escaping/private/dependency paths and missing entry points; it caps manifests at 64 KB, archive input at 64 MiB, entries at 512 and depth at 16. Build subprocesses retain the 256 MB heap and 120-second deadline. See [packaging evidence](PACKAGING_ADVISORY_VERIFICATION.md).
-- Patched minimatch/glob overrides resolve the remaining moderate findings. Compatibility and cancellation regressions cover their consumers, and required CI runs the npm audit at every severity without exclusions. See [dependency audit evidence and override maintenance](DEPENDENCY_AUDIT_VERIFICATION.md).
+- Patched minimatch/glob overrides resolve the remaining moderate findings. Compatibility and cancellation regressions cover their consumers. Required CI reports all audit findings without exclusions and fails for any rated low or higher. See [dependency audit evidence and override maintenance](DEPENDENCY_AUDIT_VERIFICATION.md).
 
 [Regressions and remaining limits](reviews/2026-10-30-review-summary.md).

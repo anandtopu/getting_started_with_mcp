@@ -48,17 +48,33 @@ The glob regression observes filesystem reads after cancellation rather than
 only checking that the promise rejects.
 
 Local compiler, ESLint and native tests passed: **158 tests passed** across
-34 files, with the existing Windows symlink skip. The full Python suite and
-complete CI matrix are being run; final evidence will be recorded when those
-checks finish. The initial focused run caught a
+34 files, with the existing Windows symlink skip. The full Python suite passed
+**249 tests**, with one Windows symlink-permission skip and the existing LangChain
+beta API warning. Ruff check/format, the release contract and local documentation
+links passed. The initial focused run caught a
 Windows separator assumption in the new test, corrected by normalizing returned
 paths before comparison; no runtime behavior was changed for that correction.
 
-The first CI run on `f29fe99` exposed a second fixture portability issue:
+The [first CI run](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41163436532)
+on `f29fe99` exposed a second fixture portability issue:
 Windows runners can use an 8.3 alias for their temporary directory, whereas the
 filesystem server correctly returns canonical paths. The fixture now resolves
 its temporary root with `realpathSync.native` before making exact relative-path
 assertions. The search and allowed-directory assertions remain unchanged.
+
+That superseded run was stopped after publishing the fixture correction.
+[The complete corrected CI run passed all 29 required jobs](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41163625829)
+on `d13a210c626fc128094d686352b0355eb17f4640`. The optional manual external-link
+job was skipped. All four Node 24/26 Windows/Linux jobs completed clean locked
+installs and reported **zero vulnerabilities**. Linux passed all **159 native
+tests**; Windows passed 158 with the existing symlink skip.
+
+The full Python 3.12–3.14 Windows/Linux matrix and macOS 3.12 passed, including
+the standalone course examples and checkpoints. Inspector, four other SDKs,
+framework adapters, isolation, both package build/installed-launch paths,
+browser acceptance, native Chat Pro/OAuth deployment and ops deployment also
+passed. The corrected run needed no further repair or retry. The dependency
+versions did not change during the Windows fixture correction.
 
 ## Maintaining the overrides
 

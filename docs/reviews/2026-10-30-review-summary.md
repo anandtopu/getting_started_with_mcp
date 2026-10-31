@@ -69,7 +69,7 @@ Completed local checks are listed below. Historical Phase 8 results are not used
 
 ## Limits and follow-up
 
-R-009 and R-010 have separate follow-up records so the original validation table above remains attributable to its tested commit. Native OAuth gateway and Chat Pro application processes no longer require Python. The affected MCPB CLI dependency is now removed; [packaging verification](../PACKAGING_ADVISORY_VERIFICATION.md) records its replacement and the separate moderate dependency findings that remain.
+R-009 and R-010 have separate follow-up records so the original validation table above remains attributable to its tested commit. Native OAuth gateway and Chat Pro application processes no longer require Python. The affected MCPB CLI dependency is removed; [packaging verification](../PACKAGING_ADVISORY_VERIFICATION.md) records its replacement. The subsequent [dependency audit follow-up](../DEPENDENCY_AUDIT_VERIFICATION.md) resolves the separate moderate findings and records a clean npm audit.
 
 Manual tests of third-party desktop UIs, real model performance/cost, live vendor SSO, public publication and cloud operation are not claimed. The original `723eb3b` CI run verified the complete Python 3.12–3.14 Windows/Linux matrix and macOS 3.12, Node 24/26 on Windows/Linux, native Go/C#/Rust/Java builds on Windows/Linux, framework adapters, Inspector, isolated packages, browser acceptance, container isolation and OAuth/Compose deployments. Its Linux, macOS and Windows logs report 250 Python tests and all 233 standalone examples passing, without CI repair. The subsequent native application follow-up has its own [CI results and repair history](../TYPESCRIPT_APPLICATIONS_VERIFICATION.md).
 

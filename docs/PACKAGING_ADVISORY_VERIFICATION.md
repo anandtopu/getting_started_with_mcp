@@ -26,12 +26,12 @@ symlink test because unprivileged symlink creation is not generally available;
 Linux CI exercises it. Both package smoke checks launch real MCP servers from
 the built artifacts outside the checkout, including the extracted Notes bundle.
 
-The required TypeScript CI matrix runs `npm audit --audit-level=high` in
-addition to the compiler, lint and regression suite. A fresh audit after the
-replacement reports **zero high or critical findings** and no affected Zod or
-MCPB node. It still reports **13 moderate dependency nodes** in ESLint,
+At `1224c45`, the required TypeScript CI matrix ran `npm audit --audit-level=high`
+in addition to the compiler, lint and regression suite. The audit at that
+commit reported **zero high or critical findings** and no affected Zod or
+MCPB node. It reported **13 moderate dependency nodes** in ESLint,
 typescript-eslint and the filesystem reference server's glob/minimatch trees.
-These are separate from R-010; this change does not claim an entirely clean audit.
+These were separate from R-010 and were resolved by the later dependency audit follow-up linked above.
 
 Local validation: compiler and ESLint passed; 153 native tests passed with one
 Windows symlink skip. Both packaging commands passed with dependency preparation

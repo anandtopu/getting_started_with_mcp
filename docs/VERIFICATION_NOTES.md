@@ -15,7 +15,13 @@ The packaging follow-up is complete: [all 29 required CI jobs passed](https://gi
 The later [dependency audit follow-up](DEPENDENCY_AUDIT_VERIFICATION.md) resolves
 all 13 moderate nodes recorded in the packaging follow-up. The current lockfile
 uses reviewed minimatch/glob overrides and reports zero npm vulnerabilities;
-CI now rejects findings at every severity.
+CI now rejects findings rated low or higher.
+
+[All 29 required dependency-fix CI jobs passed](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41163625829)
+on `d13a210`. All Node 24/26 Windows/Linux jobs report zero vulnerabilities;
+Linux passed 159 native tests and Windows passed 158 with the existing symlink
+skip. Local Python validation passed 249 tests with one Windows permission skip.
+The linked record includes the initial CI fixture correction and final full-matrix evidence.
 
 ## Phase 8 — complete course, October 30, 2026
 
