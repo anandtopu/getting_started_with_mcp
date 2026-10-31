@@ -89,6 +89,8 @@ Use the [module quiz](../quiz.md), then explain which assertions above support y
 
 [Official TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk), [current specification](https://modelcontextprotocol.io/specification/2026-07-28).
 
+The [native Compose deployment](../../../deployment/typescript/compose.yaml) runs a Node gateway and five native stdio services behind Keycloak and nginx. From the root, run `docker compose -f deployment/typescript/compose.yaml up --build -d --wait --wait-timeout 180`, then `npm run test:deployment:typescript` after installing Playwright Chromium. The [application guide](../../../docs/TYPESCRIPT_APPLICATIONS.md) covers configuration, boundaries and teardown. This deployment has no Python application process.
+
 ## Next
 
 Return to the [full track index](../../bonus/B1_typescript_track/README.md).

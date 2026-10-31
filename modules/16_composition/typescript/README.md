@@ -89,6 +89,8 @@ Use the [module quiz](../quiz.md), then explain which assertions above support y
 
 [Official TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk), [current specification](https://modelcontextprotocol.io/specification/2026-07-28).
 
+The [complete native gateway](../../../common/typescript/gateway_http.ts) composes five fixed stdio services behind OAuth, with request-local identity, fresh scope-filtered catalogs, confirmation, rate limits and redacted audit. Follow the [native application guide](../../../docs/TYPESCRIPT_APPLICATIONS.md) to run it with Keycloak and nginx; `npm run test:deployment:typescript` exercises actual PKCE, audience checking and scope step-up.
+
 ## Next
 
 Return to the [full track index](../../bonus/B1_typescript_track/README.md).

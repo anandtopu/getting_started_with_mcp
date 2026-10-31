@@ -13,14 +13,18 @@
   "scripts": {
     "test": "vitest run --maxWorkers=4",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint common/typescript modules scripts/check-exercise.ts scripts/check-ts-extension-exercise.ts distribution/npm/src tests/browser playwright.config.ts common/web_ui/app.source.js scripts/build_notes.mjs scripts/build_web_chat.mjs scripts/bundle_licenses.mjs",
+    "lint": "eslint common/typescript modules scripts/check-exercise.ts scripts/check-ts-extension-exercise.ts scripts/typescript_*.ts distribution/npm/src tests/browser playwright*.config.ts common/web_ui/app.source.js scripts/build_notes.mjs scripts/build_web_chat.mjs scripts/bundle_licenses.mjs",
     "inspector": "mcp-inspector",
     "check": "npm run typecheck && npm run lint && npm test",
     "build:dashboard": "node scripts/build_dashboard.mjs",
     "build:notes": "node scripts/build_notes.mjs",
     "mcpb": "mcpb",
     "build:chat": "node scripts/build_web_chat.mjs",
-    "test:browser": "playwright test --config playwright.config.ts"
+    "test:browser": "playwright test --config playwright.config.ts",
+    "test:browser:typescript": "playwright test --config playwright.typescript.config.ts",
+    "chat:typescript": "node --import tsx scripts/typescript_chat.ts",
+    "gateway:typescript": "node --import tsx scripts/typescript_gateway.ts",
+    "test:deployment:typescript": "node --import tsx scripts/typescript_deployment_check.ts"
   },
   "devDependencies": {
     "@anthropic-ai/mcpb": "2.1.2",

@@ -5,14 +5,14 @@ Original user-supplied build prompt SHA-256: `e05f61c45b2023c6923e34fa5f757fe567
 
 ## Status
 
-The scoped per-file pass and cross-file integration pass are complete. Security and teaching defects found in those passes have concrete fixes and regressions. **The repository must not be described as satisfying every original requirement:** R-009 remains an implementation gap in optional B1; R-010 is a mitigated upstream build-tool advisory. Live publication, cloud/vendor accounts and first-time human setup timing remain the previously documented external checks.
+The scoped per-file pass and cross-file integration pass are complete. Security and teaching defects found in those passes have concrete fixes and regressions. The follow-up [native application implementation](../TYPESCRIPT_APPLICATIONS_VERIFICATION.md) addresses R-009 with complete Node backends and passing local browser/security tests; its deployment CI is pending. R-010 remains a mitigated upstream build-tool advisory. Live publication, cloud/vendor accounts and first-time human setup timing remain the previously documented external checks.
 
 | Area | Status | Evidence |
 |---|---|---|
 | Per-file pass | Complete for listed review scope | [Individual files](2026-10-30-per-file-analysis.md); this is not a line-by-line audit of every generated fixture or dependency |
 | Integration pass | Complete for listed flows | [Contracts and flows](2026-10-30-integration-checks.md) |
 | Fix validation | Local checks and all 28 required CI jobs passed | Implementation commit `723eb3b`; completed results below |
-| Exact prompt completeness | Incomplete | Native advanced application parity remains explicit in B1 and the definition of done |
+| Native application follow-up | Implemented; deployment CI pending | [Native application evidence](../TYPESCRIPT_APPLICATIONS_VERIFICATION.md) supersedes the earlier R-009 implementation gap |
 
 ## Findings
 
@@ -26,7 +26,7 @@ The scoped per-file pass and cross-file integration pass are complete. Security 
 | R-006 | P1 | Fixed | Model boundary | The TS host lacked runtime argument validation; its provider lesson converted definitions without implementing the actual native provider loop. | common/typescript/advanced_host.ts; schemas.ts; llm.ts; chat.ts | Validate bounded portable schemas; hide/reject model confirmation; preserve provider call IDs and native history; require separate approval. | Four provider HTTP fixtures perform actual MCP calls; malformed arguments never reach approval; stdio terminal host completes offline. |
 | R-007 | P2 | Fixed | Teaching contract | Module headers omitted outcomes/version metadata, timings diverged from the learning path, early takeaways were orphan quiz answers, and host steps requested nonexistent prompts. | modules/00_setup/README.md through modules/21_production_hosts/README.md; scripts/host_configs.py; LEARNING_PATH.md | Restore explicit outcomes/versions, align timings, rewrite five takeaways, use actual host capabilities and the module 07 server. | Release teaching-contract gate, local links and source/config comparison. |
 | R-008 | P2 | Fixed | Coverage gates | The release checker accepted headings without key metadata and did not ensure each numbered example was runnable from the inventory. | scripts/check_course.py; tests/test_repository.py; scripts/examples.json; docs/FEATURE_MAP.md | Check metadata, objective/takeaway counts, duplicate inventory and every numbered example; expand legacy scans to capstones/distribution/TS; link remaining map labels. | Release validation and repository source scans. |
-| R-009 | P2 | Open | B1 application parity | The original prompt requests full TS versions. The complete OAuth gateway/deployment and Chat Pro web backend still use shared Python infrastructure. | modules/bonus/B1_typescript_track/README.md#coverage-and-runtime-boundaries; docs/DEFINITION_OF_DONE.md | Implement independent native advanced application backends and equivalent browser/deployment acceptance before claiming complete native parity. | Native full-host model/input/Task/App browser scenarios and secured multi-upstream deployment, without a Python application backend. |
+| R-009 | P2 | Implemented; CI pending | B1 application parity | Native OAuth gateway deployment and full Chat Pro backend now replace the Python application dependency. | [Implementation and evidence](../TYPESCRIPT_APPLICATIONS_VERIFICATION.md) | Five native stdio services, OAuth resource boundary and complete browser backend; new required deployment job. | Local browser, provider, security, legacy and native process tests pass; actual Keycloak deployment CI pending. |
 | R-010 | P2 | Mitigated; upstream open | Packaging dependency | npm audit reports Zod 3.25.76 under MCPB 2.1.2; no compatible upstream fix is currently offered. | package-lock.json; common/packaging.py; scripts/knowledge_package.py | Retain the documented bounded build-only use on repository-owned manifests; replace or upgrade MCPB after compatible validation. Do not force a Zod 3-to-4 override. | Audit records two affected dependency nodes for one advisory; installed package and bundle validation still pass. |
 | R-011 | P2 | Fixed | Test reliability | Thirty simultaneous Vitest workers caused a transform/import timeout in an otherwise passing exercise contract under concurrent local work. | package.json | Limit workers to four; keep the actual test assertions and deadlines. | Complete native suite passes with the bounded worker count. |
 
@@ -42,7 +42,7 @@ The scoped per-file pass and cross-file integration pass are complete. Security 
 | Fictional Lumen data and reproducibility | generator/data integrity tests, SQLite fixtures, eval rows | Existing deterministic contracts retained; no real data or credentials introduced |
 | Modules 00–21 and five checkpoints | module trees, checkpoint acceptance scripts, feature map | Main track present; original five [TS] tracks present; B1 distinction made explicit |
 | Module 14 measured improvement | deterministic and opt-in live evaluation helpers | Measured catalog/retrieval results do not establish LLM task-success improvement without a live run |
-| Optional B1 full TS versions | native cases for all 22 modules | R-009: advanced application parity is still incomplete; removed unqualified closure claim |
+| Optional B1 full TS versions | native cases for all 22 modules and native advanced application backends | R-009 follow-up has local acceptance and a new required deployment CI job |
 | B2–B4 | native SDK contracts, spec workflow, Skills/auth/Card extensions | Prior native build evidence retained; bonus/capstone exchanges regenerated |
 | Five capstones | stories, diagrams, conservative starters, runtimes, tests/eval/rubrics | Real helper composition retained; starter failures are intentional exercises |
 | Reference docs and six PDF sheets | protocol guide, glossary/design/host/security/migration/troubleshooting docs; cheatsheets | File/link/page-count gates; 24 current captured methods/notifications regenerated |
@@ -68,7 +68,7 @@ Completed local checks are listed below. Historical Phase 8 results are not used
 
 ## Limits and follow-up
 
-R-009 needs implementation work, not a documentation waiver. Its coverage matrix identifies exactly where Python is still required. R-010 is build-only in this repository: the affected CLI consumes trusted checked-in manifests in a bounded Node process with a subprocess deadline. It is not used by the running MCP servers. This reduces exposure but does not make the advisory disappear.
+R-009's implementation follow-up is documented separately so the original results below remain attributable to their tested commit. Native OAuth gateway and Chat Pro application processes no longer require Python. R-010 is build-only in this repository: the affected CLI consumes trusted checked-in manifests in a bounded Node process with a subprocess deadline. It is not used by the running MCP servers. This reduces exposure but does not make the advisory disappear.
 
 Manual tests of third-party desktop UIs, real model performance/cost, live vendor SSO, public publication and cloud operation are not claimed. The new CI run verified the complete Python 3.12–3.14 Windows/Linux matrix and macOS 3.12, Node 24/26 on Windows/Linux, native Go/C#/Rust/Java builds on Windows/Linux, framework adapters, Inspector, isolated packages, browser acceptance, container isolation and OAuth/Compose deployments. Completed Linux, macOS and Windows logs report 250 Python tests and all 233 standalone examples passing. The implementation required no CI repair or rerun. This documentation-only record does not change the tested code.
 

@@ -71,6 +71,22 @@ jobs:
       - run: uv run --frozen python scripts/inspector_smoke.py
       - run: npm run inspector -- --cli uv run python data/security/vulnerable_server.py --lab --method tools/list
       - run: npm run inspector -- --cli node node_modules/@modelcontextprotocol/server-filesystem/dist/index.js data/files --method tools/list
+  typescript-applications:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '26'
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser:typescript
+      - run: docker compose -f deployment/typescript/compose.yaml up --build -d --wait --wait-timeout 180
+      - run: npm run test:deployment:typescript
+      - if: failure()
+        run: docker compose -f deployment/typescript/compose.yaml logs --no-color --tail 80
+      - if: always()
+        run: docker compose -f deployment/typescript/compose.yaml down --volumes --remove-orphans
   keycloak:
     runs-on: ubuntu-latest
     steps:

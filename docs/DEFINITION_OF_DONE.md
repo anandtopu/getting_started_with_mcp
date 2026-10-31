@@ -24,9 +24,10 @@ Verification date: **2026-10-30**. Scope: the delivered local course and its CI.
 - [x] Reference docs: mental model, all 24 taught current methods/notifications, four design flowcharts, four-host setup matrix, security, 100-term glossary, troubleshooting and migration.
 - [x] Six one-page PDF cheatsheets, editable content and reproducible generator; rendered and visually checked.
 
-## Remaining original-prompt parity
+## Native application parity follow-up
 
-- [ ] B1's complete native application parity: the combined OAuth gateway/deployment and full Chat Pro web backend use shared Python infrastructure. Native TS protocols, providers, data, input, OAuth clients, quality, packaging, Registry, Tasks and App bridge have runnable cases. See the [explicit coverage matrix](../modules/bonus/B1_typescript_track/README.md#coverage-and-runtime-boundaries). A small native tool-review UI is not equivalent to the full production-host lesson.
+- [x] Implement native OAuth gateway deployment and complete Chat Pro web backend, including providers, approvals, ordinary input, Tasks, Apps, cancellation, reconnect and legacy configuration. See the [application guide](TYPESCRIPT_APPLICATIONS.md).
+- [ ] Complete the new required native deployment CI job and record its result alongside the passing local browser/security acceptance in the [verification record](TYPESCRIPT_APPLICATIONS_VERIFICATION.md).
 
 ## Optional integrations outside the tested release
 

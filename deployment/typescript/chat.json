@@ -1,0 +1,11 @@
+{
+  "servers": [
+    {
+      "alias": "gateway",
+      "profile": "gateway",
+      "mode": "current",
+      "url": "http://127.0.0.1:8001/mcp",
+      "token_env": "LUMEN_GATEWAY_TOKEN"
+    }
+  ]
+}

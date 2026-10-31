@@ -220,12 +220,12 @@ Run `npm run check` for all TypeScript contracts. Run `node --import tsx modules
 | OAuth | Native authorization-code/PKCE, machine and enterprise clients | Local issuer/resource fixture and Compose identity service are shared |
 | Quality | OTel spans, actual HTTP load, fixture evals, Inspector inventories | Manual TS spans; Python SDK supplies its own instrumentation |
 | Frameworks | Agents SDK, LangChain and LangGraph | Python-only framework examples remain in module 15 |
-| Gateway and deployment | Native namespaces, per-user filtering, rate limits, audit, HTTP checks | OAuth reverse proxy and complete multi-server deployment are the shared Python/Compose reference |
+| Gateway and deployment | Native OAuth resource server, five stdio upstreams, namespaces, scope filtering, throttling and audit | Keycloak and nginx are language-neutral infrastructure; the application container runs Node |
 | Tasks and Apps | Durable task receiver and official App bridge | SDK high-level task validation requires the documented transport-level peer |
 | Packaging/Registry | Native npm/MCPB artifacts; actual JSON Schema and identity checks | Python artifact builder orchestrates both packaging paths |
-| Production web host | Native two-server tool review UI, frozen approvals and connection recovery | Complete model chat, settings, Task and App UI uses the shared Python backend and JavaScript frontend |
+| Production web host | Complete native model chat, settings, approvals, ordinary input, Tasks, Apps, cancellation and reconnect | Shared JavaScript browser assets; a separate small review shell remains as a lesson |
 
-Every numbered module has native runnable cases. **B1 is not yet a completely independent TypeScript implementation of every advanced application:** the combined OAuth gateway/deployment and full Chat Pro web backend still use shared reference infrastructure. Follow the [review action register](../../../docs/reviews/2026-10-30-action-register.md) for this remaining parity gap. The original five [TS] modules are complete native tracks.
+Every numbered module has native runnable cases. The advanced application backends now also run natively: `npm run chat:typescript` starts full Chat Pro, and [the native deployment guide](../../../docs/TYPESCRIPT_APPLICATIONS.md) covers the secured gateway. The [acceptance record](../../../docs/TYPESCRIPT_APPLICATIONS_VERIFICATION.md) tracks the equivalent browser scenarios and actual Keycloak deployment. Synthetic data, browser assets and infrastructure configuration are shared; no Python application backend is required for these native applications.
 
 ## Try it in a host
 

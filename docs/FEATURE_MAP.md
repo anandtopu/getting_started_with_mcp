@@ -2,7 +2,7 @@
 
 Coverage contract updated October 30, 2026. **Modules 00–21, bonuses B1–B4 and all five capstones are delivered.** A row closes only when its runnable example, use case, captured exchange, exercises/solutions and tests are delivered. Direct links below identify the delivered sources.
 
-The Python feature column is the main-track contract; a TypeScript track link identifies companion coverage, not a claim that its application backend is identical. See [B1 runtime boundaries](../modules/bonus/B1_typescript_track/README.md#coverage-and-runtime-boundaries) for the remaining advanced parity gap.
+The Python feature column is the main-track contract. TypeScript companions now include the [native OAuth deployment and full Chat Pro backend](TYPESCRIPT_APPLICATIONS.md). See [B1 runtime boundaries](../modules/bonus/B1_typescript_track/README.md#coverage-and-runtime-boundaries) for SDK-specific extension handling and shared fixture/tooling boundaries.
 
 The map covers the core protocol, official extension inventory, selected SDK facilities, and the requested application curriculum. It does not imply that every SDK implementation detail is a protocol feature. Framework compatibility and verified primary API references are recorded in [frameworks](../frameworks/README.md) and Module 15.
 

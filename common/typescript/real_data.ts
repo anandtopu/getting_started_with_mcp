@@ -66,7 +66,7 @@ export function realDataServer(internalOrigin?:string, fetcher:typeof fetch=fetc
   return server;
 }
 
-export async function withInternalAPI<T>(action:(origin:string)=>Promise<T>) {
+export async function startInternalAPI() {
   const server=createServer((req,res)=>{
     const address=server.address();const port=address && typeof address==='object'?address.port:0;
     if(req.headers.host!==`127.0.0.1:${port}` || req.headers.origin){res.writeHead(403).end();return;}
@@ -76,6 +76,10 @@ export async function withInternalAPI<T>(action:(origin:string)=>Promise<T>) {
   });
   server.listen(0,'127.0.0.1');await once(server,'listening');
   const address=server.address();if(!address || typeof address==='string')throw new Error('No local API address');
-  try {return await action(`http://127.0.0.1:${address.port}`);}
-  finally {server.closeAllConnections();await new Promise<void>(done=>server.close(()=>done()));}
+  return { origin: `http://127.0.0.1:${address.port}`, close: async () => { server.closeAllConnections(); await new Promise<void>(done => server.close(() => done())); } };
+}
+
+export async function withInternalAPI<T>(action:(origin:string)=>Promise<T>) {
+  const api = await startInternalAPI();
+  try { return await action(api.origin); } finally { await api.close(); }
 }

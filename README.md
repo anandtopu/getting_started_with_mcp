@@ -255,4 +255,4 @@ Dependency installation needs network once. Default checks then use local fixtur
 
 ## Post-build review
 
-The [original-prompt review](docs/reviews/2026-10-30-review-summary.md) records security fixes, added native examples, verification and remaining gaps. B1 has native cases for every module; the full advanced gateway/deployment and Chat Pro web backend still use shared Python infrastructure. The MCPB build-tool dependency advisory is recorded with its bounded build-only mitigation.
+The [original-prompt review](docs/reviews/2026-10-30-review-summary.md) records security fixes, native examples and verification. B1 now includes a [native OAuth gateway deployment and complete Chat Pro backend](docs/TYPESCRIPT_APPLICATIONS.md). Run `npm run chat:typescript` for the web host; the [acceptance record](docs/TYPESCRIPT_APPLICATIONS_VERIFICATION.md) tracks local tests and deployment CI. The MCPB build-tool dependency advisory remains documented with its bounded build-only mitigation.

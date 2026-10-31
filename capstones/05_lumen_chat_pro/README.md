@@ -43,6 +43,8 @@ Expected: `PASS capstone 5` and passing tests. The reference solution composes t
 
 Launch the web solution with `uv run python capstones/05_lumen_chat_pro/solution/web.py`, then open http://127.0.0.1:8766. Use `npm run test:browser` for the actual browser acceptance suite.
 
+For the complete native TypeScript backend, run `npm run chat:typescript` and open http://127.0.0.1:8768. Use `npm run test:browser:typescript` for the same three acceptance scenarios. The [native application guide](../../docs/TYPESCRIPT_APPLICATIONS.md) also connects this backend to the OAuth gateway deployment without a Python application process.
+
 
 ## Tests and captured traffic
 

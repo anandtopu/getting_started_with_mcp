@@ -2,14 +2,15 @@
 import { DatabaseSync } from 'node:sqlite';
 import { resolve } from 'node:path';
 import { setTimeout as pause } from 'node:timers/promises';
-import { McpServer, ResourceTemplate, completable, InMemoryServerEventBus } from '@modelcontextprotocol/server';
+import { McpServer, ResourceTemplate, completable, InMemoryServerEventBus, inputRequired, acceptedContent } from '@modelcontextprotocol/server';
+import { ReviewLedger } from './advanced_policy.ts';
 import { z } from 'zod';
 import { root } from './data.ts';
 import { wikiText } from './wiki.ts';
 import { structured, failure, read as readAnnotation, write, replace } from './notes.ts';
 import { serveHttp } from './http.ts';
 
-export function remoteWorkspace() {
+export function remoteWorkspace(withForms = false) {
   const bus = new InMemoryServerEventBus();
   const source = new DatabaseSync(resolve(root, 'data/issues.db'), { readOnly: true });
   const db = new DatabaseSync(':memory:');
@@ -22,11 +23,26 @@ export function remoteWorkspace() {
   let nextId = Number(db.prepare('SELECT max(id) AS id FROM issues').get()!.id) + 1;
   let active = 0;
   let review = 'No review yet';
+  const decisions = new ReviewLedger();
   const issue = z.object({ title: z.string().min(1).max(120), project_id: z.number().int().min(1).max(5).default(1), priority: z.enum(['low', 'medium', 'high']).default('medium') }).strict();
   const read = (id: number) => db.prepare('SELECT * FROM issues WHERE id=?').get(id);
   function factory() {
     const server = new McpServer({ name: 'Lumen remote workspace', version: '4.0' },
       { capabilities: { resources: { subscribe: true } } });
+    const approval = z.object({ approve: z.boolean().meta({ title: 'Approve' }) });
+    if (withForms) server.registerTool('bulk_close', { description: 'Close up to ten synthetic issues after a separate form decision.', annotations: replace,
+      inputSchema: z.object({ issue_ids: z.array(z.number().int().positive()).min(1).max(10), confirmed: z.boolean().default(false) }) }, ({ issue_ids, confirmed }, ctx) => {
+      if (!confirmed || issue_ids.some(id => !read(id))) return failure('Confirm existing issue IDs first.');
+      const binding = JSON.stringify(issue_ids);
+      const state = ctx.mcpReq.requestState<string>();
+      if (!state) return inputRequired({ requestState: decisions.issue(binding), inputRequests: { decision: inputRequired.elicit({ message: `Close these synthetic issues: ${issue_ids.join(', ')}?`, requestedSchema: approval }) } });
+      decisions.take(state, binding);
+      if (acceptedContent(ctx.mcpReq.inputResponses, 'decision', approval)?.approve !== true) return structured({ closed: [] });
+      db.exec('BEGIN');
+      try { for (const id of issue_ids) db.prepare("UPDATE issues SET status='closed' WHERE id=?").run(id); db.exec('COMMIT'); }
+      catch (error) { db.exec('ROLLBACK'); throw error; }
+      return structured({ closed: issue_ids });
+    });
     server.registerTool('read_issue', { annotations:readAnnotation, inputSchema: z.object({ issue_id: z.number().int() }) }, ({ issue_id }) => {
       const row = read(issue_id); return row ? structured(row) : failure('Issue not found');
     });

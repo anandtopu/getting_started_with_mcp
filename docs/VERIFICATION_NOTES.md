@@ -6,7 +6,7 @@
 
 [Post-review CI](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41135048577) passed all 28 required jobs on `723eb3b`, with no repair or rerun. CI logs confirm 250 Python tests and 233 standalone examples; TypeScript has 124 tests, Inspector covers 78 advertised catalogs, and browser acceptance has three scenarios. The local external-link sweep found zero failures.
 
-The review records B1 advanced-application parity as incomplete and the MCPB/Zod build-only advisory as mitigated, not silently waived. No live model call or public publication was performed.
+The subsequent [native application implementation and acceptance record](TYPESCRIPT_APPLICATIONS_VERIFICATION.md) addresses the B1 gateway/Chat Pro parity finding. The MCPB/Zod build-only advisory remains mitigated. No paid model call or public package publication was performed.
 
 ## Phase 8 — complete course, October 30, 2026
 
