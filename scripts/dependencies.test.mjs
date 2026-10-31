@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, expect, test } from 'vitest';
-import { mkdtempSync, mkdirSync, readFileSync, readdirSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, readdirSync, realpathSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, relative } from 'node:path';
 import { createRequire } from 'node:module';
@@ -16,7 +16,8 @@ const filesystemRequire = createRequire(filesystemEntry);
 const { glob } = filesystemRequire('glob');
 const { Minimatch } = filesystemRequire('minimatch');
 let directory;
-beforeEach(() => { directory = mkdtempSync(join(tmpdir(), 'lumen-dependencies-')); });
+// Windows runners may expose Temp through an 8.3 alias; the server returns real paths.
+beforeEach(() => { directory = realpathSync.native(mkdtempSync(join(tmpdir(), 'lumen-dependencies-'))); });
 afterEach(() => rmSync(directory, { recursive: true, force: true }));
 function file(path, content = '') {
   const parts = path.split('/');

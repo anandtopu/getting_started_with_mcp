@@ -54,6 +54,12 @@ checks finish. The initial focused run caught a
 Windows separator assumption in the new test, corrected by normalizing returned
 paths before comparison; no runtime behavior was changed for that correction.
 
+The first CI run on `f29fe99` exposed a second fixture portability issue:
+Windows runners can use an 8.3 alias for their temporary directory, whereas the
+filesystem server correctly returns canonical paths. The fixture now resolves
+its temporary root with `realpathSync.native` before making exact relative-path
+assertions. The search and allowed-directory assertions remain unchanged.
+
 ## Maintaining the overrides
 
 Keep the exact pins and regression tests until parent releases declare compatible
