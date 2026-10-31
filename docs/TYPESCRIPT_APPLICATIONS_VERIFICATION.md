@@ -20,10 +20,16 @@ Date: 2026-10-30. Follow-up to [R-009](reviews/2026-10-30-action-register.md).
 - All three shared Chromium scenarios pass against the native backend.
 - Eight new native application/security integration tests pass, including the gateway with five child processes.
 - The complete TypeScript compiler, ESLint and Vitest run passes: 132 tests in 32 files, including the legacy regression.
+- Python regression suite: 249 passed, one skipped because the local Windows account cannot create symlinks (250 collected). This includes all manifest-driven standalone examples.
+- Ruff lint/format, release inventory/teaching/local-link checks, and native Compose configuration validation pass.
 - Docker Desktop's Linux engine is unavailable locally. Actual Keycloak/container acceptance is delegated to the new required `typescript-applications` CI job, not inferred from fixture tests.
 
 ## CI status
 
-Pending publication and execution for this implementation. The existing historical 28-job result belongs to commit `723eb3b`; it is not evidence for these changes. The new workflow adds one required native application job.
+Implementation commit `1adcc06` and corrections through `2eb17e98c81cf9ca2479b840e03284de2822c203` are published. **[All 29 required CI jobs passed](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41155958759)** on that exact implementation. The optional manual external-link job was skipped. The [native application job](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41155958759/job/124402681257) passed all three browser scenarios and the real Keycloak/container acceptance without setting up Python.
+
+The matrix covers Node 24/26 on Windows/Linux, Python 3.12–3.14 on Windows/Linux plus macOS 3.12, all four native SDK tracks, frameworks, Inspector, packaging, browser isolation and both deployment stacks. The completed Linux Python 3.13 log confirms 250 Python tests and all 233 delivered examples. R-009 is closed; the final documentation commit records these results without changing the tested application code.
+
+The first deployment run exposed a browser callback-capture problem; acceptance now uses a real loopback HTTP listener. The next run completed PKCE and token verification, then exposed the SDK selecting every advertised scope when the initial challenge omitted its minimum scope. The resource now explicitly challenges for `workspace:read`; writes retain a separate step-up challenge. The provider also retains issuer-bound discovery state across callbacks. The following run completed OAuth and the deployed Chat Pro call, but its final text selector matched two elements; an exact selector was verified locally in Chromium. Local regressions cover the minimal challenge. These repairs are recorded rather than describing the initial CI attempts as successful.
 
 No paid model service, vendor account, public package or production cloud deployment is required by this acceptance. The MCPB/Zod advisory R-010 remains a separate mitigated build-tool issue.

@@ -6,7 +6,7 @@ Verification date: **2026-10-30**. Scope: the delivered local course and its CI.
 
 - [x] Default cached `uv sync --offline --frozen` and offline Python tests pass without API keys. TypeScript tests pass. Fresh dependency installation needs network.
 - [x] Ruff check/format, TypeScript compiler and ESLint pass.
-- [x] Post-review CI matrix: [all 28 required jobs passed](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41135048577) on `723eb3b`, covering Python 3.12–3.14 and Node 24/26 on Windows/Linux, plus macOS Python 3.12 and four native SDKs on Windows/Linux. The manual external-link CI job was skipped; the local external-link sweep passed.
+- [x] Native-parity CI matrix: [all 29 required jobs passed](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41155958759) on `2eb17e9`, covering Python 3.12–3.14 and Node 24/26 on Windows/Linux, macOS Python 3.12, four native SDKs on Windows/Linux, and the added native application/deployment job. The optional manual external-link CI job was skipped. The earlier review's local external-link sweep passed; this follow-up's local-link/release checks also passed.
 - [x] Every advertised primitive is listed by Inspector or an equivalent client check. Native SDK contracts cover tools/resources/prompts; the explicit audit fixture has a separate stdio regression.
 - [x] Repository-wide subprocess tests enforce protocol-only stdout; the TypeScript launcher also runs outside the checkout.
 - [x] The source audit rejects banned legacy imports; MCP deprecation warnings are test errors. Labeled older-protocol interoperability is retained deliberately.
@@ -27,7 +27,7 @@ Verification date: **2026-10-30**. Scope: the delivered local course and its CI.
 ## Native application parity follow-up
 
 - [x] Implement native OAuth gateway deployment and complete Chat Pro web backend, including providers, approvals, ordinary input, Tasks, Apps, cancellation, reconnect and legacy configuration. See the [application guide](TYPESCRIPT_APPLICATIONS.md).
-- [ ] Complete the new required native deployment CI job and record its result alongside the passing local browser/security acceptance in the [verification record](TYPESCRIPT_APPLICATIONS_VERIFICATION.md).
+- [x] Complete the new required native deployment CI job: [native browser and real Keycloak deployment acceptance passed](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41155958759/job/124402681257). The [verification record](TYPESCRIPT_APPLICATIONS_VERIFICATION.md) includes local browser/security acceptance and the full-matrix status.
 
 ## Optional integrations outside the tested release
 

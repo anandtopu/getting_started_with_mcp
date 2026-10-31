@@ -8,6 +8,8 @@
 
 The subsequent [native application implementation and acceptance record](TYPESCRIPT_APPLICATIONS_VERIFICATION.md) addresses the B1 gateway/Chat Pro parity finding. The MCPB/Zod build-only advisory remains mitigated. No paid model call or public package publication was performed.
 
+The native parity follow-up is complete: [all 29 required CI jobs passed](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41155958759) on `2eb17e9`. It includes 132 TypeScript tests, the same three browser scenarios against the native backend, and actual Keycloak PKCE/scope-step-up acceptance for the Node gateway and its five native upstream processes. R-009 is closed; the linked record documents CI repairs and local platform limits.
+
 ## Phase 8 — complete course, October 30, 2026
 
 Course 1.0.0 adds the full TypeScript route, four native SDKs, five capstones and final references. [Phase 8 evidence and explicit limits](PHASE_8_VERIFICATION.md) supersede delivery-status statements in historical sections below. [Native pins](../modules/bonus/B2_other_sdks/VERSIONS.md) distinguish Java compatibility from current-revision support. TypeScript uses Agents SDK 0.21.0, LangGraph 1.5.3 and LangChain core 1.3.2 with deterministic model fixtures. PDF regeneration pins ReportLab 5.1.0 in the optional docs group.

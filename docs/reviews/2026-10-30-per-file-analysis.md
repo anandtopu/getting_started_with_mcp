@@ -2,6 +2,8 @@
 
 Date: 2026-10-30. Baseline: `19736c9`.
 
+The table preserves the original review scope. Its R-009 helper-level limitations were subsequently addressed by the [native OAuth gateway and full Chat Pro application follow-up](../TYPESCRIPT_APPLICATIONS_VERIFICATION.md), including real deployment CI; see that record for the new application files and boundary tests.
+
 This is the **selected source/manual review scope**, supplemented by repository-wide structural, link, protocol-output and test checks. Files listed as scoped reads were read for the named boundary, not certified free of all possible defects. Generated captures are validated as a set; third-party packages and all native SDK build sources were not re-audited line by line. New example wrappers were inspected through their manifests, source imports and actual execution.
 
 | File | Responsibility | Local status | Finding / action / verification |

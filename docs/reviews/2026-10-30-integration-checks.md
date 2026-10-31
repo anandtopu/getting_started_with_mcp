@@ -20,7 +20,7 @@ Date: 2026-10-30. This pass follows the per-file analysis and tracks data, autho
 | Metadata → package identity → connection decision | Registry JSON Schema → npm manifest → explicit policy | Invalid metadata/version and repeated cursor rejected; no auto-install | Publishing optional; namespaces not verified by schema alone |
 | Packaging → installed launch | source → wheel/npm/MCPB → child outside checkout | Notes artifacts and isolated launch; knowledge build path separately checked | MCPB advisory remains build-only and bounded, not fixed upstream |
 | Teaching index → inventory → CI | README commands + FEATURE_MAP → examples.json → pytest/Inspector | Numbered examples must be registered; duplicate/missing entries fail release check | Structural checks cannot establish pedagogical depth by themselves |
-| B1 index → native application behavior | native OAuth gateway → five stdio services; native Chat Pro → shared browser assets | Follow-up implementation and local browser/security acceptance complete; deployment CI pending | [Native application record](../TYPESCRIPT_APPLICATIONS_VERIFICATION.md) |
+| B1 index → native application behavior | native OAuth gateway → five stdio services; native Chat Pro → shared browser assets | Follow-up implementation, local browser/security acceptance and real deployment CI passed | [Native application record](../TYPESCRIPT_APPLICATIONS_VERIFICATION.md) |
 
 ## Contract checks
 
@@ -38,4 +38,4 @@ Date: 2026-10-30. This pass follows the per-file analysis and tracks data, autho
 
 ## Integration findings
 
-R-001 and R-002 are cross-file authorization defects: a correct-looking comparison was weakened by SDK cache behavior or by an approval callback that lost the original fingerprint. R-003 is an ownership-transfer defect. Their regressions exercise the actual SDK/HTTP/lifetime boundaries rather than copying the implementation logic. R-009 now has native application implementations and equivalent local browser acceptance; its separate record tracks the actual deployment CI result.
+R-001 and R-002 are cross-file authorization defects: a correct-looking comparison was weakened by SDK cache behavior or by an approval callback that lost the original fingerprint. R-003 is an ownership-transfer defect. Their regressions exercise the actual SDK/HTTP/lifetime boundaries rather than copying the implementation logic. R-009 is closed by native application implementations, equivalent browser acceptance and real deployment CI; its separate record preserves the evidence and repairs.
