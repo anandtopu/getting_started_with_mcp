@@ -1,5 +1,9 @@
 # Phase 7 verification — 2026-10-30
 
+Historical phase record: the [packaging follow-up](PACKAGING_ADVISORY_VERIFICATION.md)
+supersedes the MCPB CLI version and advisory mitigation below by removing that
+dependency and verifying both bundles with the pinned official schema.
+
 Target: MCP 2026-07-28, Python SDK 2.3.0, TypeScript SDK 2.4.0.
 Modules 18–21 include twelve examples, four finite use cases, twelve starter/solution
 pairs, four seven-question quizzes, sixteen external-host configs and five actual

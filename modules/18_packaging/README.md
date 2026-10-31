@@ -162,7 +162,7 @@ Templates live in [distribution/python](../../distribution/python/pyproject.toml
 
 ### Desktop bundle and Docker
 
-MCPB manifest **0.3** is validated by **@anthropic-ai/mcpb 2.1.2**. The bundle uses `${__dirname}` for its Node executable and a boolean user configuration setting. Claude Desktop documents MCPB installation on macOS/Windows. Open the emitted `.mcpb` in a supporting desktop app, inspect the configuration, then search release notes. A manifest listing a platform does not prove every host supports it. CLI validation/packing is automated here; desktop installation remains a manual check.
+MCPB manifest **0.3** is validated by **Ajv 8.20.0** against the [pinned official schema](../../distribution/mcpb/schema/README.md). The course's `npm run mcpb -- validate <manifest.json>` and `npm run mcpb -- pack <staged-directory> <output.mcpb>` helper replaces the vulnerable upstream CLI dependency; it supports these two build operations only. The bundle uses `${__dirname}` for its Node executable and a boolean user configuration setting. Claude Desktop documents MCPB installation on macOS/Windows. Open the emitted `.mcpb` in a supporting desktop app, inspect the configuration, then search release notes. A manifest listing a platform does not prove every host supports it. Validation, ZIP contents and extracted-server launch are automated here; desktop installation remains a manual check.
 
 ```text
 docker build -f distribution/notes.Dockerfile -t lumen-notes-course:1.0.0 .

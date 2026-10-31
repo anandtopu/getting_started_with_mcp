@@ -61,9 +61,8 @@ def build():
     manifest = json.loads(manifest_path.read_text())
     (bundle / "manifest.json").write_text(json.dumps(manifest, indent=2))
     shutil.copyfile(ROOT / "LICENSE", bundle / "LICENSE")
-    cli = ROOT / "node_modules/@anthropic-ai/mcpb/dist/cli/cli.js"
-    # MCPB's Zod 3 dependency has an upstream collection-memory advisory.
-    # Only our bounded manifest enters this build-only CLI; also cap its heap.
+    cli = ROOT / "scripts/mcpb.mjs"
+    # Retain the heap/time limits in addition to the packer's input bounds.
     run([node, "--max-old-space-size=256", str(cli), "validate", str(bundle / "manifest.json")])
     artifact = output / "lumen-knowledge.mcpb"
     run([node, "--max-old-space-size=256", str(cli), "pack", str(bundle), str(artifact)])

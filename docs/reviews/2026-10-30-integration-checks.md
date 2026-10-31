@@ -18,7 +18,7 @@ Date: 2026-10-30. This pass follows the per-file analysis and tracks data, autho
 | Trace/load/evaluation → teaching claim | explicit native OTel spans + actual HTTP clients + fixture dataset | Parent/child IDs and error status checked; ten requests measured; deterministic score labeled | No automatic TS SDK tracing or LLM accuracy inference |
 | Design → measured comparison | native 25-tool mirror and six-tool workflow → six retrieval cases | Same data and expected ID/status; catalog characters and concise/detail lengths measured | Retrieval benchmark does not show LLM preference |
 | Metadata → package identity → connection decision | Registry JSON Schema → npm manifest → explicit policy | Invalid metadata/version and repeated cursor rejected; no auto-install | Publishing optional; namespaces not verified by schema alone |
-| Packaging → installed launch | source → wheel/npm/MCPB → child outside checkout | Notes artifacts and isolated launch; knowledge build path separately checked | MCPB advisory remains build-only and bounded, not fixed upstream |
+| Packaging → installed launch | source → wheel/npm/MCPB → child outside checkout | Notes wheel/npm/extracted bundle and knowledge wheel/bundle launch outside checkout | [R-010 replacement and evidence](../PACKAGING_ADVISORY_VERIFICATION.md); desktop GUI installation remains manual |
 | Teaching index → inventory → CI | README commands + FEATURE_MAP → examples.json → pytest/Inspector | Numbered examples must be registered; duplicate/missing entries fail release check | Structural checks cannot establish pedagogical depth by themselves |
 | B1 index → native application behavior | native OAuth gateway → five stdio services; native Chat Pro → shared browser assets | Follow-up implementation, local browser/security acceptance and real deployment CI passed | [Native application record](../TYPESCRIPT_APPLICATIONS_VERIFICATION.md) |
 
@@ -34,7 +34,7 @@ Date: 2026-10-30. This pass follows the per-file analysis and tracks data, autho
 | Cursor termination | resources/list or Registry pages | Bounded iterator | Follow empty page with nextCursor; reject repeat/oversize and budget exhaustion |
 | Protocol stdout | Server entry point | SDK/Inspector/wiretap | Every captured message is JSON-RPC; diagnostics remain stderr |
 | Spec revision | Explicit client mode | Server request envelope | Current revision retained; labeled legacy paths remain isolated |
-| Dependency advisory | MCPB's Zod 3 schema validator | Build scripts | <=64KB owned manifests, 256MB child heap, 120-second deadline; no runtime server dependency |
+| Dependency advisory | Official MCPB 0.3 JSON Schema, Ajv and fflate | Both build scripts | Vulnerable CLI/Zod 3 removed; bounded manifest/archive inputs, 256MB child heap, 120-second deadline; dependency regression and CI audit gate |
 
 ## Integration findings
 

@@ -47,6 +47,8 @@ def artifacts():
             "distribution/mcpb/manifest.json",
             "scripts/build_notes.mjs",
             "scripts/bundle_licenses.mjs",
+            "scripts/mcpb.mjs",
+            "distribution/mcpb/schema/manifest-v0.3.schema.json",
             "common/packaging.py",
             "distribution/python/src/lumen_notes/__init__.py",
             "LICENSE",
@@ -100,7 +102,7 @@ def artifacts():
     shutil.copyfile(
         ROOT / "distribution/npm/dist/THIRD_PARTY_LICENSES.txt", bundle / "THIRD_PARTY_LICENSES.txt"
     )
-    cli = ROOT / "node_modules/@anthropic-ai/mcpb/dist/cli/cli.js"
+    cli = ROOT / "scripts/mcpb.mjs"
     run([node, "--max-old-space-size=256", str(cli), "validate", str(bundle / "manifest.json")])
     run(
         [
@@ -178,6 +180,10 @@ async def smoke_packages(*, offline=True):
         ],
     ]
     with tempfile.TemporaryDirectory(prefix="lumen-installed-") as temporary:
+        extracted = Path(temporary) / "bundle"
+        with zipfile.ZipFile(paths["bundle"]) as archive:
+            archive.extractall(extracted)  # Our just-built, inspected archive.
+        commands.append([shutil.which("node"), str(extracted / "server/cli.cjs")])
         for command in commands:
             async with Client(
                 StdioServerParameters(

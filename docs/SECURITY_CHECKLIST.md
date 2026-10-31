@@ -95,6 +95,6 @@ Evidence: [Python regressions](../tests/test_phase8.py), [TypeScript regressions
 - Replacement and deletion use `destructiveHint=true`, including bulletin updates. Additive creation/tagging remains separately annotated. All mutations still require explicit approval.
 - Native model schemas exclude host-only confirmation; invalid or self-approved proposals fail before human review.
 - Failed/cancelled connection startup cleans up before ownership transfers to the host.
-- MCPB 2.1.2 brings Zod 3.25.76 into the build tool only. Both packaging paths accept bounded repository-owned manifests, cap Node heap at 256 MB and use a 120-second subprocess deadline. [The advisory](https://github.com/advisories/GHSA-mrhx-c7xc-m3w5) remains unresolved upstream; do not use the course build CLI to validate arbitrary downloaded bundles.
+- The vulnerable MCPB CLI/Zod 3 dependency has been removed. Both packaging paths use the pinned official MCPB 0.3 JSON Schema with Ajv and a bounded fflate ZIP packer. The helper rejects symlinks, escaping/private/dependency paths and missing entry points; it caps manifests at 64 KB, archive input at 64 MiB, entries at 512 and depth at 16. Build subprocesses retain the 256 MB heap and 120-second deadline. A lockfile regression and required high/critical audit gate prevent reintroduction. See [packaging evidence and remaining moderate findings](PACKAGING_ADVISORY_VERIFICATION.md).
 
 [Regressions and remaining limits](reviews/2026-10-30-review-summary.md).

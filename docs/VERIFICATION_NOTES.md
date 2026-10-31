@@ -6,7 +6,7 @@
 
 [Post-review CI](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41135048577) passed all 28 required jobs on `723eb3b`, with no repair or rerun. CI logs confirm 250 Python tests and 233 standalone examples; TypeScript has 124 tests, Inspector covers 78 advertised catalogs, and browser acceptance has three scenarios. The local external-link sweep found zero failures.
 
-The subsequent [native application implementation and acceptance record](TYPESCRIPT_APPLICATIONS_VERIFICATION.md) addresses the B1 gateway/Chat Pro parity finding. The MCPB/Zod build-only advisory remains mitigated. No paid model call or public package publication was performed.
+The subsequent [native application implementation and acceptance record](TYPESCRIPT_APPLICATIONS_VERIFICATION.md) addresses the B1 gateway/Chat Pro parity finding. The [packaging follow-up](PACKAGING_ADVISORY_VERIFICATION.md) removes the MCPB/Zod build dependency that caused R-010. No paid model call or public package publication was performed.
 
 The native parity follow-up is complete: [all 29 required CI jobs passed](https://github.com/anandtopu/getting_started_with_mcp/actions/runs/41155958759) on `2eb17e9`. It includes 132 TypeScript tests, the same three browser scenarios against the native backend, and actual Keycloak PKCE/scope-step-up acceptance for the Node gateway and its five native upstream processes. R-009 is closed; the linked record documents CI repairs and local platform limits.
 

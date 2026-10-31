@@ -14,7 +14,7 @@ def main():
     parser.add_argument("--prepare", action="store_true")
     args = parser.parse_args()
     print(json.dumps(asyncio.run(smoke_packages(offline=not args.prepare)), indent=2))
-    print("PASS installed uvx and npx packages outside checkout")
+    print("PASS installed uvx/npx packages and extracted MCPB server outside checkout")
 
 
 if __name__ == "__main__":
